@@ -1,0 +1,16 @@
+####################################
+### Levels ENGLISH Language File ###
+####################################
+
+### Items
+item.woodSword.name=Wood Sword
+item.goldSword.name=Gold Sword
+item.stoneSword.name=Stone Sword
+item.ironSword.name=Iron Sword
+item.diamondSword.name=Diamond Sword
+
+
+
+### Creative Tabs
+itemGroup.tabLevels=Levels
+itemGroup.tabLevelsTest=Levels Test
