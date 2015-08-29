@@ -24,7 +24,7 @@ public class AbilityHelper
 		if (nbt != null)
 		{
 			Random rand = new Random();
-			int var = rand.nextInt(1);
+			int var = rand.nextInt(2);
 			if (var == 0) nbt.setBoolean("FIRE", true);
 			if (var == 1) nbt.setBoolean("FROST", true);
 		}
@@ -42,7 +42,7 @@ public class AbilityHelper
 		if (nbt != null)
 		{
 			Random rand = new Random();
-			int var = rand.nextInt(2);
+			int var = rand.nextInt(3);
 			if (var == 0) nbt.setBoolean("POISON", true);
 			if (var == 1) nbt.setBoolean("STRENGTH", true);
 		}
@@ -73,7 +73,7 @@ public class AbilityHelper
 					nbt.setBoolean("FROST", true);
 					
 					Random rand = new Random();
-					int var = rand.nextInt(1);
+					int var = rand.nextInt(2);
 					if (var == 0) nbt.setBoolean("POISON", true);
 					if (var == 1) nbt.setBoolean("STRENGTH", true);
 				}
@@ -82,14 +82,14 @@ public class AbilityHelper
 					if (nbt.getBoolean("POISON") == true)
 					{
 						Random rand = new Random();
-						int var = rand.nextInt(1);
+						int var = rand.nextInt(2);
 						if (var == 0) nbt.setBoolean("FROST", true);
 						if (var == 1) nbt.setBoolean("STRENGTH", true);
 					}
 					else
 					{
 						Random rand = new Random();
-						int var = rand.nextInt(1);
+						int var = rand.nextInt(2);
 						if (var == 0) nbt.setBoolean("FROST", true);
 						if (var == 1) nbt.setBoolean("POISON", true);
 					}
@@ -110,7 +110,7 @@ public class AbilityHelper
 					nbt.setBoolean("FIRE", true);
 					
 					Random rand = new Random();
-					int var = rand.nextInt(1);
+					int var = rand.nextInt(2);
 					if (var == 0) nbt.setBoolean("POISON", true);
 					if (var == 1) nbt.setBoolean("STRENGTH", true);
 				}
@@ -119,14 +119,14 @@ public class AbilityHelper
 					if (nbt.getBoolean("POISON") == true)
 					{
 						Random rand = new Random();
-						int var = rand.nextInt(1);
+						int var = rand.nextInt(2);
 						if (var == 0) nbt.setBoolean("FIRE", true);
 						if (var == 1) nbt.setBoolean("STRENGTH", true);
 					}
 					else
 					{
 						Random rand = new Random();
-						int var = rand.nextInt(1);
+						int var = rand.nextInt(2);
 						if (var == 0) nbt.setBoolean("FIRE", true);
 						if (var == 1) nbt.setBoolean("POISON", true);
 					}
@@ -147,7 +147,7 @@ public class AbilityHelper
 		if (nbt != null)
 		{
 			Random rand = new Random();
-			int var = rand.nextInt(1);
+			int var = rand.nextInt(2);
 			if (var == 0) nbt.setBoolean("ETHEREAL", true);
 			if (var == 1) nbt.setBoolean("VOID", true);
 		}
@@ -167,7 +167,7 @@ public class AbilityHelper
 			if (nbt.getBoolean("ETHEREAL") == true)
 			{
 				Random rand = new Random();
-				int var = rand.nextInt(4);
+				int var = rand.nextInt(5);
 				
 				if (var == 0)
 				{
@@ -199,7 +199,7 @@ public class AbilityHelper
 			if (nbt.getBoolean("VOID") == true)
 			{
 				Random rand = new Random();
-				int var = rand.nextInt(4);
+				int var = rand.nextInt(5);
 				
 				if (var == 0)
 				{
@@ -221,6 +221,224 @@ public class AbilityHelper
 				{
 					nbt.setBoolean("FROST", true);
 					nbt.setBoolean("STRENGTH", true);
+				}
+				else
+				{
+					nbt.setBoolean("ETHEREAL", true);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Draws between the given abilities, picking one to be equipped to the armor.
+	 * Default percentages are 50-50 for either Hardneded or Poisoned.
+	 * @param stack
+	 */
+	public static void drawLevelTwoArmorAbility(ItemStack stack)
+	{
+		NBTTagCompound nbt = stack.getTagCompound();
+		
+		if (nbt != null)
+		{
+			Random rand = new Random();
+			int var = rand.nextInt(2);
+			if (var == 0) nbt.setBoolean("HARDENED", true);
+			if (var == 1) nbt.setBoolean("POISONED", true);
+		}
+	}
+	
+	/**
+	 * Draws between the given abilities, picking one to be equipped to the armor.
+	 * Default percentages are 33-33-33 for Strength, Immunization, and nothing respectively.
+	 * @param stack
+	 */
+	public static void drawLevelThreeArmorAbility(ItemStack stack)
+	{
+		NBTTagCompound nbt = stack.getTagCompound();
+		
+		if (nbt != null)
+		{
+			Random rand = new Random();
+			int var = rand.nextInt(3);
+			if (var == 0) nbt.setBoolean("STRENGTH", true);
+			if (var == 1) nbt.setBoolean("IMMUNIZATION", true);
+		}
+	}
+
+	/**
+	 * Draws between the given abilities and parameters. Percentages are more complex here,
+	 * due to the several scenarios taken into account.
+	 * @param stack
+	 */
+	public static void drawLevelFourArmorAbility(ItemStack stack)
+	{
+		NBTTagCompound nbt = stack.getTagCompound();
+		
+		if (nbt != null)
+		{
+			if (nbt.getBoolean("HARDENED") == true)
+			{
+				/*
+				 * If level two yielded nothing, add two abilities (the opposite of what the first ability was,
+				 * and a random chance between Strength and Immunization.
+				 * 
+				 * If level two did yield an ability, 50-50 draw between opposite of first ability and other
+				 * second ability.
+				 */
+				if (nbt.getBoolean("STRENGTH") == false && nbt.getBoolean("IMMUNIZATION") == false)
+				{
+					nbt.setBoolean("POISONED", true);
+					
+					Random rand = new Random();
+					int var = rand.nextInt(2);
+					if (var == 0) nbt.setBoolean("STRENGTH", true);
+					if (var == 1) nbt.setBoolean("IMMUNIZATION", true);
+				}
+				else
+				{
+					if (nbt.getBoolean("STRENGTH") == true)
+					{
+						Random rand = new Random();
+						int var = rand.nextInt(2);
+						if (var == 0) nbt.setBoolean("POISONED", true);
+						if (var == 1) nbt.setBoolean("IMMUNIZATION", true);
+					}
+					else
+					{
+						Random rand = new Random();
+						int var = rand.nextInt(2);
+						if (var == 0) nbt.setBoolean("POISONED", true);
+						if (var == 1) nbt.setBoolean("STRENGTH", true);
+					}
+				}
+			}
+			
+			if (nbt.getBoolean("POISONED") == true)
+			{
+				/*
+				 * If level two yielded nothing, add two abilities (the opposite of what the first ability was,
+				 * and a random chance between Strength and Immunization.
+				 * 
+				 * If level two did yield an ability, 50-50 draw between opposite of first ability and other
+				 * second ability.
+				 */
+				if (nbt.getBoolean("STRENGTH") == false && nbt.getBoolean("IMMUNIZATION") == false)
+				{
+					nbt.setBoolean("HARDENED", true);
+					
+					Random rand = new Random();
+					int var = rand.nextInt(2);
+					if (var == 0) nbt.setBoolean("STRENGTH", true);
+					if (var == 1) nbt.setBoolean("HARDENED", true);
+				}
+				else
+				{
+					if (nbt.getBoolean("STRENGTH") == true)
+					{
+						Random rand = new Random();
+						int var = rand.nextInt(2);
+						if (var == 0) nbt.setBoolean("HARDENED", true);
+						if (var == 1) nbt.setBoolean("IMMUNIZATION", true);
+					}
+					else
+					{
+						Random rand = new Random();
+						int var = rand.nextInt(2);
+						if (var == 0) nbt.setBoolean("HARDENED", true);
+						if (var == 1) nbt.setBoolean("STRENGTH", true);
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Draws between the given abilities, picking one to be equipped to the weapon.
+	 * Default percentages are 50-50 for Ethereal and Void. 
+	 * @param stack
+	 */
+	public static void drawLevelFiveArmorAbility(ItemStack stack)
+	{
+		NBTTagCompound nbt = stack.getTagCompound();
+		
+		if (nbt != null)
+		{
+			Random rand = new Random();
+			int var = rand.nextInt(2);
+			if (var == 0) nbt.setBoolean("ETHEREAL", true);
+			if (var == 1) nbt.setBoolean("VOID", true);
+		}
+	}
+
+	/**
+	 * Based on the previous ability obtained, a host of possibilities are
+	 * available to be attained.
+	 * @param stack
+	 */
+	public static void drawLevelSixArmorAbility(ItemStack stack)
+	{
+		NBTTagCompound nbt = stack.getTagCompound();
+		
+		if (nbt != null)
+		{
+			if (nbt.getBoolean("ETHEREAL") == true)
+			{
+				Random rand = new Random();
+				int var = rand.nextInt(5);
+				
+				if (var == 0)
+				{
+					nbt.setBoolean("HARDENED", true);
+					nbt.setBoolean("IMMUNIZATION", true);
+				}
+				else if (var == 1)
+				{
+					nbt.setBoolean("POISONED", true);
+					nbt.setBoolean("STRENGTH", true);
+				}
+				else if (var == 2)
+				{
+					nbt.setBoolean("HARDENED", true);
+					nbt.setBoolean("STRENGTH", true);
+					nbt.setBoolean("IMMUNIZATION", true);
+				}
+				else if (var == 3)
+				{
+					nbt.setBoolean("POISONED", true);
+					nbt.setBoolean("IMMUNIZATION", true);
+				}
+				else
+				{
+					nbt.setBoolean("VOID", true);
+				}
+			}
+			
+			if (nbt.getBoolean("VOID") == true)
+			{
+				Random rand = new Random();
+				int var = rand.nextInt(5);
+				
+				if (var == 0)
+				{
+					nbt.setBoolean("HARDENED", true);
+					nbt.setBoolean("IMMUNIZATION", true);
+				}
+				else if (var == 1)
+				{
+					nbt.setBoolean("POISONED", true);
+					nbt.setBoolean("STRENGTH", true);
+				}
+				else if (var == 2)
+				{
+					nbt.setBoolean("HARDENED", true);
+					nbt.setBoolean("STRENGTH", true);
+					nbt.setBoolean("IMMUNIZATION", true);
+				}
+				else if (var == 3)
+				{
+					nbt.setBoolean("POISONED", true);
+					nbt.setBoolean("IMMUNIZATION", true);
 				}
 				else
 				{

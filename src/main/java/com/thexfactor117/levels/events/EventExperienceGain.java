@@ -61,7 +61,7 @@ public class EventExperienceGain
 								if (player.inventory.mainInventory[i].getItem() == itemInHand)
 								{
 									NBTTagCompound nbt = player.inventory.mainInventory[i].getTagCompound();
-									nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 10);
+									nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1000);
 									return;
 								}
 							}

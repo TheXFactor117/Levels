@@ -4,7 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
-import com.thexfactor117.levels.api.ItemMelee;
+import com.thexfactor117.levels.api.ItemLevelSwordBase;
 import com.thexfactor117.levels.helpers.RegisterHelper;
 
 /**
@@ -22,11 +22,11 @@ public class ModItems
 	public static ToolMaterial DIAMOND_SWORD = EnumHelper.addToolMaterial("DIAMOND_SWORD", 3, 1561, 8.0F, 3.0F, 10);
 	
 	// Items
-	public static Item woodSword = new ItemMelee(WOOD_SWORD, "woodSword");
-	public static Item goldSword = new ItemMelee(GOLD_SWORD, "goldSword");
-	public static Item stoneSword = new ItemMelee(STONE_SWORD, "stoneSword");
-	public static Item ironSword = new ItemMelee(IRON_SWORD, "ironSword");
-	public static Item diamondSword = new ItemMelee(DIAMOND_SWORD, "diamondSword");
+	public static Item woodSword = new ItemLevelSwordBase(WOOD_SWORD, "woodSword");
+	public static Item goldSword = new ItemLevelSwordBase(GOLD_SWORD, "goldSword");
+	public static Item stoneSword = new ItemLevelSwordBase(STONE_SWORD, "stoneSword");
+	public static Item ironSword = new ItemLevelSwordBase(IRON_SWORD, "ironSword");
+	public static Item diamondSword = new ItemLevelSwordBase(DIAMOND_SWORD, "diamondSword");
 	
 	public static void registerItems()
 	{

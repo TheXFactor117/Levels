@@ -23,9 +23,7 @@ public class Levels
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		ConfigHandler.registerConfig(event.getSuggestedConfigurationFile());
-		
 		ModItems.registerItems();
-		
 		MinecraftForge.EVENT_BUS.register(new EventExperienceGain());
 	}
 	

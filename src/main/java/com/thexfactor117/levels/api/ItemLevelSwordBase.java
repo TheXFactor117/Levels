@@ -29,11 +29,11 @@ import com.thexfactor117.levels.init.ModTabs;
  * else is needed.
  *
  */
-public class ItemMelee extends ItemSword
+public class ItemLevelSwordBase extends ItemSword
 {
 	public final ToolMaterial material;
 	
-	public ItemMelee(ToolMaterial material, String name)
+	public ItemLevelSwordBase(ToolMaterial material, String name)
 	{
 		super(material);
 		this.material = material;
