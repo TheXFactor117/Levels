@@ -15,9 +15,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 /**
  * To-Do List
  * 
- * b1.0.0
- * - Complete
- * 
  * b2.0.0
  * - Armor Leveling System
  * - Armor Abilities
