@@ -2,6 +2,8 @@ package com.thexfactor117.levels.handlers;
 
 import java.io.File;
 
+import com.thexfactor117.levels.helpers.LogHelper;
+
 import net.minecraftforge.common.config.Configuration;
 
 /**
@@ -18,13 +20,16 @@ public class ConfigHandler
 		File mainFile = new File(file + "/Levels.cfg");
 		
 		Configuration config = new Configuration(mainFile);
+		LogHelper.info("Loading config file...");
 		config.load();
 		
 		enableLevelingSystem = config.get("general", "enableLevelingSystem", true, "Enable or disable the leveling system.").getBoolean();
 		
 		if (config.hasChanged())
 		{
+			LogHelper.info("Config file saving...");
 			config.save();
+			LogHelper.info("Config file saved.");
 		}
 	}
 }

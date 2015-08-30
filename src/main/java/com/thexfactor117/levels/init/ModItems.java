@@ -5,6 +5,7 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
 import com.thexfactor117.levels.api.ItemLevelSwordBase;
+import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.helpers.RegisterHelper;
 
 /**
@@ -35,5 +36,6 @@ public class ModItems
 		RegisterHelper.registerItem(stoneSword);
 		RegisterHelper.registerItem(ironSword);
 		RegisterHelper.registerItem(diamondSword);
+		LogHelper.info("Custom weapons have been registered.");
 	}
 }
