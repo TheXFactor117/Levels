@@ -178,11 +178,11 @@ public class ItemLevelSwordBase extends ItemSword
 			 * Abilities
 			 */
 			if (nbt.getBoolean("FIRE")) enemy.setFire(4);
-			if (nbt.getBoolean("FROST")) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*4, 0));
+			if (nbt.getBoolean("FROST")) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*4, 10));
 			if (nbt.getBoolean("POISON")) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*4, 0));
 			if (nbt.getBoolean("Strength")) 
 			{
-				int var = rand.nextInt(3);
+				int var = rand.nextInt(9);
 				if (var == 0) player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20*10, 0));
 			}
 			
@@ -204,7 +204,7 @@ public class ItemLevelSwordBase extends ItemSword
 			
 			if (nbt.getBoolean("VOID"))
 			{
-				int var2 = rand.nextInt(9);
+				int var2 = rand.nextInt(19);
 				if (var2 == 0)
 				{
 					enemy.setHealth(0);

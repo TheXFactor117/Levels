@@ -19,5 +19,11 @@ public class ModRecipes
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.stoneSword), "A", "A", "B", 'A', Blocks.cobblestone, 'B', Items.stick);
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.ironSword), "A", "A", "B", 'A', Items.iron_ingot, 'B', Items.stick);
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.diamondSword), "A", "A", "B", 'A', Items.diamond, 'B', Items.stick);
+		
+		GameRegistry.addShapedRecipe(new ItemStack(Items.wooden_sword), "A", 'A', ModItems.woodSword);
+		GameRegistry.addShapedRecipe(new ItemStack(Items.golden_sword), "A", 'A', ModItems.goldSword);
+		GameRegistry.addShapedRecipe(new ItemStack(Items.stone_sword), "A", 'A', ModItems.stoneSword);
+		GameRegistry.addShapedRecipe(new ItemStack(Items.iron_sword), "A", 'A', ModItems.ironSword);
+		GameRegistry.addShapedRecipe(new ItemStack(Items.diamond_sword), "A", 'A', ModItems.diamondSword);
 	}
 }
