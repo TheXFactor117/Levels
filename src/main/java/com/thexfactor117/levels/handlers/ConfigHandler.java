@@ -14,6 +14,7 @@ import net.minecraftforge.common.config.Configuration;
 public class ConfigHandler 
 {
 	public static boolean enableLevelingSystem;
+	public static boolean enableEnchantments;
 	
 	public static void registerConfig(File file)
 	{
@@ -24,6 +25,7 @@ public class ConfigHandler
 		config.load();
 		
 		enableLevelingSystem = config.get("general", "enableLevelingSystem", true, "Enable or disable the leveling system.").getBoolean();
+		enableEnchantments = config.get("general", "enableEnchantments", true, "Enable or disable enchantments.").getBoolean();
 		
 		if (config.hasChanged())
 		{
