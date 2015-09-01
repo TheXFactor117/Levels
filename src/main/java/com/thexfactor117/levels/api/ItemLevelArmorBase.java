@@ -1,5 +1,6 @@
 package com.thexfactor117.levels.api;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.entity.Entity;
@@ -10,12 +11,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import com.thexfactor117.levels.Reference;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.AbilityHelper;
 import com.thexfactor117.levels.init.ModTabs;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemLevelArmorBase extends ItemArmor
 {
@@ -106,77 +111,113 @@ public class ItemLevelArmorBase extends ItemArmor
 				{
 					Random rand = new Random();
 					
-					if (player.getCurrentArmor(i).getTagCompound().getBoolean("HARDENED"))
+					if (player.getCurrentArmor(i) != null)
 					{
-						if (player.getLastAttackerTime() <= (double) 0.05D)
+						if (player.getLastAttacker() != null)
 						{
-							int var = rand.nextInt(5);
-							if (var == 0)
+							if (player.getCurrentArmor(i).getTagCompound().getBoolean("HARDENED"))
 							{
-								EntityLivingBase attacker = player.getLastAttacker();
-								attacker.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*2, 10));
+								if (player.getLastAttackerTime() <= (double) 0.05D)
+								{
+									int var = rand.nextInt(5);
+									if (var == 0)
+									{
+										EntityLivingBase attacker = player.getLastAttacker();
+										attacker.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*2, 10));
+									}
+								}
 							}
-						}
-					}
-					
-					if (player.getCurrentArmor(i).getTagCompound().getBoolean("POISONED"))
-					{
-						if (player.getLastAttackerTime() <= (double) 0.05D)
-						{
-							int var = rand.nextInt(5);
-							if (var == 0)
+							
+							if (player.getCurrentArmor(i).getTagCompound().getBoolean("POISONED"))
 							{
-								EntityLivingBase attacker = player.getLastAttacker();
-								attacker.addPotionEffect(new PotionEffect(Potion.poison.id, 20*5, 0));
+								if (player.getLastAttackerTime() <= (double) 0.05D)
+								{
+									int var = rand.nextInt(5);
+									if (var == 0)
+									{
+										EntityLivingBase attacker = player.getLastAttacker();
+										attacker.addPotionEffect(new PotionEffect(Potion.poison.id, 20*5, 0));
+									}
+								}
 							}
-						}
-					}
-					
-					if (player.getCurrentArmor(i).getTagCompound().getBoolean("STRENGTH"))
-					{
-						if (player.getLastAttackerTime() <= (double) 0.05D)
-						{
-							int var = rand.nextInt(10);
-							if (var == 0)
+							
+							if (player.getCurrentArmor(i).getTagCompound().getBoolean("STRENGTH"))
 							{
-								player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20*10, 0));
+								if (player.getLastAttackerTime() <= (double) 0.05D)
+								{
+									int var = rand.nextInt(10);
+									if (var == 0)
+									{
+										player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20*10, 0));
+									}
+								}
 							}
-						}
-					}
-					
-					if (player.getCurrentArmor(i).getTagCompound().getBoolean("IMMUNIZATION"))
-					{
-						if (player.isPotionActive(Potion.weakness.id)) player.removePotionEffect(Potion.weakness.id);
-						if (player.isPotionActive(Potion.moveSlowdown.id)) player.removePotionEffect(Potion.moveSlowdown.id);
-						if (player.isPotionActive(Potion.poison.id)) player.removePotionEffect(Potion.poison.id);
-					}
-					
-					if (player.getCurrentArmor(i).getTagCompound().getBoolean("ETHEREAL"))
-					{
-						if (player.getLastAttackerTime() <= (double) 0.05D)
-						{
-							int var = rand.nextInt(20);
-							if (var == 0)
+							
+							if (player.getCurrentArmor(i).getTagCompound().getBoolean("IMMUNIZATION"))
 							{
-								player.setHealth(20);
+								if (player.isPotionActive(Potion.weakness.id)) player.removePotionEffect(Potion.weakness.id);
+								if (player.isPotionActive(Potion.moveSlowdown.id)) player.removePotionEffect(Potion.moveSlowdown.id);
+								if (player.isPotionActive(Potion.poison.id)) player.removePotionEffect(Potion.poison.id);
 							}
-						}
-					}
-					
-					if (player.getCurrentArmor(i).getTagCompound().getBoolean("VOID"))
-					{
-						if (player.getLastAttackerTime() <= (double) 0.05D)
-						{
-							int var = rand.nextInt(20);
-							if (var == 0)
+							
+							if (player.getCurrentArmor(i).getTagCompound().getBoolean("ETHEREAL"))
 							{
-								EntityLivingBase attacker = player.getLastAttacker();
-								attacker.setDead();
+								if (player.getLastAttackerTime() <= (double) 0.05D)
+								{
+									int var = rand.nextInt(20);
+									if (var == 0)
+									{
+										player.setHealth(20);
+									}
+								}
+							}
+							
+							if (player.getCurrentArmor(i).getTagCompound().getBoolean("VOID"))
+							{
+								if (player.getLastAttackerTime() <= (double) 0.05D)
+								{
+									int var = rand.nextInt(20);
+									if (var == 0)
+									{
+										EntityLivingBase attacker = player.getLastAttacker();
+										attacker.setDead();
+									}
+								}
 							}
 						}
 					}
 				}
 			}
+		}
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean isHeld)
+	{
+		NBTTagCompound nbt = stack.getTagCompound();
+		
+		if (nbt != null)
+		{
+			list.add("Level: " + nbt.getInteger("LEVEL"));
+			
+			if (nbt.getInteger("LEVEL") == 1) list.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/1000");
+			if (nbt.getInteger("LEVEL") == 2) list.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/2500");
+			if (nbt.getInteger("LEVEL") == 3) list.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/5000");
+			if (nbt.getInteger("LEVEL") == 4) list.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/10000");
+			if (nbt.getInteger("LEVEL") == 5) list.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/20000");
+			if (nbt.getInteger("LEVEL") == 6) list.add("Experience: " + nbt.getInteger("EXPERIENCE"));
+			
+			list.add(stack.getMaxDamage() - stack.getItemDamage() + " Hits Remaining");
+			list.add("");
+			
+			if (nbt.getBoolean("HARDENED")) list.add(EnumChatFormatting.WHITE + "Hardened");
+			if (nbt.getBoolean("POISONED")) list.add(EnumChatFormatting.DARK_GREEN + "Poisoned");
+			if (nbt.getBoolean("STRENGTH")) list.add(EnumChatFormatting.LIGHT_PURPLE + "Strength");
+			if (nbt.getBoolean("IMMUNIZATION")) list.add(EnumChatFormatting.GOLD + "Immunization");
+			if (nbt.getBoolean("ETHEREAL")) list.add(EnumChatFormatting.BLUE + "Ethereal");
+			if (nbt.getBoolean("VOID")) list.add(EnumChatFormatting.DARK_PURPLE + "Void");
 		}
 	}
 }

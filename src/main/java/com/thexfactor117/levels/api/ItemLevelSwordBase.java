@@ -243,7 +243,7 @@ public class ItemLevelSwordBase extends ItemSword
 				if (nbt.getBoolean("FROST")) list.add(EnumChatFormatting.AQUA + "Frost");
 				if (nbt.getBoolean("POISON")) list.add(EnumChatFormatting.DARK_GREEN + "Poison");
 				if (nbt.getBoolean("STRENGTH")) list.add(EnumChatFormatting.LIGHT_PURPLE + "Strength");
-				if (nbt.getBoolean("Ethereal")) list.add(EnumChatFormatting.BLUE + "Ethereal");
+				if (nbt.getBoolean("ETHEREAL")) list.add(EnumChatFormatting.BLUE + "Ethereal");
 				if (nbt.getBoolean("VOID")) list.add(EnumChatFormatting.DARK_PURPLE + "Void");
 			}
 		}
