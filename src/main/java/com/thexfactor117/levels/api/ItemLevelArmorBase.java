@@ -11,18 +11,22 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ISpecialArmor;
 
 import com.thexfactor117.levels.Reference;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.AbilityHelper;
+import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.init.ModTabs;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemLevelArmorBase extends ItemArmor
+public class ItemLevelArmorBase extends ItemArmor implements ISpecialArmor
 {
 	public ItemLevelArmorBase(ArmorMaterial material, int type, String name)
 	{
@@ -101,91 +105,12 @@ public class ItemLevelArmorBase extends ItemArmor
 			NBTTagCompound nbt = stack.getTagCompound();
 			
 			if (nbt != null)
-			{				
-				if (player.getLastAttackerTime() <= (double) 0.05D)
+			{											
+				if (nbt.getBoolean("IMMUNIZATION"))
 				{
-					nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
-				}
-				
-				for (int i = 0; i < 4; i++)
-				{
-					Random rand = new Random();
-					
-					if (player.getCurrentArmor(i) != null)
-					{
-						if (player.getLastAttacker() != null)
-						{
-							if (player.getCurrentArmor(i).getTagCompound().getBoolean("HARDENED"))
-							{
-								if (player.getLastAttackerTime() <= (double) 0.05D)
-								{
-									int var = rand.nextInt(5);
-									if (var == 0)
-									{
-										EntityLivingBase attacker = player.getLastAttacker();
-										attacker.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*2, 10));
-									}
-								}
-							}
-							
-							if (player.getCurrentArmor(i).getTagCompound().getBoolean("POISONED"))
-							{
-								if (player.getLastAttackerTime() <= (double) 0.05D)
-								{
-									int var = rand.nextInt(5);
-									if (var == 0)
-									{
-										EntityLivingBase attacker = player.getLastAttacker();
-										attacker.addPotionEffect(new PotionEffect(Potion.poison.id, 20*5, 0));
-									}
-								}
-							}
-							
-							if (player.getCurrentArmor(i).getTagCompound().getBoolean("STRENGTH"))
-							{
-								if (player.getLastAttackerTime() <= (double) 0.05D)
-								{
-									int var = rand.nextInt(10);
-									if (var == 0)
-									{
-										player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20*10, 0));
-									}
-								}
-							}
-							
-							if (player.getCurrentArmor(i).getTagCompound().getBoolean("IMMUNIZATION"))
-							{
-								if (player.isPotionActive(Potion.weakness.id)) player.removePotionEffect(Potion.weakness.id);
-								if (player.isPotionActive(Potion.moveSlowdown.id)) player.removePotionEffect(Potion.moveSlowdown.id);
-								if (player.isPotionActive(Potion.poison.id)) player.removePotionEffect(Potion.poison.id);
-							}
-							
-							if (player.getCurrentArmor(i).getTagCompound().getBoolean("ETHEREAL"))
-							{
-								if (player.getLastAttackerTime() <= (double) 0.05D)
-								{
-									int var = rand.nextInt(20);
-									if (var == 0)
-									{
-										player.setHealth(20);
-									}
-								}
-							}
-							
-							if (player.getCurrentArmor(i).getTagCompound().getBoolean("VOID"))
-							{
-								if (player.getLastAttackerTime() <= (double) 0.05D)
-								{
-									int var = rand.nextInt(20);
-									if (var == 0)
-									{
-										EntityLivingBase attacker = player.getLastAttacker();
-										attacker.setDead();
-									}
-								}
-							}
-						}
-					}
+					if (player.isPotionActive(Potion.weakness.id)) player.removePotionEffect(Potion.weakness.id);
+					if (player.isPotionActive(Potion.moveSlowdown.id)) player.removePotionEffect(Potion.moveSlowdown.id);
+					if (player.isPotionActive(Potion.poison.id)) player.removePotionEffect(Potion.poison.id);
 				}
 			}
 		}
@@ -218,6 +143,83 @@ public class ItemLevelArmorBase extends ItemArmor
 			if (nbt.getBoolean("IMMUNIZATION")) list.add(EnumChatFormatting.GOLD + "Immunization");
 			if (nbt.getBoolean("ETHEREAL")) list.add(EnumChatFormatting.BLUE + "Ethereal");
 			if (nbt.getBoolean("VOID")) list.add(EnumChatFormatting.DARK_PURPLE + "Void");
+		}
+	}
+
+	/*
+	 * ISpecialArmor implemented methods.
+	 */
+	@Override
+	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) 
+	{
+		if (source.getSourceOfDamage() instanceof EntityLivingBase)
+		{
+			return new ArmorProperties(1, 1.0D, MathHelper.floor_double(damage * 20.0D));
+		}
+		else
+		{
+			return new ArmorProperties(1, 1.0D, 1);
+		}
+	}
+
+	@Override
+	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) 
+	{
+		if(slot == 0)
+		{
+			return 2;
+		}
+		else if(slot == 1)
+		{
+			return 3;
+		}
+		else if(slot == 2)
+		{
+			return 4;
+		}
+		else
+		{
+			return 2;
+		}
+	}
+
+	@Override
+	public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) 
+	{
+		stack.damageItem(damage, entity);
+		
+		if (ConfigHandler.enableLevelingSystem)
+		{
+			NBTTagCompound nbt = stack.getTagCompound();
+			
+			if (nbt != null)
+			{
+				Random rand = new Random();
+				
+				if (source.getSourceOfDamage() instanceof EntityLivingBase)
+				{
+					EntityLivingBase enemy = (EntityLivingBase) source.getSourceOfDamage();
+					
+					if (nbt.getBoolean("HARDENED"))
+					{
+						int var = rand.nextInt(5);
+						if (var == 0)
+						{
+							enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*2, 10));
+						}
+					}
+					
+					if (nbt.getBoolean("POISONED"))
+					{
+						int var = rand.nextInt(1);
+						if (var == 0)
+						{
+							enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*10, 0));
+							LogHelper.info("Hello?");
+						}
+					}
+				}
+			}
 		}
 	}
 }
