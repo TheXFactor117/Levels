@@ -50,7 +50,7 @@ public class EventArmorExperienceGain
 									int var = rand.nextInt(1);
 									if (var == 0)
 									{
-										enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*10, 1));
+										enemy.addPotionEffect(new PotionEffect(Potion.poison.getId(), 200, 1));
 										enemy.setFire(4);
 										LogHelper.info("Hello?");
 									}
