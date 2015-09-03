@@ -27,7 +27,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
  * @author TheXFactor117
  *
  */
-public class EventExperienceGain 
+public class EventMeleeExperienceGain 
 {
 	/**
 	 * Event used to add experience when an entity dies by a weapon.

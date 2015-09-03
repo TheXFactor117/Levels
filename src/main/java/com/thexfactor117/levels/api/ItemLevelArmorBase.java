@@ -1,32 +1,25 @@
 package com.thexfactor117.levels.api;
 
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ISpecialArmor;
 
 import com.thexfactor117.levels.Reference;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.AbilityHelper;
-import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.init.ModTabs;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemLevelArmorBase extends ItemArmor implements ISpecialArmor
+public class ItemLevelArmorBase extends ItemArmor
 {
 	public ItemLevelArmorBase(ArmorMaterial material, int type, String name)
 	{
@@ -143,83 +136,6 @@ public class ItemLevelArmorBase extends ItemArmor implements ISpecialArmor
 			if (nbt.getBoolean("IMMUNIZATION")) list.add(EnumChatFormatting.GOLD + "Immunization");
 			if (nbt.getBoolean("ETHEREAL")) list.add(EnumChatFormatting.BLUE + "Ethereal");
 			if (nbt.getBoolean("VOID")) list.add(EnumChatFormatting.DARK_PURPLE + "Void");
-		}
-	}
-
-	/*
-	 * ISpecialArmor implemented methods.
-	 */
-	@Override
-	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) 
-	{
-		if (source.getSourceOfDamage() instanceof EntityLivingBase)
-		{
-			return new ArmorProperties(1, 1.0D, MathHelper.floor_double(damage * 20.0D));
-		}
-		else
-		{
-			return new ArmorProperties(1, 1.0D, 1);
-		}
-	}
-
-	@Override
-	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) 
-	{
-		if(slot == 0)
-		{
-			return 2;
-		}
-		else if(slot == 1)
-		{
-			return 3;
-		}
-		else if(slot == 2)
-		{
-			return 4;
-		}
-		else
-		{
-			return 2;
-		}
-	}
-
-	@Override
-	public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) 
-	{
-		stack.damageItem(damage, entity);
-		
-		if (ConfigHandler.enableLevelingSystem)
-		{
-			NBTTagCompound nbt = stack.getTagCompound();
-			
-			if (nbt != null)
-			{
-				Random rand = new Random();
-				
-				if (source.getSourceOfDamage() instanceof EntityLivingBase)
-				{
-					EntityLivingBase enemy = (EntityLivingBase) source.getSourceOfDamage();
-					
-					if (nbt.getBoolean("HARDENED"))
-					{
-						int var = rand.nextInt(5);
-						if (var == 0)
-						{
-							enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*2, 10));
-						}
-					}
-					
-					if (nbt.getBoolean("POISONED"))
-					{
-						int var = rand.nextInt(1);
-						if (var == 0)
-						{
-							enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*10, 0));
-							LogHelper.info("Hello?");
-						}
-					}
-				}
-			}
 		}
 	}
 }
