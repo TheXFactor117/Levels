@@ -40,15 +40,52 @@ public class EventArmorExperienceGain
 						{
 							NBTTagCompound nbt = player.getCurrentArmor(i).getTagCompound();
 							
+							nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
+							
 							if (nbt != null)
 							{
-								if (nbt.getBoolean("POISONED"))
+								if (nbt.getBoolean("HARDENED"))
 								{
-									int var = rand.nextInt(1);
+									int var = rand.nextInt(5);
 									if (var == 0)
 									{
-										enemy.addPotionEffect(new PotionEffect(Potion.poison.getId(), 200, 1));
-										enemy.setFire(4);
+										enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*2, 10));
+									}
+								}
+								
+								if (nbt.getBoolean("POISONED"))
+								{
+									int var = rand.nextInt(5);
+									if (var == 0)
+									{
+										enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*10, 0));
+									}
+								}
+								
+								if (nbt.getBoolean("Strength"))
+								{
+									int var = rand.nextInt(10);
+									if (var == 0)
+									{
+										player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20*10, 0));
+									}
+								}
+								
+								if (nbt.getBoolean("ETHEREAL"))
+								{
+									int var = rand.nextInt(20);
+									if (var == 0)
+									{
+										player.setHealth(20.0F);
+									}
+								}
+								
+								if (nbt.getBoolean("VOID"))
+								{
+									int var = rand.nextInt(20);
+									if (var == 0)
+									{
+										enemy.setDead();
 									}
 								}
 							}

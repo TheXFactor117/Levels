@@ -51,42 +51,6 @@ public class ItemLevelArmorBase extends ItemArmor
 				nbt.setInteger("LEVEL", 1);
 				nbt.setInteger("EXPERIENCE", 0);
 			}
-			
-			/*
-			 * Leveling System
-			 */
-			if (nbt != null)
-			{
-				if (nbt.getInteger("LEVEL") == 1 && nbt.getInteger("EXPERIENCE") >= 1000)
-				{
-					nbt.setInteger("LEVEL", 2);
-					AbilityHelper.drawLevelTwoArmorAbility(stack);
-				}
-				
-				if (nbt.getInteger("LEVEL") == 2 && nbt.getInteger("EXPERIENCE") >= 2500)
-				{
-					nbt.setInteger("LEVEL", 3);
-					AbilityHelper.drawLevelThreeArmorAbility(stack);
-				}
-				
-				if (nbt.getInteger("LEVEL") == 3 && nbt.getInteger("EXPERIENCE") >= 5000)
-				{
-					nbt.setInteger("LEVEL", 4);
-					AbilityHelper.drawLevelFourArmorAbility(stack);
-				}
-				
-				if (nbt.getInteger("LEVEL") == 4 && nbt.getInteger("EXPERIENCE") >= 10000)
-				{
-					nbt.setInteger("LEVEL", 5);
-					AbilityHelper.drawLevelFiveArmorAbility(stack);
-				}
-				
-				if (nbt.getInteger("LEVEL") == 5 && nbt.getInteger("EXPERIENCE") >= 20000)
-				{
-					nbt.setInteger("LEVEL", 6);
-					AbilityHelper.drawLevelSixArmorAbility(stack);
-				}
-			}
 		}
 	}
 	
@@ -104,6 +68,42 @@ public class ItemLevelArmorBase extends ItemArmor
 					if (player.isPotionActive(Potion.weakness.id)) player.removePotionEffect(Potion.weakness.id);
 					if (player.isPotionActive(Potion.moveSlowdown.id)) player.removePotionEffect(Potion.moveSlowdown.id);
 					if (player.isPotionActive(Potion.poison.id)) player.removePotionEffect(Potion.poison.id);
+				}
+				
+				/*
+				 * Leveling System
+				 */
+				if (nbt != null)
+				{
+					if (nbt.getInteger("LEVEL") == 1 && nbt.getInteger("EXPERIENCE") >= 1000)
+					{
+						nbt.setInteger("LEVEL", 2);
+						AbilityHelper.drawLevelTwoArmorAbility(stack);
+					}
+					
+					if (nbt.getInteger("LEVEL") == 2 && nbt.getInteger("EXPERIENCE") >= 2500)
+					{
+						nbt.setInteger("LEVEL", 3);
+						AbilityHelper.drawLevelThreeArmorAbility(stack);
+					}
+					
+					if (nbt.getInteger("LEVEL") == 3 && nbt.getInteger("EXPERIENCE") >= 5000)
+					{
+						nbt.setInteger("LEVEL", 4);
+						AbilityHelper.drawLevelFourArmorAbility(stack);
+					}
+					
+					if (nbt.getInteger("LEVEL") == 4 && nbt.getInteger("EXPERIENCE") >= 10000)
+					{
+						nbt.setInteger("LEVEL", 5);
+						AbilityHelper.drawLevelFiveArmorAbility(stack);
+					}
+					
+					if (nbt.getInteger("LEVEL") == 5 && nbt.getInteger("EXPERIENCE") >= 20000)
+					{
+						nbt.setInteger("LEVEL", 6);
+						AbilityHelper.drawLevelSixArmorAbility(stack);
+					}
 				}
 			}
 		}
