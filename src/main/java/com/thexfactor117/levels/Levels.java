@@ -1,11 +1,8 @@
 package com.thexfactor117.levels;
 
-import net.minecraftforge.common.MinecraftForge;
-
-import com.thexfactor117.levels.events.EventArmorExperienceGain;
-import com.thexfactor117.levels.events.EventMeleeExperienceGain;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.LogHelper;
+import com.thexfactor117.levels.init.ModEvents;
 import com.thexfactor117.levels.init.ModItems;
 import com.thexfactor117.levels.init.ModRecipes;
 
@@ -44,9 +41,7 @@ public class Levels
 		LogHelper.info("Beginning initialization phases...");
 		ConfigHandler.registerConfig(event.getSuggestedConfigurationFile());
 		ModItems.registerItems();
-		LogHelper.info("EventExperienceGain registering into the Forge event bus.");
-		MinecraftForge.EVENT_BUS.register(new EventMeleeExperienceGain());
-		MinecraftForge.EVENT_BUS.register(new EventArmorExperienceGain());
+		ModEvents.registerEvents();
 	}
 	
 	@Mod.EventHandler

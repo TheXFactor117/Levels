@@ -8,9 +8,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-
-import com.thexfactor117.levels.helpers.LogHelper;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
@@ -32,7 +29,7 @@ public class EventArmorExperienceGain
 			if (event.entity instanceof EntityPlayer)
 			{
 				EntityPlayer player = (EntityPlayer) event.entity;
-				EntityLiving enemy = (EntityLiving) event.source.getSourceOfDamage();
+				EntityLivingBase enemy = (EntityLivingBase) event.source.getSourceOfDamage();
 				Random rand = new Random();
 				
 				for (int i = 0; i < 4; i++)
@@ -50,9 +47,8 @@ public class EventArmorExperienceGain
 									int var = rand.nextInt(1);
 									if (var == 0)
 									{
-										((EntityLiving)enemy).addPotionEffect(new PotionEffect(Potion.poison.getId(), 200, 1));
+										enemy.addPotionEffect(new PotionEffect(Potion.poison.getId(), 200, 1));
 										enemy.setFire(4);
-										LogHelper.info("Hello?");
 									}
 								}
 							}
