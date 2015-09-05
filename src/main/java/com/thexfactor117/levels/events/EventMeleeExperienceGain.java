@@ -15,6 +15,7 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
@@ -54,6 +55,22 @@ public class EventMeleeExperienceGain
 				
 				if (flag || flag1 || flag2 || flag3 || flag4)
 				{
+					if (event.entity instanceof EntityAnimal)
+					{
+						for (int i = 0; i < player.inventory.mainInventory.length; i++)
+						{
+							if (player.inventory.mainInventory[i] != null)
+							{
+								if (player.inventory.mainInventory[i].getItem() == itemInHand)
+								{
+									NBTTagCompound nbt = player.inventory.mainInventory[i].getTagCompound();
+									nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
+									return;
+								}
+							}
+						}
+					}
+					
 					if (event.entity instanceof EntityZombie || event.entity instanceof EntitySkeleton || event.entity instanceof EntitySpider || event.entity instanceof EntitySlime)
 					{
 						for (int i = 0; i < player.inventory.mainInventory.length; i++)

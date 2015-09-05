@@ -97,7 +97,7 @@ public class EventArmorExperienceGain
 									int var = rand.nextInt(20);
 									if (var == 0)
 									{
-										enemy.setDead();
+										enemy.setHealth(0);
 									}
 								}
 							}
