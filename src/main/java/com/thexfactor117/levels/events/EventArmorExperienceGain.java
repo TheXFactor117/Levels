@@ -40,7 +40,19 @@ public class EventArmorExperienceGain
 						{
 							NBTTagCompound nbt = player.getCurrentArmor(i).getTagCompound();
 							
-							nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
+							if (nbt.getInteger("LEVEL") > 3)
+							{
+								int var = rand.nextInt(3);
+								int var1 = rand.nextInt(3);
+								if (var == 0)
+								{
+									nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1 + var1);
+								}
+							}
+							else
+							{
+								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
+							}
 							
 							if (nbt != null)
 							{

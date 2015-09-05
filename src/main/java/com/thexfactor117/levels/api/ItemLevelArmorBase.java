@@ -90,31 +90,31 @@ public class ItemLevelArmorBase extends ItemArmor
 				 */
 				if (nbt != null)
 				{
-					if (nbt.getInteger("LEVEL") == 1 && nbt.getInteger("EXPERIENCE") >= 1000)
+					if (nbt.getInteger("LEVEL") == 1 && nbt.getInteger("EXPERIENCE") >= 100)
 					{
 						nbt.setInteger("LEVEL", 2);
 						AbilityHelper.drawLevelTwoArmorAbility(stack);
 					}
 					
-					if (nbt.getInteger("LEVEL") == 2 && nbt.getInteger("EXPERIENCE") >= 2500)
+					if (nbt.getInteger("LEVEL") == 2 && nbt.getInteger("EXPERIENCE") >= 250)
 					{
 						nbt.setInteger("LEVEL", 3);
 						AbilityHelper.drawLevelThreeArmorAbility(stack);
 					}
 					
-					if (nbt.getInteger("LEVEL") == 3 && nbt.getInteger("EXPERIENCE") >= 5000)
+					if (nbt.getInteger("LEVEL") == 3 && nbt.getInteger("EXPERIENCE") >= 500)
 					{
 						nbt.setInteger("LEVEL", 4);
 						AbilityHelper.drawLevelFourArmorAbility(stack);
 					}
 					
-					if (nbt.getInteger("LEVEL") == 4 && nbt.getInteger("EXPERIENCE") >= 10000)
+					if (nbt.getInteger("LEVEL") == 4 && nbt.getInteger("EXPERIENCE") >= 1000)
 					{
 						nbt.setInteger("LEVEL", 5);
 						AbilityHelper.drawLevelFiveArmorAbility(stack);
 					}
 					
-					if (nbt.getInteger("LEVEL") == 5 && nbt.getInteger("EXPERIENCE") >= 20000)
+					if (nbt.getInteger("LEVEL") == 5 && nbt.getInteger("EXPERIENCE") >= 2000)
 					{
 						nbt.setInteger("LEVEL", 6);
 						AbilityHelper.drawLevelSixArmorAbility(stack);
@@ -138,11 +138,11 @@ public class ItemLevelArmorBase extends ItemArmor
 		{
 			list.add("Level: " + nbt.getInteger("LEVEL"));
 			
-			if (nbt.getInteger("LEVEL") == 1) list.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/1000");
-			if (nbt.getInteger("LEVEL") == 2) list.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/2500");
-			if (nbt.getInteger("LEVEL") == 3) list.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/5000");
-			if (nbt.getInteger("LEVEL") == 4) list.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/10000");
-			if (nbt.getInteger("LEVEL") == 5) list.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/20000");
+			if (nbt.getInteger("LEVEL") == 1) list.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/100");
+			if (nbt.getInteger("LEVEL") == 2) list.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/250");
+			if (nbt.getInteger("LEVEL") == 3) list.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/500");
+			if (nbt.getInteger("LEVEL") == 4) list.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/1000");
+			if (nbt.getInteger("LEVEL") == 5) list.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/2000");
 			if (nbt.getInteger("LEVEL") == 6) list.add("Experience: " + nbt.getInteger("EXPERIENCE"));
 			
 			list.add(stack.getMaxDamage() - stack.getItemDamage() + " Hits Remaining");

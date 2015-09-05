@@ -1,5 +1,7 @@
 package com.thexfactor117.levels.events;
 
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -94,6 +96,22 @@ public class EventMeleeExperienceGain
 								{
 									NBTTagCompound nbt = player.inventory.mainInventory[i].getTagCompound();
 									nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 30);
+									return;
+								}
+							}
+						}
+					}
+					
+					if (event.entity instanceof EntityDragon || event.entity instanceof EntityWither)
+					{
+						for (int i = 0; i < player.inventory.mainInventory.length; i++)
+						{
+							if (player.inventory.mainInventory[i] != null)
+							{
+								if (player.inventory.mainInventory[i].getItem() == itemInHand)
+								{
+									NBTTagCompound nbt = player.inventory.mainInventory[i].getTagCompound();
+									nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 100);
 									return;
 								}
 							}
