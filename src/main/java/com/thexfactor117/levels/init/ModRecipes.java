@@ -19,10 +19,10 @@ public class ModRecipes
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.stoneSword), "A", "A", "B", 'A', Blocks.cobblestone, 'B', Items.stick);
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.ironSword), "A", "A", "B", 'A', Items.iron_ingot, 'B', Items.stick);
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.diamondSword), "A", "A", "B", 'A', Items.diamond, 'B', Items.stick);
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.leatherHelmet), "AAA", "A A", 'A', Items.leather);
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.leatherChestplate), "A A", "AAA", "AAA", 'A', Items.leather);
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.leatherLeggings), "AAA", "A A", "A A", 'A', Items.leather);
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.leatherChestplate), "A A", "A A", 'A', Items.leather);
+		//GameRegistry.addShapedRecipe(new ItemStack(ModItems.leatherHelmet), "AAA", "A A", 'A', Items.leather);
+		//GameRegistry.addShapedRecipe(new ItemStack(ModItems.leatherChestplate), "A A", "AAA", "AAA", 'A', Items.leather);
+		//GameRegistry.addShapedRecipe(new ItemStack(ModItems.leatherLeggings), "AAA", "A A", "A A", 'A', Items.leather);
+		//GameRegistry.addShapedRecipe(new ItemStack(ModItems.leatherChestplate), "A A", "A A", 'A', Items.leather);
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.goldHelmet), "AAA", "A A", 'A', Items.gold_ingot);
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.goldChestplate), "A A", "AAA", "AAA", 'A', Items.gold_ingot);
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.goldLeggings), "AAA", "A A", "A A", 'A', Items.gold_ingot);

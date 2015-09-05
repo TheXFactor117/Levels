@@ -6,6 +6,11 @@ import com.thexfactor117.levels.events.EventArmorExperienceGain;
 import com.thexfactor117.levels.events.EventMeleeExperienceGain;
 import com.thexfactor117.levels.helpers.LogHelper;
 
+/**
+ * 
+ * @author TheXFactor117
+ *
+ */
 public class ModEvents 
 {
 	public static void registerEvents()

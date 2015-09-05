@@ -7,6 +7,11 @@ import com.thexfactor117.levels.Reference;
 import com.thexfactor117.levels.api.ItemLevelArmorBase;
 import com.thexfactor117.levels.init.ModItems;
 
+/**
+ * 
+ * @author TheXFactor117
+ *
+ */
 public class ItemDiamondArmor extends ItemLevelArmorBase
 {
 	public ItemDiamondArmor(ArmorMaterial material, int type, String name)
@@ -19,11 +24,11 @@ public class ItemDiamondArmor extends ItemLevelArmorBase
 	{		
 		if (stack.getItem() == ModItems.diamondLeggings)
 		{
-			return Reference.MODID + ":models/armor/diamond_layer2.png";
+			return Reference.MODID + ":models/armor/diamond_layer_2.png";
 		}
 		else
 		{
-			return Reference.MODID + ":models/armor/diamond_layer1.png";
+			return Reference.MODID + ":models/armor/diamond_layer_1.png";
 		}
 	}
 }

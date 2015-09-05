@@ -19,6 +19,14 @@ import com.thexfactor117.levels.init.ModTabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * 
+ * @author TheXFactor117
+ *
+ * To have the functionality of the leveling system, simply just extend this class. Nothing
+ * else is needed.
+ * 
+ */
 public class ItemLevelArmorBase extends ItemArmor
 {
 	public ItemLevelArmorBase(ArmorMaterial material, int type, String name)
@@ -29,6 +37,10 @@ public class ItemLevelArmorBase extends ItemArmor
 		this.setCreativeTab(ModTabs.tabLevels);
 	}
 	
+	/**
+	 * Called every tick armor is in the inventory. Doesn't include armor being worn. Used
+	 * to create NBT tags.
+	 */
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity entity, int index, boolean bool)
 	{
@@ -54,6 +66,9 @@ public class ItemLevelArmorBase extends ItemArmor
 		}
 	}
 	
+	/**
+	 * Called every tick armor is being worn. Used to apply a few abilities and level up if necessary.
+	 */
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack stack)
 	{
@@ -109,6 +124,9 @@ public class ItemLevelArmorBase extends ItemArmor
 		}
 	}
 	
+	/**
+	 * Sets the lore of the item.
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	@SideOnly(Side.CLIENT)
