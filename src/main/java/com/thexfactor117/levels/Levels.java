@@ -39,6 +39,7 @@ public class Levels
 		ConfigHandler.registerConfig(event.getSuggestedConfigurationFile());
 		ModItems.registerItems();
 		ModEvents.registerEvents();
+		//ModIntegration.registerIntegration();
 	}
 	
 	@Mod.EventHandler
