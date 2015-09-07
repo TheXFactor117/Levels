@@ -25,9 +25,6 @@ import com.thexfactor117.levels.init.ModTabs;
  * 
  * @author TheXFactor117
  * 
- * To have the functionality of the leveling system, simply just extend this class. Nothing
- * else is needed.
- *
  */
 public class ItemLevelSwordBase extends ItemSword
 {

@@ -22,9 +22,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 /**
  * 
  * @author TheXFactor117
- *
- * To have the functionality of the leveling system, simply just extend this class. Nothing
- * else is needed.
  * 
  */
 public class ItemLevelArmorBase extends ItemArmor
