@@ -8,8 +8,18 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class EventEntityDeath 
+/**
+ * 
+ * @author TheXFactor117
+ *
+ */
+public class EventWeaponDeath 
 {
+	/**
+	 * Called when the specifed entity dies by the specific source (the Player). Used to determine how
+	 * how much bonus experience should be given to the weapon when dealing the killing blow.
+	 * @param event
+	 */
 	@SubscribeEvent
 	public void onEntityDeath(LivingDeathEvent event)
 	{
