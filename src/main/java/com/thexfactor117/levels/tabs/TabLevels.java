@@ -28,7 +28,7 @@ public class TabLevels extends CreativeTabs
 	{
 		if (this.name == "tabLevels")
 		{
-			return ModItems.ironSword;
+			return ModItems.ironChestplate;
 		} 
 			
 		return null;

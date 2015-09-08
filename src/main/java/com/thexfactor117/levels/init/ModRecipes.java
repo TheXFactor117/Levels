@@ -1,6 +1,5 @@
 package com.thexfactor117.levels.init;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -14,11 +13,6 @@ public class ModRecipes
 {
 	public static void registerRecipes()
 	{
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.woodSword), "A", "A", "B", 'A', Blocks.planks, 'B', Items.stick);
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.goldSword), "A", "A", "B", 'A', Items.gold_ingot, 'B', Items.stick);
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.stoneSword), "A", "A", "B", 'A', Blocks.cobblestone, 'B', Items.stick);
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.ironSword), "A", "A", "B", 'A', Items.iron_ingot, 'B', Items.stick);
-		GameRegistry.addShapedRecipe(new ItemStack(ModItems.diamondSword), "A", "A", "B", 'A', Items.diamond, 'B', Items.stick);
 		//GameRegistry.addShapedRecipe(new ItemStack(ModItems.leatherHelmet), "AAA", "A A", 'A', Items.leather);
 		//GameRegistry.addShapedRecipe(new ItemStack(ModItems.leatherChestplate), "A A", "AAA", "AAA", 'A', Items.leather);
 		//GameRegistry.addShapedRecipe(new ItemStack(ModItems.leatherLeggings), "AAA", "A A", "A A", 'A', Items.leather);
@@ -35,12 +29,7 @@ public class ModRecipes
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.diamondChestplate), "A A", "AAA", "AAA", 'A', Items.diamond);
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.diamondLeggings), "AAA", "A A", "A A", 'A', Items.diamond);
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.diamondBoots), "A A", "A A", 'A', Items.diamond);
-		
-		GameRegistry.addShapedRecipe(new ItemStack(Items.wooden_sword), "A", 'A', ModItems.woodSword);
-		GameRegistry.addShapedRecipe(new ItemStack(Items.golden_sword), "A", 'A', ModItems.goldSword);
-		GameRegistry.addShapedRecipe(new ItemStack(Items.stone_sword), "A", 'A', ModItems.stoneSword);
-		GameRegistry.addShapedRecipe(new ItemStack(Items.iron_sword), "A", 'A', ModItems.ironSword);
-		GameRegistry.addShapedRecipe(new ItemStack(Items.diamond_sword), "A", 'A', ModItems.diamondSword);
+
 		GameRegistry.addShapedRecipe(new ItemStack(Items.leather_helmet), "A", 'A', ModItems.leatherHelmet);
 		GameRegistry.addShapedRecipe(new ItemStack(Items.leather_chestplate), "A", 'A', ModItems.leatherChestplate);
 		GameRegistry.addShapedRecipe(new ItemStack(Items.leather_leggings), "A", 'A', ModItems.leatherLeggings);

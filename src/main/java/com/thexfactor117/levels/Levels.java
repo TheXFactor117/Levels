@@ -3,8 +3,6 @@ package com.thexfactor117.levels;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.init.ModEvents;
-import com.thexfactor117.levels.init.ModItems;
-import com.thexfactor117.levels.init.ModRecipes;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -34,7 +32,7 @@ public class Levels
 	{
 		LogHelper.info("Beginning initialization phases...");
 		ConfigHandler.registerConfig(event.getSuggestedConfigurationFile());
-		ModItems.registerItems();
+		//ModItems.registerItems();
 		ModEvents.registerEvents();
 		//ModIntegration.registerIntegration();
 	}
@@ -42,7 +40,7 @@ public class Levels
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		ModRecipes.registerRecipes();
+		//ModRecipes.registerRecipes();
 		LogHelper.info("Levels has finished initializing!");
 	}
 }
