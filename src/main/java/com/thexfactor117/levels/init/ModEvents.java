@@ -19,15 +19,13 @@ public class ModEvents
 {
 	public static void registerEvents()
 	{
-		LogHelper.info("Events registering...");
-		
-		//MinecraftForge.EVENT_BUS.register(new EventArmorExperienceGain());
-		
+		LogHelper.info("Registering events...");
+
 		FMLCommonHandler.instance().bus().register(new EventItemCrafted());
 		MinecraftForge.EVENT_BUS.register(new EventEntityAttacked());
 		MinecraftForge.EVENT_BUS.register(new EventTooltip());
 		MinecraftForge.EVENT_BUS.register(new EventWeaponDeath());
 		
-		LogHelper.info("Event registering finished.");
+		LogHelper.info("Event registration has finished.");
 	}
 }

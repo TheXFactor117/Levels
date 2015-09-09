@@ -2,13 +2,13 @@
 {
   "modid": "levels",
   "name": "Levels",
-  "description": "A small mod focused on the aspect of weapon and armor leveling to unlock new abilities and such.",
-  "version": "a3.0.0",
+  "description": "A small mod focused on the aspect of weapon and armor leveling to unlock new, powerful abilities",
+  "version": "b3.0.0",
   "mcversion": "1.7.10",
   "url": "http://github.com/TheXFactor117/Levels",
   "updateUrl": "",
   "authorList": ["TheXFactor117"],
-  "credits": "Mojang and Forge",
+  "credits": "Mojang, Forge, and Hlaaftana",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

@@ -142,6 +142,9 @@ public class EventEntityAttacked
 						{
 							NBTTagCompound nbt = player.getCurrentArmor(i).getTagCompound();
 							
+							/*
+							 * Experience
+							 */
 							if (nbt.getInteger("LEVEL") > 3)
 							{
 								int var = rand.nextInt(3);
@@ -156,6 +159,9 @@ public class EventEntityAttacked
 								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
 							}
 							
+							/*
+							 * Abilities
+							 */
 							if (nbt != null)
 							{
 								if (nbt.getBoolean("HARDENED"))

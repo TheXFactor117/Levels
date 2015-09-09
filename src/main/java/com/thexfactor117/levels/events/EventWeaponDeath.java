@@ -36,7 +36,7 @@ public class EventWeaponDeath
 				{
 					if (event.entityLiving instanceof EntityMob)
 					{
-						nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 5000);
+						nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 10);
 					}
 					
 					if (event.entityLiving instanceof EntityAnimal)
