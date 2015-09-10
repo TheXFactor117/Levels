@@ -9,13 +9,13 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 /**
  * To-Do List
- * b3.0.0
- * - Mod Compatibility!
  * 
- * b4.0.0
+ * General
  * - Bow Leveling System
  * - Bow Abilities
  * - Bow Crafting Recipes
+ * 
+ * r1.0.0 - Official Release
  */
 
 /**
