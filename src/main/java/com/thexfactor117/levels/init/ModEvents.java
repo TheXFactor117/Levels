@@ -6,6 +6,7 @@ import com.thexfactor117.levels.events.EventEntityAttacked;
 import com.thexfactor117.levels.events.EventItemCrafted;
 import com.thexfactor117.levels.events.EventTooltip;
 import com.thexfactor117.levels.events.EventWeaponDeath;
+import com.thexfactor117.levels.handlers.VersionChecker;
 import com.thexfactor117.levels.helpers.LogHelper;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -25,6 +26,8 @@ public class ModEvents
 		MinecraftForge.EVENT_BUS.register(new EventEntityAttacked());
 		MinecraftForge.EVENT_BUS.register(new EventTooltip());
 		MinecraftForge.EVENT_BUS.register(new EventWeaponDeath());
+		
+		FMLCommonHandler.instance().bus().register(new VersionChecker());
 		
 		LogHelper.info("Event registration has finished.");
 	}
