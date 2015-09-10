@@ -53,6 +53,10 @@ public class Levels
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
+		LogHelper.info("Checking if latest version...");
+		
 		proxy.postInit();
+		
+		LogHelper.info("VersionChecker complete.");
 	}
 }

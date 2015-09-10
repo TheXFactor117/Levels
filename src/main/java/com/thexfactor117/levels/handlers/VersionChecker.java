@@ -56,7 +56,7 @@ public class VersionChecker implements Runnable
         }
         LogHelper.info("Latest mod version = " + latestVersion);
         isLatestVersion = Reference.VERSION.equals(latestVersion);
-        LogHelper.info("Are you running the latest version = " + isLatestVersion + " ?");
+        LogHelper.info("Running the latest version? " + isLatestVersion);
 	}
 	
 	public boolean isLatestVersion()
