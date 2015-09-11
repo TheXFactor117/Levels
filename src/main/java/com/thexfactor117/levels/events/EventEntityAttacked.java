@@ -88,7 +88,7 @@ public class EventEntityAttacked
 						if (nbt.getBoolean("POISON")) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*4, 0));
 						if (nbt.getBoolean("Strength")) 
 						{
-							int var = rand.nextInt(9);
+							int var = rand.nextInt(10);
 							if (var == 0) player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20*10, 0));
 						}
 						
@@ -96,7 +96,7 @@ public class EventEntityAttacked
 						{
 							float healthToBeAdded = 5F;
 							
-							int var1 = rand.nextInt(3);
+							int var1 = rand.nextInt(4);
 							if (var1 == 0) 
 							{				
 								player.setHealth(player.getHealth() + healthToBeAdded);
@@ -110,7 +110,7 @@ public class EventEntityAttacked
 						
 						if (nbt.getBoolean("VOID"))
 						{
-							int var2 = rand.nextInt(19);
+							int var2 = rand.nextInt(20);
 							if (var2 == 0)
 							{
 								enemy.setHealth(0);

@@ -1,8 +1,10 @@
 package com.thexfactor117.levels.init;
 
+import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.thexfactor117.levels.events.EventEntityAttacked;
+import com.thexfactor117.levels.events.EventEntityDrops;
 import com.thexfactor117.levels.events.EventItemCrafted;
 import com.thexfactor117.levels.events.EventTooltip;
 import com.thexfactor117.levels.events.EventWeaponDeath;
@@ -28,6 +30,14 @@ public class ModEvents
 		MinecraftForge.EVENT_BUS.register(new EventWeaponDeath());
 		
 		FMLCommonHandler.instance().bus().register(new VersionChecker());
+		
+		// Test Events
+		boolean developmentEnvironment = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
+		
+		if (developmentEnvironment)
+		{
+			MinecraftForge.EVENT_BUS.register(new EventEntityDrops());
+		}
 		
 		LogHelper.info("Event registration has finished.");
 	}
