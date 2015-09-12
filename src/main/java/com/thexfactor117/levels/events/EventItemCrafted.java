@@ -10,6 +10,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
+/**
+ * 
+ * @author TheXFactor117
+ *
+ */
 public class EventItemCrafted 
 {
 	@SubscribeEvent
@@ -42,30 +47,30 @@ public class EventItemCrafted
 					
 					if (developmentEnvironment)
 					{
-						int var = rand.nextInt(15);
-						if (var < 5)
+						int var = rand.nextInt(100) + 1;
+						if (var <= 75)
 						{
-							nbt.setString("RARITY", "COMMON");
+							nbt.setInteger("RARITY", 1);
 						}
 						
-						if (var > 4 && var < 9)
+						if (var > 75 && var <= 90)
 						{
-							nbt.setString("RARITY", "UNCOMMON");
+							nbt.setInteger("RARITY", 2);
 						}
 						
-						if (var > 8 && var < 12)
+						if (var > 90 && var <= 96)
 						{
-							nbt.setString("RARITY", "RARE");
+							nbt.setInteger("RARITY", 3);
 						}
 						
-						if (var > 11 && var < 14)
+						if (var > 96 && var <= 99)
 						{
-							nbt.setString("RARITY", "LEGENDARY");
+							nbt.setInteger("RARITY", 4);
 						}
 						
-						if (var == 14)
+						if (var == 100)
 						{
-							nbt.setString("RARITY", "EXTRAORDINARY");
+							nbt.setInteger("RARITY", 5);
 						}
 					}
 				}

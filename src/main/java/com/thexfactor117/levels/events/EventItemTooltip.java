@@ -13,7 +13,12 @@ import com.thexfactor117.levels.helpers.AbilityHelper;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class EventTooltip 
+/**
+ * 
+ * @author TheXFactor117
+ *
+ */
+public class EventItemTooltip 
 {
 	@SubscribeEvent
 	public void addInformation(ItemTooltipEvent event)
@@ -73,11 +78,11 @@ public class EventTooltip
 				 */
 				event.toolTip.add("");
 				
-				if (nbt.getString("RARITY") == "COMMON") event.toolTip.add(EnumChatFormatting.WHITE + "" + EnumChatFormatting.ITALIC + "Common");
-				if (nbt.getString("RARITY") == "UNCOMMON") event.toolTip.add(EnumChatFormatting.DARK_GREEN + "" + EnumChatFormatting.ITALIC + "Uncommon");
-				if (nbt.getString("RARITY") == "RARE") event.toolTip.add(EnumChatFormatting.AQUA + "" + EnumChatFormatting.ITALIC + "Rare");
-				if (nbt.getString("RARITY") == "LEGENDARY") event.toolTip.add(EnumChatFormatting.DARK_PURPLE + "" + EnumChatFormatting.ITALIC + "Legendary");
-				if (nbt.getString("RARITY") == "EXTRAORDINARY") event.toolTip.add(EnumChatFormatting.GOLD + "" + EnumChatFormatting.ITALIC + "EXTRAORDINARY");
+				if (nbt.getInteger("RARITY") == 1) event.toolTip.add(EnumChatFormatting.WHITE + "" + EnumChatFormatting.ITALIC + "Basic");
+				if (nbt.getInteger("RARITY") == 2) event.toolTip.add(EnumChatFormatting.DARK_GREEN + "" + EnumChatFormatting.ITALIC + "Uncommon");
+				if (nbt.getInteger("RARITY") == 3) event.toolTip.add(EnumChatFormatting.AQUA + "" + EnumChatFormatting.ITALIC + "Rare");
+				if (nbt.getInteger("RARITY") == 4) event.toolTip.add(EnumChatFormatting.DARK_PURPLE + "" + EnumChatFormatting.ITALIC + "Legendary");
+				if (nbt.getInteger("RARITY") == 5) event.toolTip.add(EnumChatFormatting.GOLD + "" + EnumChatFormatting.ITALIC + "Ancient");
 				
 				event.toolTip.add("Level: " + nbt.getInteger("LEVEL"));
 				

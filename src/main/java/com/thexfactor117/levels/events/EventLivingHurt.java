@@ -8,10 +8,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
@@ -19,14 +20,14 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
  * @author TheXFactor117
  *
  */
-public class EventEntityAttacked 
+public class EventLivingHurt 
 {	
 	/**
 	 * Fired when an entity is attacked by the player.
 	 * @param event
 	 */
 	@SubscribeEvent
-	public void hitEntity(LivingAttackEvent event)
+	public void hitEntity(LivingHurtEvent event)
 	{
 		/*
 		 * 
@@ -51,6 +52,9 @@ public class EventEntityAttacked
 					 */
 					if (nbt != null)
 					{
+						/*
+						 * Experience
+						 */
 						if (nbt.getInteger("LEVEL") == 1 || nbt.getInteger("LEVEL") == 2 || nbt.getInteger("LEVEL") == 3)
 						{
 							nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
@@ -77,6 +81,67 @@ public class EventEntityAttacked
 							else
 							{
 								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
+							}
+						}
+						
+						/*
+						 * Rarity
+						 */
+						boolean developmentEnvironment = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
+						
+						if (developmentEnvironment)
+						{							
+							if (nbt.getInteger("RARITY") != 1 && nbt.getInteger("RARITY") != 0)
+							{
+								if (nbt.getInteger("RARITY") == 2)
+								{
+									event.ammount = event.ammount * 1.5F;
+								}
+								
+								if (nbt.getInteger("RARITY") == 3)
+								{
+									event.ammount = event.ammount * 1.5F;
+									
+									int var = rand.nextInt(2);
+									if (var == 0)
+									{
+										stack.setItemDamage(stack.getItemDamage() + 1);
+									}
+								}
+								
+								if (nbt.getInteger("RARITY") == 4)
+								{
+									event.ammount = event.ammount * 2.0F;
+									
+									int var = rand.nextInt(10);
+									if (var <= 5)
+									{
+										stack.setItemDamage(stack.getItemDamage() + 1);
+									}
+									
+									int var1 = rand.nextInt(20);
+									if (var1 == 0)
+									{
+										stack.setItemDamage(stack.getItemDamage() + 20);
+									}
+								}
+								
+								if (nbt.getInteger("RARITY") == 5)
+								{
+									event.ammount = event.ammount * 3.0F;
+									
+									int var = rand.nextInt(4);
+									if (var != 0)
+									{
+										stack.setItemDamage(stack.getItemDamage() + 1);
+									}
+									
+									int var1 = rand.nextInt(10);
+									if (var1 == 0)
+									{
+										stack.setItemDamage(stack.getItemDamage() + 20);
+									}
+								}
 							}
 						}
 						

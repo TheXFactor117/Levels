@@ -18,6 +18,11 @@ import com.thexfactor117.levels.helpers.LogHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
+/**
+ * 
+ * @author TheXFactor117
+ *
+ */
 public class VersionChecker implements Runnable
 {
 	private static boolean isLatestVersion = false;

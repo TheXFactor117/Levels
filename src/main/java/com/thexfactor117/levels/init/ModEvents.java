@@ -3,11 +3,11 @@ package com.thexfactor117.levels.init;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.common.MinecraftForge;
 
-import com.thexfactor117.levels.events.EventEntityAttacked;
-import com.thexfactor117.levels.events.EventEntityDrops;
+import com.thexfactor117.levels.events.EventLivingHurt;
+import com.thexfactor117.levels.events.EventLivingDrops;
 import com.thexfactor117.levels.events.EventItemCrafted;
-import com.thexfactor117.levels.events.EventTooltip;
-import com.thexfactor117.levels.events.EventWeaponDeath;
+import com.thexfactor117.levels.events.EventItemTooltip;
+import com.thexfactor117.levels.events.EventLivingDeath;
 import com.thexfactor117.levels.handlers.VersionChecker;
 import com.thexfactor117.levels.helpers.LogHelper;
 
@@ -25,9 +25,9 @@ public class ModEvents
 		LogHelper.info("Registering events...");
 
 		FMLCommonHandler.instance().bus().register(new EventItemCrafted());
-		MinecraftForge.EVENT_BUS.register(new EventEntityAttacked());
-		MinecraftForge.EVENT_BUS.register(new EventTooltip());
-		MinecraftForge.EVENT_BUS.register(new EventWeaponDeath());
+		MinecraftForge.EVENT_BUS.register(new EventLivingHurt());
+		MinecraftForge.EVENT_BUS.register(new EventItemTooltip());
+		MinecraftForge.EVENT_BUS.register(new EventLivingDeath());
 		
 		FMLCommonHandler.instance().bus().register(new VersionChecker());
 		
@@ -36,7 +36,7 @@ public class ModEvents
 		
 		if (developmentEnvironment)
 		{
-			MinecraftForge.EVENT_BUS.register(new EventEntityDrops());
+			MinecraftForge.EVENT_BUS.register(new EventLivingDrops());
 		}
 		
 		LogHelper.info("Event registration has finished.");

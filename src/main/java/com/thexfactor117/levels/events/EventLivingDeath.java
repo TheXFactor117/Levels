@@ -13,7 +13,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
  * @author TheXFactor117
  *
  */
-public class EventWeaponDeath 
+public class EventLivingDeath 
 {
 	/**
 	 * Called when the specifed entity dies by the specific source (the Player). Used to determine how
