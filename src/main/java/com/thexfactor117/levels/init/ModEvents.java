@@ -8,6 +8,7 @@ import com.thexfactor117.levels.events.EventLivingDrops;
 import com.thexfactor117.levels.events.EventItemCrafted;
 import com.thexfactor117.levels.events.EventItemTooltip;
 import com.thexfactor117.levels.events.EventLivingDeath;
+import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.handlers.VersionChecker;
 import com.thexfactor117.levels.helpers.LogHelper;
 
@@ -34,9 +35,17 @@ public class ModEvents
 		// Test Events
 		boolean developmentEnvironment = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
 		
-		if (developmentEnvironment)
+		if (developmentEnvironment || ConfigHandler.enableDevFeatures)
 		{
+			LogHelper.info("Levels is running in a development environment. Enabling development features...");
+			
 			MinecraftForge.EVENT_BUS.register(new EventLivingDrops());
+			
+			LogHelper.info("Finished enabling development features.");
+		}
+		else
+		{
+			LogHelper.info("Levels is not in a development environment. Disabling development features.");
 		}
 		
 		LogHelper.info("Event registration has finished.");

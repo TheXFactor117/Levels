@@ -33,10 +33,8 @@ public class Levels
 {	
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY, serverSide = Reference.COMMON_PROXY)
 	public static CommonProxy proxy;
-	
 	@Instance(Reference.MODID)
 	public static Levels instance;
-	
 	public static VersionChecker versionChecker;
 	
 	@Mod.EventHandler

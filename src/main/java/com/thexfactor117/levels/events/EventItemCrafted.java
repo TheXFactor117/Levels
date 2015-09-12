@@ -2,6 +2,8 @@ package com.thexfactor117.levels.events;
 
 import java.util.Random;
 
+import com.thexfactor117.levels.handlers.ConfigHandler;
+
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -45,7 +47,7 @@ public class EventItemCrafted
 					
 					boolean developmentEnvironment = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
 					
-					if (developmentEnvironment)
+					if (developmentEnvironment || ConfigHandler.enableDevFeatures)
 					{
 						int var = rand.nextInt(100) + 1;
 						if (var <= 75)

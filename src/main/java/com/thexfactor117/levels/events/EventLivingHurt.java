@@ -2,6 +2,8 @@ package com.thexfactor117.levels.events;
 
 import java.util.Random;
 
+import com.thexfactor117.levels.handlers.ConfigHandler;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -89,7 +91,7 @@ public class EventLivingHurt
 						 */
 						boolean developmentEnvironment = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
 						
-						if (developmentEnvironment)
+						if (developmentEnvironment || ConfigHandler.enableDevFeatures)
 						{							
 							if (nbt.getInteger("RARITY") != 1 && nbt.getInteger("RARITY") != 0)
 							{
