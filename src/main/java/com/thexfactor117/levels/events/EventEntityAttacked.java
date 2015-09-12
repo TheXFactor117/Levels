@@ -40,7 +40,7 @@ public class EventEntityAttacked
 			EntityLivingBase enemy = event.entityLiving;
 			ItemStack stack = player.inventory.getCurrentItem();
 			
-			if (stack.getItem() != null)
+			if (stack != null)
 			{
 				if (stack.getItem() instanceof ItemSword)
 				{
