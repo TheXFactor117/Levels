@@ -40,80 +40,83 @@ public class EventEntityAttacked
 			EntityLivingBase enemy = event.entityLiving;
 			ItemStack stack = player.inventory.getCurrentItem();
 			
-			if (stack.getItem() instanceof ItemSword)
+			if (stack.getItem() != null)
 			{
-				NBTTagCompound nbt = stack.getTagCompound();
-				
-				/*
-				 * Add experience to weapons based on level.
-				 */
-				if (nbt != null)
+				if (stack.getItem() instanceof ItemSword)
 				{
-					if (nbt.getInteger("LEVEL") == 1 || nbt.getInteger("LEVEL") == 2 || nbt.getInteger("LEVEL") == 3)
-					{
-						nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
-					}
-					else if (nbt.getInteger("LEVEL") == 4 || nbt.getInteger("LEVEL") == 5)
-					{
-						int var = rand.nextInt(4);
-						if (var == 0)
-						{
-							nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 2);
-						}
-						else
-						{
-							nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
-						}
-					}
-					else
-					{
-						int var = rand.nextInt(3);
-						if (var == 0)
-						{
-							nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 2);
-						}
-						else
-						{
-							nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
-						}
-					}
+					NBTTagCompound nbt = stack.getTagCompound();
 					
 					/*
-					 * Abilities
+					 * Add experience to weapons based on level.
 					 */
-					if (enemy != null)
+					if (nbt != null)
 					{
-						if (nbt.getBoolean("FIRE")) enemy.setFire(4);
-						if (nbt.getBoolean("FROST")) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*4, 10));
-						if (nbt.getBoolean("POISON")) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*4, 0));
-						if (nbt.getBoolean("Strength")) 
+						if (nbt.getInteger("LEVEL") == 1 || nbt.getInteger("LEVEL") == 2 || nbt.getInteger("LEVEL") == 3)
 						{
-							int var = rand.nextInt(10);
-							if (var == 0) player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20*10, 0));
+							nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
 						}
-						
-						if (nbt.getBoolean("ETHEREAL"))
+						else if (nbt.getInteger("LEVEL") == 4 || nbt.getInteger("LEVEL") == 5)
 						{
-							float healthToBeAdded = 5F;
-							
-							int var1 = rand.nextInt(4);
-							if (var1 == 0) 
-							{				
-								player.setHealth(player.getHealth() + healthToBeAdded);
-								
-								if (player.getHealth() > 20)
-								{
-									player.setHealth(20);
-								}
+							int var = rand.nextInt(4);
+							if (var == 0)
+							{
+								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 2);
+							}
+							else
+							{
+								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
+							}
+						}
+						else
+						{
+							int var = rand.nextInt(3);
+							if (var == 0)
+							{
+								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 2);
+							}
+							else
+							{
+								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
 							}
 						}
 						
-						if (nbt.getBoolean("VOID"))
+						/*
+						 * Abilities
+						 */
+						if (enemy != null)
 						{
-							int var2 = rand.nextInt(20);
-							if (var2 == 0)
+							if (nbt.getBoolean("FIRE")) enemy.setFire(4);
+							if (nbt.getBoolean("FROST")) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*4, 10));
+							if (nbt.getBoolean("POISON")) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*4, 0));
+							if (nbt.getBoolean("Strength")) 
 							{
-								enemy.setHealth(0);
+								int var = rand.nextInt(10);
+								if (var == 0) player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20*10, 0));
+							}
+							
+							if (nbt.getBoolean("ETHEREAL"))
+							{
+								float healthToBeAdded = 5F;
+								
+								int var1 = rand.nextInt(4);
+								if (var1 == 0) 
+								{				
+									player.setHealth(player.getHealth() + healthToBeAdded);
+									
+									if (player.getHealth() > 20)
+									{
+										player.setHealth(20);
+									}
+								}
+							}
+							
+							if (nbt.getBoolean("VOID"))
+							{
+								int var2 = rand.nextInt(20);
+								if (var2 == 0)
+								{
+									enemy.setHealth(0);
+								}
 							}
 						}
 					}

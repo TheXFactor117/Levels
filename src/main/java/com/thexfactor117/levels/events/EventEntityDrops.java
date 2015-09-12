@@ -4,8 +4,6 @@ import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -29,9 +27,7 @@ public class EventEntityDrops
 		if (!event.entity.worldObj.isRemote)
 		{
 			if (event.entityLiving instanceof EntityMob)
-			{
-				event.drops.add(new EntityItem(event.entityLiving.worldObj, event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ, new ItemStack(Items.diamond_sword)));
-				
+			{				
 				for (int i = 0; i < event.drops.size(); i++)
 				{
 					EntityItem entityItem = event.drops.get(i);
