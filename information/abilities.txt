@@ -19,3 +19,5 @@
 - Immunization - the user becomes immune to slowness, weakness, and poison.
 - Ethereal - the user has a 5% chance of being fully healed when dealt damage.
 - Void - the enemy has a 5% chance of dying when dealing damage.
+
+Test: http://github.com/TheXFactor117/Levels
