@@ -1,0 +1,40 @@
+#########################
+### Levels Changelogs ###
+#########################
+
+### Beta 3 - Mod Compatibility
+b3.1.1
++ Added option of enabling development features
++ [Dev Features] Implemented a weapon rarity system
+* Fixed bug when killing enemies with a bare hand
+
+b3.1.0
++ Implemented a VersionChecker system
+
+b3.0.0
++ Mod Compatibility (if a mod is not compatible, report it!) for both weapons and armor
++ Level up notification
+- Removed old system (mod file size should be much smaller now for those concerned)
+* Weapon bonus experience tweaked (Slimes/Magma Cubes do not give bonuses)
+
+### Beta 2 - Armor Leveling System
+b2.1.0
++ Armor levels now progress through hundreds instead of thousands (e.g. 100, 250, etc)
++ Killing the Ender Dragon or Wither results in a large amount of experience towards weapon
++ Killing passive animals will result in a small experience bonus
+* Fixed Void armor ability from setting enemies to dead, resulting in no experience or drops
+
+b2.0.1
+* Fixed issue with armors not having a "name"
+* Fixed texture issue for armors when worn
+
+b2.0.0
++ Added an armor leveling system (minus Leather and Chain)
+* Minor tweaks to weapon leveling system
+
+### Beta 1 - Weapon Leveling System
+b1.0.1
+* Fixed issue with experience using test values
+
+b1.0.0
+* Initial Release
