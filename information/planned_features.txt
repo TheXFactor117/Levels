@@ -1,0 +1,23 @@
+###############################
+### Levels Planned Features ###
+###############################
+
+### Release 1 - Initial Release
+r1.0.0
+- Weapon and Armor Leveling Systems
+- Mod Compatibility
+
+r1.1.0
+- Weapon Rarities
+
+r1.2.0
+- Armor Rarities
+
+r1.3.0
+- Bow Leveling System and Rarities
+
+
+
+### Release 2 - A Whole New World
+r2.0.0
+- Enemy Leveling Systems
