@@ -2,8 +2,6 @@ package com.thexfactor117.levels.events;
 
 import java.util.Random;
 
-import com.thexfactor117.levels.handlers.ConfigHandler;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +13,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+
+import com.thexfactor117.levels.handlers.ConfigHandler;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
@@ -25,7 +26,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class EventLivingHurt 
 {	
 	/**
-	 * Fired when an entity is attacked by the player.
+	 * Fired when an entity is about to be hurt.
 	 * @param event
 	 */
 	@SubscribeEvent
@@ -49,9 +50,6 @@ public class EventLivingHurt
 				{
 					NBTTagCompound nbt = stack.getTagCompound();
 					
-					/*
-					 * Add experience to weapons based on level.
-					 */
 					if (nbt != null)
 					{
 						/*
@@ -93,7 +91,7 @@ public class EventLivingHurt
 						
 						if (developmentEnvironment || ConfigHandler.enableDevFeatures)
 						{							
-							if (nbt.getInteger("RARITY") != 1 && nbt.getInteger("RARITY") != 0)
+							if (nbt.getInteger("RARITY") != 1)
 							{
 								if (nbt.getInteger("RARITY") == 2)
 								{
@@ -107,7 +105,14 @@ public class EventLivingHurt
 									int var = rand.nextInt(2);
 									if (var == 0)
 									{
-										stack.setItemDamage(stack.getItemDamage() + 1);
+										if (stack.getItemDamage() == stack.getMaxDamage())
+										{
+											stack.setItemDamage(stack.getItemDamage());
+										}
+										else
+										{
+											stack.setItemDamage(stack.getItemDamage() + 1);
+										}
 									}
 								}
 								
@@ -118,13 +123,27 @@ public class EventLivingHurt
 									int var = rand.nextInt(10);
 									if (var <= 5)
 									{
-										stack.setItemDamage(stack.getItemDamage() + 1);
+										if (stack.getItemDamage() == stack.getMaxDamage())
+										{
+											stack.setItemDamage(stack.getItemDamage());
+										}
+										else
+										{
+											stack.setItemDamage(stack.getItemDamage() + 1);
+										}
 									}
 									
 									int var1 = rand.nextInt(20);
 									if (var1 == 0)
 									{
-										stack.setItemDamage(stack.getItemDamage() + 20);
+										if (stack.getItemDamage() == stack.getMaxDamage())
+										{
+											stack.setItemDamage(stack.getItemDamage());
+										}
+										else
+										{
+											stack.setItemDamage(stack.getItemDamage() + 20);
+										}
 									}
 								}
 								
@@ -135,13 +154,27 @@ public class EventLivingHurt
 									int var = rand.nextInt(4);
 									if (var != 0)
 									{
-										stack.setItemDamage(stack.getItemDamage() + 1);
+										if (stack.getItemDamage() == stack.getMaxDamage())
+										{
+											stack.setItemDamage(stack.getItemDamage());
+										}
+										else
+										{
+											stack.setItemDamage(stack.getItemDamage() + 1);
+										}
 									}
 									
 									int var1 = rand.nextInt(10);
 									if (var1 == 0)
 									{
-										stack.setItemDamage(stack.getItemDamage() + 20);
+										if (stack.getItemDamage() == stack.getMaxDamage())
+										{
+											stack.setItemDamage(stack.getItemDamage());
+										}
+										else
+										{
+											stack.setItemDamage(stack.getItemDamage() + 20);
+										}
 									}
 								}
 							}

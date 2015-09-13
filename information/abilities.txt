@@ -1,0 +1,21 @@
+########################
+### Levels Abilities ###
+########################
+
+### Weapon Abilities
+- Fire - sets enemies on fire for 4 seconds.
+- Frost - enemies become frozen for 4 seconds.
+- Poison - enemies become poisoned for 10 seconds.
+- Strength - the user receives a strength buff for 10 seconds. Occurs 10% of the time.
+- Ethereal - a portion of the damage dealt is returned to the user as health.
+- Void - a 5% chance of instantly killing the enemy.
+
+
+
+### Armor Abilities
+- Hardened - enemies dealing damage to you have a 20% chance of being stunned for 2 seconds.
+- Poisoned - enemies dealing damage to you have a 20% chance of being poisoned for 5 seconds.
+- Strength - the user has a 10% chance of gaining a strength buff when dealt damage.
+- Immunization - the user becomes immune to slowness, weakness, and poison.
+- Ethereal - the user has a 5% chance of being fully healed when dealt damage.
+- Void - the enemy has a 5% chance of dying when dealing damage.

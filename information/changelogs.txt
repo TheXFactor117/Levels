@@ -17,6 +17,8 @@ b3.0.0
 - Removed old system (mod file size should be much smaller now for those concerned)
 * Weapon bonus experience tweaked (Slimes/Magma Cubes do not give bonuses)
 
+
+
 ### Beta 2 - Armor Leveling System
 b2.1.0
 + Armor levels now progress through hundreds instead of thousands (e.g. 100, 250, etc)
@@ -31,6 +33,8 @@ b2.0.1
 b2.0.0
 + Added an armor leveling system (minus Leather and Chain)
 * Minor tweaks to weapon leveling system
+
+
 
 ### Beta 1 - Weapon Leveling System
 b1.0.1

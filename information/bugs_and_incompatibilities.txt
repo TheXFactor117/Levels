@@ -1,0 +1,11 @@
+##################################
+### Bugs and Incompatibilities ###
+##################################
+
+### Bugs
+* [wontfix] Weapons with rarity higher than Basic loose durability in creative mode
+
+
+
+### Incompatibilities
+* [wontfix] Tinkers' Construct

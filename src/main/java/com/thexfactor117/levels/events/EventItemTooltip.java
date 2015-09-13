@@ -93,6 +93,8 @@ public class EventItemTooltip
 				if (nbt.getInteger("LEVEL") == 5) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/20000");
 				if (nbt.getInteger("LEVEL") == 6) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE"));
 				
+				event.toolTip.add(event.itemStack.getMaxDamage() - event.itemStack.getItemDamage() + " Durability");
+				
 				event.toolTip.add("");
 				
 				if (nbt.getBoolean("FIRE")) event.toolTip.add(EnumChatFormatting.DARK_RED + "Fire");
