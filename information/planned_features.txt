@@ -9,15 +9,28 @@ r1.0.0
 
 r1.1.0
 - Weapon Rarities
+    * Weapon Rarity is a new system in which weapons are given different rarities (Basic, Uncommon, Rare, Legendary, 
+    * Ancient). When crafting a weapon, you'll have chances of getting varying rarities. Of course, the Ancient rarity 
+    * is obviously better than a Basic rarity. These rarities give weapons a variety of effects, like increased damage, 
+    * or chances of not dealing damage to the weapon. Weapons dropped from entities, perhaps from other mods, will be 
+    * able to get rarities and the actual leveling system.
 
 r1.2.0
 - Armor Rarities
+    * Armor rarities perform exactly how weapons work. Reference that instead. Different bonuses will likely be given
+    * however.
 
 r1.3.0
 - Bow Leveling System and Rarities
+    * Pretty self-explanatory. A bow leveling system with rarities. Bow abilities will be released in the abilities.txt
+    * file.
 
 
 
-### Release 2 - A Whole New World
+### Release 2 - Enemy Leveling
 r2.0.0
 - Enemy Leveling Systems
+    * Why not continue the leveling theme one step further. Enemies will now be spawned with varying levels too. Some
+    * levels will be easier than normal monsters, though others will be much more powerful. The more powerful the
+    * monster, the better loot that can be received, amongst experience bonuses and such. Enemy levels will be released
+    * in the abilities.txt file too.
