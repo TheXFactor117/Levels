@@ -108,6 +108,7 @@ public class AbilityHelper
 		abilitiesCollection.add(0.03D, "ethereal");
 		abilitiesCollection.add(0.03D, "void");
 		String abilities = abilitiesCollection.next();
+		LogHelper.info(abilities);
 		
 		if (abilities == "fire") nbt.setBoolean("FIRE", true);
 		if (abilities == "frost") nbt.setBoolean("FROST", true);
@@ -128,6 +129,7 @@ public class AbilityHelper
 		abilitiesCollection.add(0.10D, "ethereal");
 		abilitiesCollection.add(0.10D, "void");
 		String abilities = abilitiesCollection.next();
+		LogHelper.info(abilities);
 		
 		if (abilities == "fire") nbt.setBoolean("FIRE", true);
 		if (abilities == "frost") nbt.setBoolean("FROST", true);
@@ -148,6 +150,7 @@ public class AbilityHelper
 		abilitiesCollection.add(0.25D, "ethereal");
 		abilitiesCollection.add(0.25D, "void");
 		String abilities = abilitiesCollection.next();
+		LogHelper.info(abilities);
 		
 		if (abilities == "fire") nbt.setBoolean("FIRE", true);
 		if (abilities == "frost") nbt.setBoolean("FROST", true);

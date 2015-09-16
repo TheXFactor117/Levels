@@ -2,6 +2,7 @@ package com.thexfactor117.levels.events;
 
 import java.util.Random;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,9 +13,12 @@ import net.minecraft.launchwrapper.Launch;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import com.thexfactor117.levels.handlers.ConfigHandler;
+import com.thexfactor117.levels.helpers.AbilityHelper;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -53,34 +57,63 @@ public class EventLivingHurt
 					if (nbt != null)
 					{
 						/*
+						 * Leveling system
+						 */
+						if (nbt.getInteger("LEVEL") == 1 && nbt.getInteger("EXPERIENCE") >= 1000)
+						{
+							nbt.setInteger("LEVEL", 2);
+							AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
+							Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.WHITE + "Your weapon has leveled up!"));
+						}
+						
+						if (nbt.getInteger("LEVEL") == 2 && nbt.getInteger("EXPERIENCE") >= 2500)
+						{
+							nbt.setInteger("LEVEL", 3);
+							AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
+							Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GREEN + "Your weapon has leveled up!"));
+						}
+						
+						if (nbt.getInteger("LEVEL") == 3 && nbt.getInteger("EXPERIENCE") >= 5000)
+						{
+							nbt.setInteger("LEVEL", 4);
+							AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
+							Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.AQUA + "Your weapon has leveled up!"));
+						}
+						
+						if (nbt.getInteger("LEVEL") == 4 && nbt.getInteger("EXPERIENCE") >= 10000)
+						{
+							nbt.setInteger("LEVEL", 5);
+							AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
+							Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + "Your weapon has leveled up!"));
+						}
+						
+						if (nbt.getInteger("LEVEL") == 5 && nbt.getInteger("EXPERIENCE") >= 20000)
+						{
+							nbt.setInteger("LEVEL", 6);
+							AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
+							Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "Your weapon has reached the max level!"));
+						}
+						
+						/*
 						 * Experience
 						 */
-						if (nbt.getInteger("LEVEL") == 1 || nbt.getInteger("LEVEL") == 2 || nbt.getInteger("LEVEL") == 3)
+						if (nbt.getInteger("LEVEL") != 6)
 						{
-							nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
-						}
-						else if (nbt.getInteger("LEVEL") == 4 || nbt.getInteger("LEVEL") == 5)
-						{
-							int var = rand.nextInt(4);
-							if (var == 0)
-							{
-								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 2);
-							}
-							else
+							if (nbt.getInteger("LEVEL") == 1 || nbt.getInteger("LEVEL") == 2 || nbt.getInteger("LEVEL") == 3)
 							{
 								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
 							}
-						}
-						else
-						{
-							int var = rand.nextInt(3);
-							if (var == 0)
+							else if (nbt.getInteger("LEVEL") == 4 || nbt.getInteger("LEVEL") == 5)
 							{
-								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 2);
-							}
-							else
-							{
-								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
+								int var = rand.nextInt(4);
+								if (var == 0)
+								{
+									nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 2);
+								}
+								else
+								{
+									nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
+								}
 							}
 						}
 						
