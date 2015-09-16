@@ -15,6 +15,18 @@ public class AbilityHelper
 	/**
 	 * New System
 	 */
+	
+	/**
+	 * Simply retrieves the ability needing to be added to the weapon.
+	 * 
+	 * Works by running through several probabilities, depending on level of weapon and
+	 * ability category (rarity). Depending on the calculations, an ability is picked.
+	 * Higher weapon levels have a higher chance of drawing an A3 (Ability 3 Category)
+	 * ability (Ethereal/Void), though even a level 2 weapon has a chance of drawing an
+	 * A3 ability. Complicated, yes. Will it work, hopefully.
+	 * @param stack
+	 * @param level
+	 */
 	public static void getRandomizedMeleeAbilities(ItemStack stack, int level)
 	{
 		NBTTagCompound nbt = stack.getTagCompound();
