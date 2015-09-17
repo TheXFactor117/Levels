@@ -1,14 +1,18 @@
 package com.thexfactor117.levels.events;
 
-import java.util.Random;
-
-import com.thexfactor117.levels.handlers.ConfigHandler;
-
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.nbt.NBTTagCompound;
+
+import com.thexfactor117.levels.Levels;
+import com.thexfactor117.levels.handlers.ConfigHandler;
+import com.thexfactor117.levels.helpers.LogHelper;
+import com.thexfactor117.levels.helpers.RandomCollection;
+import com.thexfactor117.levels.network.PacketRarities;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
@@ -24,14 +28,15 @@ public class EventItemCrafted
 	{
 		ItemStack stack = event.crafting;
 		NBTTagCompound nbt = stack.getTagCompound();
-		Random rand = new Random();
 		
-		if (nbt == null)
+		if (stack.getItem() instanceof ItemSword)
 		{
-			if (stack.getItem() instanceof ItemSword)
-			{				
+			if (!event.player.worldObj.isRemote)
+			{
 				if (nbt == null)
-				{
+				{				
+					EntityPlayerMP player = (EntityPlayerMP) event.player;
+					
 					nbt = new NBTTagCompound();
 					stack.setTagCompound(nbt);
 					
@@ -49,52 +54,45 @@ public class EventItemCrafted
 					
 					if (developmentEnvironment || ConfigHandler.enableDevFeatures)
 					{
-						int var = rand.nextInt(100) + 1;
-						if (var <= 75)
-						{
-							nbt.setInteger("RARITY", 1);
-						}
+						RandomCollection<String> rarities = new RandomCollection<String>();
 						
-						if (var > 75 && var <= 90)
-						{
-							nbt.setInteger("RARITY", 2);
-						}
+						rarities.add(0.65D, "basic");
+						rarities.add(0.17D, "uncommon");
+						rarities.add(0.11D, "rare");
+						rarities.add(0.05D, "legendary");
+						rarities.add(0.02D, "ancient");
+						String rarity = rarities.next();
+						LogHelper.info(rarity);
 						
-						if (var > 90 && var <= 96)
-						{
-							nbt.setInteger("RARITY", 3);
-						}
+						Levels.network.sendTo(new PacketRarities(rarity, nbt), player);
+						LogHelper.info("Packet Sent!");
 						
-						if (var > 96 && var <= 99)
-						{
-							nbt.setInteger("RARITY", 4);
-						}
-						
-						if (var == 100)
-						{
-							nbt.setInteger("RARITY", 5);
-						}
+						if (rarity == "basic") nbt.setInteger("RARITY", 1);
+						if (rarity == "uncommon") nbt.setInteger("RARITY", 2);
+						if (rarity == "rare") nbt.setInteger("RARITY", 3);
+						if (rarity == "legendary") nbt.setInteger("RARITY", 4);
+						if (rarity == "ancient") nbt.setInteger("RARITY", 5);
 					}
 				}
 			}
-			
-			if (stack.getItem() instanceof ItemArmor)
+		}
+		
+		if (stack.getItem() instanceof ItemArmor)
+		{
+			if (nbt == null)
 			{
-				if (nbt == null)
-				{
-					nbt = new NBTTagCompound();
-					stack.setTagCompound(nbt);
-					
-					nbt.setBoolean("HARDENED", false);
-					nbt.setBoolean("POISONED", false);
-					nbt.setBoolean("STRENGTH", false);
-					nbt.setBoolean("IMMUNIZATION", false);
-					nbt.setBoolean("ETHEREAL", false);
-					nbt.setBoolean("VOID", false);
-					
-					nbt.setInteger("LEVEL", 1);
-					nbt.setInteger("EXPERIENCE", 0);
-				}
+				nbt = new NBTTagCompound();
+				stack.setTagCompound(nbt);
+				
+				nbt.setBoolean("HARDENED", false);
+				nbt.setBoolean("POISONED", false);
+				nbt.setBoolean("STRENGTH", false);
+				nbt.setBoolean("IMMUNIZATION", false);
+				nbt.setBoolean("ETHEREAL", false);
+				nbt.setBoolean("VOID", false);
+				
+				nbt.setInteger("LEVEL", 1);
+				nbt.setInteger("EXPERIENCE", 0);
 			}
 		}
 	}

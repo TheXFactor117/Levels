@@ -4,6 +4,7 @@ import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.handlers.VersionChecker;
 import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.init.ModEvents;
+import com.thexfactor117.levels.network.PacketRarities;
 import com.thexfactor117.levels.proxies.CommonProxy;
 
 import cpw.mods.fml.common.Mod;
@@ -11,6 +12,9 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.relauncher.Side;
 
 /**
  * To-Do List
@@ -31,6 +35,7 @@ public class Levels
 	@Instance(Reference.MODID)
 	public static Levels instance;
 	public static VersionChecker versionChecker;
+	public static SimpleNetworkWrapper network;
 	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -39,6 +44,8 @@ public class Levels
 		
 		ConfigHandler.registerConfig(event.getSuggestedConfigurationFile());
 		ModEvents.registerEvents();
+		network = NetworkRegistry.INSTANCE.newSimpleChannel("RarityChannel");
+		network.registerMessage(PacketRarities.HandlerRarities.class, PacketRarities.class, 0, Side.CLIENT);
 		
 		LogHelper.info("Levels has finished initializing.");
 	}
