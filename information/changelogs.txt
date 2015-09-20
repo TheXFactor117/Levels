@@ -7,6 +7,9 @@
 ####
 
 ### Release 1 - Official Release
+r1.0.3
+* Fixed issue with weapon experience gain.
+
 r1.0.2
 - No longer supplying deobf versions of the mod.
 * Implemented new armor ability selection system (similar to weapons previously).
