@@ -242,10 +242,28 @@ public class EventLivingHurt
 							
 							if (nbt.getBoolean("VOID"))
 							{
-								int var2 = rand.nextInt(20);
-								if (var2 == 0)
+								if (ConfigHandler.voidInstantKill)
 								{
-									enemy.setHealth(0);
+									int var2 = rand.nextInt(20);
+									if (var2 == 0)
+									{
+										enemy.setHealth(0);
+									}
+								}
+								else
+								{
+									int var2 = rand.nextInt(20);
+									if (var2 == 0)
+									{
+										if (enemy.getHealth() < 30)
+										{
+											enemy.setHealth(0);
+										}
+										else
+										{
+											enemy.setHealth((float) (enemy.getHealth() - ConfigHandler.voidDamageAmount));
+										}
+									}
 								}
 							}
 						}

@@ -5,6 +5,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
@@ -75,7 +76,16 @@ public class EventLivingDeath
 					{
 						if (event.entityLiving instanceof EntityMob)
 						{
-							nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 10);
+							boolean developmentEnvironment = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
+							
+							if (developmentEnvironment)
+							{
+								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1000);
+							}
+							else
+							{
+								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 10);
+							}
 						}
 						
 						if (event.entityLiving instanceof EntityAnimal)
