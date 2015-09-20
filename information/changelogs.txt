@@ -2,6 +2,25 @@
 ### Levels Changelogs ###
 #########################
 
+####
+### RELEASE
+####
+
+### Release 1 - Official Release
+r1.0.1
++ Re-worked ability selection system for weapons; armor soon to follow.
++ Weapon/Armor drops from mobs now have the leveling system.
+* [Dev] Weapon Rarity system refined.
+
+r1.0.0
+* Official Release
+
+
+
+####
+### BETA
+####
+
 ### Beta 3 - Mod Compatibility
 b3.1.1
 + Added option of enabling development features
