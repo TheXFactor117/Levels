@@ -278,18 +278,59 @@ public class EventLivingHurt
 							/*
 							 * Experience
 							 */
-							if (nbt.getInteger("LEVEL") > 3)
+							if (nbt.getInteger("LEVEL") != 6)
 							{
-								int var = rand.nextInt(3);
-								int var1 = rand.nextInt(3);
-								if (var == 0)
+								if (nbt.getInteger("LEVEL") > 3)
 								{
-									nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1 + var1);
+									int var = rand.nextInt(3);
+									int var1 = rand.nextInt(3);
+									if (var == 0)
+									{
+										nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1 + var1);
+									}
+								}
+								else
+								{
+									nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
 								}
 							}
-							else
+							
+							/*
+							 * Leveling system
+							 */
+							if (nbt.getInteger("LEVEL") == 1 && nbt.getInteger("EXPERIENCE") >= 100)
 							{
-								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
+								nbt.setInteger("LEVEL", 2);
+								AbilityHelper.getRandomizedArmorAbilities(player.getCurrentArmor(i), nbt.getInteger("LEVEL"));
+								Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.WHITE + "Your armor piece has leveled up!"));
+							}
+							
+							if (nbt.getInteger("LEVEL") == 2 && nbt.getInteger("EXPERIENCE") >= 250)
+							{
+								nbt.setInteger("LEVEL", 3);
+								AbilityHelper.getRandomizedArmorAbilities(player.getCurrentArmor(i), nbt.getInteger("LEVEL"));
+								Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GREEN + "Your armor piece has leveled up!"));
+							}
+							
+							if (nbt.getInteger("LEVEL") == 3 && nbt.getInteger("EXPERIENCE") >= 500)
+							{
+								nbt.setInteger("LEVEL", 4);
+								AbilityHelper.getRandomizedArmorAbilities(player.getCurrentArmor(i), nbt.getInteger("LEVEL"));
+								Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.AQUA + "Your armor piece has leveled up!"));
+							}
+							
+							if (nbt.getInteger("LEVEL") == 4 && nbt.getInteger("EXPERIENCE") >= 1000)
+							{
+								nbt.setInteger("LEVEL", 5);
+								AbilityHelper.getRandomizedArmorAbilities(player.getCurrentArmor(i), nbt.getInteger("LEVEL"));
+								Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + "Your armor piece has leveled up!"));
+							}
+							
+							if (nbt.getInteger("LEVEL") == 5 && nbt.getInteger("EXPERIENCE") >= 2000)
+							{
+								nbt.setInteger("LEVEL", 6);
+								AbilityHelper.getRandomizedArmorAbilities(player.getCurrentArmor(i), nbt.getInteger("LEVEL"));
+								Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "Your armor piece has reached the max level!"));
 							}
 							
 							/*

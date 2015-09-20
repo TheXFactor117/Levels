@@ -1,16 +1,11 @@
 package com.thexfactor117.levels.events;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-
-import com.thexfactor117.levels.helpers.AbilityHelper;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
@@ -74,45 +69,7 @@ public class EventItemTooltip
 			 * 
 			 */
 			if (stack.getItem() instanceof ItemArmor)
-			{
-				/*
-				 * Leveling system
-				 */
-				if (nbt.getInteger("LEVEL") == 1 && nbt.getInteger("EXPERIENCE") >= 100)
-				{
-					nbt.setInteger("LEVEL", 2);
-					AbilityHelper.drawLevelTwoArmorAbility(stack);
-					Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.WHITE + "Your armor piece has leveled up!"));
-				}
-				
-				if (nbt.getInteger("LEVEL") == 2 && nbt.getInteger("EXPERIENCE") >= 250)
-				{
-					nbt.setInteger("LEVEL", 3);
-					AbilityHelper.drawLevelThreeArmorAbility(stack);
-					Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GREEN + "Your armor piece has leveled up!"));
-				}
-				
-				if (nbt.getInteger("LEVEL") == 3 && nbt.getInteger("EXPERIENCE") >= 500)
-				{
-					nbt.setInteger("LEVEL", 4);
-					AbilityHelper.drawLevelFourArmorAbility(stack);
-					Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.AQUA + "Your armor piece has leveled up!"));
-				}
-				
-				if (nbt.getInteger("LEVEL") == 4 && nbt.getInteger("EXPERIENCE") >= 1000)
-				{
-					nbt.setInteger("LEVEL", 5);
-					AbilityHelper.drawLevelFiveArmorAbility(stack);
-					Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + "Your armor piece has leveled up!"));
-				}
-				
-				if (nbt.getInteger("LEVEL") == 5 && nbt.getInteger("EXPERIENCE") >= 2000)
-				{
-					nbt.setInteger("LEVEL", 6);
-					AbilityHelper.drawLevelSixArmorAbility(stack);
-					Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "Your armor piece has reached the max level!"));
-				}
-				
+			{	
 				/*
 				 * Tooltip
 				 */

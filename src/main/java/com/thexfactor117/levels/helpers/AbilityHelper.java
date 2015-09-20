@@ -180,9 +180,9 @@ public class AbilityHelper
 				abilityLevelCollection.add(0.05D, "L2A3");
 				String abilityLevel = abilityLevelCollection.next();
 				
-				if (abilityLevel == "L2A1") addA1Abilities(nbt);
-				if (abilityLevel == "L2A2") addA2Abilities(nbt);
-				if (abilityLevel == "L2A3") addA3Abilities(nbt);
+				if (abilityLevel == "L2A1") addA1AbilitiesArmor(nbt);
+				if (abilityLevel == "L2A2") addA2AbilitiesArmor(nbt);
+				if (abilityLevel == "L2A3") addA3AbilitiesArmor(nbt);
 			}
 			
 			if (level == 3)
@@ -192,9 +192,9 @@ public class AbilityHelper
 				abilityLevelCollection.add(0.1D, "L3A3");
 				String abilityLevel = abilityLevelCollection.next();
 				
-				if (abilityLevel == "L3A1") addA1Abilities(nbt);
-				if (abilityLevel == "L3A2") addA2Abilities(nbt);
-				if (abilityLevel == "L3A3") addA3Abilities(nbt);
+				if (abilityLevel == "L3A1") addA1AbilitiesArmor(nbt);
+				if (abilityLevel == "L3A2") addA2AbilitiesArmor(nbt);
+				if (abilityLevel == "L3A3") addA3AbilitiesArmor(nbt);
 			}
 			
 			if (level == 4)
@@ -204,9 +204,9 @@ public class AbilityHelper
 				abilityLevelCollection.add(0.15D, "L4A3");
 				String abilityLevel = abilityLevelCollection.next();
 				
-				if (abilityLevel == "L4A1") addA1Abilities(nbt);
-				if (abilityLevel == "L4A2") addA2Abilities(nbt);
-				if (abilityLevel == "L4A3") addA3Abilities(nbt);
+				if (abilityLevel == "L4A1") addA1AbilitiesArmor(nbt);
+				if (abilityLevel == "L4A2") addA2AbilitiesArmor(nbt);
+				if (abilityLevel == "L4A3") addA3AbilitiesArmor(nbt);
 			}
 			
 			if (level == 5)
@@ -216,9 +216,9 @@ public class AbilityHelper
 				abilityLevelCollection.add(0.2D, "L5A3");
 				String abilityLevel = abilityLevelCollection.next();
 				
-				if (abilityLevel == "L5A1") addA1Abilities(nbt);
-				if (abilityLevel == "L5A2") addA2Abilities(nbt);
-				if (abilityLevel == "L5A3") addA3Abilities(nbt);
+				if (abilityLevel == "L5A1") addA1AbilitiesArmor(nbt);
+				if (abilityLevel == "L5A2") addA2AbilitiesArmor(nbt);
+				if (abilityLevel == "L5A3") addA3AbilitiesArmor(nbt);
 			}
 			
 			if (level == 6)
@@ -228,9 +228,9 @@ public class AbilityHelper
 				abilityLevelCollection.add(0.25D, "L6A3");
 				String abilityLevel = abilityLevelCollection.next();
 				
-				if (abilityLevel == "L6A1") addA1Abilities(nbt);
-				if (abilityLevel == "L6A2") addA2Abilities(nbt);
-				if (abilityLevel == "L6A3") addA3Abilities(nbt);
+				if (abilityLevel == "L6A1") addA1AbilitiesArmor(nbt);
+				if (abilityLevel == "L6A2") addA2AbilitiesArmor(nbt);
+				if (abilityLevel == "L6A3") addA3AbilitiesArmor(nbt);
 			}
 		}
 	}

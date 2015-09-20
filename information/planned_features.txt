@@ -3,10 +3,6 @@
 ###############################
 
 ### Release 1 - Initial Release
-r1.0.0
-- Weapon and Armor Leveling Systems
-- Mod Compatibility
-
 r1.1.0
 - Weapon Rarities
     * Weapon Rarity is a new system in which weapons are given different rarities (Basic, Uncommon, Rare, Legendary, 

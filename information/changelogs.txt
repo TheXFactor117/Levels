@@ -7,6 +7,13 @@
 ####
 
 ### Release 1 - Official Release
+r1.0.2
+- No longer supplying deobf versions of the mod.
+* Implemented new armor ability selection system (similar to weapons previously).
+* Balanced ability percentages of obtainment.
+* Fixed issue with weapons not leveling up at the right time.
+* Updated several information files.
+
 r1.0.1
 + Re-worked ability selection system for weapons; armor soon to follow.
 + Weapon/Armor drops from mobs now have the leveling system.
