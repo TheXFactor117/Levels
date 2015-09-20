@@ -1,7 +1,5 @@
 package com.thexfactor117.levels.events;
 
-import com.thexfactor117.levels.helpers.AbilityHelper;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -11,6 +9,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+
+import com.thexfactor117.levels.handlers.ConfigHandler;
+import com.thexfactor117.levels.helpers.AbilityHelper;
+import com.thexfactor117.levels.helpers.LogHelper;
+import com.thexfactor117.levels.helpers.RandomCollection;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
@@ -39,6 +43,31 @@ public class EventLivingDeath
 				
 				if (nbt != null)
 				{
+					if (ConfigHandler.enableDevFeatures)
+					{
+						/*
+						 * Rarities
+						 */
+						if (nbt.getInteger("RARITY") == 0)
+						{
+							RandomCollection<String> rarities = new RandomCollection<String>();
+							
+							rarities.add(0.65D, "basic");
+							rarities.add(0.17D, "uncommon");
+							rarities.add(0.11D, "rare");
+							rarities.add(0.05D, "legendary");
+							rarities.add(0.02D, "ancient");
+							String rarity = rarities.next();
+							LogHelper.info(rarity);
+							
+							if (rarity == "basic") nbt.setInteger("RARITY", 1);
+							if (rarity == "uncommon") nbt.setInteger("RARITY", 2);
+							if (rarity == "rare") nbt.setInteger("RARITY", 3);
+							if (rarity == "legendary") nbt.setInteger("RARITY", 4);
+							if (rarity == "ancient") nbt.setInteger("RARITY", 5);
+						}
+					}
+					
 					/*
 					 * Weapon Bonus Experience
 					 */

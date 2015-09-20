@@ -40,6 +40,7 @@ public class EventItemTooltip
 				 */
 				event.toolTip.add("");
 				
+				if (nbt.getInteger("RARITY") == 0) event.toolTip.add(EnumChatFormatting.ITALIC + "Unknown");
 				if (nbt.getInteger("RARITY") == 1) event.toolTip.add(EnumChatFormatting.WHITE + "" + EnumChatFormatting.ITALIC + "Basic");
 				if (nbt.getInteger("RARITY") == 2) event.toolTip.add(EnumChatFormatting.DARK_GREEN + "" + EnumChatFormatting.ITALIC + "Uncommon");
 				if (nbt.getInteger("RARITY") == 3) event.toolTip.add(EnumChatFormatting.AQUA + "" + EnumChatFormatting.ITALIC + "Rare");
@@ -53,7 +54,7 @@ public class EventItemTooltip
 				if (nbt.getInteger("LEVEL") == 3) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/5000");
 				if (nbt.getInteger("LEVEL") == 4) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/10000");
 				if (nbt.getInteger("LEVEL") == 5) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/20000");
-				if (nbt.getInteger("LEVEL") == 6) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE"));
+				if (nbt.getInteger("LEVEL") == 6) event.toolTip.add("Experience: " + "Max");
 				
 				event.toolTip.add(event.itemStack.getMaxDamage() - event.itemStack.getItemDamage() + " Durability");
 				

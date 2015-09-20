@@ -9,7 +9,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.launchwrapper.Launch;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -59,35 +58,35 @@ public class EventLivingHurt
 						/*
 						 * Leveling system
 						 */
-						if (nbt.getInteger("LEVEL") == 1 && nbt.getInteger("EXPERIENCE") >= 1000)
+						if (nbt.getInteger("LEVEL") == 1 && nbt.getInteger("EXPERIENCE") >= 10)
 						{
 							nbt.setInteger("LEVEL", 2);
 							AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
 							Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.WHITE + "Your weapon has leveled up!"));
 						}
 						
-						if (nbt.getInteger("LEVEL") == 2 && nbt.getInteger("EXPERIENCE") >= 2500)
+						if (nbt.getInteger("LEVEL") == 2 && nbt.getInteger("EXPERIENCE") >= 25)
 						{
 							nbt.setInteger("LEVEL", 3);
 							AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
 							Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GREEN + "Your weapon has leveled up!"));
 						}
 						
-						if (nbt.getInteger("LEVEL") == 3 && nbt.getInteger("EXPERIENCE") >= 5000)
+						if (nbt.getInteger("LEVEL") == 3 && nbt.getInteger("EXPERIENCE") >= 50)
 						{
 							nbt.setInteger("LEVEL", 4);
 							AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
 							Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.AQUA + "Your weapon has leveled up!"));
 						}
 						
-						if (nbt.getInteger("LEVEL") == 4 && nbt.getInteger("EXPERIENCE") >= 10000)
+						if (nbt.getInteger("LEVEL") == 4 && nbt.getInteger("EXPERIENCE") >= 100)
 						{
 							nbt.setInteger("LEVEL", 5);
 							AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
 							Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + "Your weapon has leveled up!"));
 						}
 						
-						if (nbt.getInteger("LEVEL") == 5 && nbt.getInteger("EXPERIENCE") >= 20000)
+						if (nbt.getInteger("LEVEL") == 5 && nbt.getInteger("EXPERIENCE") >= 200)
 						{
 							nbt.setInteger("LEVEL", 6);
 							AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
@@ -119,10 +118,8 @@ public class EventLivingHurt
 						
 						/*
 						 * Rarity
-						 */
-						boolean developmentEnvironment = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
-						
-						if (developmentEnvironment || ConfigHandler.enableDevFeatures)
+						 */						
+						if (ConfigHandler.enableDevFeatures)
 						{							
 							if (nbt.getInteger("RARITY") != 1)
 							{

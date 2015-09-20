@@ -1,13 +1,12 @@
 package com.thexfactor117.levels.init;
 
-import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.common.MinecraftForge;
 
-import com.thexfactor117.levels.events.EventLivingHurt;
-import com.thexfactor117.levels.events.EventLivingDrops;
 import com.thexfactor117.levels.events.EventItemCrafted;
 import com.thexfactor117.levels.events.EventItemTooltip;
 import com.thexfactor117.levels.events.EventLivingDeath;
+import com.thexfactor117.levels.events.EventLivingDrops;
+import com.thexfactor117.levels.events.EventLivingHurt;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.handlers.VersionChecker;
 import com.thexfactor117.levels.helpers.LogHelper;
@@ -29,18 +28,13 @@ public class ModEvents
 		MinecraftForge.EVENT_BUS.register(new EventLivingHurt());
 		MinecraftForge.EVENT_BUS.register(new EventItemTooltip());
 		MinecraftForge.EVENT_BUS.register(new EventLivingDeath());
+		MinecraftForge.EVENT_BUS.register(new EventLivingDrops());
 		
 		FMLCommonHandler.instance().bus().register(new VersionChecker());
-		
-		// Test Events
-		boolean developmentEnvironment = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
-		
-		if (developmentEnvironment || ConfigHandler.enableDevFeatures)
+
+		if (ConfigHandler.enableDevFeatures)
 		{
 			LogHelper.info("Levels is running in a development environment. Enabling development features...");
-			
-			MinecraftForge.EVENT_BUS.register(new EventLivingDrops());
-			
 			LogHelper.info("Finished enabling development features.");
 		}
 		else
