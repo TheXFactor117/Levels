@@ -97,6 +97,10 @@ public class AbilityHelper
 		}
 	}
 	
+	/**
+	 * 
+	 * @param nbt
+	 */
 	public static void addA1Abilities(NBTTagCompound nbt)
 	{
 		RandomCollection<String> abilitiesCollection = new RandomCollection<String>();
@@ -122,12 +126,12 @@ public class AbilityHelper
 	{
 		RandomCollection<String> abilitiesCollection = new RandomCollection<String>();
 		
-		abilitiesCollection.add(0.15D, "fire");
-		abilitiesCollection.add(0.15D, "frost");
-		abilitiesCollection.add(0.25D, "poison");
-		abilitiesCollection.add(0.25D, "strength");
-		abilitiesCollection.add(0.10D, "ethereal");
-		abilitiesCollection.add(0.10D, "void");
+		abilitiesCollection.add(0.3D, "fire");
+		abilitiesCollection.add(0.3D, "frost");
+		abilitiesCollection.add(0.13D, "poison");
+		abilitiesCollection.add(0.13D, "strength");
+		abilitiesCollection.add(0.7D, "ethereal");
+		abilitiesCollection.add(0.7D, "void");
 		String abilities = abilitiesCollection.next();
 		LogHelper.info(abilities);
 		
@@ -143,12 +147,12 @@ public class AbilityHelper
 	{
 		RandomCollection<String> abilitiesCollection = new RandomCollection<String>();
 		
-		abilitiesCollection.add(0.10D, "fire");
-		abilitiesCollection.add(0.10D, "frost");
-		abilitiesCollection.add(0.15D, "poison");
-		abilitiesCollection.add(0.15D, "strength");
-		abilitiesCollection.add(0.25D, "ethereal");
-		abilitiesCollection.add(0.25D, "void");
+		abilitiesCollection.add(0.2D, "fire");
+		abilitiesCollection.add(0.2D, "frost");
+		abilitiesCollection.add(0.17D, "poison");
+		abilitiesCollection.add(0.17D, "strength");
+		abilitiesCollection.add(0.13D, "ethereal");
+		abilitiesCollection.add(0.13D, "void");
 		String abilities = abilitiesCollection.next();
 		LogHelper.info(abilities);
 		
