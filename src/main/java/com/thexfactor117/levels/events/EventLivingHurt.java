@@ -43,7 +43,7 @@ public class EventLivingHurt
 		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
 		{
 			Random rand = new Random();
-			EntityPlayer player = (EntityPlayer) event.source.getEntity();
+			EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
 			EntityLivingBase enemy = event.entityLiving;
 			ItemStack stack = player.inventory.getCurrentItem();
 			
