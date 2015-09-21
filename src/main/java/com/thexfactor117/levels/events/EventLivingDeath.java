@@ -35,7 +35,7 @@ public class EventLivingDeath
 	{
 		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer) event.source.getEntity();
+			EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
 			ItemStack stack = player.inventory.getCurrentItem();
 			
 			if (stack != null)
