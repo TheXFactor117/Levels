@@ -1,5 +1,7 @@
 package com.thexfactor117.levels.events;
 
+import com.thexfactor117.levels.handlers.ConfigHandler;
+
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -44,11 +46,11 @@ public class EventItemTooltip
 				
 				event.toolTip.add("Level: " + nbt.getInteger("LEVEL"));
 				
-				if (nbt.getInteger("LEVEL") == 1) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/1000");
-				if (nbt.getInteger("LEVEL") == 2) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/2500");
-				if (nbt.getInteger("LEVEL") == 3) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/5000");
-				if (nbt.getInteger("LEVEL") == 4) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/10000");
-				if (nbt.getInteger("LEVEL") == 5) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/20000");
+				if (nbt.getInteger("LEVEL") == 1) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.weaponMaxLevel2Exp);
+				if (nbt.getInteger("LEVEL") == 2) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.weaponMaxLevel3Exp);
+				if (nbt.getInteger("LEVEL") == 3) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.weaponMaxLevel4Exp);
+				if (nbt.getInteger("LEVEL") == 4) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.weaponMaxLevel5Exp);
+				if (nbt.getInteger("LEVEL") == 5) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.weaponMaxLevel6Exp);
 				if (nbt.getInteger("LEVEL") == 6) event.toolTip.add("Experience: " + "Max");
 				
 				event.toolTip.add(event.itemStack.getMaxDamage() - event.itemStack.getItemDamage() + " Durability");
@@ -76,11 +78,11 @@ public class EventItemTooltip
 				event.toolTip.add("");
 				event.toolTip.add("Level: " + nbt.getInteger("LEVEL"));
 				
-				if (nbt.getInteger("LEVEL") == 1) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/100");
-				if (nbt.getInteger("LEVEL") == 2) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/250");
-				if (nbt.getInteger("LEVEL") == 3) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/500");
-				if (nbt.getInteger("LEVEL") == 4) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/1000");
-				if (nbt.getInteger("LEVEL") == 5) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/2000");
+				if (nbt.getInteger("LEVEL") == 1) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.armorMaxLevel2Exp);
+				if (nbt.getInteger("LEVEL") == 2) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.armorMaxLevel3Exp);
+				if (nbt.getInteger("LEVEL") == 3) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.armorMaxLevel4Exp);
+				if (nbt.getInteger("LEVEL") == 4) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.armorMaxLevel5Exp);
+				if (nbt.getInteger("LEVEL") == 5) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.armorMaxLevel6Exp);
 				if (nbt.getInteger("LEVEL") == 6) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE"));
 				
 				event.toolTip.add(stack.getMaxDamage() - stack.getItemDamage() + " Hits Remaining");
