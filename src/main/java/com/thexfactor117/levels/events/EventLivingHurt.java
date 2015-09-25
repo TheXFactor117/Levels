@@ -215,23 +215,21 @@ public class EventLivingHurt
 						 */
 						if (enemy != null)
 						{
-							if (nbt.getBoolean("FIRE")) enemy.setFire(4);
-							if (nbt.getBoolean("FROST")) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*4, 10));
-							if (nbt.getBoolean("POISON")) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*4, 0));
+							if (nbt.getBoolean("FIRE")) enemy.setFire(ConfigHandler.fireAbilityDuration);
+							if (nbt.getBoolean("FROST")) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20 * ConfigHandler.frostAbilityDuration, 10));
+							if (nbt.getBoolean("POISON")) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20 * ConfigHandler.poisonAbilityDuration, 0));
 							if (nbt.getBoolean("Strength")) 
 							{
-								int var = rand.nextInt(10);
-								if (var == 0) player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20*10, 0));
+								int var = rand.nextInt(ConfigHandler.strengthAbilityProbability);
+								if (var == 0) player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20 * ConfigHandler.strengthAbilityDuration, 0));
 							}
 							
 							if (nbt.getBoolean("ETHEREAL"))
 							{
-								float healthToBeAdded = 5F;
-								
 								int var1 = rand.nextInt(4);
 								if (var1 == 0) 
 								{				
-									player.setHealth(player.getHealth() + healthToBeAdded);
+									player.setHealth(player.getHealth() + ConfigHandler.etherealAbilityAmountHealed);
 									
 									if (player.getHealth() > 20)
 									{
@@ -361,7 +359,7 @@ public class EventLivingHurt
 									int var = rand.nextInt(5);
 									if (var == 0)
 									{
-										attacker.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*2, 10));
+										attacker.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20 * ConfigHandler.hardenedAbilityDuration, 10));
 									}
 								}
 								
@@ -370,22 +368,22 @@ public class EventLivingHurt
 									int var = rand.nextInt(5);
 									if (var == 0)
 									{
-										attacker.addPotionEffect(new PotionEffect(Potion.poison.id, 20*10, 0));
+										attacker.addPotionEffect(new PotionEffect(Potion.poison.id, 20 * ConfigHandler.poisonedAbilityDuration, 0));
 									}
 								}
 								
 								if (nbt.getBoolean("Strength"))
 								{
-									int var = rand.nextInt(10);
+									int var = rand.nextInt(ConfigHandler.strengthAbilityProbability);
 									if (var == 0)
 									{
-										player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20*10, 0));
+										player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20 * ConfigHandler.strengthAbilityDuration, 0));
 									}
 								}
 								
 								if (nbt.getBoolean("ETHEREAL"))
 								{
-									int var = rand.nextInt(20);
+									int var = rand.nextInt(15);
 									if (var == 0)
 									{
 										player.setHealth(20.0F);
