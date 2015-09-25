@@ -31,4 +31,27 @@ You can view the available abilities in the abilities.txt file.
 
 
 ### Armor Leveling System
-wip...
+Weapons also have a max of six levels, and gain experience by being damaged by living entities. Each time you are
+*hurt* by an enemy, you'll gain two experience points per piece of armor being worn, though the higher your level,
+the higher the chance you'll get a bonus of one or more experience points. Armors also will have rarities (in the
+future) which will be explained once that is ready.
+
+Each level has a different amount of experience needed to level up. For example, view this chart below:
+
+Level 2 ---> 100
+Level 3 ---> 250
+Level 4 ---> 500
+Level 5 ---> 1000
+Level 6 ---> 2000
+
+Everytime your armor is leveled up, an algorithm is run to determine which ability gets added (one will always
+be added, except in one case). At lower levels, the chance of getting an A1 ability (Lower category: Hardened/Poisoned)
+is really high. If you have a higher rarity level, this will also affect which ability you get. Ancient armors
+are more likely to receive an A3 ability (Ethereal/Void) than Basic armors. Sometimes, you might not get an
+ability. If that is the case, it just means that the algorithm picked an ability you already have, resulting
+in nothing being added.
+
+Once you reach the max of level 6, you now will not be able to gain more experience. It will rather say "Max"
+instead.
+
+You can view the available abilities in the abilities.txt file.
