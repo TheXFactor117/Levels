@@ -11,7 +11,7 @@ public class Reference
 {
 	public static final String MODID = "levels";
 	public static final String NAME = "Levels";
-	public static final String VERSION = "r1.0.3";
+	public static final String VERSION = "r1.0.4";
 	public static final String COMMON_PROXY = "com.thexfactor117.levels.proxies.CommonProxy";
 	public static final String CLIENT_PROXY = "com.thexfactor117.levels.proxies.ClientProxy";
 	public static final String UPDATE_STRING = EnumChatFormatting.GOLD + "[Levels] " + EnumChatFormatting.GRAY + "A new version of Levels has been released! Click to download!";
