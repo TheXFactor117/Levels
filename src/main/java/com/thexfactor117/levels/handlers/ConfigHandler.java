@@ -51,9 +51,7 @@ public class ConfigHandler
 		config.load();
 		
 		// general
-		enableDevFeatures = config.get("general", "enableDevFeatures", false, "Enable dev features. Things could go wrong; only use in test worlds.").getBoolean();
-		
-		// leveling system
+		enableDevFeatures = config.get("general", "enableDevFeatures", false, "Enable dev features. Things could go wrong; only use in test worlds.").getBoolean();		
 		weaponMaxLevel2Exp = config.get("levelingSystem", "weaponMaxLevel2Exp", 1000, "Controls how much experience is needed to level up from 1 to 2.").getInt();
 		weaponMaxLevel3Exp = config.get("levelingSystem", "weaponMaxLevel3Exp", 2500, "Controls how much experience is needed to level up from 2 to 3.").getInt();
 		weaponMaxLevel4Exp = config.get("levelingSystem", "weaponMaxLevel4Exp", 5000, "Controls how much experience is needed to level up from 3 to 4.").getInt();
@@ -66,17 +64,16 @@ public class ConfigHandler
 		armorMaxLevel6Exp = config.get("levelingSystem", "armorMaxLevel6Exp", 2000, "Controls how much experience is needed to level up from 5 to 6.").getInt();
 		weaponMonsterExpBonus = config.get("levelingSystem", "weaponMonsterExpBonus", 10, "Determines the amount of bonus experience for killing monsters.").getInt();
 		weaponAnimalExpBonus = config.get("levelingSystem", "weaponAnimalExpBonus", 2, "Determines the amount of bonus experience for killing animals.").getInt();
-		// abilities
 		fireAbilityDuration = config.get("abilities", "fireAbilityDuration", 4, "Determines how long enemies will be set on fire (in seconds).").getInt();
 		frostAbilityDuration = config.get("abilities", "frostAbilityDuration", 4, "Determines how long enemies will be stunned (in seconds).").getInt();
 		poisonAbilityDuration = config.get("abilities", "poisonAbilityDuration", 4, "Determines how long enemies will be poisoned (in seconds).").getInt();
 		strengthAbilityDuration = config.get("abilities", "strengthAbilityDuration", 10, "Determines how long the user will have a strength buff (in seconds).").getInt();
 		strengthAbilityProbability = config.get("abilities", "strengthAbilityProbability", 10, "Determines the probability of the strength ability occurring. Defaults at 1/10. Changing this to 5 will result in a 20% chance instead of 10%.").getInt();
 		etherealAbilityAmountHealed = config.get("abilities", "etherealAbilityAmountHealed", 5, "Determines the amount of health being returned to user. Number is in points; not hearts.").getInt();
-		voidInstantKill = config.get("levelingSystem", "voidInstantKill", true, "Disable to where void just adds extra damage (amount configurable from voidDamageAmount).").getBoolean();
-		voidDamageAmount = config.get("levelingSystem", "voidDamageAmount", 30.0D, "Amount of extra damage the Void ability inflicts (only effective if the above is disabled).").getDouble();
-		hardenedAbilityDuration = config.get("levelingSystem", "hardenedAbilityDuration", 2, "Determines how long enemies will be stunned (in seconds).").getInt();
-		poisonedAbilityDuration = config.get("levelingSystem", "poisonedAbilityDuration", 10, "Determines how long enemies will be poisoned (in seconds).").getInt();
+		voidInstantKill = config.get("abilities", "voidInstantKill", true, "Disable to where void just adds extra damage (amount configurable from voidDamageAmount).").getBoolean();
+		voidDamageAmount = config.get("abilities", "voidDamageAmount", 30.0D, "Amount of extra damage the Void ability inflicts (only effective if the above is disabled).").getDouble();
+		hardenedAbilityDuration = config.get("abilities", "hardenedAbilityDuration", 2, "Determines how long enemies will be stunned (in seconds).").getInt();
+		poisonedAbilityDuration = config.get("abilities", "poisonedAbilityDuration", 10, "Determines how long enemies will be poisoned (in seconds).").getInt();
 		
 		if (config.hasChanged())
 		{
