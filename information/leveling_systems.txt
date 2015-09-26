@@ -2,7 +2,11 @@
 ### Levels Leveling Systems ###
 ###############################
 
+
+
+####
 ### Weapon Leveling System
+####
 Weapons have a max of six levels, and gain experience by successfully using a weapon. Dealing the killing
 blow will also result in a bonus of experience to the weapon (10 for monsters; 2 for animals). Weapons will
 also (in the future) have different rarities, each rarity granting different passive abilities (extra damage,
@@ -30,7 +34,11 @@ You can view the available abilities in the abilities.txt file.
 
 
 
+
+
+####
 ### Armor Leveling System
+####
 Weapons also have a max of six levels, and gain experience by being damaged by living entities. Each time you are
 *hurt* by an enemy, you'll gain two experience points per piece of armor being worn, though the higher your level,
 the higher the chance you'll get a bonus of one or more experience points. Armors also will have rarities (in the
@@ -55,3 +63,16 @@ Once you reach the max of level 6, you now will not be able to gain more experie
 instead.
 
 You can view the available abilities in the abilities.txt file.
+
+
+
+
+
+####
+### Weapon Rarities
+####
+Whenever you craft a weapon, you will see "Unknown" on the tooltip. This is your weapons rarity. Once you kill a monster,
+that rarity will be uncovered, resulting in 1 of 5 possible rarities (Basic, Uncommon, Rare, Legendary, and Ancient). The
+higher your rarity, the better you weapon will be, resulting in potentially more damage, chances of negating weapon 
+durability damage, or even adding durability to your weapon. You'll even have higher chances of getting those higher
+ranked abilities assuming your rarity is high enough.

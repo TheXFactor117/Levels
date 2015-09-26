@@ -1,7 +1,5 @@
 package com.thexfactor117.levels.events;
 
-import com.thexfactor117.levels.handlers.ConfigHandler;
-
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -38,11 +36,7 @@ public class EventItemCrafted
 				
 				nbt.setInteger("LEVEL", 1);
 				nbt.setInteger("EXPERIENCE", 0);
-				
-				if (ConfigHandler.enableDevFeatures)
-				{
-					nbt.setInteger("RARITY", 0);
-				}
+				nbt.setInteger("RARITY", 0);
 			}
 		}
 		

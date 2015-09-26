@@ -44,28 +44,45 @@ public class EventLivingDeath
 				
 				if (nbt != null)
 				{
-					if (ConfigHandler.enableDevFeatures)
+					/*
+					 * Rarities
+					 */
+					if (nbt.getInteger("RARITY") == 0)
 					{
-						/*
-						 * Rarities
-						 */
-						if (nbt.getInteger("RARITY") == 0)
+						RandomCollection<String> rarities = new RandomCollection<String>();
+						
+						rarities.add(0.65D, "basic");
+						rarities.add(0.17D, "uncommon");
+						rarities.add(0.11D, "rare");
+						rarities.add(0.05D, "legendary");
+						rarities.add(0.02D, "ancient");
+						String rarity = rarities.next();
+						LogHelper.info(rarity);
+						
+						if (rarity == "basic") nbt.setInteger("RARITY", 1);							
+						
+						if (rarity == "uncommon") 
 						{
-							RandomCollection<String> rarities = new RandomCollection<String>();
-							
-							rarities.add(0.65D, "basic");
-							rarities.add(0.17D, "uncommon");
-							rarities.add(0.11D, "rare");
-							rarities.add(0.05D, "legendary");
-							rarities.add(0.02D, "ancient");
-							String rarity = rarities.next();
-							LogHelper.info(rarity);
-							
-							if (rarity == "basic") nbt.setInteger("RARITY", 1);
-							if (rarity == "uncommon") nbt.setInteger("RARITY", 2);
-							if (rarity == "rare") nbt.setInteger("RARITY", 3);
-							if (rarity == "legendary") nbt.setInteger("RARITY", 4);
-							if (rarity == "ancient") nbt.setInteger("RARITY", 5);
+							nbt.setInteger("RARITY", 2);
+							player.worldObj.playSoundAtEntity(player, "mob.enderdragon.end", 0.25F, 1.0F);
+						}
+						
+						if (rarity == "rare") 
+						{
+							nbt.setInteger("RARITY", 3);
+							player.worldObj.playSoundAtEntity(player, "mob.enderdragon.end", 0.5F, 1.0F);
+						}
+						
+						if (rarity == "legendary")
+						{
+							nbt.setInteger("RARITY", 4);
+							player.worldObj.playSoundAtEntity(player, "mob.enderdragon.end", 0.75F, 1.0F);
+						}
+						
+						if (rarity == "ancient") 
+						{
+							nbt.setInteger("RARITY", 5);
+							player.worldObj.playSoundAtEntity(player, "mob.enderdragon.end", 1.0F, 1.0F);
 						}
 					}
 					

@@ -3,14 +3,6 @@
 ###############################
 
 ### Release 1 - Initial Release
-r1.1.0
-- Weapon Rarities
-    * Weapon Rarity is a new system in which weapons are given different rarities (Basic, Uncommon, Rare, Legendary, 
-    * Ancient). When crafting a weapon, you'll have chances of getting varying rarities. Of course, the Ancient rarity 
-    * is obviously better than a Basic rarity. These rarities give weapons a variety of effects, like increased damage, 
-    * or chances of not dealing damage to the weapon. Weapons dropped from entities, perhaps from other mods, will be 
-    * able to get rarities and the actual leveling system.
-
 r1.2.0
 - Armor Rarities
     * Armor rarities perform exactly how weapons work. Reference that instead. Different bonuses will likely be given

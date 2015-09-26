@@ -7,6 +7,9 @@
 ####
 
 ### Release 1 - Official Release
+r1.1.0 - Weapon Rarities
++ Added a weapon rarity system.
+
 r1.0.4
 + Added several new configuration options.
 * Permanently fixes a recurring experience bug.
