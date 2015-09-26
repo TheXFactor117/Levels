@@ -275,7 +275,7 @@ public class EventLivingHurt
 		if (event.entityLiving instanceof EntityPlayer)
 		{
 			Random rand = new Random();
-			EntityLivingBase attacker = (EntityLivingBase) event.source.getEntity();
+			EntityLivingBase attacker = (EntityLivingBase) event.source.getSourceOfDamage();
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
 			
 			if (attacker instanceof EntityMob)
