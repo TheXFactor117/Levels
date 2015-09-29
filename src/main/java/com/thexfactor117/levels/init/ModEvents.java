@@ -2,10 +2,8 @@ package com.thexfactor117.levels.init;
 
 import net.minecraftforge.common.MinecraftForge;
 
-import com.thexfactor117.levels.events.EventItemCrafted;
 import com.thexfactor117.levels.events.EventItemTooltip;
 import com.thexfactor117.levels.events.EventLivingDeath;
-import com.thexfactor117.levels.events.EventLivingDrops;
 import com.thexfactor117.levels.events.EventLivingHurt;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.handlers.VersionChecker;
@@ -24,11 +22,9 @@ public class ModEvents
 	{
 		LogHelper.info("Registering events...");
 
-		FMLCommonHandler.instance().bus().register(new EventItemCrafted());
 		MinecraftForge.EVENT_BUS.register(new EventLivingHurt());
 		MinecraftForge.EVENT_BUS.register(new EventItemTooltip());
 		MinecraftForge.EVENT_BUS.register(new EventLivingDeath());
-		MinecraftForge.EVENT_BUS.register(new EventLivingDrops());
 		
 		FMLCommonHandler.instance().bus().register(new VersionChecker());
 

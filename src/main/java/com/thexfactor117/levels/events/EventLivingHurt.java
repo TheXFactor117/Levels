@@ -2,7 +2,7 @@ package com.thexfactor117.levels.events;
 
 import java.util.Random;
 
-import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,12 +12,10 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import com.thexfactor117.levels.handlers.ConfigHandler;
-import com.thexfactor117.levels.helpers.AbilityHelper;
+import com.thexfactor117.levels.helpers.*;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -42,8 +40,8 @@ public class EventLivingHurt
 		 */
 		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
 		{
-			Random rand = new Random();
 			EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
+			Random rand = player.worldObj.rand;
 			EntityLivingBase enemy = event.entityLiving;
 			ItemStack stack = player.inventory.getCurrentItem();
 			
@@ -51,217 +49,136 @@ public class EventLivingHurt
 			{
 				if (stack.getItem() instanceof ItemSword)
 				{
-					NBTTagCompound nbt = stack.getTagCompound();
-					
-					if (nbt != null)
+					NBTTagCompound nbt = stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
+					int level = Experience.getLevel(nbt);
+					int experience = Experience.getExperience(nbt);
+
+					/*
+					 * Experience
+					 */
+					if (level < ItemType.WEAPON.getMaxLevel())
 					{
-						/*
-						 * Experience
-						 */
-						if (nbt.getInteger("LEVEL") != 6)
+						experience += level > 3 && rand.nextInt(4) == 0 ? 2 : 1;
+						Experience.setExperience(nbt, experience);
+					}
+
+					/*
+					 * Leveling system
+					 */
+					while (level < Experience.getLevelsUp(player, level, experience, ItemType.WEAPON))
+					{
+						level++;
+						AbilityHelper.getRandomizedMeleeAbilities(stack, level);
+					}
+
+					Experience.setLevel(nbt, level);
+
+					/*
+					 * Rarity
+					 */
+					Rarity rarity = Rarity.getRarity(nbt);
+					float multiplier = 1.0F;
+					boolean var = false;
+					boolean var1 = false;
+
+					switch (rarity)
+					{
+						case UNCOMMON:
+							multiplier = 1.5F;
+							break;
+						case RARE:
+							multiplier = 1.5F;
+							var = rand.nextInt(2) == 0;
+							break;
+						case LEGENDARY:
+							multiplier = 2.0F;
+							var = rand.nextInt(10) <= 5;
+							var1 = rand.nextInt(20) == 0;
+							break;
+						case ANCIENT:
+							multiplier = 3.0F;
+							var = rand.nextInt(4) != 0;
+							var1 = rand.nextInt(10) == 0;
+							break;
+					}
+
+					event.ammount *= multiplier;
+
+					if (var)
+					{
+						if (stack.getItemDamage() == stack.getMaxDamage())
 						{
-							if (nbt.getInteger("LEVEL") == 1 || nbt.getInteger("LEVEL") == 2 || nbt.getInteger("LEVEL") == 3)
-							{
-								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
-							}
-							else if (nbt.getInteger("LEVEL") == 4 || nbt.getInteger("LEVEL") == 5)
-							{
-								int var = rand.nextInt(4);
-								if (var == 0)
-								{
-									nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 2);
-								}
-								else
-								{
-									nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
-								}
-							}
+							stack.setItemDamage(stack.getItemDamage());
 						}
-						
-						/*
-						 * Leveling system
-						 */
-						if (nbt.getInteger("LEVEL") == 1 && nbt.getInteger("EXPERIENCE") >= ConfigHandler.weaponMaxLevel2Exp)
+						else
 						{
-							nbt.setInteger("LEVEL", 2);
-							AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
-							Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.WHITE + "Your weapon has leveled up!"));
+							stack.setItemDamage(stack.getItemDamage() + 1);
 						}
-						
-						if (nbt.getInteger("LEVEL") == 2 && nbt.getInteger("EXPERIENCE") >= ConfigHandler.weaponMaxLevel3Exp)
+					}
+
+					if (var1)
+					{
+						if (stack.getItemDamage() == stack.getMaxDamage())
 						{
-							nbt.setInteger("LEVEL", 3);
-							AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
-							Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GREEN + "Your weapon has leveled up!"));
+							stack.setItemDamage(stack.getItemDamage());
 						}
-						
-						if (nbt.getInteger("LEVEL") == 3 && nbt.getInteger("EXPERIENCE") >= ConfigHandler.weaponMaxLevel4Exp)
+						else
 						{
-							nbt.setInteger("LEVEL", 4);
-							AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
-							Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.AQUA + "Your weapon has leveled up!"));
+							stack.setItemDamage(stack.getItemDamage() + 20);
 						}
-						
-						if (nbt.getInteger("LEVEL") == 4 && nbt.getInteger("EXPERIENCE") >= ConfigHandler.weaponMaxLevel5Exp)
+					}
+
+					/*
+					 * Abilities
+					 */
+					if (enemy != null)
+					{
+						if (Ability.FIRE.hasAbility(nbt))
 						{
-							nbt.setInteger("LEVEL", 5);
-							AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
-							Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + "Your weapon has leveled up!"));
+							enemy.setFire(ConfigHandler.fireAbilityDuration);
 						}
-						
-						if (nbt.getInteger("LEVEL") == 5 && nbt.getInteger("EXPERIENCE") >= ConfigHandler.weaponMaxLevel6Exp)
+
+						if (Ability.FROST.hasAbility(nbt))
 						{
-							nbt.setInteger("LEVEL", 6);
-							AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
-							Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "Your weapon has reached the max level!"));
+							enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20 * ConfigHandler.frostAbilityDuration, 10));
 						}
-						
-						/*
-						 * Rarity
-						 */						
-						if (nbt.getInteger("RARITY") != 1)
+
+						if (Ability.POISON.hasAbility(nbt))
 						{
-							if (nbt.getInteger("RARITY") == 2)
-							{
-								event.ammount = event.ammount * 1.5F;
-							}
-							
-							if (nbt.getInteger("RARITY") == 3)
-							{
-								event.ammount = event.ammount * 1.5F;
-								
-								int var = rand.nextInt(2);
-								if (var == 0)
-								{
-									if (stack.getItemDamage() == stack.getMaxDamage())
-									{
-										stack.setItemDamage(stack.getItemDamage());
-									}
-									else
-									{
-										stack.setItemDamage(stack.getItemDamage() + 1);
-									}
-								}
-							}
-							
-							if (nbt.getInteger("RARITY") == 4)
-							{
-								event.ammount = event.ammount * 2.0F;
-								
-								int var = rand.nextInt(10);
-								if (var <= 5)
-								{
-									if (stack.getItemDamage() == stack.getMaxDamage())
-									{
-										stack.setItemDamage(stack.getItemDamage());
-									}
-									else
-									{
-										stack.setItemDamage(stack.getItemDamage() + 1);
-									}
-								}
-								
-								int var1 = rand.nextInt(20);
-								if (var1 == 0)
-								{
-									if (stack.getItemDamage() == stack.getMaxDamage())
-									{
-										stack.setItemDamage(stack.getItemDamage());
-									}
-									else
-									{
-										stack.setItemDamage(stack.getItemDamage() + 20);
-									}
-								}
-							}
-							
-							if (nbt.getInteger("RARITY") == 5)
-							{
-								event.ammount = event.ammount * 3.0F;
-								
-								int var = rand.nextInt(4);
-								if (var != 0)
-								{
-									if (stack.getItemDamage() == stack.getMaxDamage())
-									{
-										stack.setItemDamage(stack.getItemDamage());
-									}
-									else
-									{
-										stack.setItemDamage(stack.getItemDamage() + 1);
-									}
-								}
-								
-								int var1 = rand.nextInt(10);
-								if (var1 == 0)
-								{
-									if (stack.getItemDamage() == stack.getMaxDamage())
-									{
-										stack.setItemDamage(stack.getItemDamage());
-									}
-									else
-									{
-										stack.setItemDamage(stack.getItemDamage() + 20);
-									}
-								}
-							}
+							enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20 * ConfigHandler.poisonAbilityDuration, 0));
 						}
-						
-						/*
-						 * Abilities
-						 */
-						if (enemy != null)
+
+						if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(ConfigHandler.strengthAbilityProbability) == 0)
 						{
-							if (nbt.getBoolean("FIRE")) enemy.setFire(ConfigHandler.fireAbilityDuration);
-							if (nbt.getBoolean("FROST")) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20 * ConfigHandler.frostAbilityDuration, 10));
-							if (nbt.getBoolean("POISON")) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20 * ConfigHandler.poisonAbilityDuration, 0));
-							if (nbt.getBoolean("Strength")) 
-							{
-								int var = rand.nextInt(ConfigHandler.strengthAbilityProbability);
-								if (var == 0) player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20 * ConfigHandler.strengthAbilityDuration, 0));
-							}
-							
-							if (nbt.getBoolean("ETHEREAL"))
-							{
-								int var1 = rand.nextInt(4);
-								if (var1 == 0) 
-								{				
-									player.setHealth(player.getHealth() + ConfigHandler.etherealAbilityAmountHealed);
-									
-									if (player.getHealth() > 20)
-									{
-										player.setHealth(20);
-									}
-								}
-							}
-							
-							if (nbt.getBoolean("VOID"))
-							{
-								if (ConfigHandler.voidInstantKill)
-								{
-									int var2 = rand.nextInt(20);
-									if (var2 == 0)
-									{
-										enemy.setHealth(0);
-									}
-								}
-								else
-								{
-									int var2 = rand.nextInt(20);
-									if (var2 == 0)
-									{
-										if (enemy.getHealth() < 30)
-										{
-											enemy.setHealth(0);
-										}
-										else
-										{
-											enemy.setHealth((float) (enemy.getHealth() - ConfigHandler.voidDamageAmount));
-										}
-									}
-								}
-							}
+							player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20 * ConfigHandler.strengthAbilityDuration, 0));
 						}
+
+						if (Ability.ETHEREAL.hasAbility(nbt) && rand.nextInt(4) == 0)
+						{
+							float health = Math.min(player.getMaxHealth(), player.getHealth() + ConfigHandler.etherealAbilityAmountHealed);
+							player.setHealth(health);
+						}
+
+						if (Ability.VOID.hasAbility(nbt) && rand.nextInt(20) == 0)
+						{
+							float health;
+
+							if (ConfigHandler.voidInstantKill || enemy.getHealth() < 30.0F)
+							{
+								health = 0.0F;
+							}
+							else
+							{
+								health = (float) (enemy.getHealth() - ConfigHandler.voidDamageAmount);
+							}
+
+							enemy.setHealth(health);
+						}
+					}
+
+					if (!nbt.hasNoTags() && !stack.hasTagCompound())
+					{
+						stack.setTagCompound(nbt);
 					}
 				}
 			}
@@ -274,127 +191,75 @@ public class EventLivingHurt
 		 */
 		if (event.entityLiving instanceof EntityPlayer)
 		{
-			Random rand = new Random();
-			EntityLivingBase attacker = (EntityLivingBase) event.source.getSourceOfDamage();
+			Entity source = event.source.getSourceOfDamage();
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
+			Random rand = player.worldObj.rand;
 			
-			if (attacker instanceof EntityMob)
+			if (source instanceof EntityMob)
 			{
-				for (int i = 0; i < 4; i++)
+				EntityMob attacker = (EntityMob) source;
+
+				for (ItemStack stack : player.inventory.armorInventory)
 				{
-					if (player.getCurrentArmor(i) != null)
+					if (stack != null)
 					{
-						if (player.getCurrentArmor(i).getItem() instanceof ItemArmor && player.getCurrentArmor(i).getTagCompound() != null)
+						if (stack.getItem() instanceof ItemArmor)
 						{
-							NBTTagCompound nbt = player.getCurrentArmor(i).getTagCompound();
-							
+							NBTTagCompound nbt = stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
+							int level = Experience.getLevel(nbt);
+							int experience = Experience.getExperience(nbt);
+
 							/*
 							 * Experience
 							 */
-							if (nbt.getInteger("LEVEL") != 6)
+							if (level < ItemType.ARMOR.getMaxLevel())
 							{
-								if (nbt.getInteger("LEVEL") > 3)
-								{
-									int var = rand.nextInt(3);
-									int var1 = rand.nextInt(3);
-									if (var == 0)
-									{
-										nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1 + var1);
-									}
-								}
-								else
-								{
-									nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1);
-								}
+								experience += level > 3 && rand.nextInt(3) == 0 ? 1 + rand.nextInt(3) : 1;
+								Experience.setExperience(nbt, experience);
 							}
 							
 							/*
 							 * Leveling system
 							 */
-							if (nbt.getInteger("LEVEL") == 1 && nbt.getInteger("EXPERIENCE") >= ConfigHandler.armorMaxLevel2Exp)
+							while (level < Experience.getLevelsUp(player, level, experience, ItemType.WEAPON))
 							{
-								nbt.setInteger("LEVEL", 2);
-								AbilityHelper.getRandomizedArmorAbilities(player.getCurrentArmor(i), nbt.getInteger("LEVEL"));
-								Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.WHITE + "Your armor piece has leveled up!"));
+								level++;
+								AbilityHelper.getRandomizedArmorAbilities(stack, level);
 							}
-							
-							if (nbt.getInteger("LEVEL") == 2 && nbt.getInteger("EXPERIENCE") >= ConfigHandler.armorMaxLevel3Exp)
-							{
-								nbt.setInteger("LEVEL", 3);
-								AbilityHelper.getRandomizedArmorAbilities(player.getCurrentArmor(i), nbt.getInteger("LEVEL"));
-								Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GREEN + "Your armor piece has leveled up!"));
-							}
-							
-							if (nbt.getInteger("LEVEL") == 3 && nbt.getInteger("EXPERIENCE") >= ConfigHandler.armorMaxLevel4Exp)
-							{
-								nbt.setInteger("LEVEL", 4);
-								AbilityHelper.getRandomizedArmorAbilities(player.getCurrentArmor(i), nbt.getInteger("LEVEL"));
-								Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.AQUA + "Your armor piece has leveled up!"));
-							}
-							
-							if (nbt.getInteger("LEVEL") == 4 && nbt.getInteger("EXPERIENCE") >= ConfigHandler.armorMaxLevel5Exp)
-							{
-								nbt.setInteger("LEVEL", 5);
-								AbilityHelper.getRandomizedArmorAbilities(player.getCurrentArmor(i), nbt.getInteger("LEVEL"));
-								Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + "Your armor piece has leveled up!"));
-							}
-							
-							if (nbt.getInteger("LEVEL") == 5 && nbt.getInteger("EXPERIENCE") >= ConfigHandler.armorMaxLevel6Exp)
-							{
-								nbt.setInteger("LEVEL", 6);
-								AbilityHelper.getRandomizedArmorAbilities(player.getCurrentArmor(i), nbt.getInteger("LEVEL"));
-								Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "Your armor piece has reached the max level!"));
-							}
+
+							Experience.setLevel(nbt, level);
 							
 							/*
 							 * Abilities
 							 */
-							if (nbt != null)
+							if (Ability.HARDENED.hasAbility(nbt) && rand.nextInt(5) == 0)
 							{
-								if (nbt.getBoolean("HARDENED"))
-								{
-									int var = rand.nextInt(5);
-									if (var == 0)
-									{
-										attacker.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20 * ConfigHandler.hardenedAbilityDuration, 10));
-									}
-								}
-								
-								if (nbt.getBoolean("POISONED"))
-								{
-									int var = rand.nextInt(5);
-									if (var == 0)
-									{
-										attacker.addPotionEffect(new PotionEffect(Potion.poison.id, 20 * ConfigHandler.poisonedAbilityDuration, 0));
-									}
-								}
-								
-								if (nbt.getBoolean("Strength"))
-								{
-									int var = rand.nextInt(ConfigHandler.strengthAbilityProbability);
-									if (var == 0)
-									{
-										player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20 * ConfigHandler.strengthAbilityDuration, 0));
-									}
-								}
-								
-								if (nbt.getBoolean("ETHEREAL"))
-								{
-									int var = rand.nextInt(15);
-									if (var == 0)
-									{
-										player.setHealth(20.0F);
-									}
-								}
-								
-								if (nbt.getBoolean("VOID"))
-								{
-									int var = rand.nextInt(20);
-									if (var == 0)
-									{
-										attacker.setHealth(0);
-									}
-								}
+								attacker.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20 * ConfigHandler.hardenedAbilityDuration, 10));
+							}
+
+							if (Ability.POISONED.hasAbility(nbt) && rand.nextInt(5) == 0)
+							{
+								attacker.addPotionEffect(new PotionEffect(Potion.poison.id, 20 * ConfigHandler.poisonedAbilityDuration, 0));
+							}
+
+							if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(ConfigHandler.strengthAbilityProbability) == 0)
+							{
+								player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20 * ConfigHandler.strengthAbilityDuration, 0));
+							}
+
+							if (Ability.ETHEREAL.hasAbility(nbt) && rand.nextInt(15) == 0)
+							{
+								player.setHealth(20.0F);
+							}
+
+							if (Ability.VOID.hasAbility(nbt) && rand.nextInt(20) == 0)
+							{
+								attacker.setHealth(0.0F);
+							}
+
+							if (!nbt.hasNoTags() && !stack.hasTagCompound())
+							{
+								stack.setTagCompound(nbt);
 							}
 						}
 					}

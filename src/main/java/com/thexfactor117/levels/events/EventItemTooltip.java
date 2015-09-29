@@ -1,14 +1,19 @@
 package com.thexfactor117.levels.events;
 
-import com.thexfactor117.levels.handlers.ConfigHandler;
+import com.thexfactor117.levels.helpers.Ability;
+import com.thexfactor117.levels.helpers.ItemType;
+import com.thexfactor117.levels.helpers.Rarity;
 
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 /**
  * 
@@ -17,84 +22,45 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
  */
 public class EventItemTooltip 
 {
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void addInformation(ItemTooltipEvent event)
 	{
 		ItemStack stack = event.itemStack;
 		NBTTagCompound nbt = stack.getTagCompound();
-		
-		if (nbt != null)
-		{			
+		List<String> tooltip = event.toolTip;
+
+		/*
+		 *
+		 * WEAPONS
+		 *
+		 */
+		if (stack.getItem() instanceof ItemSword)
+		{
 			/*
-			 * 
-			 * WEAPONS
-			 * 
+			 * Tooltip
 			 */
-			if (stack.getItem() instanceof ItemSword)
-			{	
-				/*
-				 * Tooltip
-				 */
-				event.toolTip.add("");
-				
-				if (nbt.getInteger("RARITY") == 0) event.toolTip.add(EnumChatFormatting.ITALIC + "Unknown");
-				if (nbt.getInteger("RARITY") == 1) event.toolTip.add(EnumChatFormatting.WHITE + "" + EnumChatFormatting.ITALIC + "Basic");
-				if (nbt.getInteger("RARITY") == 2) event.toolTip.add(EnumChatFormatting.DARK_GREEN + "" + EnumChatFormatting.ITALIC + "Uncommon");
-				if (nbt.getInteger("RARITY") == 3) event.toolTip.add(EnumChatFormatting.AQUA + "" + EnumChatFormatting.ITALIC + "Rare");
-				if (nbt.getInteger("RARITY") == 4) event.toolTip.add(EnumChatFormatting.DARK_PURPLE + "" + EnumChatFormatting.ITALIC + "Legendary");
-				if (nbt.getInteger("RARITY") == 5) event.toolTip.add(EnumChatFormatting.GOLD + "" + EnumChatFormatting.ITALIC + "Ancient");
-				
-				event.toolTip.add("Level: " + nbt.getInteger("LEVEL"));
-				
-				if (nbt.getInteger("LEVEL") == 1) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.weaponMaxLevel2Exp);
-				if (nbt.getInteger("LEVEL") == 2) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.weaponMaxLevel3Exp);
-				if (nbt.getInteger("LEVEL") == 3) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.weaponMaxLevel4Exp);
-				if (nbt.getInteger("LEVEL") == 4) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.weaponMaxLevel5Exp);
-				if (nbt.getInteger("LEVEL") == 5) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.weaponMaxLevel6Exp);
-				if (nbt.getInteger("LEVEL") == 6) event.toolTip.add("Experience: " + "Max");
-				
-				event.toolTip.add(event.itemStack.getMaxDamage() - event.itemStack.getItemDamage() + " Durability");
-				
-				event.toolTip.add("");
-				
-				if (nbt.getBoolean("FIRE")) event.toolTip.add(EnumChatFormatting.DARK_RED + "Fire");
-				if (nbt.getBoolean("FROST")) event.toolTip.add(EnumChatFormatting.AQUA + "Frost");
-				if (nbt.getBoolean("POISON")) event.toolTip.add(EnumChatFormatting.DARK_GREEN + "Poison");
-				if (nbt.getBoolean("STRENGTH")) event.toolTip.add(EnumChatFormatting.LIGHT_PURPLE + "Strength");
-				if (nbt.getBoolean("ETHEREAL")) event.toolTip.add(EnumChatFormatting.BLUE + "Ethereal");
-				if (nbt.getBoolean("VOID")) event.toolTip.add(EnumChatFormatting.DARK_PURPLE + "Void");
-			}
-			
+			tooltip.add("");
+			Rarity.addTooltip(nbt, tooltip);
+			ItemType.WEAPON.addTooltip(stack, tooltip);
+			tooltip.add("");
+			Ability.addTooltip(nbt, tooltip);
+		}
+
+		/*
+		 *
+		 * ARMOR
+		 *
+		 */
+		if (stack.getItem() instanceof ItemArmor)
+		{
 			/*
-			 * 
-			 * ARMOR
-			 * 
+			 * Tooltip
 			 */
-			if (stack.getItem() instanceof ItemArmor)
-			{	
-				/*
-				 * Tooltip
-				 */
-				event.toolTip.add("");
-				event.toolTip.add("Level: " + nbt.getInteger("LEVEL"));
-				
-				if (nbt.getInteger("LEVEL") == 1) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.armorMaxLevel2Exp);
-				if (nbt.getInteger("LEVEL") == 2) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.armorMaxLevel3Exp);
-				if (nbt.getInteger("LEVEL") == 3) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.armorMaxLevel4Exp);
-				if (nbt.getInteger("LEVEL") == 4) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.armorMaxLevel5Exp);
-				if (nbt.getInteger("LEVEL") == 5) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE") + "/" + ConfigHandler.armorMaxLevel6Exp);
-				if (nbt.getInteger("LEVEL") == 6) event.toolTip.add("Experience: " + nbt.getInteger("EXPERIENCE"));
-				
-				event.toolTip.add(stack.getMaxDamage() - stack.getItemDamage() + " Hits Remaining");
-				event.toolTip.add("");
-				
-				if (nbt.getBoolean("HARDENED")) event.toolTip.add(EnumChatFormatting.WHITE + "Hardened");
-				if (nbt.getBoolean("POISONED")) event.toolTip.add(EnumChatFormatting.DARK_GREEN + "Poisoned");
-				if (nbt.getBoolean("STRENGTH")) event.toolTip.add(EnumChatFormatting.LIGHT_PURPLE + "Strength");
-				if (nbt.getBoolean("IMMUNIZATION")) event.toolTip.add(EnumChatFormatting.GOLD + "Immunization");
-				if (nbt.getBoolean("ETHEREAL")) event.toolTip.add(EnumChatFormatting.BLUE + "Ethereal");
-				if (nbt.getBoolean("VOID")) event.toolTip.add(EnumChatFormatting.DARK_PURPLE + "Void");
-			}
+			tooltip.add("");
+			ItemType.ARMOR.addTooltip(stack, tooltip);
+			tooltip.add("");
+			Ability.addTooltip(nbt, tooltip);
 		}
 	}
 }
