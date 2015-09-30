@@ -1,20 +1,16 @@
 package com.thexfactor117.levels.events;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 import com.thexfactor117.levels.handlers.ConfigHandler;
-import com.thexfactor117.levels.helpers.AbilityHelper;
-import com.thexfactor117.levels.helpers.LogHelper;
-import com.thexfactor117.levels.helpers.RandomCollection;
+import com.thexfactor117.levels.helpers.*;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -37,117 +33,64 @@ public class EventLivingDeath
 		{
 			EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
 			ItemStack stack = player.inventory.getCurrentItem();
-			
-			if (stack != null)
+
+			if (stack != null && stack.getItem() instanceof ItemSword)
 			{
-				NBTTagCompound nbt = stack.getTagCompound();
-				
-				if (nbt != null)
+				NBTTagCompound nbt = stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
+				int level = Experience.getLevel(nbt);
+				int experience = Experience.getExperience(nbt);
+
+				/*
+				 * Rarities
+				 */
+				if (Rarity.getRarity(nbt) == Rarity.UNKOWN)
 				{
-					/*
-					 * Rarities
-					 */
-					if (nbt.getInteger("RARITY") == 0)
+					RandomCollection<Rarity> rarities = new RandomCollection<Rarity>();
+
+					rarities.add(0.65D, Rarity.BASIC);
+					rarities.add(0.17D, Rarity.UNCOMMON);
+					rarities.add(0.11D, Rarity.RARE);
+					rarities.add(0.05D, Rarity.LEGENDARY);
+					rarities.add(0.02D, Rarity.ANCIENT);
+					Rarity rarity = rarities.next();
+					LogHelper.info(rarity);
+					rarity.setRarity(nbt);
+					player.worldObj.playSoundAtEntity(player, "mob.enderdragon.end", 0.25F * (float) (rarity.ordinal() - 1), 1.0F);
+				}
+
+				/*
+				 * Weapon Bonus Experience
+				 */
+				if (level < ItemType.WEAPON.getMaxLevel())
+				{
+					if (event.entityLiving instanceof EntityMob)
 					{
-						RandomCollection<String> rarities = new RandomCollection<String>();
-						
-						rarities.add(0.65D, "basic");
-						rarities.add(0.17D, "uncommon");
-						rarities.add(0.11D, "rare");
-						rarities.add(0.05D, "legendary");
-						rarities.add(0.02D, "ancient");
-						String rarity = rarities.next();
-						LogHelper.info(rarity);
-						
-						if (rarity == "basic") nbt.setInteger("RARITY", 1);							
-						
-						if (rarity == "uncommon") 
-						{
-							nbt.setInteger("RARITY", 2);
-							player.worldObj.playSoundAtEntity(player, "mob.enderdragon.end", 0.25F, 1.0F);
-						}
-						
-						if (rarity == "rare") 
-						{
-							nbt.setInteger("RARITY", 3);
-							player.worldObj.playSoundAtEntity(player, "mob.enderdragon.end", 0.5F, 1.0F);
-						}
-						
-						if (rarity == "legendary")
-						{
-							nbt.setInteger("RARITY", 4);
-							player.worldObj.playSoundAtEntity(player, "mob.enderdragon.end", 0.75F, 1.0F);
-						}
-						
-						if (rarity == "ancient") 
-						{
-							nbt.setInteger("RARITY", 5);
-							player.worldObj.playSoundAtEntity(player, "mob.enderdragon.end", 1.0F, 1.0F);
-						}
+						boolean developmentEnvironment = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
+						experience += developmentEnvironment ? 1000 : ConfigHandler.weaponMonsterExpBonus;
 					}
-					
-					/*
-					 * Weapon Bonus Experience
-					 */
-					if (nbt.getInteger("LEVEL") != 6)
+
+					if (event.entityLiving instanceof EntityAnimal)
 					{
-						if (event.entityLiving instanceof EntityMob)
-						{
-							boolean developmentEnvironment = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
-							
-							if (developmentEnvironment)
-							{
-								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + 1000);
-							}
-							else
-							{
-								nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + ConfigHandler.weaponMonsterExpBonus);
-							}
-						}
-						
-						if (event.entityLiving instanceof EntityAnimal)
-						{
-							nbt.setInteger("EXPERIENCE", nbt.getInteger("EXPERIENCE") + ConfigHandler.weaponAnimalExpBonus);
-						}
+						experience += ConfigHandler.weaponAnimalExpBonus;
 					}
-					
-					/*
-					 * Leveling system
-					 */
-					if (nbt.getInteger("LEVEL") == 1 && nbt.getInteger("EXPERIENCE") >= ConfigHandler.weaponMaxLevel2Exp)
-					{
-						nbt.setInteger("LEVEL", 2);
-						AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
-						Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.WHITE + "Your weapon has leveled up!"));
-					}
-					
-					if (nbt.getInteger("LEVEL") == 2 && nbt.getInteger("EXPERIENCE") >= ConfigHandler.weaponMaxLevel3Exp)
-					{
-						nbt.setInteger("LEVEL", 3);
-						AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
-						Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GREEN + "Your weapon has leveled up!"));
-					}
-					
-					if (nbt.getInteger("LEVEL") == 3 && nbt.getInteger("EXPERIENCE") >= ConfigHandler.weaponMaxLevel4Exp)
-					{
-						nbt.setInteger("LEVEL", 4);
-						AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
-						Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.AQUA + "Your weapon has leveled up!"));
-					}
-					
-					if (nbt.getInteger("LEVEL") == 4 && nbt.getInteger("EXPERIENCE") >= ConfigHandler.weaponMaxLevel5Exp)
-					{
-						nbt.setInteger("LEVEL", 5);
-						AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
-						Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + "Your weapon has leveled up!"));
-					}
-					
-					if (nbt.getInteger("LEVEL") == 5 && nbt.getInteger("EXPERIENCE") >= ConfigHandler.weaponMaxLevel6Exp)
-					{
-						nbt.setInteger("LEVEL", 6);
-						AbilityHelper.getRandomizedMeleeAbilities(stack, nbt.getInteger("LEVEL"));
-						Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "Your weapon has reached the max level!"));
-					}
+
+					Experience.setExperience(nbt, experience);
+				}
+
+				/*
+				 * Leveling system
+				 */
+				while (level < Experience.getLevelsUp(player, level, experience, ItemType.WEAPON))
+				{
+					level++;
+					AbilityHelper.getRandomizedMeleeAbilities(stack, level);
+				}
+
+				Experience.setLevel(nbt, level);
+
+				if (!nbt.hasNoTags() && !stack.hasTagCompound())
+				{
+					stack.setTagCompound(nbt);
 				}
 			}
 		}

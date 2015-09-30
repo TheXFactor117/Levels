@@ -1,6 +1,7 @@
 package com.thexfactor117.levels;
 
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 
 /**
  * 
@@ -14,5 +15,5 @@ public class Reference
 	public static final String VERSION = "r1.1.0";
 	public static final String COMMON_PROXY = "com.thexfactor117.levels.proxies.CommonProxy";
 	public static final String CLIENT_PROXY = "com.thexfactor117.levels.proxies.ClientProxy";
-	public static final String UPDATE_STRING = EnumChatFormatting.GOLD + "[Levels] " + EnumChatFormatting.GRAY + "A new version of Levels has been released! Click to download!";
+	public static final String UPDATE_STRING = EnumChatFormatting.GOLD + "[Levels] " + EnumChatFormatting.GRAY + StatCollector.translateToLocal("levels.update");
 }

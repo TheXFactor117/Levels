@@ -3,6 +3,8 @@ package com.thexfactor117.levels.helpers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import static com.thexfactor117.levels.helpers.Ability.*;
+
 /**
  * 
  * @author TheXFactor117
@@ -27,131 +29,131 @@ public class AbilityHelper
 		
 		if (nbt != null && level >= 2)
 		{	
-			RandomCollection<String> abilityLevelCollection = new RandomCollection<String>();
+			RandomCollection<Integer> abilityLevelCollection = new RandomCollection<Integer>();
 			
 			if (level == 2)
 			{
-				abilityLevelCollection.add(0.8D, "L2A1");
-				abilityLevelCollection.add(0.15D, "L2A2");
-				abilityLevelCollection.add(0.05D, "L2A3");
-				String abilityLevel = abilityLevelCollection.next();
+				abilityLevelCollection.add(0.8D, 1);
+				abilityLevelCollection.add(0.15D, 2);
+				abilityLevelCollection.add(0.05D, 3);
+				Integer abilityLevel = abilityLevelCollection.next();
 				
-				if (abilityLevel == "L2A1") addA1Abilities(nbt);
-				if (abilityLevel == "L2A2") addA2Abilities(nbt);
-				if (abilityLevel == "L2A3") addA3Abilities(nbt);
+				if (abilityLevel == 1) addA1Abilities(nbt);
+				if (abilityLevel == 2) addA2Abilities(nbt);
+				if (abilityLevel == 3) addA3Abilities(nbt);
 			}
 			
 			if (level == 3)
 			{
-				abilityLevelCollection.add(0.7D, "L3A1");
-				abilityLevelCollection.add(0.2D, "L3A2");
-				abilityLevelCollection.add(0.1D, "L3A3");
-				String abilityLevel = abilityLevelCollection.next();
+				abilityLevelCollection.add(0.7D, 1);
+				abilityLevelCollection.add(0.2D, 2);
+				abilityLevelCollection.add(0.1D, 3);
+				Integer abilityLevel = abilityLevelCollection.next();
 				
-				if (abilityLevel == "L3A1") addA1Abilities(nbt);
-				if (abilityLevel == "L3A2") addA2Abilities(nbt);
-				if (abilityLevel == "L3A3") addA3Abilities(nbt);
+				if (abilityLevel == 1) addA1Abilities(nbt);
+				if (abilityLevel == 2) addA2Abilities(nbt);
+				if (abilityLevel == 3) addA3Abilities(nbt);
 			}
 			
 			if (level == 4)
 			{
-				abilityLevelCollection.add(0.6D, "L4A1");
-				abilityLevelCollection.add(0.25D, "L4A2");
-				abilityLevelCollection.add(0.15D, "L4A3");
-				String abilityLevel = abilityLevelCollection.next();
+				abilityLevelCollection.add(0.6D, 1);
+				abilityLevelCollection.add(0.25D, 2);
+				abilityLevelCollection.add(0.15D, 3);
+				Integer abilityLevel = abilityLevelCollection.next();
 				
-				if (abilityLevel == "L4A1") addA1Abilities(nbt);
-				if (abilityLevel == "L4A2") addA2Abilities(nbt);
-				if (abilityLevel == "L4A3") addA3Abilities(nbt);
+				if (abilityLevel == 1) addA1Abilities(nbt);
+				if (abilityLevel == 2) addA2Abilities(nbt);
+				if (abilityLevel == 3) addA3Abilities(nbt);
 			}
 			
 			if (level == 5)
 			{
-				abilityLevelCollection.add(0.5D, "L5A1");
-				abilityLevelCollection.add(0.3D, "L5A2");
-				abilityLevelCollection.add(0.2D, "L5A3");
-				String abilityLevel = abilityLevelCollection.next();
+				abilityLevelCollection.add(0.5D, 1);
+				abilityLevelCollection.add(0.3D, 2);
+				abilityLevelCollection.add(0.2D, 3);
+				Integer abilityLevel = abilityLevelCollection.next();
 				
-				if (abilityLevel == "L5A1") addA1Abilities(nbt);
-				if (abilityLevel == "L5A2") addA2Abilities(nbt);
-				if (abilityLevel == "L5A3") addA3Abilities(nbt);
+				if (abilityLevel == 1) addA1Abilities(nbt);
+				if (abilityLevel == 2) addA2Abilities(nbt);
+				if (abilityLevel == 3) addA3Abilities(nbt);
 			}
 			
 			if (level == 6)
 			{
-				abilityLevelCollection.add(0.4D, "L6A1");
-				abilityLevelCollection.add(0.35D, "L6A2");
-				abilityLevelCollection.add(0.25D, "L6A3");
-				String abilityLevel = abilityLevelCollection.next();
+				abilityLevelCollection.add(0.4D, 1);
+				abilityLevelCollection.add(0.35D, 2);
+				abilityLevelCollection.add(0.25D, 3);
+				Integer abilityLevel = abilityLevelCollection.next();
 				
-				if (abilityLevel == "L6A1") addA1Abilities(nbt);
-				if (abilityLevel == "L6A2") addA2Abilities(nbt);
-				if (abilityLevel == "L6A3") addA3Abilities(nbt);
+				if (abilityLevel == 1) addA1Abilities(nbt);
+				if (abilityLevel == 2) addA2Abilities(nbt);
+				if (abilityLevel == 3) addA3Abilities(nbt);
 			}
 		}
 	}
 
 	public static void addA1Abilities(NBTTagCompound nbt)
 	{
-		RandomCollection<String> abilitiesCollection = new RandomCollection<String>();
+		RandomCollection<Ability> abilitiesCollection = new RandomCollection<Ability>();
 		
-		abilitiesCollection.add(0.4D, "fire");
-		abilitiesCollection.add(0.4D, "frost");
-		abilitiesCollection.add(0.07D, "poison");
-		abilitiesCollection.add(0.07D, "strength");
-		abilitiesCollection.add(0.03D, "ethereal");
-		abilitiesCollection.add(0.03D, "void");
-		String abilities = abilitiesCollection.next();
-		LogHelper.info(abilities);
+		abilitiesCollection.add(0.4D, FIRE);
+		abilitiesCollection.add(0.4D, FROST);
+		abilitiesCollection.add(0.07D, POISON);
+		abilitiesCollection.add(0.07D, STRENGTH);
+		abilitiesCollection.add(0.03D, ETHEREAL);
+		abilitiesCollection.add(0.03D, VOID);
+		Ability ability = abilitiesCollection.next();
+		LogHelper.info(ability);
 		
-		if (abilities == "fire") nbt.setBoolean("FIRE", true);
-		if (abilities == "frost") nbt.setBoolean("FROST", true);
-		if (abilities == "poison") nbt.setBoolean("POISON", true);
-		if (abilities == "strength") nbt.setBoolean("STRENGTH", true);
-		if (abilities == "ethereal") nbt.setBoolean("ETHEREAL", true);
-		if (abilities == "void") nbt.setBoolean("VOID", true);
+		if (ability == FIRE) FIRE.addAbility(nbt);
+		if (ability == FROST) FROST.addAbility(nbt);
+		if (ability == POISON) POISON.addAbility(nbt);
+		if (ability == STRENGTH) STRENGTH.addAbility(nbt);
+		if (ability == ETHEREAL) ETHEREAL.addAbility(nbt);
+		if (ability == VOID) VOID.addAbility(nbt);
 	}
 	
 	public static void addA2Abilities(NBTTagCompound nbt)
 	{
-		RandomCollection<String> abilitiesCollection = new RandomCollection<String>();
+		RandomCollection<Ability> abilitiesCollection = new RandomCollection<Ability>();
 		
-		abilitiesCollection.add(0.3D, "fire");
-		abilitiesCollection.add(0.3D, "frost");
-		abilitiesCollection.add(0.13D, "poison");
-		abilitiesCollection.add(0.13D, "strength");
-		abilitiesCollection.add(0.07D, "ethereal");
-		abilitiesCollection.add(0.07D, "void");
-		String abilities = abilitiesCollection.next();
-		LogHelper.info(abilities);
+		abilitiesCollection.add(0.3D, FIRE);
+		abilitiesCollection.add(0.3D, FROST);
+		abilitiesCollection.add(0.13D, POISON);
+		abilitiesCollection.add(0.13D, STRENGTH);
+		abilitiesCollection.add(0.07D, ETHEREAL);
+		abilitiesCollection.add(0.07D, VOID);
+		Ability ability = abilitiesCollection.next();
+		LogHelper.info(ability);
 		
-		if (abilities == "fire") nbt.setBoolean("FIRE", true);
-		if (abilities == "frost") nbt.setBoolean("FROST", true);
-		if (abilities == "poison") nbt.setBoolean("POISON", true);
-		if (abilities == "strength") nbt.setBoolean("STRENGTH", true);
-		if (abilities == "ethereal") nbt.setBoolean("ETHEREAL", true);
-		if (abilities == "void") nbt.setBoolean("VOID", true);
+		if (ability == FIRE) FIRE.addAbility(nbt);
+		if (ability == FROST) FROST.addAbility(nbt);
+		if (ability == POISON) POISON.addAbility(nbt);
+		if (ability == STRENGTH) STRENGTH.addAbility(nbt);
+		if (ability == ETHEREAL) ETHEREAL.addAbility(nbt);
+		if (ability == VOID) VOID.addAbility(nbt);
 	}
 	
 	public static void addA3Abilities(NBTTagCompound nbt)
 	{
-		RandomCollection<String> abilitiesCollection = new RandomCollection<String>();
+		RandomCollection<Ability> abilitiesCollection = new RandomCollection<Ability>();
 		
-		abilitiesCollection.add(0.2D, "fire");
-		abilitiesCollection.add(0.2D, "frost");
-		abilitiesCollection.add(0.17D, "poison");
-		abilitiesCollection.add(0.17D, "strength");
-		abilitiesCollection.add(0.13D, "ethereal");
-		abilitiesCollection.add(0.13D, "void");
-		String abilities = abilitiesCollection.next();
-		LogHelper.info(abilities);
+		abilitiesCollection.add(0.2D, FIRE);
+		abilitiesCollection.add(0.2D, FROST);
+		abilitiesCollection.add(0.17D, POISON);
+		abilitiesCollection.add(0.17D, STRENGTH);
+		abilitiesCollection.add(0.13D, ETHEREAL);
+		abilitiesCollection.add(0.13D, VOID);
+		Ability ability = abilitiesCollection.next();
+		LogHelper.info(ability);
 		
-		if (abilities == "fire") nbt.setBoolean("FIRE", true);
-		if (abilities == "frost") nbt.setBoolean("FROST", true);
-		if (abilities == "poison") nbt.setBoolean("POISON", true);
-		if (abilities == "strength") nbt.setBoolean("STRENGTH", true);
-		if (abilities == "ethereal") nbt.setBoolean("ETHEREAL", true);
-		if (abilities == "void") nbt.setBoolean("VOID", true);
+		if (ability == FIRE) FIRE.addAbility(nbt);
+		if (ability == FROST) FROST.addAbility(nbt);
+		if (ability == POISON) POISON.addAbility(nbt);
+		if (ability == STRENGTH) STRENGTH.addAbility(nbt);
+		if (ability == ETHEREAL) ETHEREAL.addAbility(nbt);
+		if (ability == VOID) VOID.addAbility(nbt);
 	}
 	
 	/**
@@ -171,130 +173,130 @@ public class AbilityHelper
 		
 		if (nbt != null && level >= 2)
 		{	
-			RandomCollection<String> abilityLevelCollection = new RandomCollection<String>();
+			RandomCollection<Integer> abilityLevelCollection = new RandomCollection<Integer>();
 			
 			if (level == 2)
 			{
-				abilityLevelCollection.add(0.8D, "L2A1");
-				abilityLevelCollection.add(0.15D, "L2A2");
-				abilityLevelCollection.add(0.05D, "L2A3");
-				String abilityLevel = abilityLevelCollection.next();
+				abilityLevelCollection.add(0.8D, 1);
+				abilityLevelCollection.add(0.15D, 2);
+				abilityLevelCollection.add(0.05D, 3);
+				Integer abilityLevel = abilityLevelCollection.next();
 				
-				if (abilityLevel == "L2A1") addA1AbilitiesArmor(nbt);
-				if (abilityLevel == "L2A2") addA2AbilitiesArmor(nbt);
-				if (abilityLevel == "L2A3") addA3AbilitiesArmor(nbt);
+				if (abilityLevel == 1) addA1AbilitiesArmor(nbt);
+				if (abilityLevel == 2) addA2AbilitiesArmor(nbt);
+				if (abilityLevel == 3) addA3AbilitiesArmor(nbt);
 			}
 			
 			if (level == 3)
 			{
-				abilityLevelCollection.add(0.7D, "L3A1");
-				abilityLevelCollection.add(0.2D, "L3A2");
-				abilityLevelCollection.add(0.1D, "L3A3");
-				String abilityLevel = abilityLevelCollection.next();
+				abilityLevelCollection.add(0.7D, 1);
+				abilityLevelCollection.add(0.2D, 2);
+				abilityLevelCollection.add(0.1D, 3);
+				Integer abilityLevel = abilityLevelCollection.next();
 				
-				if (abilityLevel == "L3A1") addA1AbilitiesArmor(nbt);
-				if (abilityLevel == "L3A2") addA2AbilitiesArmor(nbt);
-				if (abilityLevel == "L3A3") addA3AbilitiesArmor(nbt);
+				if (abilityLevel == 1) addA1AbilitiesArmor(nbt);
+				if (abilityLevel == 2) addA2AbilitiesArmor(nbt);
+				if (abilityLevel == 3) addA3AbilitiesArmor(nbt);
 			}
 			
 			if (level == 4)
 			{
-				abilityLevelCollection.add(0.6D, "L4A1");
-				abilityLevelCollection.add(0.25D, "L4A2");
-				abilityLevelCollection.add(0.15D, "L4A3");
-				String abilityLevel = abilityLevelCollection.next();
+				abilityLevelCollection.add(0.6D, 1);
+				abilityLevelCollection.add(0.25D, 2);
+				abilityLevelCollection.add(0.15D, 3);
+				Integer abilityLevel = abilityLevelCollection.next();
 				
-				if (abilityLevel == "L4A1") addA1AbilitiesArmor(nbt);
-				if (abilityLevel == "L4A2") addA2AbilitiesArmor(nbt);
-				if (abilityLevel == "L4A3") addA3AbilitiesArmor(nbt);
+				if (abilityLevel == 1) addA1AbilitiesArmor(nbt);
+				if (abilityLevel == 2) addA2AbilitiesArmor(nbt);
+				if (abilityLevel == 3) addA3AbilitiesArmor(nbt);
 			}
 			
 			if (level == 5)
 			{
-				abilityLevelCollection.add(0.5D, "L5A1");
-				abilityLevelCollection.add(0.3D, "L5A2");
-				abilityLevelCollection.add(0.2D, "L5A3");
-				String abilityLevel = abilityLevelCollection.next();
+				abilityLevelCollection.add(0.5D, 1);
+				abilityLevelCollection.add(0.3D, 2);
+				abilityLevelCollection.add(0.2D, 3);
+				Integer abilityLevel = abilityLevelCollection.next();
 				
-				if (abilityLevel == "L5A1") addA1AbilitiesArmor(nbt);
-				if (abilityLevel == "L5A2") addA2AbilitiesArmor(nbt);
-				if (abilityLevel == "L5A3") addA3AbilitiesArmor(nbt);
+				if (abilityLevel == 1) addA1AbilitiesArmor(nbt);
+				if (abilityLevel == 2) addA2AbilitiesArmor(nbt);
+				if (abilityLevel == 3) addA3AbilitiesArmor(nbt);
 			}
 			
 			if (level == 6)
 			{
-				abilityLevelCollection.add(0.4D, "L6A1");
-				abilityLevelCollection.add(0.35D, "L6A2");
-				abilityLevelCollection.add(0.25D, "L6A3");
-				String abilityLevel = abilityLevelCollection.next();
+				abilityLevelCollection.add(0.4D, 1);
+				abilityLevelCollection.add(0.35D, 2);
+				abilityLevelCollection.add(0.25D, 3);
+				Integer abilityLevel = abilityLevelCollection.next();
 				
-				if (abilityLevel == "L6A1") addA1AbilitiesArmor(nbt);
-				if (abilityLevel == "L6A2") addA2AbilitiesArmor(nbt);
-				if (abilityLevel == "L6A3") addA3AbilitiesArmor(nbt);
+				if (abilityLevel == 1) addA1AbilitiesArmor(nbt);
+				if (abilityLevel == 2) addA2AbilitiesArmor(nbt);
+				if (abilityLevel == 3) addA3AbilitiesArmor(nbt);
 			}
 		}
 	}
 	
 	public static void addA1AbilitiesArmor(NBTTagCompound nbt)
 	{
-		RandomCollection<String> abilitiesCollection = new RandomCollection<String>();
+		RandomCollection<Ability> abilitiesCollection = new RandomCollection<Ability>();
 		
-		abilitiesCollection.add(0.4D, "hardened");
-		abilitiesCollection.add(0.4D, "poisoned");
-		abilitiesCollection.add(0.07D, "strength");
-		abilitiesCollection.add(0.07D, "immunization");
-		abilitiesCollection.add(0.03D, "ethereal");
-		abilitiesCollection.add(0.03D, "void");
-		String abilities = abilitiesCollection.next();
-		LogHelper.info(abilities);
+		abilitiesCollection.add(0.4D, HARDENED);
+		abilitiesCollection.add(0.4D, POISONED);
+		abilitiesCollection.add(0.07D, STRENGTH);
+		abilitiesCollection.add(0.07D, IMMUNIZATION);
+		abilitiesCollection.add(0.03D, ETHEREAL);
+		abilitiesCollection.add(0.03D, VOID);
+		Ability ability = abilitiesCollection.next();
+		LogHelper.info(ability);
 		
-		if (abilities == "hardened") nbt.setBoolean("HARDENED", true);
-		if (abilities == "poisoned") nbt.setBoolean("POISONED", true);
-		if (abilities == "strength") nbt.setBoolean("STRENGTH", true);
-		if (abilities == "immunization") nbt.setBoolean("IMMUNIZATION", true);
-		if (abilities == "ethereal") nbt.setBoolean("ETHEREAL", true);
-		if (abilities == "void") nbt.setBoolean("VOID", true);
+		if (ability == HARDENED) HARDENED.addAbility(nbt);
+		if (ability == POISONED) POISONED.addAbility(nbt);
+		if (ability == STRENGTH) STRENGTH.addAbility(nbt);
+		if (ability == IMMUNIZATION) IMMUNIZATION.addAbility(nbt);
+		if (ability == ETHEREAL) ETHEREAL.addAbility(nbt);
+		if (ability == VOID) VOID.addAbility(nbt);
 	}
 	
 	public static void addA2AbilitiesArmor(NBTTagCompound nbt)
 	{
-		RandomCollection<String> abilitiesCollection = new RandomCollection<String>();
+		RandomCollection<Ability> abilitiesCollection = new RandomCollection<Ability>();
 		
-		abilitiesCollection.add(0.3D, "hardened");
-		abilitiesCollection.add(0.3D, "poisoned");
-		abilitiesCollection.add(0.13D, "strength");
-		abilitiesCollection.add(0.13D, "immunization");
-		abilitiesCollection.add(0.07D, "ethereal");
-		abilitiesCollection.add(0.07D, "void");
-		String abilities = abilitiesCollection.next();
-		LogHelper.info(abilities);
+		abilitiesCollection.add(0.3D, HARDENED);
+		abilitiesCollection.add(0.3D, POISONED);
+		abilitiesCollection.add(0.13D, STRENGTH);
+		abilitiesCollection.add(0.13D, IMMUNIZATION);
+		abilitiesCollection.add(0.07D, ETHEREAL);
+		abilitiesCollection.add(0.07D, VOID);
+		Ability ability = abilitiesCollection.next();
+		LogHelper.info(ability);
 		
-		if (abilities == "hardened") nbt.setBoolean("HARDENED", true);
-		if (abilities == "poisoned") nbt.setBoolean("POISONED", true);
-		if (abilities == "strength") nbt.setBoolean("STRENGTH", true);
-		if (abilities == "immunization") nbt.setBoolean("IMMUNIZATION", true);
-		if (abilities == "ethereal") nbt.setBoolean("ETHEREAL", true);
-		if (abilities == "void") nbt.setBoolean("VOID", true);
+		if (ability == HARDENED) HARDENED.addAbility(nbt);
+		if (ability == POISONED) POISONED.addAbility(nbt);
+		if (ability == STRENGTH) STRENGTH.addAbility(nbt);
+		if (ability == IMMUNIZATION) IMMUNIZATION.addAbility(nbt);
+		if (ability == ETHEREAL) ETHEREAL.addAbility(nbt);
+		if (ability == VOID) VOID.addAbility(nbt);
 	}
 	
 	public static void addA3AbilitiesArmor(NBTTagCompound nbt)
 	{
-		RandomCollection<String> abilitiesCollection = new RandomCollection<String>();
+		RandomCollection<Ability> abilitiesCollection = new RandomCollection<Ability>();
 		
-		abilitiesCollection.add(0.2D, "hardened");
-		abilitiesCollection.add(0.2D, "poisoned");
-		abilitiesCollection.add(0.17D, "strength");
-		abilitiesCollection.add(0.17D, "immunization");
-		abilitiesCollection.add(0.13D, "ethereal");
-		abilitiesCollection.add(0.13D, "void");
-		String abilities = abilitiesCollection.next();
-		LogHelper.info(abilities);
+		abilitiesCollection.add(0.2D, HARDENED);
+		abilitiesCollection.add(0.2D, POISONED);
+		abilitiesCollection.add(0.17D, STRENGTH);
+		abilitiesCollection.add(0.17D, IMMUNIZATION);
+		abilitiesCollection.add(0.13D, ETHEREAL);
+		abilitiesCollection.add(0.13D, VOID);
+		Ability ability = abilitiesCollection.next();
+		LogHelper.info(ability);
 		
-		if (abilities == "hardened") nbt.setBoolean("HARDENED", true);
-		if (abilities == "poisoned") nbt.setBoolean("POISONED", true);
-		if (abilities == "strength") nbt.setBoolean("STRENGTH", true);
-		if (abilities == "immunization") nbt.setBoolean("IMMUNIZATION", true);
-		if (abilities == "ethereal") nbt.setBoolean("ETHEREAL", true);
-		if (abilities == "void") nbt.setBoolean("VOID", true);
+		if (ability == HARDENED) HARDENED.addAbility(nbt);
+		if (ability == POISONED) POISONED.addAbility(nbt);
+		if (ability == STRENGTH) STRENGTH.addAbility(nbt);
+		if (ability == IMMUNIZATION) IMMUNIZATION.addAbility(nbt);
+		if (ability == ETHEREAL) ETHEREAL.addAbility(nbt);
+		if (ability == VOID) VOID.addAbility(nbt);
 	}
 }
