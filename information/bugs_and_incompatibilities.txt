@@ -3,7 +3,6 @@
 ##################################
 
 ### Bugs
-* Shift-clicking weapons/armor in crafting grids won't apply the leveling system
 * [wontfix] Weapons with rarity higher than Basic loose durability in creative mode
 
 

@@ -30,6 +30,7 @@ public class EventLivingHurt
 	 * Fired when an entity is about to be hurt.
 	 * @param event
 	 */
+	@SuppressWarnings("incomplete-switch")
 	@SubscribeEvent
 	public void hitEntity(LivingHurtEvent event)
 	{
