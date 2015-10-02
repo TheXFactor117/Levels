@@ -222,7 +222,7 @@ public class EventLivingHurt
 							/*
 							 * Leveling system
 							 */
-							while (level < Experience.getLevelsUp(player, level, experience, ItemType.WEAPON))
+							while (level < Experience.getLevelsUp(player, level, experience, ItemType.ARMOR))
 							{
 								level++;
 								AbilityHelper.getRandomizedArmorAbilities(stack, level);
