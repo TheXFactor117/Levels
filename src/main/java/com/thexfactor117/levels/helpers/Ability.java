@@ -1,12 +1,7 @@
 package com.thexfactor117.levels.helpers;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
-
-import java.util.List;
 
 /**
  *
@@ -15,34 +10,23 @@ import java.util.List;
  */
 public enum Ability
 {
-	FIRE(EnumChatFormatting.DARK_RED),
-	FROST(EnumChatFormatting.AQUA),
-	POISON(EnumChatFormatting.DARK_GREEN),
-	STRENGTH(EnumChatFormatting.LIGHT_PURPLE),
-	ETHEREAL(EnumChatFormatting.BLUE),
-	VOID(EnumChatFormatting.DARK_PURPLE),
-	HARDENED(EnumChatFormatting.WHITE),
-	POISONED(EnumChatFormatting.DARK_GREEN),
-	IMMUNIZATION(EnumChatFormatting.GOLD);
-	
-	private static final Ability[] ABILITIES = Ability.values();
+	FIRE(EnumChatFormatting.DARK_RED, 0.4D, 0.3D, 0.2D),
+	FROST(EnumChatFormatting.AQUA, 0.4D, 0.3D, 0.2D),
+	POISON(EnumChatFormatting.DARK_GREEN, 0.07D, 0.13D, 0.17D),
+	STRENGTH(EnumChatFormatting.LIGHT_PURPLE, 0.07D, 0.13D, 0.17D),
+	ETHEREAL(EnumChatFormatting.BLUE, 0.03D, 0.07D, 0.13D),
+	VOID(EnumChatFormatting.DARK_PURPLE, 0.03D, 0.07D, 0.13D),
+	HARDENED(EnumChatFormatting.WHITE, 0.4D, 0.3D, 0.2D),
+	POISONED(EnumChatFormatting.DARK_GREEN, 0.4D, 0.3D, 0.2D),
+	IMMUNIZATION(EnumChatFormatting.GOLD, 0.07D, 0.13D, 0.17D);
+
 	private final String color;
+	private final double[] weights;
 	
-	Ability(Object color)
+	Ability(Object color, double... weights)
 	{
 		this.color = color.toString();
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static void addTooltip(NBTTagCompound nbt, List<String> tooltip)
-	{
-		for (Ability ability : ABILITIES)
-		{
-			if (ability.hasAbility(nbt))
-			{
-				ability.addTooltip(tooltip);
-			}
-		}
+		this.weights = weights;
 	}
 	
 	public boolean hasAbility(NBTTagCompound nbt)
@@ -60,9 +44,13 @@ public enum Ability
 		nbt.removeTag(toString());
 	}
 
-	@SideOnly(Side.CLIENT)
-	private void addTooltip(List<String> tooltip)
+	public String getColor()
 	{
-		tooltip.add(color + I18n.format("levels.ability." + toString().toLowerCase()));
+		return color;
+	}
+
+	public double[] getWeights()
+	{
+		return weights;
 	}
 }

@@ -31,6 +31,7 @@ public class ModEvents
 		if (ConfigHandler.enableDevFeatures)
 		{
 			LogHelper.info("Levels is running in a development environment. Enabling development features...");
+			// 1000 xp on mob death
 			LogHelper.info("Finished enabling development features.");
 		}
 		else

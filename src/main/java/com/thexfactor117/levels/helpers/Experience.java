@@ -1,10 +1,13 @@
 package com.thexfactor117.levels.helpers;
 
+import com.thexfactor117.levels.Reference;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
+
+import java.util.Random;
 
 /**
  *
@@ -16,22 +19,16 @@ public final class Experience
 	private static final String LEVEL_KEY = "LEVEL";
 	private static final String EXPERIENCE_KEY = "EXPERIENCE";
 
-	public static int getLevelsUp(EntityPlayer player, int level, int experience, ItemType type)
+	public static int getLevelsUp(EntityPlayer player, NBTTagCompound nbt, int level, int experience, ItemType type, Random random)
 	{
-		while (level < type.getMaxLevel())
+		while (level < Reference.MAX_LEVEL && experience >= type.getMaxLevelExp(level))
 		{
-			if (experience >= type.getMaxLevelExp(level))
-			{
-				level++;
-				EnumChatFormatting color = getLevelUpColor(level);
-				String message = StatCollector.translateToLocal(level < type.getMaxLevel() ? "levels.levelUp" : "levels.levelUp.max");
-				String typeString = StatCollector.translateToLocal("levels.levelUp." + type.toString().toLowerCase());
-				player.addChatMessage(new ChatComponentText(color + String.format(message, typeString)));
-			}
-			else
-			{
-				break;
-			}
+			level++;
+			AbilityHelper.getRandomizedAbilities(nbt, level, type, random);
+			EnumChatFormatting color = getLevelUpColor(level);
+			String message = StatCollector.translateToLocal(level < Reference.MAX_LEVEL ? "levels.levelUp" : "levels.levelUp.max");
+			String typeString = StatCollector.translateToLocal("levels.levelUp." + type.toString().toLowerCase());
+			player.addChatMessage(new ChatComponentText(color + String.format(message, typeString)));
 		}
 
 		return level;
