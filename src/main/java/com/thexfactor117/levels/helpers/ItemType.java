@@ -1,59 +1,55 @@
 package com.thexfactor117.levels.helpers;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import com.thexfactor117.levels.Reference;
 
-import java.util.List;
+import java.util.Random;
+
+import static com.thexfactor117.levels.helpers.Ability.*;
 
 public enum ItemType
 {
-	WEAPON(6),
-	ARMOR(6);
+	WEAPON(FIRE, FROST, POISON, STRENGTH, ETHEREAL, VOID),
+	ARMOR(HARDENED, POISONED, STRENGTH, IMMUNIZATION, ETHEREAL, VOID);
 
-	private final int maxLevel;
-	private final int[] maxLevelExp;
+	private final RandomCollection<Ability>[] abilityCollections = new RandomCollection[Reference.MAX_ABILITY_LEVEL];
+	private final int[] maxLevelExp = new int[Reference.MAX_LEVEL - 1];
+	private final Ability[] abilities;
 
-	ItemType(int maxLevel)
+	ItemType(Ability... abilities)
 	{
-		this.maxLevel = maxLevel;
-		this.maxLevelExp = new int[maxLevel];
-	}
+		this.abilities = abilities;
 
-	@SideOnly(Side.CLIENT)
-	public void addTooltip(ItemStack stack, List<String> tooltip)
-	{
-		NBTTagCompound nbt = stack.getTagCompound();
-		int level = Experience.getLevel(nbt);
-
-		tooltip.add(I18n.format("levels.level") + ": " + level);
-
-		if (level == maxLevel)
+		for (int i = 0; i < Reference.MAX_ABILITY_LEVEL; i++)
 		{
-			tooltip.add(I18n.format("levels.experience") + ": " + I18n.format("levels.experience.max"));
-		}
-		else
-		{
-			tooltip.add(I18n.format("levels.experience") + ": " + Experience.getExperience(nbt) + "/" + getMaxLevelExp(level));
-		}
+			RandomCollection<Ability> abilityCollection = new RandomCollection<Ability>();
 
-		tooltip.add(I18n.format("levels.durability." + toString().toLowerCase(), stack.getMaxDamage() - stack.getItemDamage()));
-	}
+			for (Ability ability : abilities)
+			{
+				double weight = ability.getWeights()[i];
+				abilityCollection.add(weight, ability);
+			}
 
-	public int getMaxLevel()
-	{
-		return maxLevel;
+			abilityCollections[i] = abilityCollection;
+		}
 	}
 
 	public int getMaxLevelExp(int level)
 	{
-		return maxLevelExp[level];
+		return maxLevelExp[level - 1];
 	}
 
 	public void setMaxLevelExp(int level, int maxExp)
 	{
-		maxLevelExp[level] = maxExp;
+		maxLevelExp[level - 1] = maxExp;
+	}
+
+	public Ability[] getAbilities()
+	{
+		return abilities;
+	}
+
+	public Ability getRandomAbility(int level, Random random)
+	{
+		return abilityCollections[level - 1].next(random);
 	}
 }

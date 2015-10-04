@@ -13,18 +13,7 @@ import java.util.TreeMap;
 public class RandomCollection<E>
 {
 	private final NavigableMap<Double, E> map = new TreeMap<Double, E>();
-    private final Random random;
     private double total = 0;
-
-    public RandomCollection() 
-    {
-        this(new Random());
-    }
-
-    public RandomCollection(Random random) 
-    {
-        this.random = random;
-    }
 
     public void add(double weight, E result) 
     {
@@ -33,7 +22,7 @@ public class RandomCollection<E>
         map.put(total, result);
     }
 
-    public E next() 
+    public E next(Random random)
     {
         double value = random.nextDouble() * total;
         return map.ceilingEntry(value).getValue();

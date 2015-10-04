@@ -1,12 +1,9 @@
 package com.thexfactor117.levels.helpers;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 
-import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -15,25 +12,27 @@ import java.util.List;
  */
 public enum Rarity
 {
-	UNKOWN(""),
-	BASIC(EnumChatFormatting.WHITE),
-	UNCOMMON(EnumChatFormatting.DARK_GREEN),
-	RARE(EnumChatFormatting.AQUA),
-	LEGENDARY(EnumChatFormatting.DARK_PURPLE),
-	ANCIENT(EnumChatFormatting.GOLD);
-	
+	UNKOWN("", 0.0D),
+	BASIC(EnumChatFormatting.WHITE, 0.65D),
+	UNCOMMON(EnumChatFormatting.DARK_GREEN, 0.17D),
+	RARE(EnumChatFormatting.AQUA, 0.11D),
+	LEGENDARY(EnumChatFormatting.DARK_PURPLE, 0.05D),
+	ANCIENT(EnumChatFormatting.GOLD, 0.02D);
+
 	private static final Rarity[] RARITIES = Rarity.values();
+	private static final RandomCollection<Rarity> RANDOM_RARITIES = new RandomCollection<Rarity>();
 	private final String color;
+	private final double weight;
 	
-	Rarity(Object color)
+	Rarity(Object color, double weight)
 	{
 		this.color = color.toString();
+		this.weight = weight;
 	}
 
-	@SideOnly(Side.CLIENT)
-	public static void addTooltip(NBTTagCompound nbt, List<String> tooltip)
+	public static Rarity getRandomRarity(Random random)
 	{
-		getRarity(nbt).addTooltip(tooltip);
+		return RANDOM_RARITIES.next(random);
 	}
 
 	public static Rarity getRarity(NBTTagCompound nbt)
@@ -45,10 +44,20 @@ public enum Rarity
 	{
 		nbt.setInteger("RARITY", ordinal());
 	}
-	
-	@SideOnly(Side.CLIENT)
-	private void addTooltip(List<String> tooltip)
+
+	public String getColor()
 	{
-		tooltip.add(color + EnumChatFormatting.ITALIC + I18n.format("levels.rarity." + ordinal()));
+		return color;
+	}
+
+	static
+	{
+		for (Rarity rarity : RARITIES)
+		{
+			if (rarity.weight > 0.0D)
+			{
+				RANDOM_RARITIES.add(rarity.weight, rarity);
+			}
+		}
 	}
 }

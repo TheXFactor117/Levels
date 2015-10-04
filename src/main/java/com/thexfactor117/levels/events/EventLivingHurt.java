@@ -2,6 +2,7 @@ package com.thexfactor117.levels.events;
 
 import java.util.Random;
 
+import com.thexfactor117.levels.Reference;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
@@ -50,14 +51,14 @@ public class EventLivingHurt
 			{
 				if (stack.getItem() instanceof ItemSword)
 				{
-					NBTTagCompound nbt = stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
+					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 					int level = Experience.getLevel(nbt);
 					int experience = Experience.getExperience(nbt);
 
 					/*
 					 * Experience
 					 */
-					if (level < ItemType.WEAPON.getMaxLevel())
+					if (level < Reference.MAX_LEVEL)
 					{
 						experience += level > 3 && rand.nextInt(4) == 0 ? 2 : 1;
 						Experience.setExperience(nbt, experience);
@@ -66,12 +67,7 @@ public class EventLivingHurt
 					/*
 					 * Leveling system
 					 */
-					while (level < Experience.getLevelsUp(player, level, experience, ItemType.WEAPON))
-					{
-						level++;
-						AbilityHelper.getRandomizedMeleeAbilities(stack, level);
-					}
-
+					level = Experience.getLevelsUp(player, nbt, level, experience, ItemType.WEAPON, rand);
 					Experience.setLevel(nbt, level);
 
 					/*
@@ -177,10 +173,7 @@ public class EventLivingHurt
 						}
 					}
 
-					if (!nbt.hasNoTags() && !stack.hasTagCompound())
-					{
-						stack.setTagCompound(nbt);
-					}
+					NBTHelper.saveStackNBT(stack, nbt);
 				}
 			}
 		}
@@ -206,14 +199,14 @@ public class EventLivingHurt
 					{
 						if (stack.getItem() instanceof ItemArmor)
 						{
-							NBTTagCompound nbt = stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
+							NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 							int level = Experience.getLevel(nbt);
 							int experience = Experience.getExperience(nbt);
 
 							/*
 							 * Experience
 							 */
-							if (level < ItemType.ARMOR.getMaxLevel())
+							if (level < Reference.MAX_LEVEL)
 							{
 								experience += level > 3 && rand.nextInt(3) == 0 ? 1 + rand.nextInt(3) : 1;
 								Experience.setExperience(nbt, experience);
@@ -222,12 +215,7 @@ public class EventLivingHurt
 							/*
 							 * Leveling system
 							 */
-							while (level < Experience.getLevelsUp(player, level, experience, ItemType.ARMOR))
-							{
-								level++;
-								AbilityHelper.getRandomizedArmorAbilities(stack, level);
-							}
-
+							level = Experience.getLevelsUp(player, nbt, level, experience, ItemType.ARMOR, rand);
 							Experience.setLevel(nbt, level);
 							
 							/*
@@ -258,10 +246,7 @@ public class EventLivingHurt
 								attacker.setHealth(0.0F);
 							}
 
-							if (!nbt.hasNoTags() && !stack.hasTagCompound())
-							{
-								stack.setTagCompound(nbt);
-							}
+							NBTHelper.saveStackNBT(stack, nbt);
 						}
 					}
 				}
