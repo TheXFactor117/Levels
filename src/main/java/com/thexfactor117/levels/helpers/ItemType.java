@@ -11,6 +11,7 @@ public enum ItemType
 	WEAPON(FIRE, FROST, POISON, STRENGTH, ETHEREAL, VOID),
 	ARMOR(HARDENED, POISONED, STRENGTH, IMMUNIZATION, ETHEREAL, VOID);
 
+	@SuppressWarnings("unchecked")
 	private final RandomCollection<Ability>[] abilityCollections = new RandomCollection[Reference.MAX_ABILITY_LEVEL];
 	private final int[] maxLevelExp = new int[Reference.MAX_LEVEL - 1];
 	private final Ability[] abilities;

@@ -7,6 +7,11 @@
 ####
 
 ### Release 1 - Official Release
+r1.1.2
++ A couple new languages now supported (Chinese and Taiwanese)
+* Fixes to new optimized code
+* And further optimization thanks to MrIbby
+
 r1.1.1
 * Major improvements to internal code (thanks to MrIbby).
 * Fixes issue with entities not being cast correctly, causing crashes.

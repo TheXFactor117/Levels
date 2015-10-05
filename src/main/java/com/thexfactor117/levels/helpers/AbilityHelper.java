@@ -1,6 +1,7 @@
 package com.thexfactor117.levels.helpers;
 
 import com.thexfactor117.levels.Reference;
+
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.Random;
@@ -12,6 +13,7 @@ import java.util.Random;
  */
 public class AbilityHelper 
 {
+	@SuppressWarnings("unchecked")
 	private static final RandomCollection<Integer>[] ABILITY_LEVELS = new RandomCollection[Reference.MAX_LEVEL];
 	
 	/**
