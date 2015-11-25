@@ -6,6 +6,17 @@
 ### RELEASE
 ####
 
+### Release 2 - Levels Rewritten
+r2.0.1
+* Fixes issue with creative weapons (support will be added)
+
+r2.0.0
++ Re-wrote entire mod.
++ Mod now uses Java 8. Might not be compatible with older versions
+*** Temporarily removed certain features.
+
+
+
 ### Release 1 - Official Release
 r1.1.2
 + A couple new languages now supported (Chinese and Taiwanese)
