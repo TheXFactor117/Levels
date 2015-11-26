@@ -21,3 +21,16 @@ r4.0.0
     * levels will be easier than normal monsters, though others will be much more powerful. The more powerful the
     * monster, the better loot that can be received, amongst experience bonuses and such. Enemy levels will be released
     * in the abilities.txt file too.
+
+
+
+####
+### Potential Features
+####
+
+- Weapon Loot
+   * Weapons can now spawn in chests throughout the world, and can also drop from enemies as well. They will also drop with
+   * with a pre-determined rarity as well.
+
+- Weapon Rarities on Obtainment
+   * Instead of having to kill an enemy, weapons will automatically come with a rarity.
