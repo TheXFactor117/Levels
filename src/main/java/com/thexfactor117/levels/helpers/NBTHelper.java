@@ -4,11 +4,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
- *
+ * 
+ * @author TheXFactor117
  * @author MrIbby
  *
  */
-public class NBTHelper
+public class NBTHelper 
 {
 	public static NBTTagCompound loadStackNBT(ItemStack stack)
 	{

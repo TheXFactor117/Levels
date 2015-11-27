@@ -3,22 +3,15 @@ package com.thexfactor117.levels.events;
 import java.util.Random;
 
 import com.thexfactor117.levels.Reference;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityMob;
+import com.thexfactor117.levels.helpers.ExperienceHelper;
+import com.thexfactor117.levels.helpers.Rarity;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-
-import com.thexfactor117.levels.handlers.ConfigHandler;
-import com.thexfactor117.levels.helpers.*;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * 
@@ -26,7 +19,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
  *
  */
 public class EventLivingHurt 
-{	
+{
 	/**
 	 * Fired when an entity is about to be hurt.
 	 * @param event
@@ -44,209 +37,148 @@ public class EventLivingHurt
 		{
 			EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
 			Random rand = player.worldObj.rand;
-			EntityLivingBase enemy = event.entityLiving;
 			ItemStack stack = player.inventory.getCurrentItem();
 			
 			if (stack != null)
 			{
 				if (stack.getItem() instanceof ItemSword)
 				{
-					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-					int level = Experience.getLevel(nbt);
-					int experience = Experience.getExperience(nbt);
+					NBTTagCompound nbt = stack.getTagCompound();
+					int level = ExperienceHelper.getLevel(nbt);
+					int experience = ExperienceHelper.getExperience(nbt);
 
 					/*
 					 * Experience
 					 */
 					if (level < Reference.MAX_LEVEL)
 					{
-						experience += level > 3 && rand.nextInt(4) == 0 ? 2 : 1;
-						Experience.setExperience(nbt, experience);
+						ExperienceHelper.setExperience(nbt, ExperienceHelper.getExperience(nbt) + 1);
 					}
 
 					/*
 					 * Leveling system
 					 */
-					level = Experience.getLevelsUp(player, nbt, level, experience, ItemType.WEAPON, rand);
-					Experience.setLevel(nbt, level);
+					level = ExperienceHelper.getNextLevel(player, nbt, level, experience, rand);
+					ExperienceHelper.setLevel(nbt, level);
 
 					/*
 					 * Rarity
 					 */
 					Rarity rarity = Rarity.getRarity(nbt);
-					float multiplier = 1.0F;
-					boolean var = false;
-					boolean var1 = false;
+					float damageMultiplier = 1.0F;
+					//float trueDamage = event.ammount;
 
+					// Damage boosts
 					switch (rarity)
 					{
 						case UNCOMMON:
-							multiplier = 1.5F;
+							damageMultiplier = 1.5F;
+							int var = rand.nextInt(10);
+							if (var == 0) ExperienceHelper.setExperience(nbt, ExperienceHelper.getExperience(nbt) + 1);
 							break;
 						case RARE:
-							multiplier = 1.5F;
-							var = rand.nextInt(2) == 0;
+							damageMultiplier = 1.5F;
+							int var1 = rand.nextInt(4);
+							if (var1 == 0) ExperienceHelper.setExperience(nbt, ExperienceHelper.getExperience(nbt) + 1);
 							break;
 						case LEGENDARY:
-							multiplier = 2.0F;
-							var = rand.nextInt(10) <= 5;
-							var1 = rand.nextInt(20) == 0;
+							damageMultiplier = 2.0F;
+							int var2 = rand.nextInt(5);
+							int var3 = rand.nextInt(2) + 2;
+							if (var2 == 0) ExperienceHelper.setExperience(nbt, ExperienceHelper.getExperience(nbt) + var3);
 							break;
 						case ANCIENT:
-							multiplier = 3.0F;
-							var = rand.nextInt(4) != 0;
-							var1 = rand.nextInt(10) == 0;
+							damageMultiplier = 3.0F;
+							int var4 = rand.nextInt(4);
+							int var5 = rand.nextInt(3) + 3;
+							if (var4 == 0) ExperienceHelper.setExperience(nbt, ExperienceHelper.getExperience(nbt) + var5);
 							break;
 					}
 
-					event.ammount *= multiplier;
-
-					if (var)
+					event.ammount *= damageMultiplier;
+					// DEBUG
+					//LogHelper.info("True Damage: " + trueDamage + "   |   Modified Damage: " + event.ammount);
+					
+					// Durability boosts
+					// rare
+					if (rarity == Rarity.RARE)
 					{
-						if (stack.getItemDamage() == stack.getMaxDamage())
+						// reduction
+						int var = rand.nextInt(5);
+						if (var == 0)
 						{
-							stack.setItemDamage(stack.getItemDamage());
-						}
-						else
-						{
-							stack.setItemDamage(stack.getItemDamage() + 1);
-						}
-					}
-
-					if (var1)
-					{
-						if (stack.getItemDamage() == stack.getMaxDamage())
-						{
-							stack.setItemDamage(stack.getItemDamage());
-						}
-						else
-						{
-							stack.setItemDamage(stack.getItemDamage() + 20);
-						}
-					}
-
-					/*
-					 * Abilities
-					 */
-					if (enemy != null)
-					{
-						if (Ability.FIRE.hasAbility(nbt))
-						{
-							enemy.setFire(ConfigHandler.fireAbilityDuration);
-						}
-
-						if (Ability.FROST.hasAbility(nbt))
-						{
-							enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20 * ConfigHandler.frostAbilityDuration, 10));
-						}
-
-						if (Ability.POISON.hasAbility(nbt))
-						{
-							enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20 * ConfigHandler.poisonAbilityDuration, 0));
-						}
-
-						if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(ConfigHandler.strengthAbilityProbability) == 0)
-						{
-							player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20 * ConfigHandler.strengthAbilityDuration, 0));
-						}
-
-						if (Ability.ETHEREAL.hasAbility(nbt) && rand.nextInt(4) == 0)
-						{
-							float health = Math.min(player.getMaxHealth(), player.getHealth() + ConfigHandler.etherealAbilityAmountHealed);
-							player.setHealth(health);
-						}
-
-						if (Ability.VOID.hasAbility(nbt) && rand.nextInt(20) == 0)
-						{
-							float health;
-
-							if (ConfigHandler.voidInstantKill || enemy.getHealth() < 30.0F)
+							if (stack.getItemDamage() == stack.getMaxDamage())
 							{
-								health = 0.0F;
+								stack.setItemDamage(stack.getItemDamage());
 							}
 							else
 							{
-								health = (float) (enemy.getHealth() - ConfigHandler.voidDamageAmount);
+								stack.setItemDamage(stack.getItemDamage() - 1);
 							}
-
-							enemy.setHealth(health);
 						}
 					}
-
-					NBTHelper.saveStackNBT(stack, nbt);
-				}
-			}
-		}
-		
-		/*
-		 * 
-		 * ARMOR
-		 * 
-		 */
-		if (event.entityLiving instanceof EntityPlayer)
-		{
-			Entity source = event.source.getSourceOfDamage();
-			EntityPlayer player = (EntityPlayer) event.entityLiving;
-			Random rand = player.worldObj.rand;
-			
-			if (source instanceof EntityMob)
-			{
-				EntityMob attacker = (EntityMob) source;
-
-				for (ItemStack stack : player.inventory.armorInventory)
-				{
-					if (stack != null)
+					
+					// legendary
+					if (rarity == Rarity.LEGENDARY)
 					{
-						if (stack.getItem() instanceof ItemArmor)
+						// reduction
+						int var = rand.nextInt(5);
+						if (var == 0)
 						{
-							NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-							int level = Experience.getLevel(nbt);
-							int experience = Experience.getExperience(nbt);
-
-							/*
-							 * Experience
-							 */
-							if (level < Reference.MAX_LEVEL)
+							if (stack.getItemDamage() == stack.getMaxDamage())
 							{
-								experience += level > 3 && rand.nextInt(3) == 0 ? 1 + rand.nextInt(3) : 1;
-								Experience.setExperience(nbt, experience);
+								stack.setItemDamage(stack.getItemDamage());
 							}
-							
-							/*
-							 * Leveling system
-							 */
-							level = Experience.getLevelsUp(player, nbt, level, experience, ItemType.ARMOR, rand);
-							Experience.setLevel(nbt, level);
-							
-							/*
-							 * Abilities
-							 */
-							if (Ability.HARDENED.hasAbility(nbt) && rand.nextInt(5) == 0)
+							else
 							{
-								attacker.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20 * ConfigHandler.hardenedAbilityDuration, 10));
+								stack.setItemDamage(stack.getItemDamage() - 1);
 							}
-
-							if (Ability.POISONED.hasAbility(nbt) && rand.nextInt(5) == 0)
+						}
+						
+						// additional durability
+						int var1 = rand.nextInt(10);
+						if (var1 == 0)
+						{
+							if (stack.getItemDamage() <= stack.getMaxDamage() && stack.getItemDamage() >= (stack.getMaxDamage() - 10))
 							{
-								attacker.addPotionEffect(new PotionEffect(Potion.poison.id, 20 * ConfigHandler.poisonedAbilityDuration, 0));
+								stack.setItemDamage(stack.getMaxDamage());
 							}
-
-							if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(ConfigHandler.strengthAbilityProbability) == 0)
+							else
 							{
-								player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20 * ConfigHandler.strengthAbilityDuration, 0));
+								stack.setItemDamage(stack.getItemDamage() - 10);
 							}
-
-							if (Ability.ETHEREAL.hasAbility(nbt) && rand.nextInt(15) == 0)
+						}
+					}
+					
+					// ancient
+					if (rarity == Rarity.ANCIENT)
+					{
+						// reduction
+						int var = rand.nextInt(10);
+						if (var < 3)
+						{
+							if (stack.getItemDamage() == stack.getMaxDamage())
 							{
-								player.setHealth(20.0F);
+								stack.setItemDamage(stack.getItemDamage());
 							}
-
-							if (Ability.VOID.hasAbility(nbt) && rand.nextInt(20) == 0)
+							else
 							{
-								attacker.setHealth(0.0F);
+								stack.setItemDamage(stack.getItemDamage() - 1);
 							}
-
-							NBTHelper.saveStackNBT(stack, nbt);
+						}
+						
+						// additional durability
+						int var1 = rand.nextInt(5);
+						if (var1 == 0)
+						{
+							if (stack.getItemDamage() <= stack.getMaxDamage() && stack.getItemDamage() >= (stack.getMaxDamage() - 10))
+							{
+								stack.setItemDamage(stack.getMaxDamage());
+							}
+							else
+							{
+								stack.setItemDamage(stack.getItemDamage() - 10);
+							}
 						}
 					}
 				}

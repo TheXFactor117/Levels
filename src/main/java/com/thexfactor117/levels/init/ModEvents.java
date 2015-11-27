@@ -1,15 +1,13 @@
 package com.thexfactor117.levels.init;
 
-import net.minecraftforge.common.MinecraftForge;
-
 import com.thexfactor117.levels.events.EventItemTooltip;
 import com.thexfactor117.levels.events.EventLivingDeath;
 import com.thexfactor117.levels.events.EventLivingHurt;
-import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.handlers.VersionChecker;
 import com.thexfactor117.levels.helpers.LogHelper;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraftforge.common.MinecraftForge;
 
 /**
  * 
@@ -28,16 +26,7 @@ public class ModEvents
 		
 		FMLCommonHandler.instance().bus().register(new VersionChecker());
 
-		if (ConfigHandler.enableDevFeatures)
-		{
-			LogHelper.info("Levels is running in a development environment. Enabling development features...");
-			// 1000 xp on mob death
-			LogHelper.info("Finished enabling development features.");
-		}
-		else
-		{
-			LogHelper.info("Levels is not in a development environment. Disabling development features.");
-		}
+		LogHelper.info("Configurations are not working right now. Development features being disabled.");
 		
 		LogHelper.info("Event registration has finished.");
 	}
