@@ -3,6 +3,7 @@ package com.thexfactor117.levels.events;
 import java.util.Random;
 
 import com.thexfactor117.levels.Reference;
+import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.Experience;
 import com.thexfactor117.levels.helpers.Rarity;
 
@@ -99,87 +100,94 @@ public class EventLivingHurt
 					// DEBUG
 					//LogHelper.info("True Damage: " + trueDamage + "   |   Modified Damage: " + event.ammount);
 					
-					// Durability boosts
-					// rare
-					if (rarity == Rarity.RARE)
+					if (ConfigHandler.enableDurability)
 					{
-						// reduction
-						int var = rand.nextInt(5);
-						if (var == 0)
+						// Durability boosts
+						// rare
+						if (rarity == Rarity.RARE)
 						{
-							if (stack.getItemDamage() == stack.getMaxDamage())
+							// reduction
+							int var = rand.nextInt(5);
+							if (var == 0)
 							{
-								stack.setItemDamage(stack.getItemDamage());
-							}
-							else
-							{
-								stack.setItemDamage(stack.getItemDamage() - 1);
-							}
-						}
-					}
-					
-					// legendary
-					if (rarity == Rarity.LEGENDARY)
-					{
-						// reduction
-						int var = rand.nextInt(5);
-						if (var == 0)
-						{
-							if (stack.getItemDamage() == stack.getMaxDamage())
-							{
-								stack.setItemDamage(stack.getItemDamage());
-							}
-							else
-							{
-								stack.setItemDamage(stack.getItemDamage() - 1);
+								if (stack.getItemDamage() == stack.getMaxDamage())
+								{
+									stack.setItemDamage(stack.getItemDamage());
+								}
+								else
+								{
+									stack.setItemDamage(stack.getItemDamage() - 1);
+								}
 							}
 						}
 						
-						// additional durability
-						int var1 = rand.nextInt(10);
-						if (var1 == 0)
+						// legendary
+						if (rarity == Rarity.LEGENDARY)
 						{
-							if (stack.getItemDamage() <= stack.getMaxDamage() && stack.getItemDamage() >= (stack.getMaxDamage() - 10))
+							// reduction
+							int var = rand.nextInt(5);
+							if (var == 0)
 							{
-								stack.setItemDamage(stack.getMaxDamage());
+								if (stack.getItemDamage() == stack.getMaxDamage())
+								{
+									stack.setItemDamage(stack.getItemDamage());
+								}
+								else
+								{
+									stack.setItemDamage(stack.getItemDamage() - 1);
+								}
 							}
-							else
+							
+							// additional durability
+							int var1 = rand.nextInt(10);
+							if (var1 == 0)
 							{
-								stack.setItemDamage(stack.getItemDamage() - 10);
-							}
-						}
-					}
-					
-					// ancient
-					if (rarity == Rarity.ANCIENT)
-					{
-						// reduction
-						int var = rand.nextInt(10);
-						if (var < 3)
-						{
-							if (stack.getItemDamage() == stack.getMaxDamage())
-							{
-								stack.setItemDamage(stack.getItemDamage());
-							}
-							else
-							{
-								stack.setItemDamage(stack.getItemDamage() - 1);
+								if (stack.getItemDamage() <= stack.getMaxDamage() && stack.getItemDamage() >= (stack.getMaxDamage() - 10))
+								{
+									stack.setItemDamage(stack.getMaxDamage());
+								}
+								else
+								{
+									stack.setItemDamage(stack.getItemDamage() - 10);
+								}
 							}
 						}
 						
-						// additional durability
-						int var1 = rand.nextInt(5);
-						if (var1 == 0)
+						// ancient
+						if (rarity == Rarity.ANCIENT)
 						{
-							if (stack.getItemDamage() <= stack.getMaxDamage() && stack.getItemDamage() >= (stack.getMaxDamage() - 10))
+							// reduction
+							int var = rand.nextInt(10);
+							if (var < 3)
 							{
-								stack.setItemDamage(stack.getMaxDamage());
+								if (stack.getItemDamage() == stack.getMaxDamage())
+								{
+									stack.setItemDamage(stack.getItemDamage());
+								}
+								else
+								{
+									stack.setItemDamage(stack.getItemDamage() - 1);
+								}
 							}
-							else
+							
+							// additional durability
+							int var1 = rand.nextInt(5);
+							if (var1 == 0)
 							{
-								stack.setItemDamage(stack.getItemDamage() - 10);
+								if (stack.getItemDamage() <= stack.getMaxDamage() && stack.getItemDamage() >= (stack.getMaxDamage() - 10))
+								{
+									stack.setItemDamage(stack.getMaxDamage());
+								}
+								else
+								{
+									stack.setItemDamage(stack.getItemDamage() - 10);
+								}
 							}
 						}
+					}
+					else
+					{
+						stack.setItemDamage(-stack.getMaxDamage());
 					}
 				}
 			}

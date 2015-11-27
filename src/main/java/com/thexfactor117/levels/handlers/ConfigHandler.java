@@ -15,6 +15,8 @@ public class ConfigHandler
 {
 	public static boolean enableDevFeatures;
 	
+	public static boolean enableDurability;
+	
 	public static int monsterBonusExp;
 	public static int animalBonusExp;
 	
@@ -47,6 +49,7 @@ public class ConfigHandler
 		config.load();
 		
 		enableDevFeatures = config.get("general", "enableDevFeatures", false, "Enable dev features. Things could go wrong; only use in test worlds.").getBoolean();
+		enableDurability = config.get("general", "enableDurability", false, "Enables durability. Weapons will eventually run out of durability.").getBoolean();
 		l2Exp = config.get("leveling", "l2Exp", 50).getInt();
 		l3Exp = config.get("leveling", "l3Exp", 125).getInt();
 		l4Exp = config.get("leveling", "l4Exp", 225).getInt();
