@@ -1,7 +1,7 @@
 package com.thexfactor117.levels.events;
 
 import com.thexfactor117.levels.Reference;
-import com.thexfactor117.levels.helpers.ExperienceHelper;
+import com.thexfactor117.levels.helpers.Experience;
 import com.thexfactor117.levels.helpers.Rarity;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -39,12 +39,12 @@ public class EventItemTooltip
 				{	
 					String exp;
 					
-					if (ExperienceHelper.getLevel(nbt) == Reference.MAX_LEVEL) exp = I18n.format("levels.experience.max");
-					else exp = ExperienceHelper.getExperience(nbt) + " / " + ExperienceHelper.getMaxLevelExp(ExperienceHelper.getLevel(nbt));
+					if (Experience.getLevel(nbt) == Reference.MAX_LEVEL) exp = I18n.format("levels.experience.max");
+					else exp = Experience.getExperience(nbt) + " / " + Experience.getMaxLevelExp(Experience.getLevel(nbt));
 					
 					event.toolTip.add("");
 					event.toolTip.add(rarity.getColor() + EnumChatFormatting.ITALIC + I18n.format("levels.rarity." + rarity.ordinal()));
-					event.toolTip.add("Level: " + ExperienceHelper.getLevel(nbt));
+					event.toolTip.add("Level: " + Experience.getLevel(nbt));
 					event.toolTip.add("Experience: " + exp);
 					event.toolTip.add("Durability: " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
 				}
@@ -54,8 +54,8 @@ public class EventItemTooltip
 					stack.setTagCompound(nbt);
 					
 					Rarity.UNKNOWN.setRarity(nbt);
-					ExperienceHelper.setExperience(nbt, 0);
-					ExperienceHelper.setLevel(nbt, 1);
+					Experience.setExperience(nbt, 0);
+					Experience.setLevel(nbt, 1);
 				}
 			}
 		}

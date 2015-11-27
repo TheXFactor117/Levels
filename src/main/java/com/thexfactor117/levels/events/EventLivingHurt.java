@@ -3,7 +3,7 @@ package com.thexfactor117.levels.events;
 import java.util.Random;
 
 import com.thexfactor117.levels.Reference;
-import com.thexfactor117.levels.helpers.ExperienceHelper;
+import com.thexfactor117.levels.helpers.Experience;
 import com.thexfactor117.levels.helpers.Rarity;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -44,22 +44,22 @@ public class EventLivingHurt
 				if (stack.getItem() instanceof ItemSword)
 				{
 					NBTTagCompound nbt = stack.getTagCompound();
-					int level = ExperienceHelper.getLevel(nbt);
-					int experience = ExperienceHelper.getExperience(nbt);
+					int level = Experience.getLevel(nbt);
+					int experience = Experience.getExperience(nbt);
 
 					/*
 					 * Experience
 					 */
 					if (level < Reference.MAX_LEVEL)
 					{
-						ExperienceHelper.setExperience(nbt, ExperienceHelper.getExperience(nbt) + 1);
+						Experience.setExperience(nbt, Experience.getExperience(nbt) + 1);
 					}
 
 					/*
 					 * Leveling system
 					 */
-					level = ExperienceHelper.getNextLevel(player, nbt, level, experience, rand);
-					ExperienceHelper.setLevel(nbt, level);
+					level = Experience.getNextLevel(player, nbt, level, experience, rand);
+					Experience.setLevel(nbt, level);
 
 					/*
 					 * Rarity
@@ -74,24 +74,24 @@ public class EventLivingHurt
 						case UNCOMMON:
 							damageMultiplier = 1.5F;
 							int var = rand.nextInt(10);
-							if (var == 0) ExperienceHelper.setExperience(nbt, ExperienceHelper.getExperience(nbt) + 1);
+							if (var == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + 1);
 							break;
 						case RARE:
 							damageMultiplier = 1.5F;
 							int var1 = rand.nextInt(4);
-							if (var1 == 0) ExperienceHelper.setExperience(nbt, ExperienceHelper.getExperience(nbt) + 1);
+							if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + 1);
 							break;
 						case LEGENDARY:
 							damageMultiplier = 2.0F;
 							int var2 = rand.nextInt(5);
 							int var3 = rand.nextInt(2) + 2;
-							if (var2 == 0) ExperienceHelper.setExperience(nbt, ExperienceHelper.getExperience(nbt) + var3);
+							if (var2 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var3);
 							break;
 						case ANCIENT:
 							damageMultiplier = 3.0F;
 							int var4 = rand.nextInt(4);
 							int var5 = rand.nextInt(3) + 3;
-							if (var4 == 0) ExperienceHelper.setExperience(nbt, ExperienceHelper.getExperience(nbt) + var5);
+							if (var4 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var5);
 							break;
 					}
 

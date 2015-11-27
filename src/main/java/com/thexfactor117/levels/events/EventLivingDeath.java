@@ -3,7 +3,7 @@ package com.thexfactor117.levels.events;
 import java.util.Random;
 
 import com.thexfactor117.levels.Reference;
-import com.thexfactor117.levels.helpers.ExperienceHelper;
+import com.thexfactor117.levels.helpers.Experience;
 import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.helpers.Rarity;
 
@@ -41,8 +41,8 @@ public class EventLivingDeath
 			{
 				NBTTagCompound nbt = stack.getTagCompound();
 				Rarity rarity = Rarity.getRarity(nbt);
-				int level = ExperienceHelper.getLevel(nbt);
-				int experience = ExperienceHelper.getExperience(nbt);
+				int level = Experience.getLevel(nbt);
+				int experience = Experience.getExperience(nbt);
 
 				/*
 				 * Rarities
@@ -62,20 +62,20 @@ public class EventLivingDeath
 				{
 					if (event.entityLiving instanceof EntityMob)
 					{
-						ExperienceHelper.setExperience(nbt, ExperienceHelper.getExperience(nbt) + Reference.MONSTER_BONUS_EXP);
+						Experience.setExperience(nbt, Experience.getExperience(nbt) + Reference.MONSTER_BONUS_EXP);
 					}
 
 					if (event.entityLiving instanceof EntityAnimal)
 					{
-						ExperienceHelper.setExperience(nbt, ExperienceHelper.getExperience(nbt) + Reference.ANIMAL_BONUS_EXP);
+						Experience.setExperience(nbt, Experience.getExperience(nbt) + Reference.ANIMAL_BONUS_EXP);
 					}
 				}
 
 				/*
 				 * Leveling system
 				 */
-				level = ExperienceHelper.getNextLevel(player, nbt, level, experience, rand);
-				ExperienceHelper.setLevel(nbt, level);
+				level = Experience.getNextLevel(player, nbt, level, experience, rand);
+				Experience.setLevel(nbt, level);
 			}
 		}
 	}

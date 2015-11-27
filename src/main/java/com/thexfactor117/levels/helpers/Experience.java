@@ -14,7 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
  * @author MrIbby
  *
  */
-public class ExperienceHelper 
+public class Experience 
 {
 	private static final String LEVEL_KEY = "LEVEL";
 	private static final String EXPERIENCE_KEY = "EXPERIENCE";
@@ -22,7 +22,7 @@ public class ExperienceHelper
 	
 	public static int getNextLevel(EntityPlayer player, NBTTagCompound nbt, int level, int experience, Random rand)
 	{
-		while (level < Reference.MAX_LEVEL && experience >= ExperienceHelper.getMaxLevelExp(level))
+		while (level < Reference.MAX_LEVEL && experience >= Experience.getMaxLevelExp(level))
 		{
 			level++;
 		}
@@ -82,24 +82,24 @@ public class ExperienceHelper
 	
 	public static void setMaxLevels()
 	{
-		ExperienceHelper.setMaxLevelExp(1, ConfigHandler.l2Exp);
-		ExperienceHelper.setMaxLevelExp(2, ConfigHandler.l3Exp);
-		ExperienceHelper.setMaxLevelExp(3, ConfigHandler.l4Exp);
-		ExperienceHelper.setMaxLevelExp(4, ConfigHandler.l5Exp);
-		ExperienceHelper.setMaxLevelExp(5, ConfigHandler.l6Exp);
-		ExperienceHelper.setMaxLevelExp(6, ConfigHandler.l7Exp);
-		ExperienceHelper.setMaxLevelExp(7, ConfigHandler.l8Exp);
-		ExperienceHelper.setMaxLevelExp(8, ConfigHandler.l9Exp);
-		ExperienceHelper.setMaxLevelExp(9, ConfigHandler.l10Exp);
-		ExperienceHelper.setMaxLevelExp(10, ConfigHandler.l11Exp);
-		ExperienceHelper.setMaxLevelExp(11, ConfigHandler.l12Exp);
-		ExperienceHelper.setMaxLevelExp(12, ConfigHandler.l13Exp);
-		ExperienceHelper.setMaxLevelExp(13, ConfigHandler.l14Exp);
-		ExperienceHelper.setMaxLevelExp(14, ConfigHandler.l15Exp);
-		ExperienceHelper.setMaxLevelExp(15, ConfigHandler.l16Exp);
-		ExperienceHelper.setMaxLevelExp(16, ConfigHandler.l17Exp);
-		ExperienceHelper.setMaxLevelExp(17, ConfigHandler.l18Exp);
-		ExperienceHelper.setMaxLevelExp(18, ConfigHandler.l19Exp);
-		ExperienceHelper.setMaxLevelExp(19, ConfigHandler.l20Exp);
+		Experience.setMaxLevelExp(1, ConfigHandler.l2Exp);
+		Experience.setMaxLevelExp(2, ConfigHandler.l3Exp);
+		Experience.setMaxLevelExp(3, ConfigHandler.l4Exp);
+		Experience.setMaxLevelExp(4, ConfigHandler.l5Exp);
+		Experience.setMaxLevelExp(5, ConfigHandler.l6Exp);
+		Experience.setMaxLevelExp(6, ConfigHandler.l7Exp);
+		Experience.setMaxLevelExp(7, ConfigHandler.l8Exp);
+		Experience.setMaxLevelExp(8, ConfigHandler.l9Exp);
+		Experience.setMaxLevelExp(9, ConfigHandler.l10Exp);
+		Experience.setMaxLevelExp(10, ConfigHandler.l11Exp);
+		Experience.setMaxLevelExp(11, ConfigHandler.l12Exp);
+		Experience.setMaxLevelExp(12, ConfigHandler.l13Exp);
+		Experience.setMaxLevelExp(13, ConfigHandler.l14Exp);
+		Experience.setMaxLevelExp(14, ConfigHandler.l15Exp);
+		Experience.setMaxLevelExp(15, ConfigHandler.l16Exp);
+		Experience.setMaxLevelExp(16, ConfigHandler.l17Exp);
+		Experience.setMaxLevelExp(17, ConfigHandler.l18Exp);
+		Experience.setMaxLevelExp(18, ConfigHandler.l19Exp);
+		Experience.setMaxLevelExp(19, ConfigHandler.l20Exp);
 	}
 }

@@ -2,7 +2,7 @@ package com.thexfactor117.levels;
 
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.handlers.VersionChecker;
-import com.thexfactor117.levels.helpers.ExperienceHelper;
+import com.thexfactor117.levels.helpers.Experience;
 import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.init.ModEvents;
 import com.thexfactor117.levels.proxies.CommonProxy;
@@ -36,7 +36,7 @@ public class Levels
 		LogHelper.info("Beginning initialization phases...");
 		
 		ConfigHandler.registerConfig(event.getModConfigurationDirectory());
-		ExperienceHelper.setMaxLevels();
+		Experience.setMaxLevels();
 		ModEvents.registerEvents();
 		
 		LogHelper.info("Levels has finished initializing.");
