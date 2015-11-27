@@ -2,6 +2,8 @@
 ### Levels Abilities ###
 ########################
 
+Temporarily disabled.
+
 ### Weapon Abilities
 * Fire - sets enemies on fire for 4 seconds.
 * Frost - enemies become frozen for 4 seconds.
