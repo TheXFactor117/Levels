@@ -13,7 +13,7 @@ import net.minecraft.util.EnumChatFormatting;
 public enum Rarity 
 {
 	UNKNOWN("", 0.0D),
-	BASIC(EnumChatFormatting.WHITE, 0.60D),
+	BASIC(EnumChatFormatting.WHITE, 0.6D),
 	UNCOMMON(EnumChatFormatting.DARK_GREEN, 0.2D),
 	RARE(EnumChatFormatting.AQUA, 0.12D),
 	LEGENDARY(EnumChatFormatting.DARK_PURPLE, 0.06D),
