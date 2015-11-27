@@ -3,8 +3,7 @@
 ##################################
 
 ### Bugs
-* [wontfix] Weapons with rarity higher than Basic loose durability in creative mode
-
+No known bugs!
 
 
 ### Incompatibilities

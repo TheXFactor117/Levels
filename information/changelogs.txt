@@ -7,6 +7,10 @@
 ####
 
 ### Release 2 - Levels Rewritten
+r2.0.2
++ Added support for grabbing items out of creative tabs.
+* Fixed issues with creative
+
 r2.0.1
 * Fixes issue with creative weapons (support will be added)
 
