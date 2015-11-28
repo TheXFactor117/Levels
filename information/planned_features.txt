@@ -28,9 +28,5 @@ r4.0.0
 ### Potential Features
 ####
 
-- Weapon Loot
-   * Weapons can now spawn in chests throughout the world, and can also drop from enemies as well. They will also drop with
-   * with a pre-determined rarity as well.
-
 - Weapon Rarities on Obtainment
    * Instead of having to kill an enemy, weapons will automatically come with a rarity.
