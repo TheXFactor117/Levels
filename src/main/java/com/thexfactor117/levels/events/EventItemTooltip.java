@@ -2,6 +2,7 @@ package com.thexfactor117.levels.events;
 
 import com.thexfactor117.levels.Reference;
 import com.thexfactor117.levels.helpers.Experience;
+import com.thexfactor117.levels.helpers.NBTHelper;
 import com.thexfactor117.levels.helpers.Rarity;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -28,8 +29,7 @@ public class EventItemTooltip
 	{
 		ItemStack stack = event.itemStack;
 		Item item = stack.getItem();
-		NBTTagCompound nbt = stack.getTagCompound();
-		Rarity rarity = Rarity.getRarity(nbt);
+		NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 
 		if (item != null)
 		{
@@ -37,6 +37,8 @@ public class EventItemTooltip
 			{
 				if (nbt != null)
 				{	
+					Rarity rarity = Rarity.getRarity(nbt);
+					
 					String exp;
 					
 					if (Experience.getLevel(nbt) == Reference.MAX_LEVEL) exp = I18n.format("levels.experience.max");
