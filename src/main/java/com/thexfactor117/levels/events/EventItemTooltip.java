@@ -1,6 +1,8 @@
 package com.thexfactor117.levels.events;
 
 import com.thexfactor117.levels.Reference;
+import com.thexfactor117.levels.helpers.Ability;
+import com.thexfactor117.levels.helpers.AbilityHelper;
 import com.thexfactor117.levels.helpers.Experience;
 import com.thexfactor117.levels.helpers.NBTHelper;
 import com.thexfactor117.levels.helpers.Rarity;
@@ -38,7 +40,7 @@ public class EventItemTooltip
 				if (nbt != null)
 				{	
 					Rarity rarity = Rarity.getRarity(nbt);
-					
+					AbilityHelper abilityHelper = AbilityHelper.ABILITIES;
 					String exp;
 					
 					if (Experience.getLevel(nbt) == Reference.MAX_LEVEL) exp = I18n.format("levels.experience.max");
@@ -49,6 +51,15 @@ public class EventItemTooltip
 					event.toolTip.add("Level: " + Experience.getLevel(nbt));
 					event.toolTip.add("Experience: " + exp);
 					event.toolTip.add("Durability: " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
+					event.toolTip.add("");
+					
+					for (Ability ability : abilityHelper.getAbilities())
+					{	
+						if (ability.hasAbility(nbt))
+						{
+							event.toolTip.add(ability.getColor() + I18n.format("levels.ability." + ability.toString().toLowerCase()));
+						}
+					}
 				}
 				else
 				{

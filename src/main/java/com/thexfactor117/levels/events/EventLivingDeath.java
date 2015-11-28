@@ -3,8 +3,8 @@ package com.thexfactor117.levels.events;
 import java.util.Random;
 
 import com.thexfactor117.levels.Reference;
+import com.thexfactor117.levels.helpers.AbilityHelper;
 import com.thexfactor117.levels.helpers.Experience;
-import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.helpers.NBTHelper;
 import com.thexfactor117.levels.helpers.Rarity;
 
@@ -37,17 +37,14 @@ public class EventLivingDeath
 			EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
 			Random rand = player.worldObj.rand;
 			ItemStack stack = player.inventory.getCurrentItem();
-			LogHelper.info("stack null check");
 			
 			if (stack != null && stack.getItem() instanceof ItemSword)
 			{
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-				LogHelper.info("nbt null check");
 				
 				if (nbt != null)
 				{
 					Rarity rarity = Rarity.getRarity(nbt);
-					LogHelper.info("Outside: " + rarity);
 					int level = Experience.getLevel(nbt);
 					int experience = Experience.getExperience(nbt);
 
@@ -57,7 +54,6 @@ public class EventLivingDeath
 					if (rarity == Rarity.UNKNOWN)
 					{
 						rarity = Rarity.getRandomRarity(rand);
-						LogHelper.info("Inside: " + rarity);
 						rarity.setRarity(nbt);
 						if (rarity == Rarity.ANCIENT) player.worldObj.playSoundAtEntity(player, "mob.enderdragon.end", 0.8F, 1.0F);
 					}
@@ -81,7 +77,7 @@ public class EventLivingDeath
 					/*
 					 * Leveling system
 					 */
-					level = Experience.getNextLevel(player, nbt, level, experience, rand);
+					level = Experience.getNextLevel(player, nbt, AbilityHelper.ABILITIES, level, experience, rand);
 					Experience.setLevel(nbt, level);
 					
 					NBTHelper.saveStackNBT(stack, nbt);

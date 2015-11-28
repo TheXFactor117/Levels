@@ -20,11 +20,33 @@ public class Experience
 	private static final String EXPERIENCE_KEY = "EXPERIENCE";
 	private static final int[] maxLevelExp = new int[Reference.MAX_LEVEL - 1];
 	
-	public static int getNextLevel(EntityPlayer player, NBTTagCompound nbt, int level, int experience, Random rand)
+	public static int getNextLevel(EntityPlayer player, NBTTagCompound nbt, AbilityHelper abilityHelper, int level, int experience, Random rand)
 	{
 		while (level < Reference.MAX_LEVEL && experience >= Experience.getMaxLevelExp(level))
 		{
 			level++;
+			
+			switch (level)
+			{
+				case 3:
+					AbilitySelection.getRandomizedAbilities(nbt, level, abilityHelper, rand);
+					break;
+				case 7:
+					AbilitySelection.getRandomizedAbilities(nbt, level, abilityHelper, rand);
+					break;
+				case 10:
+					AbilitySelection.getRandomizedAbilities(nbt, level, abilityHelper, rand);
+					break;
+				case 13:
+					AbilitySelection.getRandomizedAbilities(nbt, level, abilityHelper, rand);
+					break;
+				case 17:
+					AbilitySelection.getRandomizedAbilities(nbt, level, abilityHelper, rand);
+					break;
+				case 20:
+					AbilitySelection.getRandomizedAbilities(nbt, level, abilityHelper, rand);
+					break;
+			}
 		}
 		
 		return level;

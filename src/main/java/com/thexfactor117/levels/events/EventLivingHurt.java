@@ -4,15 +4,20 @@ import java.util.Random;
 
 import com.thexfactor117.levels.Reference;
 import com.thexfactor117.levels.handlers.ConfigHandler;
+import com.thexfactor117.levels.helpers.Ability;
+import com.thexfactor117.levels.helpers.AbilityHelper;
 import com.thexfactor117.levels.helpers.Experience;
 import com.thexfactor117.levels.helpers.NBTHelper;
 import com.thexfactor117.levels.helpers.Rarity;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 /**
@@ -39,6 +44,7 @@ public class EventLivingHurt
 		{
 			EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
 			Random rand = player.worldObj.rand;
+			EntityLivingBase enemy = event.entityLiving;
 			ItemStack stack = player.inventory.getCurrentItem();
 			
 			if (stack != null)
@@ -57,13 +63,13 @@ public class EventLivingHurt
 						 */
 						if (level < Reference.MAX_LEVEL)
 						{
-							Experience.setExperience(nbt, Experience.getExperience(nbt) + 1);
+							Experience.setExperience(nbt, Experience.getExperience(nbt) + 5000);
 						}
 
 						/*
 						 * Leveling system
 						 */
-						level = Experience.getNextLevel(player, nbt, level, experience, rand);
+						level = Experience.getNextLevel(player, nbt, AbilityHelper.ABILITIES, level, experience, rand);
 						Experience.setLevel(nbt, level);
 
 						/*
@@ -192,6 +198,51 @@ public class EventLivingHurt
 						else
 						{
 							stack.setItemDamage(-stack.getMaxDamage());
+						}
+						
+						/*
+						 * Abilities
+						 */
+						if (enemy != null)
+						{
+							if (Ability.FIRE.hasAbility(nbt)) enemy.setFire(4);
+							if (Ability.FROST.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*4, 10));
+							if (Ability.POISON.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*7, 0));
+							if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(10) == 0) player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20*5, 0));
+							if (Ability.ELEMENTAL.hasAbility(nbt))
+							{
+								int var = rand.nextInt(3);
+								if (var == 0) enemy.setFire(4);
+								if (var == 1) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*4, 10));
+								if (var == 2) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*7, 0));
+							}
+							
+							if (Ability.DARKNESS.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.addPotionEffect(new PotionEffect(Potion.blindness.id, 20*5, 0));
+							if (Ability.LIGHT.hasAbility(nbt))
+							{
+								enemy.addPotionEffect(new PotionEffect(Potion.weakness.id, 20*5, 0));
+								int var = rand.nextInt(10);
+								if (var == 0) enemy.addPotionEffect(new PotionEffect(Potion.blindness.id, 20*5, 0));
+							}
+							
+							if (Ability.BLOODLUST.hasAbility(nbt))
+							{
+								int var = rand.nextInt(10);
+								if (var == 0)
+								{
+									int var1 = rand.nextInt(10) + 1;
+									enemy.setHealth(enemy.getHealth() - var1);
+								}
+							}
+							
+							if (Ability.ETHEREAL.hasAbility(nbt) && rand.nextInt(2) == 0)
+							{
+								float health = player.getHealth() + (event.ammount / 2);
+								player.setHealth(health);
+							}
+							
+							if (Ability.STING.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.setHealth(enemy.getHealth() - 10);
+							if (Ability.VOID.hasAbility(nbt) && rand.nextInt(20) == 0) enemy.setHealth(0);
 						}
 						
 						NBTHelper.saveStackNBT(stack, nbt);
