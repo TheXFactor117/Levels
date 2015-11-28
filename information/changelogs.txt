@@ -7,6 +7,14 @@
 ####
 
 ### Release 2 - Levels Rewritten
+r2.0.4
+* Fixes issue with crafted items not getting a rarity applied.
+
+r2.0.3
++ Added Config file.
++ Weapons now do not loose durability. Can be changed in the config, if you want them to though.
++ Added weapon drops from monsters. This should work with non-vanilla monsters too.
+
 r2.0.2
 + Added support for grabbing items out of creative tabs.
 * Fixed issues with creative
