@@ -2,8 +2,6 @@
 ### Levels Abilities ###
 ########################
 
-Temporarily disabled.
-
 ### Weapon Abilities
 * Fire (Uncommon) - sets enemies on fire for 4 seconds.
 * Frost (Uncommon) - enemies become frozen for 4 seconds.
