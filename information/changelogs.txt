@@ -7,6 +7,14 @@
 ####
 
 ### Release 2 - Levels Rewritten
+r2.1.0
++ Re-added abilities!
++ Added 5 new abilities, Elemental (Rare), Darkness (Rare), Light (Rare), Bloodlust (Legendary), and Sting (Ancient).
++ Abilities now come in rarities, as aforementioned, ranging from Uncommon to Ancient.
+* Tweaked weapon rarity weights. Essentially made it easier for higher rarities besides Basic.
+* Fixes issue with language files not reading certain names.
+* Changed drop rates of swords from monsters.
+
 r2.0.4
 * Fixes issue with crafted items not getting a rarity applied.
 
