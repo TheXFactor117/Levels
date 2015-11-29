@@ -15,6 +15,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -63,7 +64,16 @@ public class EventLivingHurt
 						 */
 						if (level < Reference.MAX_LEVEL)
 						{
-							Experience.setExperience(nbt, Experience.getExperience(nbt) + 1);
+							boolean isDev = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
+							
+							if (isDev)
+							{
+								Experience.setExperience(nbt, Experience.getExperience(nbt) + 1000);
+							}
+							else
+							{
+								Experience.setExperience(nbt, Experience.getExperience(nbt) + 1);
+							}
 						}
 
 						/*
