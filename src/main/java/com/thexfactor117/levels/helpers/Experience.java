@@ -7,6 +7,8 @@ import com.thexfactor117.levels.handlers.ConfigHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 
 /**
  * 
@@ -25,26 +27,27 @@ public class Experience
 		while (level < Reference.MAX_LEVEL && experience >= Experience.getMaxLevelExp(level))
 		{
 			level++;
+			player.addChatMessage(new ChatComponentText(EnumChatFormatting.WHITE + "Your weapon has leveled up to level " + level + "!"));
 			
 			switch (level)
 			{
 				case 3:
-					AbilitySelection.getRandomizedAbilities(nbt, level, abilityHelper, rand);
+					AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
 					break;
 				case 7:
-					AbilitySelection.getRandomizedAbilities(nbt, level, abilityHelper, rand);
+					AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
 					break;
 				case 10:
-					AbilitySelection.getRandomizedAbilities(nbt, level, abilityHelper, rand);
+					AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
 					break;
 				case 13:
-					AbilitySelection.getRandomizedAbilities(nbt, level, abilityHelper, rand);
+					AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
 					break;
 				case 17:
-					AbilitySelection.getRandomizedAbilities(nbt, level, abilityHelper, rand);
+					AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
 					break;
 				case 20:
-					AbilitySelection.getRandomizedAbilities(nbt, level, abilityHelper, rand);
+					AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
 					break;
 			}
 		}

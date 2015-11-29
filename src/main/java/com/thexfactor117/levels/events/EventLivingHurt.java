@@ -63,7 +63,7 @@ public class EventLivingHurt
 						 */
 						if (level < Reference.MAX_LEVEL)
 						{
-							Experience.setExperience(nbt, Experience.getExperience(nbt) + 5000);
+							Experience.setExperience(nbt, Experience.getExperience(nbt) + 10000);
 						}
 
 						/*
@@ -159,7 +159,7 @@ public class EventLivingHurt
 									else
 									{
 										stack.setItemDamage(stack.getItemDamage() - 10);
-									}
+ 									}
 								}
 							}
 							
@@ -222,7 +222,7 @@ public class EventLivingHurt
 							{
 								enemy.addPotionEffect(new PotionEffect(Potion.weakness.id, 20*5, 0));
 								int var = rand.nextInt(10);
-								if (var == 0) enemy.addPotionEffect(new PotionEffect(Potion.blindness.id, 20*5, 0));
+								if (var == 0) enemy.addPotionEffect(new PotionEffect(Potion.blindness.id, 20*3, 0));
 							}
 							
 							if (Ability.BLOODLUST.hasAbility(nbt))

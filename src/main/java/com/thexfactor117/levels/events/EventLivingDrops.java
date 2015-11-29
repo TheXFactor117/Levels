@@ -2,7 +2,6 @@ package com.thexfactor117.levels.events;
 
 import java.util.Random;
 
-import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.helpers.WeaponType;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -26,14 +25,13 @@ public class EventLivingDrops
 			float health = event.entityLiving.getMaxHealth();
 			int var = 0;
 
-			if (health < 10.0F) var = 10;
-			if (health >= 10.0F && health < 20.0F) var = 5;
-			if (health >= 20.0F) var = 3;
+			if (health < 10.0F) var = 50;
+			if (health >= 10.0F && health < 20.0F) var = 25;
+			if (health >= 20.0F) var = 10;
 			
 			if (var != 0)
 			{
 				int var1 = rand.nextInt(var);
-				LogHelper.info("Printing var1: " + var1);
 				if (var1 == 0)
 				{
 					WeaponType weapon = WeaponType.getRandomWeaponType(rand);

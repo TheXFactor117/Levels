@@ -4,7 +4,10 @@ import java.util.Random;
 
 import com.thexfactor117.levels.Reference;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 
 /**
  * 
@@ -17,12 +20,22 @@ public class AbilitySelection
 	@SuppressWarnings("unchecked")
 	private static final RandomCollection<Integer>[] ABILITY_LEVELS = new RandomCollection[Reference.MAX_LEVEL];
 	
-	public static void getRandomizedAbilities(NBTTagCompound nbt, int level, AbilityHelper abilityHelper, Random rand)
+	public static void getRandomizedAbilities(EntityPlayer player, NBTTagCompound nbt, int level, AbilityHelper abilityHelper, Random rand)
 	{
 		if (level > 1)
 		{
 			int abilityLevel = ABILITY_LEVELS[level - 1].next(rand);
 			Ability ability = abilityHelper.getRandomAbility(abilityLevel, rand);
+			
+			if (!ability.hasAbility(nbt))
+			{
+				player.addChatMessage(new ChatComponentText(EnumChatFormatting.WHITE + "Your weapon has a new ability, " + ability.getColor() + ability.toString().toLowerCase() + EnumChatFormatting.WHITE + "!"));
+			}
+			else
+			{
+				player.addChatMessage(new ChatComponentText(EnumChatFormatting.WHITE + "Well, looks like you already have this ability..."));
+			}
+			
 			LogHelper.info(ability);
 			ability.addAbility(nbt);
 		}
