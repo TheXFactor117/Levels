@@ -53,6 +53,12 @@ public enum AbilityHelper
 		return abilities;
 	}
 	
+	/**
+	 * Grabs a randomized ability according to the weights set for each ability.
+	 * @param level
+	 * @param rand
+	 * @return
+	 */
 	public Ability getRandomAbility(int level, Random rand)
 	{
 		return abilityCollections[level - 1].next(rand);

@@ -107,9 +107,7 @@ public class EventLivingHurt
 						}
 
 						event.ammount *= damageMultiplier;
-						// DEBUG
-						//LogHelper.info("True Damage: " + trueDamage + "   |   Modified Damage: " + event.ammount);
-						
+
 						if (ConfigHandler.enableDurability)
 						{
 							// Durability boosts

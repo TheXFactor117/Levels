@@ -16,6 +16,11 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
  */
 public class EventLivingDrops 
 {	
+	/**
+	 * Called whenever an entity needs to drop items. Used to drop swords from monsters whenever
+	 * they die.
+	 * @param event
+	 */
 	@SubscribeEvent
 	public void onLivingDrop(LivingDropsEvent event)
 	{		

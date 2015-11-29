@@ -25,6 +25,10 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
  */
 public class EventItemTooltip 
 {
+	/**
+	 * Gets called whenever the tooltip for an item needs to appear.
+	 * @param event
+	 */
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void addInformation(ItemTooltipEvent event)

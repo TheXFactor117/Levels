@@ -34,26 +34,39 @@ public enum Ability
 		this.weights = weights;
 	}
 
+	/**
+	 * Returns true if the stack has the ability.
+	 * @param nbt
+	 * @return
+	 */
 	public boolean hasAbility(NBTTagCompound nbt)
 	{
 		return nbt != null && nbt.getBoolean(toString());
 	}
 	
+	/**
+	 * Adds the specified ability to the stack.
+	 * @param nbt
+	 */
 	public void addAbility(NBTTagCompound nbt)
 	{
 		nbt.setBoolean(toString(), true);
 	}
 	
+	/**
+	 * Removes the specified ability from the stack.
+	 * @param nbt
+	 */
 	public void removeAbility(NBTTagCompound nbt)
 	{
 		nbt.removeTag(toString());
 	}
-	
+
 	public String getColor()
 	{
 		return color;
 	}
-	
+
 	public Rarity getAbilityRarity()
 	{
 		return rarity;

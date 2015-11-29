@@ -20,6 +20,14 @@ public class AbilitySelection
 	@SuppressWarnings("unchecked")
 	private static final RandomCollection<Integer>[] ABILITY_LEVELS = new RandomCollection[Reference.MAX_LEVEL];
 	
+	/**
+	 * Uses AbilityHelper.getRandomAbility to set a random ability to the stack when it levels up.
+	 * @param player
+	 * @param nbt
+	 * @param level
+	 * @param abilityHelper
+	 * @param rand
+	 */
 	public static void getRandomizedAbilities(EntityPlayer player, NBTTagCompound nbt, int level, AbilityHelper abilityHelper, Random rand)
 	{
 		if (level > 1)
@@ -41,6 +49,10 @@ public class AbilitySelection
 		}
 	}
 	
+	/**
+	 * Selects an ability to be added to the stack. Depending on what level it is, the chances of getting better abilities
+	 * increases as the level increases.
+	 */
 	static
 	{
 		for (int level = 2; level <= Reference.MAX_LEVEL; level++)

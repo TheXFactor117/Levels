@@ -22,6 +22,16 @@ public class Experience
 	private static final String EXPERIENCE_KEY = "EXPERIENCE";
 	private static final int[] maxLevelExp = new int[Reference.MAX_LEVEL - 1];
 	
+	/**
+	 * Levels the stack up according to its experience values; also used to call the randomized ability methods.
+	 * @param player
+	 * @param nbt
+	 * @param abilityHelper
+	 * @param level
+	 * @param experience
+	 * @param rand
+	 * @return
+	 */
 	public static int getNextLevel(EntityPlayer player, NBTTagCompound nbt, AbilityHelper abilityHelper, int level, int experience, Random rand)
 	{
 		while (level < Reference.MAX_LEVEL && experience >= Experience.getMaxLevelExp(level))
@@ -105,6 +115,9 @@ public class Experience
 		maxLevelExp[level - 1] = maxExp;
 	}
 	
+	/**
+	 * Used to set how much experience is needed till leveling up, depending on the specified level.
+	 */
 	public static void setMaxLevels()
 	{
 		Experience.setMaxLevelExp(1, ConfigHandler.l2Exp);

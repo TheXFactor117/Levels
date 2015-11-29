@@ -25,8 +25,8 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 public class EventLivingDeath 
 {
 	/**
-	 * Called when the specifed entity dies by the specific source (the Player). Used to determine how
-	 * how much bonus experience should be given to the weapon when dealing the killing blow.
+	 * Called when the specifed entity dies by another specific source. In this case, the source
+	 * is the player.
 	 * @param event
 	 */
 	@SubscribeEvent
