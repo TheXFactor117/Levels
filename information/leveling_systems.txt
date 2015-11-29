@@ -37,7 +37,7 @@ Level 20 --> 61150
 Once you reach the max of level 20, you now will not be able to gain more experience. It will rather say "Max"
 instead.
 
-You can view the available abilities in the abilities.txt file. (will be re-implemented)
+You can view the available abilities in the abilities.txt file.
 
 
 
