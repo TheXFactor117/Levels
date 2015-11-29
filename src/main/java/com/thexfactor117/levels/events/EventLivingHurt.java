@@ -63,7 +63,7 @@ public class EventLivingHurt
 						 */
 						if (level < Reference.MAX_LEVEL)
 						{
-							Experience.setExperience(nbt, Experience.getExperience(nbt) + 10000);
+							Experience.setExperience(nbt, Experience.getExperience(nbt) + 1);
 						}
 
 						/*
