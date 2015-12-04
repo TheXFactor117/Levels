@@ -64,7 +64,7 @@ public class EventLivingHurt
 						 */
 						if (level < Reference.MAX_LEVEL)
 						{
-							boolean isDev = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
+							boolean isDev = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 							
 							if (isDev)
 							{
