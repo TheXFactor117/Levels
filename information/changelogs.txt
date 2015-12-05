@@ -7,6 +7,12 @@
 ####
 
 ### Release 2 - Levels Rewritten
+r2.1.1
++ Added chat messages for leveling up weapons and gaining new abilities.
++ Development configurations for development clients.
+* Tweaked weapon drop rates from mobs again.
+* Code documentation.
+
 r2.1.0
 + Re-added abilities!
 + Added 5 new abilities, Elemental (Rare), Darkness (Rare), Light (Rare), Bloodlust (Legendary), and Sting (Ancient).
