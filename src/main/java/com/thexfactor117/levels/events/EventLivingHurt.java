@@ -13,6 +13,8 @@ import com.thexfactor117.levels.helpers.Rarity;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.launchwrapper.Launch;
@@ -50,6 +52,9 @@ public class EventLivingHurt
 			
 			if (stack != null)
 			{
+				/*****************
+				 * MELEE WEAPONS *
+				 *****************/
 				if (stack.getItem() instanceof ItemSword)
 				{
 					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
@@ -252,6 +257,55 @@ public class EventLivingHurt
 							if (Ability.STING.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.setHealth(enemy.getHealth() - 10);
 							if (Ability.VOID.hasAbility(nbt) && rand.nextInt(20) == 0) enemy.setHealth(0);
 						}
+						
+						NBTHelper.saveStackNBT(stack, nbt);
+					}
+				}
+			}
+		}
+		
+		/********
+		 * BOWS *
+		 *******/
+		if (event.source.getSourceOfDamage() instanceof EntityArrow)
+		{
+			EntityArrow arrow = (EntityArrow) event.source.getSourceOfDamage();
+			EntityPlayer player = (EntityPlayer) arrow.shootingEntity;
+			ItemStack stack = player.inventory.getCurrentItem();
+			
+			if (stack != null)
+			{
+				if (stack.getItem() instanceof ItemBow)
+				{
+					if (stack.getItem() instanceof ItemBow)
+					{
+						NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+						
+						/*
+						 * Rarity
+						 */
+						Rarity rarity = Rarity.getRarity(nbt);
+						float damageMultiplier = 1.0F;
+						//float trueDamage = event.ammount;
+
+						// Damage boosts
+						switch (rarity)
+						{
+							case UNCOMMON:
+								damageMultiplier = 1.5F;
+								break;
+							case RARE:
+								damageMultiplier = 1.5F;
+								break;
+							case LEGENDARY:
+								damageMultiplier = 2.0F;
+								break;
+							case ANCIENT:
+								damageMultiplier = 3.0F;
+								break;
+						}
+
+						event.ammount *= damageMultiplier;
 						
 						NBTHelper.saveStackNBT(stack, nbt);
 					}

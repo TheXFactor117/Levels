@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -39,6 +40,9 @@ public class EventItemTooltip
 
 		if (item != null)
 		{
+			/*****************
+			 * MELEE WEAPONS *
+			 *****************/
 			if (item instanceof ItemSword)
 			{
 				if (nbt != null)
@@ -73,6 +77,26 @@ public class EventItemTooltip
 					Rarity.UNKNOWN.setRarity(nbt);
 					Experience.setExperience(nbt, 0);
 					Experience.setLevel(nbt, 1);
+				}
+			}
+			
+			/********
+			 * BOWS *
+			 *******/
+			if (item instanceof ItemBow)
+			{
+				if (nbt != null)
+				{
+					Rarity rarity = Rarity.getRarity(nbt);
+					
+					event.toolTip.add(rarity.getColor() + EnumChatFormatting.ITALIC + I18n.format("levels.rarity." + rarity.ordinal()));
+				}
+				else
+				{
+					nbt = new NBTTagCompound();
+					stack.setTagCompound(nbt);
+					
+					Rarity.UNKNOWN.setRarity(nbt);
 				}
 			}
 		}
