@@ -32,7 +32,10 @@ public class EventLivingDeath
 	 */
 	@SubscribeEvent
 	public void onEntityDeath(LivingDeathEvent event)
-	{
+	{	
+		/*****************
+		 * MELEE WEAPONS *
+		 *****************/
 		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
@@ -41,9 +44,6 @@ public class EventLivingDeath
 			
 			if (stack != null)
 			{
-				/*****************
-				 * MELEE WEAPONS *
-				 *****************/
 				if (stack.getItem() instanceof ItemSword)
 				{
 					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
@@ -92,6 +92,9 @@ public class EventLivingDeath
 			}
 		}
 		
+		/********
+		 * BOWS *
+		 *******/
 		if (event.source.getSourceOfDamage() instanceof EntityArrow)
 		{
 			EntityArrow arrow = (EntityArrow) event.source.getSourceOfDamage();
@@ -103,6 +106,8 @@ public class EventLivingDeath
 			{
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				Rarity rarity = Rarity.getRarity(nbt);
+				int level = Experience.getLevel(nbt);
+				int experience = Experience.getExperience(nbt);
 				
 				/*
 				 * Rarities
@@ -113,6 +118,28 @@ public class EventLivingDeath
 					rarity.setRarity(nbt);
 					if (rarity == Rarity.ANCIENT) player.worldObj.playSoundAtEntity(player, "mob.enderdragon.end", 0.8F, 1.0F);
 				}
+				
+				/*
+				 * Bow bonus experience
+				 */
+				if (level < Reference.MAX_LEVEL)
+				{
+					if (event.entityLiving instanceof EntityMob)
+					{
+						Experience.setExperience(nbt, Experience.getExperience(nbt) + Reference.MONSTER_BONUS_EXP);
+					}
+
+					if (event.entityLiving instanceof EntityAnimal)
+					{
+						Experience.setExperience(nbt, Experience.getExperience(nbt) + Reference.ANIMAL_BONUS_EXP);
+					}
+				}
+				
+				/*
+				 * Leveling experience
+				 */
+				level = Experience.getNextLevel(player, nbt, AbilityHelper.ABILITIES, level, experience, rand);
+				Experience.setLevel(nbt, level);
 				
 				NBTHelper.saveStackNBT(stack, nbt);
 			}

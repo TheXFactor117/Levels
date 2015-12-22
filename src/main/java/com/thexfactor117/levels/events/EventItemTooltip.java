@@ -88,8 +88,25 @@ public class EventItemTooltip
 				if (nbt != null)
 				{
 					Rarity rarity = Rarity.getRarity(nbt);
+					AbilityHelper abilityHelper = AbilityHelper.ABILITIES;
+					String exp;
+					
+					if (Experience.getLevel(nbt) == Reference.MAX_LEVEL) exp = I18n.format("levels.experience.max");
+					else exp = Experience.getExperience(nbt) + " / " + Experience.getMaxLevelExp(Experience.getLevel(nbt));
 					
 					event.toolTip.add(rarity.getColor() + EnumChatFormatting.ITALIC + I18n.format("levels.rarity." + rarity.ordinal()));
+					event.toolTip.add("Level: " + Experience.getLevel(nbt));
+					event.toolTip.add("Experience: " + exp);
+					event.toolTip.add("Durability: " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
+					event.toolTip.add("");
+					
+					for (Ability ability : abilityHelper.getAbilities())
+					{	
+						if (ability.hasAbility(nbt))
+						{
+							event.toolTip.add(ability.getColor() + I18n.format("levels.ability." + ability.toString().toLowerCase()));
+						}
+					}
 				}
 				else
 				{
@@ -97,6 +114,8 @@ public class EventItemTooltip
 					stack.setTagCompound(nbt);
 					
 					Rarity.UNKNOWN.setRarity(nbt);
+					Experience.setExperience(nbt, 0);
+					Experience.setLevel(nbt, 1);
 				}
 			}
 		}
