@@ -270,117 +270,121 @@ public class EventLivingHurt
 		if (event.source.getSourceOfDamage() instanceof EntityArrow)
 		{
 			EntityArrow arrow = (EntityArrow) event.source.getSourceOfDamage();
-			EntityPlayer player = (EntityPlayer) arrow.shootingEntity;
 			EntityLivingBase enemy = event.entityLiving;
-			ItemStack stack = player.inventory.getCurrentItem();
-			Random rand = player.worldObj.rand;
 			
-			if (stack != null)
+			if (arrow.shootingEntity instanceof EntityPlayer)
 			{
-				if (stack.getItem() instanceof ItemBow)
+				EntityPlayer player = (EntityPlayer) arrow.shootingEntity;
+				ItemStack stack = player.inventory.getCurrentItem();
+				Random rand = player.worldObj.rand;
+				
+				if (stack != null)
 				{
 					if (stack.getItem() instanceof ItemBow)
 					{
-						NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-						int level = Experience.getLevel(nbt);
-						int experience = Experience.getExperience(nbt);
-
-						/*
-						 * Experience
-						 */
-						if (level < Reference.MAX_LEVEL)
+						if (stack.getItem() instanceof ItemBow)
 						{
-							boolean isDev = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
-							
-							if (isDev)
-							{
-								Experience.setExperience(nbt, Experience.getExperience(nbt) + 1000);
-							}
-							else
-							{
-								Experience.setExperience(nbt, Experience.getExperience(nbt) + 1);
-							}
-						}
+							NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+							int level = Experience.getLevel(nbt);
+							int experience = Experience.getExperience(nbt);
 
-						/*
-						 * Leveling system
-						 */
-						level = Experience.getNextLevel(player, nbt, AbilityHelper.ABILITIES, level, experience, rand);
-						Experience.setLevel(nbt, level);
-						
-						/*
-						 * Rarity
-						 */
-						Rarity rarity = Rarity.getRarity(nbt);
-						float damageMultiplier = 1.0F;
-						//float trueDamage = event.ammount;
-
-						// Damage boosts
-						switch (rarity)
-						{
-							case UNCOMMON:
-								damageMultiplier = 1.5F;
-								break;
-							case RARE:
-								damageMultiplier = 1.5F;
-								break;
-							case LEGENDARY:
-								damageMultiplier = 2.0F;
-								break;
-							case ANCIENT:
-								damageMultiplier = 3.0F;
-								break;
-						}
-
-						event.ammount *= damageMultiplier;
-						stack.setItemDamage(-stack.getMaxDamage());
-						
-						/*
-						 * Abilities
-						 */
-						if (enemy != null)
-						{
-							if (Ability.FIRE.hasAbility(nbt)) enemy.setFire(4);
-							if (Ability.FROST.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*4, 10));
-							if (Ability.POISON.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*7, 0));
-							if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(10) == 0) player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20*5, 0));
-							if (Ability.ELEMENTAL.hasAbility(nbt))
+							/*
+							 * Experience
+							 */
+							if (level < Reference.MAX_LEVEL)
 							{
-								int var = rand.nextInt(3);
-								if (var == 0) enemy.setFire(4);
-								if (var == 1) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*4, 10));
-								if (var == 2) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*7, 0));
-							}
-							
-							if (Ability.DARKNESS.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.addPotionEffect(new PotionEffect(Potion.blindness.id, 20*5, 0));
-							if (Ability.LIGHT.hasAbility(nbt))
-							{
-								enemy.addPotionEffect(new PotionEffect(Potion.weakness.id, 20*5, 0));
-								int var = rand.nextInt(10);
-								if (var == 0) enemy.addPotionEffect(new PotionEffect(Potion.blindness.id, 20*3, 0));
-							}
-							
-							if (Ability.BLOODLUST.hasAbility(nbt))
-							{
-								int var = rand.nextInt(10);
-								if (var == 0)
+								boolean isDev = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
+								
+								if (isDev)
 								{
-									int var1 = rand.nextInt(10) + 1;
-									enemy.setHealth(enemy.getHealth() - var1);
+									Experience.setExperience(nbt, Experience.getExperience(nbt) + 1000);
+								}
+								else
+								{
+									Experience.setExperience(nbt, Experience.getExperience(nbt) + 1);
 								}
 							}
+
+							/*
+							 * Leveling system
+							 */
+							level = Experience.getNextLevel(player, nbt, AbilityHelper.ABILITIES, level, experience, rand);
+							Experience.setLevel(nbt, level);
 							
-							if (Ability.ETHEREAL.hasAbility(nbt) && rand.nextInt(2) == 0)
+							/*
+							 * Rarity
+							 */
+							Rarity rarity = Rarity.getRarity(nbt);
+							float damageMultiplier = 1.0F;
+							//float trueDamage = event.ammount;
+
+							// Damage boosts
+							switch (rarity)
 							{
-								float health = player.getHealth() + (event.ammount / 2);
-								player.setHealth(health);
+								case UNCOMMON:
+									damageMultiplier = 1.5F;
+									break;
+								case RARE:
+									damageMultiplier = 1.5F;
+									break;
+								case LEGENDARY:
+									damageMultiplier = 2.0F;
+									break;
+								case ANCIENT:
+									damageMultiplier = 3.0F;
+									break;
+							}
+
+							event.ammount *= damageMultiplier;
+							stack.setItemDamage(-stack.getMaxDamage());
+							
+							/*
+							 * Abilities
+							 */
+							if (enemy != null)
+							{
+								if (Ability.FIRE.hasAbility(nbt)) enemy.setFire(4);
+								if (Ability.FROST.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*4, 10));
+								if (Ability.POISON.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*7, 0));
+								if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(10) == 0) player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20*5, 0));
+								if (Ability.ELEMENTAL.hasAbility(nbt))
+								{
+									int var = rand.nextInt(3);
+									if (var == 0) enemy.setFire(4);
+									if (var == 1) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*4, 10));
+									if (var == 2) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*7, 0));
+								}
+								
+								if (Ability.DARKNESS.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.addPotionEffect(new PotionEffect(Potion.blindness.id, 20*5, 0));
+								if (Ability.LIGHT.hasAbility(nbt))
+								{
+									enemy.addPotionEffect(new PotionEffect(Potion.weakness.id, 20*5, 0));
+									int var = rand.nextInt(10);
+									if (var == 0) enemy.addPotionEffect(new PotionEffect(Potion.blindness.id, 20*3, 0));
+								}
+								
+								if (Ability.BLOODLUST.hasAbility(nbt))
+								{
+									int var = rand.nextInt(10);
+									if (var == 0)
+									{
+										int var1 = rand.nextInt(10) + 1;
+										enemy.setHealth(enemy.getHealth() - var1);
+									}
+								}
+								
+								if (Ability.ETHEREAL.hasAbility(nbt) && rand.nextInt(2) == 0)
+								{
+									float health = player.getHealth() + (event.ammount / 2);
+									player.setHealth(health);
+								}
+								
+								if (Ability.STING.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.setHealth(enemy.getHealth() - 10);
+								if (Ability.VOID.hasAbility(nbt) && rand.nextInt(20) == 0) enemy.setHealth(0);
 							}
 							
-							if (Ability.STING.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.setHealth(enemy.getHealth() - 10);
-							if (Ability.VOID.hasAbility(nbt) && rand.nextInt(20) == 0) enemy.setHealth(0);
+							NBTHelper.saveStackNBT(stack, nbt);
 						}
-						
-						NBTHelper.saveStackNBT(stack, nbt);
 					}
 				}
 			}

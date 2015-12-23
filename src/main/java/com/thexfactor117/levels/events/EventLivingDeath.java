@@ -98,50 +98,54 @@ public class EventLivingDeath
 		if (event.source.getSourceOfDamage() instanceof EntityArrow)
 		{
 			EntityArrow arrow = (EntityArrow) event.source.getSourceOfDamage();
-			EntityPlayer player = (EntityPlayer) arrow.shootingEntity;
-			Random rand = player.worldObj.rand;
-			ItemStack stack = player.inventory.getCurrentItem();
 			
-			if (stack != null)
+			if (arrow.shootingEntity instanceof EntityPlayer)
 			{
-				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-				Rarity rarity = Rarity.getRarity(nbt);
-				int level = Experience.getLevel(nbt);
-				int experience = Experience.getExperience(nbt);
+				EntityPlayer player = (EntityPlayer) arrow.shootingEntity;
+				Random rand = player.worldObj.rand;
+				ItemStack stack = player.inventory.getCurrentItem();
 				
-				/*
-				 * Rarities
-				 */
-				if (rarity == Rarity.UNKNOWN)
+				if (stack != null)
 				{
-					rarity = Rarity.getRandomRarity(rand);
-					rarity.setRarity(nbt);
-					if (rarity == Rarity.ANCIENT) player.worldObj.playSoundAtEntity(player, "mob.enderdragon.end", 0.8F, 1.0F);
-				}
-				
-				/*
-				 * Bow bonus experience
-				 */
-				if (level < Reference.MAX_LEVEL)
-				{
-					if (event.entityLiving instanceof EntityMob)
+					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+					Rarity rarity = Rarity.getRarity(nbt);
+					int level = Experience.getLevel(nbt);
+					int experience = Experience.getExperience(nbt);
+					
+					/*
+					 * Rarities
+					 */
+					if (rarity == Rarity.UNKNOWN)
 					{
-						Experience.setExperience(nbt, Experience.getExperience(nbt) + Reference.MONSTER_BONUS_EXP);
+						rarity = Rarity.getRandomRarity(rand);
+						rarity.setRarity(nbt);
+						if (rarity == Rarity.ANCIENT) player.worldObj.playSoundAtEntity(player, "mob.enderdragon.end", 0.8F, 1.0F);
 					}
+					
+					/*
+					 * Bow bonus experience
+					 */
+					if (level < Reference.MAX_LEVEL)
+					{
+						if (event.entityLiving instanceof EntityMob)
+						{
+							Experience.setExperience(nbt, Experience.getExperience(nbt) + Reference.MONSTER_BONUS_EXP);
+						}
 
-					if (event.entityLiving instanceof EntityAnimal)
-					{
-						Experience.setExperience(nbt, Experience.getExperience(nbt) + Reference.ANIMAL_BONUS_EXP);
+						if (event.entityLiving instanceof EntityAnimal)
+						{
+							Experience.setExperience(nbt, Experience.getExperience(nbt) + Reference.ANIMAL_BONUS_EXP);
+						}
 					}
+					
+					/*
+					 * Leveling experience
+					 */
+					level = Experience.getNextLevel(player, nbt, AbilityHelper.ABILITIES, level, experience, rand);
+					Experience.setLevel(nbt, level);
+					
+					NBTHelper.saveStackNBT(stack, nbt);
 				}
-				
-				/*
-				 * Leveling experience
-				 */
-				level = Experience.getNextLevel(player, nbt, AbilityHelper.ABILITIES, level, experience, rand);
-				Experience.setLevel(nbt, level);
-				
-				NBTHelper.saveStackNBT(stack, nbt);
 			}
 		}
 	}
