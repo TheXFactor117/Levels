@@ -100,23 +100,23 @@ public class EventLivingHurt
 							case UNCOMMON:
 								damageMultiplier = 1.5F;
 								int var = rand.nextInt(10);
-								if (var == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + 1);
+								if (var == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + 10);
 								break;
 							case RARE:
 								damageMultiplier = 1.5F;
 								int var1 = rand.nextInt(4);
-								if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + 1);
+								if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + 10);
 								break;
 							case LEGENDARY:
 								damageMultiplier = 2.0F;
 								int var2 = rand.nextInt(5);
-								int var3 = rand.nextInt(2) + 2;
+								int var3 = rand.nextInt(10) + 20;
 								if (var2 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var3);
 								break;
 							case ANCIENT:
 								damageMultiplier = 3.0F;
 								int var4 = rand.nextInt(4);
-								int var5 = rand.nextInt(3) + 3;
+								int var5 = rand.nextInt(20) + 30;
 								if (var4 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var5);
 								break;
 						}
