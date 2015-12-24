@@ -11,11 +11,12 @@ import com.thexfactor117.levels.helpers.WeaponType;
  */
 public enum WeaponType
 {
-	WOOD(0.3D),
-	STONE(0.25D),
-	GOLD(0.2D),
-	IRON(0.15D),
-	DIAMOND(0.1D);
+	WOOD(0.25D),
+	STONE(0.2D),
+	GOLD(0.15D),
+	IRON(0.1D),
+	DIAMOND(0.05D),
+	BOW(0.25D);
 	
 	private static final WeaponType[] WEAPONS = WeaponType.values();
 	private static final RandomCollection<WeaponType> RANDOM_WEAPON = new RandomCollection<WeaponType>();

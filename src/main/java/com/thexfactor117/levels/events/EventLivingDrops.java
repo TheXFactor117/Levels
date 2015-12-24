@@ -58,6 +58,9 @@ public class EventLivingDrops
 						case DIAMOND:
 							event.entityLiving.dropItem(Items.diamond_sword, 1);
 							break;
+						case BOW:
+							event.entityLiving.dropItem(Items.bow, 1);
+							break;
 					}
 				}
 			}
