@@ -435,7 +435,7 @@ public class EventLivingHurt
 								if (Ability.FIRE.hasAbility(nbt)) enemy.setFire(4);
 								if (Ability.FROST.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*4, 10));
 								if (Ability.POISON.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*7, 0));
-								if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(10) == 0) player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20*5, 0));
+								if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(10) == 0) player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 20*10, 0));
 								if (Ability.ELEMENTAL.hasAbility(nbt))
 								{
 									int var = rand.nextInt(3);
