@@ -6,12 +6,14 @@ import com.thexfactor117.levels.Reference;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.Ability;
 import com.thexfactor117.levels.helpers.AbilityHelper;
+import com.thexfactor117.levels.helpers.EnemyLevel;
 import com.thexfactor117.levels.helpers.Experience;
 import com.thexfactor117.levels.helpers.NBTHelper;
 import com.thexfactor117.levels.helpers.Rarity;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemBow;
@@ -473,6 +475,49 @@ public class EventLivingHurt
 							}
 							
 							NBTHelper.saveStackNBT(stack, nbt);
+						}
+					}
+				}
+			}
+		}
+		
+		/*
+		 * Entity Leveling
+		 */
+		if (event.entityLiving instanceof EntityMob)
+		{
+			EntityMob enemy = (EntityMob) event.entityLiving;
+			EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
+			Random rand = player.worldObj.rand;
+			NBTTagCompound nbt = enemy.getEntityData();
+			
+			if (nbt != null)
+			{
+				if (nbt.hasKey("ENEMY_LEVEL"))
+				{
+					EnemyLevel level = EnemyLevel.getEnemyLevel(nbt);
+					
+					if (level == EnemyLevel.ELITE)
+					{
+						int var = rand.nextInt(10);
+						int var1 = rand.nextInt(3);
+						if (var == 0)
+						{
+							if (var1 == 0) player.setFire(4);
+							if (var1 == 1) player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*5, 20));
+							if (var1 == 2) player.addPotionEffect(new PotionEffect(Potion.poison.id, 20*15, 0));
+						}
+					}
+					
+					if (level == EnemyLevel.LEGENDARY)
+					{
+						int var = rand.nextInt(5);
+						int var1 = rand.nextInt(3);
+						if (var == 0)
+						{
+							if (var1 == 0) player.setFire(5);
+							if (var1 == 1) player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*7, 20));
+							if (var1 == 2) player.addPotionEffect(new PotionEffect(Potion.poison.id, 20*20, 0));
 						}
 					}
 				}
