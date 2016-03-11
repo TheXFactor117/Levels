@@ -3,6 +3,7 @@ package com.thexfactor117.levels.events;
 import java.util.Random;
 
 import com.thexfactor117.levels.handlers.ConfigHandler;
+import com.thexfactor117.levels.handlers.ExtendedMob;
 import com.thexfactor117.levels.helpers.Ability;
 import com.thexfactor117.levels.helpers.AbilityHelper;
 import com.thexfactor117.levels.helpers.EnemyLevel;
@@ -497,7 +498,8 @@ public class EventLivingHurt
 				{
 					if (nbt.hasKey("ENEMY_LEVEL"))
 					{
-						EnemyLevel level = EnemyLevel.getEnemyLevel(nbt);
+						ExtendedMob props = ExtendedMob.get(enemy);
+						EnemyLevel level = props.getEnemyLevelFromProps();
 						
 						if (level == EnemyLevel.ELITE)
 						{

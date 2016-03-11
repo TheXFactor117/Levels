@@ -17,8 +17,12 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
  * @author TheXFactor117
  *
  */
-public class EventLivingSpawn 
+public class EventEntityJoinWorld 
 {
+	/**
+	 * Called whenever an entity is loaded into the world. Used to modify the attributes of monsters whenever they are spawned.
+	 * @param event
+	 */
 	@SubscribeEvent
 	public void onEntitySpawn(EntityJoinWorldEvent event)
 	{

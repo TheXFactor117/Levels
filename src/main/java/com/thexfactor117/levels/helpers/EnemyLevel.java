@@ -40,6 +40,11 @@ public enum EnemyLevel
 		return RANDOM_LEVELS.next(random);
 	}
 
+	/**
+	 * Returns the EnemyLevel of the entity.
+	 * @param nbt
+	 * @return
+	 */
 	public static EnemyLevel getEnemyLevel(NBTTagCompound nbt)
 	{
 		return nbt != null && nbt.hasKey("ENEMY_LEVEL") ? LEVELS[nbt.getInteger("ENEMY_LEVEL")] : DEFAULT;		

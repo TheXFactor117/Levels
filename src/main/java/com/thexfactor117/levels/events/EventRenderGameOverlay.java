@@ -26,6 +26,11 @@ public class EventRenderGameOverlay
 {
 	private final double NAME_VISION_DISTANCE = 32D;
 	
+	/**
+	 * Called whenever the mouse is hovering over an entity to determine its level. Renders the level on
+	 * the top of the screen.
+	 * @param event
+	 */
 	@SubscribeEvent
 	public void onRenderGameOverlay(RenderGameOverlayEvent.Pre event)
 	{

@@ -13,6 +13,11 @@ import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
  */
 public class EventEntityConstruction 
 {
+	/**
+	 * Event used to create the extended properties for mobs during their construction. Used to
+	 * keep track of their level.
+	 * @param event
+	 */
 	@SubscribeEvent
 	public void onEntityConstruction(EntityConstructing event)
 	{

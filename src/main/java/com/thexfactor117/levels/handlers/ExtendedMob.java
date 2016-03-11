@@ -3,11 +3,8 @@ package com.thexfactor117.levels.handlers;
 import java.util.Random;
 
 import com.thexfactor117.levels.helpers.EnemyLevel;
-import com.thexfactor117.levels.helpers.EnumAttributeModifierOperations;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -21,9 +18,14 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 public class ExtendedMob implements IExtendedEntityProperties
 {
 	public static final String EXTENDED_PROPERTIES = "ExtendedMob";
+	@SuppressWarnings("unused")
 	private final EntityMob entity;
 	private EnemyLevel level;
 	
+	/**
+	 * Constructor for the extended mob. Used to set a random level.
+	 * @param mob
+	 */
 	public ExtendedMob(EntityMob mob)
 	{
 		this.entity = mob;
@@ -39,17 +41,25 @@ public class ExtendedMob implements IExtendedEntityProperties
 				if (this.level == EnemyLevel.DEFAULT)
 				{
 					level = EnemyLevel.getRandomLevel(rand);
-					//this.setAttributeModifiers();
 				}
 			}
 		}
 	}
 	
+	/**
+	 * Registers the mob to have extended properties
+	 * @param mob
+	 */
 	public static final void register(EntityMob mob)
 	{
 		mob.registerExtendedProperties(EXTENDED_PROPERTIES, new ExtendedMob(mob));
 	}
 	
+	/**
+	 * Returns the extended mob with its properties
+	 * @param mob
+	 * @return
+	 */
 	public static final ExtendedMob get(EntityMob mob)
 	{
 		return (ExtendedMob) mob.getExtendedProperties(EXTENDED_PROPERTIES);
@@ -73,49 +83,12 @@ public class ExtendedMob implements IExtendedEntityProperties
 	@Override
 	public void init(Entity entity, World world) {}
 	
+	/**
+	 * Returns the enemy level as saved in its properties
+	 * @return
+	 */
 	public EnemyLevel getEnemyLevelFromProps()
 	{
 		return level;
-	}
-	
-	public void setAttributeModifiers()
-	{
-		if (level == EnemyLevel.WEAKENED)
-		{
-			AttributeModifier weakenedMaxHealth = new AttributeModifier("weakenedMaxHealth", -0.25D, EnumAttributeModifierOperations.ADD_PERC_VAL_TO_SUM.ordinal());
-			entity.getEntityAttribute(SharedMonsterAttributes.maxHealth).applyModifier(weakenedMaxHealth);
-			AttributeModifier weakenedDamageBoost = new AttributeModifier("weakenedDamageBoost", -0.25D, EnumAttributeModifierOperations.ADD_PERC_VAL_TO_SUM.ordinal());
-			entity.getEntityAttribute(SharedMonsterAttributes.attackDamage).applyModifier(weakenedDamageBoost);
-		}
-		
-		if (level == EnemyLevel.HARDENED)
-		{
-			AttributeModifier hardenedMaxHealth = new AttributeModifier("hardenedMaxHealth", 0.25D, EnumAttributeModifierOperations.ADD_PERC_VAL_TO_SUM.ordinal());
-			entity.getEntityAttribute(SharedMonsterAttributes.maxHealth).applyModifier(hardenedMaxHealth);
-		}
-		
-		if (level == EnemyLevel.SUPERIOR)
-		{
-			AttributeModifier superiorMaxHealth = new AttributeModifier("superiorMaxHealth", 0.3D, EnumAttributeModifierOperations.ADD_PERC_VAL_TO_SUM.ordinal());
-			entity.getEntityAttribute(SharedMonsterAttributes.maxHealth).applyModifier(superiorMaxHealth);
-			AttributeModifier superiorDamageBoost = new AttributeModifier("superiorDamageBoost", 0.25D, EnumAttributeModifierOperations.ADD_PERC_VAL_TO_SUM.ordinal());
-			entity.getEntityAttribute(SharedMonsterAttributes.attackDamage).applyModifier(superiorDamageBoost);
-		}
-		
-		if (level == EnemyLevel.ELITE)
-		{
-			AttributeModifier eliteMaxHealth = new AttributeModifier("eliteMaxHealth", 0.35D, EnumAttributeModifierOperations.ADD_PERC_VAL_TO_SUM.ordinal());
-			entity.getEntityAttribute(SharedMonsterAttributes.maxHealth).applyModifier(eliteMaxHealth);
-			AttributeModifier eliteDamageBoost = new AttributeModifier("eliteDamageBoost", 0.3D, EnumAttributeModifierOperations.ADD_PERC_VAL_TO_SUM.ordinal());
-			entity.getEntityAttribute(SharedMonsterAttributes.attackDamage).applyModifier(eliteDamageBoost);
-		}
-		
-		if (level == EnemyLevel.LEGENDARY)
-		{
-			AttributeModifier legendaryMaxHealth = new AttributeModifier("legendaryMaxHealth", 0.5D, EnumAttributeModifierOperations.ADD_PERC_VAL_TO_SUM.ordinal());
-			entity.getEntityAttribute(SharedMonsterAttributes.maxHealth).applyModifier(legendaryMaxHealth);
-			AttributeModifier legendaryDamageBoost = new AttributeModifier("legendaryDamageBoost", 0.5D, EnumAttributeModifierOperations.ADD_PERC_VAL_TO_SUM.ordinal());
-			entity.getEntityAttribute(SharedMonsterAttributes.attackDamage).applyModifier(legendaryDamageBoost);
-		}
 	}
 }
