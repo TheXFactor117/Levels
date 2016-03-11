@@ -2,7 +2,7 @@ package com.thexfactor117.levels.events;
 
 import java.util.Random;
 
-import com.thexfactor117.levels.Reference;
+import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.AbilityHelper;
 import com.thexfactor117.levels.helpers.Experience;
 import com.thexfactor117.levels.helpers.NBTHelper;
@@ -67,16 +67,16 @@ public class EventLivingDeath
 						/*
 						 * Weapon Bonus Experience
 						 */
-						if (level < Reference.MAX_LEVEL)
+						if (level < ConfigHandler.maxLevelCap)
 						{
 							if (event.entityLiving instanceof EntityMob)
 							{
-								Experience.setExperience(nbt, Experience.getExperience(nbt) + Reference.MONSTER_BONUS_EXP);
+								Experience.setExperience(nbt, Experience.getExperience(nbt) + ConfigHandler.monsterBonusExp);
 							}
 
 							if (event.entityLiving instanceof EntityAnimal)
 							{
-								Experience.setExperience(nbt, Experience.getExperience(nbt) + Reference.ANIMAL_BONUS_EXP);
+								Experience.setExperience(nbt, Experience.getExperience(nbt) + ConfigHandler.animalBonusExp);
 							}
 						}
 
@@ -125,16 +125,16 @@ public class EventLivingDeath
 					/*
 					 * Bow bonus experience
 					 */
-					if (level < Reference.MAX_LEVEL)
+					if (level < ConfigHandler.maxLevelCap)
 					{
 						if (event.entityLiving instanceof EntityMob)
 						{
-							Experience.setExperience(nbt, Experience.getExperience(nbt) + Reference.MONSTER_BONUS_EXP);
+							Experience.setExperience(nbt, Experience.getExperience(nbt) + ConfigHandler.monsterBonusExp);
 						}
 
 						if (event.entityLiving instanceof EntityAnimal)
 						{
-							Experience.setExperience(nbt, Experience.getExperience(nbt) + Reference.ANIMAL_BONUS_EXP);
+							Experience.setExperience(nbt, Experience.getExperience(nbt) + ConfigHandler.animalBonusExp);
 						}
 					}
 					

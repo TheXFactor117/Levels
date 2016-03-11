@@ -2,7 +2,6 @@ package com.thexfactor117.levels.events;
 
 import java.util.Random;
 
-import com.thexfactor117.levels.Reference;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.Ability;
 import com.thexfactor117.levels.helpers.AbilityHelper;
@@ -69,7 +68,7 @@ public class EventLivingHurt
 						/*
 						 * Experience
 						 */
-						if (level < Reference.MAX_LEVEL)
+						if (level < ConfigHandler.maxLevelCap)
 						{
 							boolean isDev = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 							
@@ -293,7 +292,7 @@ public class EventLivingHurt
 							/*
 							 * Experience
 							 */
-							if (level < Reference.MAX_LEVEL)
+							if (level < ConfigHandler.maxLevelCap)
 							{
 								boolean isDev = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 								

@@ -1,6 +1,6 @@
 package com.thexfactor117.levels.events;
 
-import com.thexfactor117.levels.Reference;
+import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.Ability;
 import com.thexfactor117.levels.helpers.AbilityHelper;
 import com.thexfactor117.levels.helpers.Experience;
@@ -51,7 +51,7 @@ public class EventItemTooltip
 					AbilityHelper abilityHelper = AbilityHelper.ABILITIES;
 					String exp;
 					
-					if (Experience.getLevel(nbt) == Reference.MAX_LEVEL) exp = I18n.format("levels.experience.max");
+					if (Experience.getLevel(nbt) == ConfigHandler.maxLevelCap) exp = I18n.format("levels.experience.max");
 					else exp = Experience.getExperience(nbt) + " / " + Experience.getMaxLevelExp(Experience.getLevel(nbt));
 					
 					event.toolTip.add("");
@@ -91,7 +91,7 @@ public class EventItemTooltip
 					AbilityHelper abilityHelper = AbilityHelper.ABILITIES;
 					String exp;
 					
-					if (Experience.getLevel(nbt) == Reference.MAX_LEVEL) exp = I18n.format("levels.experience.max");
+					if (Experience.getLevel(nbt) == ConfigHandler.maxLevelCap) exp = I18n.format("levels.experience.max");
 					else exp = Experience.getExperience(nbt) + " / " + Experience.getMaxLevelExp(Experience.getLevel(nbt));
 					
 					event.toolTip.add(rarity.getColor() + EnumChatFormatting.ITALIC + I18n.format("levels.rarity." + rarity.ordinal()));

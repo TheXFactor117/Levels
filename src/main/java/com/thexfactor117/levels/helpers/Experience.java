@@ -2,7 +2,7 @@ package com.thexfactor117.levels.helpers;
 
 import java.util.Random;
 
-import com.thexfactor117.levels.Reference;
+import com.thexfactor117.levels.handlers.ConfigHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -32,7 +32,7 @@ public class Experience
 	 */
 	public static int getNextLevel(EntityPlayer player, NBTTagCompound nbt, AbilityHelper abilityHelper, int level, int experience, Random rand)
 	{
-		while (level < Reference.MAX_LEVEL && experience >= Experience.getMaxLevelExp(level))
+		while (level < ConfigHandler.maxLevelCap && experience >= Experience.getMaxLevelExp(level))
 		{
 			level++;
 			player.addChatMessage(new ChatComponentText(EnumChatFormatting.WHITE + "Your weapon has leveled up to level " + level + "!"));

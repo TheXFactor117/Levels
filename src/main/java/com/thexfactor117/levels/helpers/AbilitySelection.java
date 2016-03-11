@@ -2,7 +2,7 @@ package com.thexfactor117.levels.helpers;
 
 import java.util.Random;
 
-import com.thexfactor117.levels.Reference;
+import com.thexfactor117.levels.handlers.ConfigHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,7 +18,7 @@ import net.minecraft.util.EnumChatFormatting;
 public class AbilitySelection 
 {
 	@SuppressWarnings("unchecked")
-	private static final RandomCollection<Integer>[] ABILITY_LEVELS = new RandomCollection[Reference.MAX_LEVEL];
+	private static final RandomCollection<Integer>[] ABILITY_LEVELS = new RandomCollection[ConfigHandler.maxLevelCap];
 	
 	/**
 	 * Uses AbilityHelper.getRandomAbility to set a random ability to the stack when it levels up.
@@ -55,7 +55,7 @@ public class AbilitySelection
 	 */
 	static
 	{
-		for (int level = 2; level <= Reference.MAX_LEVEL; level++)
+		for (int level = 2; level <= ConfigHandler.maxLevelCap; level++)
 		{
 			RandomCollection<Integer> abilityLevels = new RandomCollection<Integer>();
 			

@@ -17,9 +17,5 @@ public class Reference
 	public static final String CLIENT_PROXY = "com.thexfactor117.levels.proxies.ClientProxy";
 	public static final String UPDATE_STRING = EnumChatFormatting.GOLD + "[Levels] " + EnumChatFormatting.GRAY + StatCollector.translateToLocal("levels.update");
 	
-	public static final int MAX_LEVEL = 20;
 	public static final int MAX_ABILITY_LEVEL = 3;
-	
-	public static final int MONSTER_BONUS_EXP = 10;
-	public static final int ANIMAL_BONUS_EXP = 2;
 }
