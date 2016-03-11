@@ -42,8 +42,11 @@ public class Levels
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		MinecraftForge.EVENT_BUS.register(new EventEntityConstruction());
-		MinecraftForge.EVENT_BUS.register(new EventRenderGameOverlay());
+		if (ConfigHandler.enableEnemyLeveling)
+		{
+			MinecraftForge.EVENT_BUS.register(new EventEntityConstruction());
+			MinecraftForge.EVENT_BUS.register(new EventRenderGameOverlay());
+		}
 		
 		LogHelper.info("Entity construction and rendering events have been loaded...");
 	}

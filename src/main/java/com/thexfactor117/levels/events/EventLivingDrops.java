@@ -3,6 +3,7 @@ package com.thexfactor117.levels.events;
 import java.util.Random;
 
 import com.thexfactor117.levels.handlers.ConfigHandler;
+import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.helpers.WeaponType;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -27,6 +28,8 @@ public class EventLivingDrops
 	{		
 		if (ConfigHandler.enableMobDrops)
 		{
+			LogHelper.info("Mob Droppings enabled...");
+			
 			if (event.entityLiving instanceof EntityMob)
 			{
 				Random rand = new Random();
