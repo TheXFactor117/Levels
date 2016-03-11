@@ -40,10 +40,9 @@ public class Levels
 		LogHelper.info("Beginning initialization phases...");
 		
 		ConfigHandler.registerConfig(event.getModConfigurationDirectory());
-		Experience.setMaxLevels();
 		ModEvents.registerEvents();
 		
-		LogHelper.info("Levels has finished initializing.");
+		LogHelper.info("Configurations and core events have been loaded...");
 	}
 	
 	@EventHandler
@@ -51,6 +50,8 @@ public class Levels
 	{
 		MinecraftForge.EVENT_BUS.register(new EventEntityConstruction());
 		MinecraftForge.EVENT_BUS.register(new EventRenderGameOverlay());
+		
+		LogHelper.info("Entity construction and rendering events have been loaded...");
 	}
 	
 	@EventHandler
@@ -60,6 +61,7 @@ public class Levels
 		
 		proxy.postInit();
 		
-		LogHelper.info("VersionChecker complete.");
+		LogHelper.info("VersionChecker complete...");
+		LogHelper.info("Levels has finished initializing!");
 	}
 }

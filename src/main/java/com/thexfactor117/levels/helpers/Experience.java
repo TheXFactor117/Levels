@@ -3,7 +3,6 @@ package com.thexfactor117.levels.helpers;
 import java.util.Random;
 
 import com.thexfactor117.levels.Reference;
-import com.thexfactor117.levels.handlers.ConfigHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,7 +19,6 @@ public class Experience
 {
 	private static final String LEVEL_KEY = "LEVEL";
 	private static final String EXPERIENCE_KEY = "EXPERIENCE";
-	private static final int[] maxLevelExp = new int[Reference.MAX_LEVEL - 1];
 	
 	/**
 	 * Levels the stack up according to its experience values; also used to call the randomized ability methods.
@@ -107,37 +105,7 @@ public class Experience
 	
 	public static int getMaxLevelExp(int level)
 	{
-		return maxLevelExp[level - 1];
-	}
-	
-	public static void setMaxLevelExp(int level, int maxExp)
-	{
-		maxLevelExp[level - 1] = maxExp;
-	}
-	
-	/**
-	 * Used to set how much experience is needed till leveling up, depending on the specified level.
-	 */
-	public static void setMaxLevels()
-	{
-		Experience.setMaxLevelExp(1, ConfigHandler.l2Exp);
-		Experience.setMaxLevelExp(2, ConfigHandler.l3Exp);
-		Experience.setMaxLevelExp(3, ConfigHandler.l4Exp);
-		Experience.setMaxLevelExp(4, ConfigHandler.l5Exp);
-		Experience.setMaxLevelExp(5, ConfigHandler.l6Exp);
-		Experience.setMaxLevelExp(6, ConfigHandler.l7Exp);
-		Experience.setMaxLevelExp(7, ConfigHandler.l8Exp);
-		Experience.setMaxLevelExp(8, ConfigHandler.l9Exp);
-		Experience.setMaxLevelExp(9, ConfigHandler.l10Exp);
-		Experience.setMaxLevelExp(10, ConfigHandler.l11Exp);
-		Experience.setMaxLevelExp(11, ConfigHandler.l12Exp);
-		Experience.setMaxLevelExp(12, ConfigHandler.l13Exp);
-		Experience.setMaxLevelExp(13, ConfigHandler.l14Exp);
-		Experience.setMaxLevelExp(14, ConfigHandler.l15Exp);
-		Experience.setMaxLevelExp(15, ConfigHandler.l16Exp);
-		Experience.setMaxLevelExp(16, ConfigHandler.l17Exp);
-		Experience.setMaxLevelExp(17, ConfigHandler.l18Exp);
-		Experience.setMaxLevelExp(18, ConfigHandler.l19Exp);
-		Experience.setMaxLevelExp(19, ConfigHandler.l20Exp);
+		int maxXP = (int) Math.pow(level, 2.2) * 10;
+		return maxXP;
 	}
 }
