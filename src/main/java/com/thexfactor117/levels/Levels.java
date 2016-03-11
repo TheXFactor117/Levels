@@ -1,5 +1,7 @@
 package com.thexfactor117.levels;
 
+import com.thexfactor117.levels.events.EventEntityConstruction;
+import com.thexfactor117.levels.events.EventRenderGameOverlay;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.handlers.VersionChecker;
 import com.thexfactor117.levels.helpers.Experience;
@@ -11,9 +13,11 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.common.MinecraftForge;
 
 /**
  * 
@@ -40,6 +44,13 @@ public class Levels
 		ModEvents.registerEvents();
 		
 		LogHelper.info("Levels has finished initializing.");
+	}
+	
+	@EventHandler
+	public void init(FMLInitializationEvent event)
+	{
+		MinecraftForge.EVENT_BUS.register(new EventEntityConstruction());
+		MinecraftForge.EVENT_BUS.register(new EventRenderGameOverlay());
 	}
 	
 	@EventHandler

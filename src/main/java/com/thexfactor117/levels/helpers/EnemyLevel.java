@@ -3,7 +3,6 @@ package com.thexfactor117.levels.helpers;
 import java.util.Random;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
 
 /**
  * 
@@ -12,21 +11,22 @@ import net.minecraft.util.EnumChatFormatting;
  */
 public enum EnemyLevel 
 {
-	WEAKENED(EnumChatFormatting.GRAY, 0.25D),
-	NORMAL(EnumChatFormatting.WHITE, 0.30D),
-	HARDENED(EnumChatFormatting.DARK_GREEN, 0.20D),
-	SUPERIOR(EnumChatFormatting.AQUA, 0.15D),
-	ELITE(EnumChatFormatting.DARK_PURPLE, 0.7D),
-	LEGENDARY(EnumChatFormatting.GOLD, 0.3D);
+	DEFAULT(0xffffff, 0.0D),
+	WEAKENED(0xaaaaaa, 0.15D),
+	NORMAL(0xffffff, 0.50D),
+	HARDENED(0x00aa00, 0.15D),
+	SUPERIOR(0x55ffff, 0.1D),
+	ELITE(0xaa00aa, 0.07D),
+	LEGENDARY(0xffaa00, 0.03D);
 	
 	private static final EnemyLevel[] LEVELS = EnemyLevel.values();
 	private static final RandomCollection<EnemyLevel> RANDOM_LEVELS = new RandomCollection<EnemyLevel>();
-	private final String color;
+	private final int color;
 	private final double weight;
 	
-	EnemyLevel(Object color, double weight)
+	EnemyLevel(int color, double weight)
 	{
-		this.color = color.toString();
+		this.color = color;
 		this.weight = weight;
 	}
 	
@@ -42,7 +42,7 @@ public enum EnemyLevel
 
 	public static EnemyLevel getEnemyLevel(NBTTagCompound nbt)
 	{
-		return nbt != null && nbt.hasKey("ENEMY_LEVEL") ? LEVELS[nbt.getInteger("ENEMY_LEVEL")] : NORMAL;		
+		return nbt != null && nbt.hasKey("ENEMY_LEVEL") ? LEVELS[nbt.getInteger("ENEMY_LEVEL")] : DEFAULT;		
 	}
 	
 	public void setEnemyLevel(NBTTagCompound nbt)
@@ -53,7 +53,7 @@ public enum EnemyLevel
 		}
 	}
 	
-	public String getColor()
+	public int getColor()
 	{
 		return color;
 	}

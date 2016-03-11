@@ -487,37 +487,41 @@ public class EventLivingHurt
 		if (event.entityLiving instanceof EntityMob)
 		{
 			EntityMob enemy = (EntityMob) event.entityLiving;
-			EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
-			Random rand = player.worldObj.rand;
 			NBTTagCompound nbt = enemy.getEntityData();
 			
-			if (nbt != null)
+			if (event.source.getSourceOfDamage() instanceof EntityPlayer)
 			{
-				if (nbt.hasKey("ENEMY_LEVEL"))
+				EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
+				Random rand = player.worldObj.rand;
+				
+				if (nbt != null)
 				{
-					EnemyLevel level = EnemyLevel.getEnemyLevel(nbt);
-					
-					if (level == EnemyLevel.ELITE)
+					if (nbt.hasKey("ENEMY_LEVEL"))
 					{
-						int var = rand.nextInt(10);
-						int var1 = rand.nextInt(3);
-						if (var == 0)
+						EnemyLevel level = EnemyLevel.getEnemyLevel(nbt);
+						
+						if (level == EnemyLevel.ELITE)
 						{
-							if (var1 == 0) player.setFire(4);
-							if (var1 == 1) player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*5, 20));
-							if (var1 == 2) player.addPotionEffect(new PotionEffect(Potion.poison.id, 20*15, 0));
+							int var = rand.nextInt(10);
+							int var1 = rand.nextInt(3);
+							if (var == 0)
+							{
+								if (var1 == 0) player.setFire(4);
+								if (var1 == 1) player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*5, 20));
+								if (var1 == 2) player.addPotionEffect(new PotionEffect(Potion.poison.id, 20*15, 0));
+							}
 						}
-					}
-					
-					if (level == EnemyLevel.LEGENDARY)
-					{
-						int var = rand.nextInt(5);
-						int var1 = rand.nextInt(3);
-						if (var == 0)
+						
+						if (level == EnemyLevel.LEGENDARY)
 						{
-							if (var1 == 0) player.setFire(5);
-							if (var1 == 1) player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*7, 20));
-							if (var1 == 2) player.addPotionEffect(new PotionEffect(Potion.poison.id, 20*20, 0));
+							int var = rand.nextInt(5);
+							int var1 = rand.nextInt(3);
+							if (var == 0)
+							{
+								if (var1 == 0) player.setFire(5);
+								if (var1 == 1) player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*7, 20));
+								if (var1 == 2) player.addPotionEffect(new PotionEffect(Potion.poison.id, 20*20, 0));
+							}
 						}
 					}
 				}
