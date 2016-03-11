@@ -1,6 +1,5 @@
 package com.thexfactor117.levels.helpers;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -22,19 +21,6 @@ public class NBTHelper
 		if (!stack.hasTagCompound() && !nbt.hasNoTags())
 		{
 			stack.setTagCompound(nbt);
-		}
-	}
-	
-	public static NBTTagCompound loadEntityNBT(Entity entity)
-	{
-		return entity.getEntityData();
-	}
-
-	public static void saveEntityNBT(Entity entity, NBTTagCompound nbt)
-	{
-		if (!entity.getEntityData().hasNoTags() && !nbt.hasNoTags())
-		{
-			entity.writeToNBT(nbt);
 		}
 	}
 }
