@@ -37,27 +37,19 @@ public class Experience
 			level++;
 			player.addChatMessage(new ChatComponentText(EnumChatFormatting.WHITE + "Your weapon has leveled up to level " + level + "!"));
 			
-			switch (level)
-			{
-				case 3:
-					AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
-					break;
-				case 7:
-					AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
-					break;
-				case 10:
-					AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
-					break;
-				case 13:
-					AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
-					break;
-				case 17:
-					AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
-					break;
-				case 20:
-					AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
-					break;
-			}
+			int select1 = ConfigHandler.maxLevelCap / 6;
+			int select2 = ConfigHandler.maxLevelCap / 3;
+			int select3 = ConfigHandler.maxLevelCap / 2;
+			int select4 = (int) (ConfigHandler.maxLevelCap / 1.5);
+			int select5 = (int) (ConfigHandler.maxLevelCap / 1.2);
+			int select6 = ConfigHandler.maxLevelCap;
+			
+			if (level == select1) AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
+			if (level == select2) AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
+			if (level == select3) AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
+			if (level == select4) AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
+			if (level == select5) AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
+			if (level == select6) AbilitySelection.getRandomizedAbilities(player, nbt, level, abilityHelper, rand);
 		}
 		
 		return level;

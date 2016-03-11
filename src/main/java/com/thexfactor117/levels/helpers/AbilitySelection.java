@@ -59,38 +59,53 @@ public class AbilitySelection
 		{
 			RandomCollection<Integer> abilityLevels = new RandomCollection<Integer>();
 			
-			switch (level)
+			int select1 = ConfigHandler.maxLevelCap / 6;
+			int select2 = ConfigHandler.maxLevelCap / 3;
+			int select3 = ConfigHandler.maxLevelCap / 2;
+			int select4 = (int) (ConfigHandler.maxLevelCap / 1.5);
+			int select5 = (int) (ConfigHandler.maxLevelCap / 1.2);
+			int select6 = ConfigHandler.maxLevelCap;
+			
+			if (level == select1)
 			{
-				case 3:
-					abilityLevels.add(0.8D, 1);
-					abilityLevels.add(0.15D, 2);
-					abilityLevels.add(0.05D, 3);
-					break;
-				case 7:
-					abilityLevels.add(0.7D, 1);
-					abilityLevels.add(0.2D, 2);
-					abilityLevels.add(0.1D, 3);
-					break;
-				case 10:
-					abilityLevels.add(0.6D, 1);
-					abilityLevels.add(0.25D, 2);
-					abilityLevels.add(0.15D, 3);
-					break;
-				case 13:
-					abilityLevels.add(0.5D, 1);
-					abilityLevels.add(0.3D, 2);
-					abilityLevels.add(0.2D, 3);
-					break;
-				case 17:
-					abilityLevels.add(0.4D, 1);
-					abilityLevels.add(0.35D, 2);
-					abilityLevels.add(0.25D, 3);
-					break;
-				case 20:
-					abilityLevels.add(0.3D, 1);
-					abilityLevels.add(0.4D, 2);
-					abilityLevels.add(0.3D, 3);
-					break;
+				abilityLevels.add(0.8D, 1);
+				abilityLevels.add(0.15D, 2);
+				abilityLevels.add(0.05D, 3);
+			}
+			
+			if (level == select2)
+			{
+				abilityLevels.add(0.7D, 1);
+				abilityLevels.add(0.2D, 2);
+				abilityLevels.add(0.1D, 3);
+			}
+			
+			if (level == select3)
+			{
+				abilityLevels.add(0.6D, 1);
+				abilityLevels.add(0.25D, 2);
+				abilityLevels.add(0.15D, 3);
+			}
+			
+			if (level == select4)
+			{
+				abilityLevels.add(0.5D, 1);
+				abilityLevels.add(0.3D, 2);
+				abilityLevels.add(0.2D, 3);	
+			}
+			
+			if (level == select5)
+			{
+				abilityLevels.add(0.4D, 1);
+				abilityLevels.add(0.35D, 2);
+				abilityLevels.add(0.25D, 3);
+			}
+			
+			if (level == select6)
+			{
+				abilityLevels.add(0.3D, 1);
+				abilityLevels.add(0.4D, 2);
+				abilityLevels.add(0.3D, 3);
 			}
 			
 			ABILITY_LEVELS[level - 1] = abilityLevels;
