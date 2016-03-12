@@ -8,6 +8,7 @@ import com.thexfactor117.levels.helpers.Ability;
 import com.thexfactor117.levels.helpers.AbilityHelper;
 import com.thexfactor117.levels.helpers.EnemyLevel;
 import com.thexfactor117.levels.helpers.Experience;
+import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.helpers.NBTHelper;
 import com.thexfactor117.levels.helpers.Rarity;
 
@@ -484,47 +485,35 @@ public class EventLivingHurt
 		/*
 		 * Entity Leveling
 		 */
-		if (event.entityLiving instanceof EntityMob)
+		if (event.entityLiving instanceof EntityPlayer && event.source.getSourceOfDamage() instanceof EntityMob)
 		{
-			EntityMob enemy = (EntityMob) event.entityLiving;
-			NBTTagCompound nbt = enemy.getEntityData();
+			ExtendedMob props = ExtendedMob.get((EntityMob) event.source.getSourceOfDamage());
+			Random rand = event.entityLiving.worldObj.rand;
+			EntityPlayer player = (EntityPlayer) event.entityLiving;
+			EnemyLevel level = props.getEnemyLevelFromProps();
+			LogHelper.info("Level: " + level);
 			
-			if (event.source.getSourceOfDamage() instanceof EntityPlayer)
+			if (level == EnemyLevel.ELITE)
 			{
-				EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
-				Random rand = player.worldObj.rand;
-				
-				if (nbt != null)
+				int var = rand.nextInt(10);
+				int var1 = rand.nextInt(3);
+				if (var == 0)
 				{
-					if (nbt.hasKey("ENEMY_LEVEL"))
-					{
-						ExtendedMob props = ExtendedMob.get(enemy);
-						EnemyLevel level = props.getEnemyLevelFromProps();
-						
-						if (level == EnemyLevel.ELITE)
-						{
-							int var = rand.nextInt(10);
-							int var1 = rand.nextInt(3);
-							if (var == 0)
-							{
-								if (var1 == 0) player.setFire(4);
-								if (var1 == 1) player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*5, 20));
-								if (var1 == 2) player.addPotionEffect(new PotionEffect(Potion.poison.id, 20*15, 0));
-							}
-						}
-						
-						if (level == EnemyLevel.LEGENDARY)
-						{
-							int var = rand.nextInt(5);
-							int var1 = rand.nextInt(3);
-							if (var == 0)
-							{
-								if (var1 == 0) player.setFire(5);
-								if (var1 == 1) player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*7, 20));
-								if (var1 == 2) player.addPotionEffect(new PotionEffect(Potion.poison.id, 20*20, 0));
-							}
-						}
-					}
+					if (var1 == 0) player.setFire(4);
+					if (var1 == 1) player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*5, 20));
+					if (var1 == 2) player.addPotionEffect(new PotionEffect(Potion.poison.id, 20*15, 0));
+				}
+			}
+			
+			if (level == EnemyLevel.LEGENDARY)
+			{
+				int var = rand.nextInt(5);
+				int var1 = rand.nextInt(3);
+				if (var == 0)
+				{
+					if (var1 == 0) player.setFire(5);
+					if (var1 == 1) player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*7, 20));
+					if (var1 == 2) player.addPotionEffect(new PotionEffect(Potion.poison.id, 20*20, 0));
 				}
 			}
 		}

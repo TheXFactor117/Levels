@@ -30,20 +30,7 @@ public class ExtendedMob implements IExtendedEntityProperties
 	{
 		this.entity = mob;
 		NBTTagCompound nbt = mob.getEntityData();
-		
-		if (mob != null)
-		{
-			if (nbt != null)
-			{
-				this.level = EnemyLevel.getEnemyLevel(nbt);
-				Random rand = mob.worldObj.rand;
-				
-				if (this.level == EnemyLevel.DEFAULT)
-				{
-					level = EnemyLevel.getRandomLevel(rand);
-				}
-			}
-		}
+		this.level = EnemyLevel.getEnemyLevel(nbt);
 	}
 	
 	/**
@@ -66,18 +53,18 @@ public class ExtendedMob implements IExtendedEntityProperties
 	}
 	
 	@Override
-	public void saveNBTData(NBTTagCompound nbt)
+	public void saveNBTData(NBTTagCompound compound)
 	{
-		nbt = new NBTTagCompound();
-		level.setEnemyLevel(nbt);
-		nbt.setTag(EXTENDED_PROPERTIES, nbt);
+		NBTTagCompound nbt = new NBTTagCompound();
+		this.level.setEnemyLevel(nbt);
+		compound.setTag(EXTENDED_PROPERTIES, nbt);
 	}
 	
 	@Override
 	public void loadNBTData(NBTTagCompound compound)
 	{
 		NBTTagCompound nbt = (NBTTagCompound) compound.getTag(EXTENDED_PROPERTIES);
-		level = EnemyLevel.getEnemyLevel(nbt);
+		this.level = EnemyLevel.getEnemyLevel(nbt);
 	}
 	
 	@Override
@@ -89,6 +76,13 @@ public class ExtendedMob implements IExtendedEntityProperties
 	 */
 	public EnemyLevel getEnemyLevelFromProps()
 	{
+		Random rand = new Random();
+		
+		if (level == EnemyLevel.DEFAULT)
+		{
+			level = EnemyLevel.getRandomLevel(rand);
+		}
+		
 		return level;
 	}
 }
