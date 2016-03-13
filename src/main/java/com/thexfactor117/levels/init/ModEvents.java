@@ -1,10 +1,10 @@
 package com.thexfactor117.levels.init;
 
+import com.thexfactor117.levels.events.EventEntityJoinWorld;
 import com.thexfactor117.levels.events.EventItemTooltip;
 import com.thexfactor117.levels.events.EventLivingDeath;
 import com.thexfactor117.levels.events.EventLivingDrops;
 import com.thexfactor117.levels.events.EventLivingHurt;
-import com.thexfactor117.levels.events.EventEntityJoinWorld;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.handlers.VersionChecker;
 import com.thexfactor117.levels.helpers.LogHelper;

@@ -1,7 +1,6 @@
 package com.thexfactor117.levels;
 
 import com.thexfactor117.levels.events.EventEntityConstruction;
-import com.thexfactor117.levels.events.EventRenderGameOverlay;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.handlers.VersionChecker;
 import com.thexfactor117.levels.helpers.LogHelper;
@@ -42,11 +41,7 @@ public class Levels
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		if (ConfigHandler.enableEnemyLeveling)
-		{
-			MinecraftForge.EVENT_BUS.register(new EventEntityConstruction());
-			MinecraftForge.EVENT_BUS.register(new EventRenderGameOverlay());
-		}
+		if (ConfigHandler.enableEnemyLeveling) MinecraftForge.EVENT_BUS.register(new EventEntityConstruction());
 		
 		LogHelper.info("Entity construction and rendering events have been loaded...");
 	}
