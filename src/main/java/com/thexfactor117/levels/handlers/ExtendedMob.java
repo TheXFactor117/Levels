@@ -15,6 +15,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
  * @author TheXFactor117
  *
  */
+@Deprecated
 public class ExtendedMob implements IExtendedEntityProperties
 {
 	public static final String EXTENDED_PROPERTIES = "ExtendedMob";
@@ -49,7 +50,7 @@ public class ExtendedMob implements IExtendedEntityProperties
 	 */
 	public static final ExtendedMob get(EntityMob mob)
 	{
-		return (ExtendedMob) mob.getExtendedProperties(EXTENDED_PROPERTIES);
+		return (ExtendedMob) mob;
 	}
 	
 	@Override

@@ -9,8 +9,8 @@ import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.handlers.VersionChecker;
 import com.thexfactor117.levels.helpers.LogHelper;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 /**
  * 

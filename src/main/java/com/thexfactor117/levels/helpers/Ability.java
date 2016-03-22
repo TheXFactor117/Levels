@@ -1,7 +1,7 @@
 package com.thexfactor117.levels.helpers;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextFormatting;
 
 /**
  * 
@@ -11,17 +11,17 @@ import net.minecraft.util.EnumChatFormatting;
  */
 public enum Ability 
 {
-	FIRE(EnumChatFormatting.RED, Rarity.UNCOMMON, 0.16D, 0.13D, 0.09D),
-	FROST(EnumChatFormatting.AQUA, Rarity.UNCOMMON, 0.16D, 0.13D, 0.09D),
-	POISON(EnumChatFormatting.DARK_GREEN, Rarity.UNCOMMON, 0.17D, 0.12D, 0.09D),
-	STRENGTH(EnumChatFormatting.LIGHT_PURPLE, Rarity.UNCOMMON, 0.16D, 0.12D, 0.08D),
-	ELEMENTAL(EnumChatFormatting.GREEN, Rarity.RARE, 0.07D, 0.08D, 0.1D),
-	DARKNESS(EnumChatFormatting.DARK_GRAY, Rarity.RARE, 0.07D, 0.08D, 0.1D),
-	LIGHT(EnumChatFormatting.WHITE, Rarity.RARE, 0.06D, 0.09D, 0.1D),
-	BLOODLUST(EnumChatFormatting.DARK_RED, Rarity.LEGENDARY, 0.05D, 0.08D, 0.1D),
-	ETHEREAL(EnumChatFormatting.YELLOW, Rarity.LEGENDARY, 0.05D, 0.07D, 0.1D),
-	STING(EnumChatFormatting.GOLD, Rarity.ANCIENT, 0.03D, 0.05D, 0.08D),
-	VOID(EnumChatFormatting.DARK_GRAY, Rarity.ANCIENT, 0.02D, 0.05D, 0.07D);
+	FIRE(TextFormatting.RED, Rarity.UNCOMMON, 0.16D, 0.13D, 0.09D),
+	FROST(TextFormatting.AQUA, Rarity.UNCOMMON, 0.16D, 0.13D, 0.09D),
+	POISON(TextFormatting.DARK_GREEN, Rarity.UNCOMMON, 0.17D, 0.12D, 0.09D),
+	STRENGTH(TextFormatting.LIGHT_PURPLE, Rarity.UNCOMMON, 0.16D, 0.12D, 0.08D),
+	ELEMENTAL(TextFormatting.GREEN, Rarity.RARE, 0.07D, 0.08D, 0.1D),
+	DARKNESS(TextFormatting.DARK_GRAY, Rarity.RARE, 0.07D, 0.08D, 0.1D),
+	LIGHT(TextFormatting.WHITE, Rarity.RARE, 0.06D, 0.09D, 0.1D),
+	BLOODLUST(TextFormatting.DARK_RED, Rarity.LEGENDARY, 0.05D, 0.08D, 0.1D),
+	ETHEREAL(TextFormatting.YELLOW, Rarity.LEGENDARY, 0.05D, 0.07D, 0.1D),
+	STING(TextFormatting.GOLD, Rarity.ANCIENT, 0.03D, 0.05D, 0.08D),
+	VOID(TextFormatting.DARK_GRAY, Rarity.ANCIENT, 0.02D, 0.05D, 0.07D);
 	
 	private final String color;
 	private final Rarity rarity;

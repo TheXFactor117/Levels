@@ -11,7 +11,6 @@ import com.thexfactor117.levels.helpers.Experience;
 import com.thexfactor117.levels.helpers.NBTHelper;
 import com.thexfactor117.levels.helpers.Rarity;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +23,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * 
@@ -221,23 +221,23 @@ public class EventLivingHurt
 						if (enemy != null)
 						{
 							if (Ability.FIRE.hasAbility(nbt)) enemy.setFire(4);
-							if (Ability.FROST.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*4, 10));
-							if (Ability.POISON.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*7, 0));
-							if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(10) == 0) player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20*5, 0));
+							if (Ability.FROST.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20*4, 10));
+							if (Ability.POISON.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(19), 20*7, 0));
+							if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(10) == 0) player.addPotionEffect(new PotionEffect(Potion.getPotionById(5), 20*5, 0));
 							if (Ability.ELEMENTAL.hasAbility(nbt))
 							{
 								int var = rand.nextInt(3);
 								if (var == 0) enemy.setFire(4);
-								if (var == 1) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*4, 10));
-								if (var == 2) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*7, 0));
+								if (var == 1) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20*4, 10));
+								if (var == 2) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(19), 20*7, 0));
 							}
 							
-							if (Ability.DARKNESS.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.addPotionEffect(new PotionEffect(Potion.blindness.id, 20*5, 0));
+							if (Ability.DARKNESS.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 20*5, 0));
 							if (Ability.LIGHT.hasAbility(nbt))
 							{
-								enemy.addPotionEffect(new PotionEffect(Potion.weakness.id, 20*5, 0));
+								enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(18), 20*5, 0));
 								int var = rand.nextInt(10);
-								if (var == 0) enemy.addPotionEffect(new PotionEffect(Potion.blindness.id, 20*3, 0));
+								if (var == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 20*3, 0));
 							}
 							
 							if (Ability.BLOODLUST.hasAbility(nbt))
@@ -435,23 +435,23 @@ public class EventLivingHurt
 							if (enemy != null)
 							{
 								if (Ability.FIRE.hasAbility(nbt)) enemy.setFire(4);
-								if (Ability.FROST.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*4, 10));
-								if (Ability.POISON.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*7, 0));
-								if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(10) == 0) player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 20*10, 0));
+								if (Ability.FROST.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20*4, 10));
+								if (Ability.POISON.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(19), 20*7, 0));
+								if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(10) == 0) player.addPotionEffect(new PotionEffect(Potion.getPotionById(1), 20*10, 0));
 								if (Ability.ELEMENTAL.hasAbility(nbt))
 								{
 									int var = rand.nextInt(3);
 									if (var == 0) enemy.setFire(4);
-									if (var == 1) enemy.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*4, 10));
-									if (var == 2) enemy.addPotionEffect(new PotionEffect(Potion.poison.id, 20*7, 0));
+									if (var == 1) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20*4, 10));
+									if (var == 2) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(19), 20*7, 0));
 								}
 								
-								if (Ability.DARKNESS.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.addPotionEffect(new PotionEffect(Potion.blindness.id, 20*5, 0));
+								if (Ability.DARKNESS.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 20*5, 0));
 								if (Ability.LIGHT.hasAbility(nbt))
 								{
-									enemy.addPotionEffect(new PotionEffect(Potion.weakness.id, 20*5, 0));
+									enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(18), 20*5, 0));
 									int var = rand.nextInt(10);
-									if (var == 0) enemy.addPotionEffect(new PotionEffect(Potion.blindness.id, 20*3, 0));
+									if (var == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 20*3, 0));
 								}
 								
 								if (Ability.BLOODLUST.hasAbility(nbt))
@@ -502,8 +502,8 @@ public class EventLivingHurt
 					if (var == 0)
 					{
 						if (var1 == 0) player.setFire(4);
-						if (var1 == 1) player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*5, 20));
-						if (var1 == 2) player.addPotionEffect(new PotionEffect(Potion.poison.id, 20*15, 0));
+						if (var1 == 1) player.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20*5, 20));
+						if (var1 == 2) player.addPotionEffect(new PotionEffect(Potion.getPotionById(19), 20*15, 0));
 					}
 				}
 				
@@ -514,8 +514,8 @@ public class EventLivingHurt
 					if (var == 0)
 					{
 						if (var1 == 0) player.setFire(5);
-						if (var1 == 1) player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*7, 20));
-						if (var1 == 2) player.addPotionEffect(new PotionEffect(Potion.poison.id, 20*20, 0));
+						if (var1 == 1) player.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20*7, 20));
+						if (var1 == 2) player.addPotionEffect(new PotionEffect(Potion.getPotionById(19), 20*20, 0));
 					}
 				}
 			}

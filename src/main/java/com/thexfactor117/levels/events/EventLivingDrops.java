@@ -6,10 +6,10 @@ import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.helpers.WeaponType;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.init.Items;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * 

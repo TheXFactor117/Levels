@@ -8,15 +8,16 @@ import com.thexfactor117.levels.helpers.Experience;
 import com.thexfactor117.levels.helpers.NBTHelper;
 import com.thexfactor117.levels.helpers.Rarity;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * 
@@ -61,7 +62,7 @@ public class EventLivingDeath
 						{
 							rarity = Rarity.getRandomRarity(rand);
 							rarity.setRarity(nbt);
-							if (rarity == Rarity.ANCIENT) player.worldObj.playSoundAtEntity(player, "mob.enderdragon.end", 0.8F, 1.0F);
+							if (rarity == Rarity.ANCIENT) player.worldObj.playSound(player, player.getPosition(), SoundEvents.entity_enderdragon_death, player.getSoundCategory(), 0.8F, 1.0F);
 						}
 
 						/*
@@ -119,7 +120,7 @@ public class EventLivingDeath
 					{
 						rarity = Rarity.getRandomRarity(rand);
 						rarity.setRarity(nbt);
-						if (rarity == Rarity.ANCIENT) player.worldObj.playSoundAtEntity(player, "mob.enderdragon.end", 0.8F, 1.0F);
+						if (rarity == Rarity.ANCIENT) player.worldObj.playSound(player, player.getPosition(), SoundEvents.entity_enderdragon_death, player.getSoundCategory(), 0.8F, 1.0F);
 					}
 					
 					/*

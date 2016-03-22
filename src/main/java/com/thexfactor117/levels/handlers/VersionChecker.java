@@ -11,11 +11,11 @@ import com.thexfactor117.levels.Levels;
 import com.thexfactor117.levels.Reference;
 import com.thexfactor117.levels.helpers.LogHelper;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
-import net.minecraft.event.ClickEvent;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatStyle;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.event.ClickEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 /**
  * 
@@ -79,8 +79,8 @@ public class VersionChecker implements Runnable
     	if (event.player.worldObj.isRemote && !Levels.versionChecker.isLatestVersion() && !this.hasUpdateMessageAppeared)
     	{
     		ClickEvent versionCheckChatClickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, "http://minecraft.curseforge.com/mc-mods/235552-levels/files");
-    	    ChatStyle clickableChatStyle = new ChatStyle().setChatClickEvent(versionCheckChatClickEvent);
-    	    ChatComponentText versionWarningChatComponent = new ChatComponentText(Reference.UPDATE_STRING);
+    	    Style clickableChatStyle = new Style().setChatClickEvent(versionCheckChatClickEvent);
+    	    TextComponentString versionWarningChatComponent = new TextComponentString(Reference.UPDATE_STRING);
     	    versionWarningChatComponent.setChatStyle(clickableChatStyle);
     	    event.player.addChatMessage(versionWarningChatComponent);
     	    this.hasUpdateMessageAppeared = true;

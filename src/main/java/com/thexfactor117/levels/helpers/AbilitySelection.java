@@ -6,8 +6,8 @@ import com.thexfactor117.levels.handlers.ConfigHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 
 /**
  * 
@@ -37,11 +37,11 @@ public class AbilitySelection
 			
 			if (!ability.hasAbility(nbt))
 			{
-				player.addChatMessage(new ChatComponentText(EnumChatFormatting.WHITE + "Your weapon has a new ability, " + ability.getColor() + ability.toString().toLowerCase() + EnumChatFormatting.WHITE + "!"));
+				player.addChatMessage(new TextComponentString(TextFormatting.WHITE + "Your weapon has a new ability, " + ability.getColor() + ability.toString().toLowerCase() + TextFormatting.WHITE + "!"));
 			}
 			else
 			{
-				player.addChatMessage(new ChatComponentText(EnumChatFormatting.WHITE + "Well, looks like you already have this ability..."));
+				player.addChatMessage(new TextComponentString(TextFormatting.WHITE + "Well, looks like you already have this ability..."));
 			}
 			
 			LogHelper.info(ability);
