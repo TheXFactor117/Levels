@@ -26,11 +26,11 @@ public class EventEntityJoinWorld
 	@net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 	public void onEntitySpawn(EntityJoinWorldEvent event)
 	{
-		if (event.entity instanceof EntityMob)
+		if (event.getEntity() instanceof EntityMob)
 		{			
-			if (!event.entity.worldObj.isRemote)
+			if (!event.getEntity().worldObj.isRemote)
 			{
-				EntityMob entity = (EntityMob) event.entity;
+				EntityMob entity = (EntityMob) event.getEntity();
 				ExtendedMob props = ExtendedMob.get(entity);
 				EnemyLevel level = props.getEnemyLevelFromProps();
 				

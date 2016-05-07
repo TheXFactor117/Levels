@@ -11,3 +11,6 @@
 /eula.txt
 /logs
 /server.properties
+/Levels_Client.launch
+/Levels_Server.launch
+/.gitignore

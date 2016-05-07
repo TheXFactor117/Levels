@@ -34,7 +34,7 @@ public class EventItemTooltip
 	@SubscribeEvent
 	public void addInformation(ItemTooltipEvent event)
 	{
-		ItemStack stack = event.itemStack;
+		ItemStack stack = event.getItemStack();
 		Item item = stack.getItem();
 		NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 
@@ -54,18 +54,18 @@ public class EventItemTooltip
 					if (Experience.getLevel(nbt) == ConfigHandler.maxLevelCap) exp = I18n.format("levels.experience.max");
 					else exp = Experience.getExperience(nbt) + " / " + Experience.getMaxLevelExp(Experience.getLevel(nbt));
 					
-					event.toolTip.add("");
-					event.toolTip.add(rarity.getColor() + TextFormatting.ITALIC + I18n.format("levels.rarity." + rarity.ordinal()));
-					event.toolTip.add("Level: " + Experience.getLevel(nbt));
-					event.toolTip.add("Experience: " + exp);
-					event.toolTip.add("Durability: " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
-					event.toolTip.add("");
+					event.getToolTip().add("");
+					event.getToolTip().add(rarity.getColor() + TextFormatting.ITALIC + I18n.format("levels.rarity." + rarity.ordinal()));
+					event.getToolTip().add("Level: " + Experience.getLevel(nbt));
+					event.getToolTip().add("Experience: " + exp);
+					event.getToolTip().add("Durability: " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
+					event.getToolTip().add("");
 					
 					for (Ability ability : abilityHelper.getAbilities())
 					{	
 						if (ability.hasAbility(nbt))
 						{
-							event.toolTip.add(ability.getColor() + I18n.format("levels.ability." + ability.toString().toLowerCase()));
+							event.getToolTip().add(ability.getColor() + I18n.format("levels.ability." + ability.toString().toLowerCase()));
 						}
 					}
 				}
@@ -94,17 +94,17 @@ public class EventItemTooltip
 					if (Experience.getLevel(nbt) == ConfigHandler.maxLevelCap) exp = I18n.format("levels.experience.max");
 					else exp = Experience.getExperience(nbt) + " / " + Experience.getMaxLevelExp(Experience.getLevel(nbt));
 					
-					event.toolTip.add(rarity.getColor() + TextFormatting.ITALIC + I18n.format("levels.rarity." + rarity.ordinal()));
-					event.toolTip.add("Level: " + Experience.getLevel(nbt));
-					event.toolTip.add("Experience: " + exp);
-					event.toolTip.add("Durability: " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
-					event.toolTip.add("");
+					event.getToolTip().add(rarity.getColor() + TextFormatting.ITALIC + I18n.format("levels.rarity." + rarity.ordinal()));
+					event.getToolTip().add("Level: " + Experience.getLevel(nbt));
+					event.getToolTip().add("Experience: " + exp);
+					event.getToolTip().add("Durability: " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
+					event.getToolTip().add("");
 					
 					for (Ability ability : abilityHelper.getAbilities())
 					{	
 						if (ability.hasAbility(nbt))
 						{
-							event.toolTip.add(ability.getColor() + I18n.format("levels.ability." + ability.toString().toLowerCase()));
+							event.getToolTip().add(ability.getColor() + I18n.format("levels.ability." + ability.toString().toLowerCase()));
 						}
 					}
 				}
