@@ -6,6 +6,7 @@ import com.thexfactor117.levels.handlers.ConfigHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 
 /**
@@ -34,7 +35,7 @@ public class Experience
 		while (level < ConfigHandler.maxLevelCap && experience >= Experience.getMaxLevelExp(level))
 		{
 			level++;
-			player.addChatMessage(new ChatComponentText(TextFormatting.WHITE + "Your weapon has leveled up to level " + level + "!"));
+			player.addChatMessage(new TextComponentString(TextFormatting.WHITE + "Your weapon has leveled up to level " + level + "!"));
 			
 			int select1 = ConfigHandler.maxLevelCap / 6;
 			int select2 = ConfigHandler.maxLevelCap / 3;

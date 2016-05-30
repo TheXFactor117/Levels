@@ -1,6 +1,5 @@
 package com.thexfactor117.levels.init;
 
-import com.thexfactor117.levels.events.EventEntityJoinWorld;
 import com.thexfactor117.levels.events.EventItemTooltip;
 import com.thexfactor117.levels.events.EventLivingDeath;
 import com.thexfactor117.levels.events.EventLivingDrops;
@@ -19,6 +18,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
  */
 public class ModEvents 
 {
+	@SuppressWarnings("deprecation")
 	public static void registerEvents()
 	{
 		LogHelper.info("Registering events...");
@@ -32,12 +32,6 @@ public class ModEvents
 		}
 		
 		MinecraftForge.EVENT_BUS.register(new EventLivingDrops());
-		
-		if (ConfigHandler.enableEnemyLeveling) 
-		{
-			LogHelper.info("Enemy Leveling system activating...");
-			MinecraftForge.EVENT_BUS.register(new EventEntityJoinWorld());
-		}
 		
 		if (ConfigHandler.enableVersionChecker)
 		{

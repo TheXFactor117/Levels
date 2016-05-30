@@ -3,7 +3,6 @@ package com.thexfactor117.levels.events;
 import java.util.Random;
 
 import com.thexfactor117.levels.handlers.ConfigHandler;
-import com.thexfactor117.levels.handlers.ExtendedMob;
 import com.thexfactor117.levels.helpers.Ability;
 import com.thexfactor117.levels.helpers.AbilityHelper;
 import com.thexfactor117.levels.helpers.EnemyLevel;
@@ -45,11 +44,11 @@ public class EventLivingHurt
 		 * WEAPONS
 		 *
 		 */
-		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
+		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
+			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
 			Random rand = player.worldObj.rand;
-			EntityLivingBase enemy = event.entityLiving;
+			EntityLivingBase enemy = event.getEntityLiving();
 			ItemStack stack = player.inventory.getCurrentItem();
 			
 			if (stack != null)
@@ -123,7 +122,8 @@ public class EventLivingHurt
 								break;
 						}
 
-						event.ammount *= damageMultiplier;
+						float amount = event.getAmount();
+						event.setAmount(amount *= damageMultiplier);
 
 						if (ConfigHandler.enableDurability)
 						{
@@ -252,7 +252,7 @@ public class EventLivingHurt
 							
 							if (Ability.ETHEREAL.hasAbility(nbt) && rand.nextInt(2) == 0)
 							{
-								float health = player.getHealth() + (event.ammount / 2);
+								float health = player.getHealth() + (event.getAmount() / 2);
 								player.setHealth(health);
 							}
 							
@@ -269,10 +269,10 @@ public class EventLivingHurt
 		/********
 		 * BOWS *
 		 *******/
-		if (event.source.getSourceOfDamage() instanceof EntityArrow)
+		if (event.getSource().getSourceOfDamage() instanceof EntityArrow)
 		{
-			EntityArrow arrow = (EntityArrow) event.source.getSourceOfDamage();
-			EntityLivingBase enemy = event.entityLiving;
+			EntityArrow arrow = (EntityArrow) event.getSource().getSourceOfDamage();
+			EntityLivingBase enemy = event.getEntityLiving();
 			
 			if (arrow.shootingEntity instanceof EntityPlayer)
 			{
@@ -337,7 +337,8 @@ public class EventLivingHurt
 									break;
 							}
 
-							event.ammount *= damageMultiplier;
+							float amount = event.getAmount();
+							event.setAmount(amount *= damageMultiplier);
 							
 							if (ConfigHandler.enableDurability)
 							{
@@ -466,7 +467,7 @@ public class EventLivingHurt
 								
 								if (Ability.ETHEREAL.hasAbility(nbt) && rand.nextInt(2) == 0)
 								{
-									float health = player.getHealth() + (event.ammount / 2);
+									float health = player.getHealth() + (event.getAmount() / 2);
 									player.setHealth(health);
 								}
 								
@@ -484,18 +485,20 @@ public class EventLivingHurt
 		/*
 		 * Entity Leveling
 		 */
-		if (event.entityLiving instanceof EntityPlayer && event.source.getSourceOfDamage() instanceof EntityMob)
+		if (event.getEntityLiving() instanceof EntityPlayer && event.getSource().getSourceOfDamage() instanceof EntityMob)
 		{
-			Random rand = event.entityLiving.worldObj.rand;
-			EntityPlayer player = (EntityPlayer) event.entityLiving;
-			EntityMob mob = (EntityMob) event.source.getSourceOfDamage();
+			Random rand = event.getEntityLiving().worldObj.rand;
+			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+			EntityMob mob = (EntityMob) event.getSource().getSourceOfDamage();
 			
 			if (!mob.worldObj.isRemote)
 			{
-				ExtendedMob props = ExtendedMob.get(mob);
-				EnemyLevel level = props.getEnemyLevelFromProps();
+				NBTTagCompound nbt = mob.getEntityData();
+				mob.readFromNBT(nbt);
+				EnemyLevel enemyLevel = EnemyLevel.getEnemyLevel(nbt);
+				int level = enemyLevel.ordinal();
 
-				if (level == EnemyLevel.ELITE)
+				if (level == 5)
 				{
 					int var = rand.nextInt(10);
 					int var1 = rand.nextInt(3);
@@ -507,7 +510,7 @@ public class EventLivingHurt
 					}
 				}
 				
-				if (level == EnemyLevel.LEGENDARY)
+				if (level == 6)
 				{
 					int var = rand.nextInt(5);
 					int var1 = rand.nextInt(3);

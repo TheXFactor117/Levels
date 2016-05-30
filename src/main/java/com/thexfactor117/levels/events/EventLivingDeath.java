@@ -37,9 +37,9 @@ public class EventLivingDeath
 		/*****************
 		 * MELEE WEAPONS *
 		 *****************/
-		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
+		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
+			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
 			Random rand = player.worldObj.rand;
 			ItemStack stack = player.inventory.getCurrentItem();
 			
@@ -62,7 +62,7 @@ public class EventLivingDeath
 						{
 							rarity = Rarity.getRandomRarity(rand);
 							rarity.setRarity(nbt);
-							if (rarity == Rarity.ANCIENT) player.worldObj.playSound(player, player.getPosition(), SoundEvents.entity_enderdragon_death, player.getSoundCategory(), 0.8F, 1.0F);
+							if (rarity == Rarity.ANCIENT) player.worldObj.playSound(player, player.getPosition(), SoundEvents.ENTITY_ENDERDRAGON_DEATH, player.getSoundCategory(), 0.8F, 1.0F);
 						}
 
 						/*
@@ -70,12 +70,12 @@ public class EventLivingDeath
 						 */
 						if (level < ConfigHandler.maxLevelCap)
 						{
-							if (event.entityLiving instanceof EntityMob)
+							if (event.getEntityLiving() instanceof EntityMob)
 							{
 								Experience.setExperience(nbt, Experience.getExperience(nbt) + ConfigHandler.monsterBonusExp);
 							}
 
-							if (event.entityLiving instanceof EntityAnimal)
+							if (event.getEntityLiving() instanceof EntityAnimal)
 							{
 								Experience.setExperience(nbt, Experience.getExperience(nbt) + ConfigHandler.animalBonusExp);
 							}
@@ -96,9 +96,9 @@ public class EventLivingDeath
 		/********
 		 * BOWS *
 		 *******/
-		if (event.source.getSourceOfDamage() instanceof EntityArrow)
+		if (event.getSource().getSourceOfDamage() instanceof EntityArrow)
 		{
-			EntityArrow arrow = (EntityArrow) event.source.getSourceOfDamage();
+			EntityArrow arrow = (EntityArrow) event.getSource().getSourceOfDamage();
 			
 			if (arrow.shootingEntity instanceof EntityPlayer)
 			{
@@ -120,7 +120,7 @@ public class EventLivingDeath
 					{
 						rarity = Rarity.getRandomRarity(rand);
 						rarity.setRarity(nbt);
-						if (rarity == Rarity.ANCIENT) player.worldObj.playSound(player, player.getPosition(), SoundEvents.entity_enderdragon_death, player.getSoundCategory(), 0.8F, 1.0F);
+						if (rarity == Rarity.ANCIENT) player.worldObj.playSound(player, player.getPosition(), SoundEvents.ENTITY_ENDERDRAGON_DEATH, player.getSoundCategory(), 0.8F, 1.0F);
 					}
 					
 					/*
@@ -128,12 +128,12 @@ public class EventLivingDeath
 					 */
 					if (level < ConfigHandler.maxLevelCap)
 					{
-						if (event.entityLiving instanceof EntityMob)
+						if (event.getEntityLiving() instanceof EntityMob)
 						{
 							Experience.setExperience(nbt, Experience.getExperience(nbt) + ConfigHandler.monsterBonusExp);
 						}
 
-						if (event.entityLiving instanceof EntityAnimal)
+						if (event.getEntityLiving() instanceof EntityAnimal)
 						{
 							Experience.setExperience(nbt, Experience.getExperience(nbt) + ConfigHandler.animalBonusExp);
 						}

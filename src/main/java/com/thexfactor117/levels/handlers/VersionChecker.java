@@ -79,9 +79,9 @@ public class VersionChecker implements Runnable
     	if (event.player.worldObj.isRemote && !Levels.versionChecker.isLatestVersion() && !this.hasUpdateMessageAppeared)
     	{
     		ClickEvent versionCheckChatClickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, "http://minecraft.curseforge.com/mc-mods/235552-levels/files");
-    	    Style clickableChatStyle = new Style().setChatClickEvent(versionCheckChatClickEvent);
+    	    Style clickableChatStyle = new Style().setClickEvent(versionCheckChatClickEvent);
     	    TextComponentString versionWarningChatComponent = new TextComponentString(Reference.UPDATE_STRING);
-    	    versionWarningChatComponent.setChatStyle(clickableChatStyle);
+    	    versionWarningChatComponent.setStyle(clickableChatStyle);
     	    event.player.addChatMessage(versionWarningChatComponent);
     	    this.hasUpdateMessageAppeared = true;
     	}

@@ -1,13 +1,11 @@
 package com.thexfactor117.levels;
 
-import com.thexfactor117.levels.events.EventEntityConstruction;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.handlers.VersionChecker;
 import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.init.ModEvents;
 import com.thexfactor117.levels.proxies.CommonProxy;
 
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -34,16 +32,13 @@ public class Levels
 		
 		ConfigHandler.registerConfig(event.getModConfigurationDirectory());
 		ModEvents.registerEvents();
-		//CapabilityManager.INSTANCE.register(IEnemyLevel.class, DrafterStorage.drafterStorage, EnemyLevelCapability.class);
 		
 		LogHelper.info("Configurations and core events have been loaded...");
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event)
-	{
-		if (ConfigHandler.enableEnemyLeveling) MinecraftForge.EVENT_BUS.register(new EventEntityConstruction());
-		
+	{		
 		LogHelper.info("Entity construction and rendering events have been loaded...");
 	}
 	
