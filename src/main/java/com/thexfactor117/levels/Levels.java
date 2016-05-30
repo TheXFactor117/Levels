@@ -37,10 +37,7 @@ public class Levels
 	}
 	
 	@EventHandler
-	public void init(FMLInitializationEvent event)
-	{		
-		LogHelper.info("Entity construction and rendering events have been loaded...");
-	}
+	public void init(FMLInitializationEvent event) {}
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)

@@ -23,7 +23,7 @@ public class ModEvents
 	{
 		LogHelper.info("Registering events...");
 
-		if (ConfigHandler.enableEnemyLeveling)
+		if (ConfigHandler.enableWeaponLeveling)
 		{
 			LogHelper.info("Weapon Leveling system activating...");
 			MinecraftForge.EVENT_BUS.register(new EventLivingHurt());

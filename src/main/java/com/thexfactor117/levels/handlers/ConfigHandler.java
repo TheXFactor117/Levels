@@ -15,7 +15,7 @@ public class ConfigHandler
 {
 	public static boolean enableDevFeatures;
 	public static boolean enableWeaponLeveling;
-	public static boolean enableEnemyLeveling;
+	//public static boolean enableEnemyLeveling;
 	public static boolean enableDurability;
 	public static boolean enableMobDrops;
 	public static boolean enableVersionChecker;
@@ -23,8 +23,7 @@ public class ConfigHandler
 	public static int monsterBonusExp;
 	public static int animalBonusExp;
 	
-	//enemy leveling
-	public static double weakMaxHealth;
+	/*public static double weakMaxHealth;
 	public static double weakDamage;
 	public static double hardenedMaxHealth;
 	public static double superiorMaxHealth;
@@ -32,7 +31,7 @@ public class ConfigHandler
 	public static double eliteMaxHealth;
 	public static double eliteDamage;
 	public static double legendaryMaxHealth;
-	public static double legendaryDamage;
+	public static double legendaryDamage;*/
 	
 	public static void registerConfig(File file)
 	{
@@ -44,7 +43,7 @@ public class ConfigHandler
 		
 		enableDevFeatures = config.get("general", "enableDevFeatures", false, "Enable dev features. Things could go wrong; only use in test worlds. Default false").getBoolean();
 		enableWeaponLeveling = config.get("general", "enableWeaponLeveling", true, "Enables the weapon leveling system. Default true").getBoolean();
-		enableEnemyLeveling = config.get("general", "enableEnemyLeveling", true, "Enables the enemy leveling system. Default true").getBoolean();
+		//enableEnemyLeveling = config.get("general", "enableEnemyLeveling", true, "Enables the enemy leveling system. Default true").getBoolean();
 		enableDurability = config.get("general", "enableDurability", false, "Enables durability. Weapons will eventually run out of durability. Default false").getBoolean();
 		enableMobDrops = config.get("general", "enableMobDrops", true, "Enables mob drops. Mobs will now randomly drop weapons and armor. Default true").getBoolean();
 		enableVersionChecker = config.get("general", "enableVersionChecker", true, "Enables the version checker. It is not recommneded to make this false. Default true").getBoolean();
@@ -53,7 +52,7 @@ public class ConfigHandler
 		animalBonusExp = config.get("leveling", "animalBonusExp", 2, "Determines the extra amount of experience for killing an animal. Default 2").getInt();
 		
 		//enemy leveling
-		weakMaxHealth = config.get("enemy leveling", "weakendMaxHealth", -10D, "Determines the weakened entity health. The new value works like this: (default max health) - (this value) = new max health. Default -10D").getDouble();
+		/*weakMaxHealth = config.get("enemy leveling", "weakendMaxHealth", -10D, "Determines the weakened entity health. The new value works like this: (default max health) - (this value) = new max health. Default -10D").getDouble();
 		weakDamage = config.get("enemy leveling", "weakenedDamageBoost", -2D, "Determines the weakened entity damage. The new value works like this: (default damage) - (this value) = new damage. Default -2D").getDouble();
 		hardenedMaxHealth = config.get("enemy leveling", "hardenedMaxHealth", 0.2D, "Determines the hardened entity health. The new value works like this: [(default max health) * (this value)] + (default max health) = new max health. Default 0.2D").getDouble();
 		superiorMaxHealth = config.get("enemy leveling", "superiorMaxHealth", 0.4D, "Determines the superior entity health. The new value works like this: [(default max health) * (this value)] + (default max health) = new max health. Default 0.4D").getDouble();
@@ -61,7 +60,7 @@ public class ConfigHandler
 		eliteMaxHealth = config.get("enemy leveling", "eliteMaxHealth", 0.6D, "Determines the elite entity health. The new value works like this: [(default max health) * (this value)] + (default max health) = new max health. Default 0.6D").getDouble();
 		eliteDamage = config.get("enemy leveling", "eliteDamageBoost", 0.6D, "Determines the elite entity damage. The new value works like this: [(default damage) * (this value)] + (default damage) = new damage. Default 0.6D").getDouble();
 		legendaryMaxHealth = config.get("enemy leveling", "legendaryMaxHealth", 0.9D, "Determines the legendary entity health. The new value works like this: [(default max health) * (this value)] + (default max health) = new max health. Default 0.9D").getDouble();
-		legendaryDamage = config.get("enemy leveling", "legendaryDamageBoost", 0.9D, "Determines the legendary entity damage. The new value works like this: [(default damage) * (this value)] + (default damage) = new damage. Default 0.9D").getDouble();
+		legendaryDamage = config.get("enemy leveling", "legendaryDamageBoost", 0.9D, "Determines the legendary entity damage. The new value works like this: [(default damage) * (this value)] + (default damage) = new damage. Default 0.9D").getDouble();*/
 		
 		if (config.hasChanged())
 		{
