@@ -1,5 +1,7 @@
 package com.thexfactor117.levels.events;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import com.thexfactor117.levels.handlers.ConfigHandler;
@@ -7,9 +9,11 @@ import com.thexfactor117.levels.helpers.Ability;
 import com.thexfactor117.levels.helpers.AbilityHelper;
 import com.thexfactor117.levels.helpers.EnemyLevel;
 import com.thexfactor117.levels.helpers.Experience;
+import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.helpers.NBTHelper;
 import com.thexfactor117.levels.helpers.Rarity;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,6 +25,8 @@ import net.minecraft.launchwrapper.Launch;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -35,7 +41,7 @@ public class EventLivingHurt
 	 * Fired when an entity is about to be hurt.
 	 * @param event
 	 */
-	@SuppressWarnings("incomplete-switch")
+	@SuppressWarnings({ "incomplete-switch", "rawtypes" })
 	@SubscribeEvent
 	public void hitEntity(LivingHurtEvent event)
 	{
@@ -83,15 +89,10 @@ public class EventLivingHurt
 						}
 
 						/*
-						 * Leveling system
-						 */
-						level = Experience.getNextLevel(player, nbt, AbilityHelper.ABILITIES, level, experience, rand);
-						Experience.setLevel(nbt, level);
-
-						/*
 						 * Rarity
 						 */
 						Rarity rarity = Rarity.getRarity(nbt);
+						LogHelper.info(rarity);
 						float damageMultiplier = 1.0F;
 						//float trueDamage = event.ammount;
 
@@ -250,15 +251,39 @@ public class EventLivingHurt
 								}
 							}
 							
+							if (Ability.STING.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.setHealth(enemy.getHealth() - 10);
+							
 							if (Ability.ETHEREAL.hasAbility(nbt) && rand.nextInt(2) == 0)
 							{
 								float health = player.getHealth() + (event.getAmount() / 2);
 								player.setHealth(health);
 							}
 							
-							if (Ability.STING.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.setHealth(enemy.getHealth() - 10);
+							if (Ability.CHAINED.hasAbility(nbt) && rand.nextInt(10) == 0)
+							{
+								World world = enemy.getEntityWorld();
+								List entityList = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.posX - 10, player.posY - 10, player.posZ - 10, player.posX + 10, player.posY + 10, player.posZ + 10));
+								Iterator iterator = entityList.iterator();
+								
+								while (iterator.hasNext())
+								{
+				                    Entity entity = (Entity) iterator.next();
+									
+									if (entity instanceof EntityLivingBase)
+									{
+										entity.setFire(5);
+									}
+								}
+							}
+							
 							if (Ability.VOID.hasAbility(nbt) && rand.nextInt(20) == 0) enemy.setHealth(0);
 						}
+						
+						/*
+						 * Leveling system
+						 */
+						level = Experience.getNextLevel(player, nbt, AbilityHelper.ABILITIES, level, experience, rand);
+						Experience.setLevel(nbt, level);
 						
 						NBTHelper.saveStackNBT(stack, nbt);
 					}

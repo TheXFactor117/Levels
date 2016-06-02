@@ -30,6 +30,8 @@ public class AbilitySelection
 	 */
 	public static void getRandomizedAbilities(EntityPlayer player, NBTTagCompound nbt, int level, AbilityHelper abilityHelper, Random rand)
 	{
+		setAbilityWeights(nbt);
+		
 		if (level > 1)
 		{
 			int abilityLevel = ABILITY_LEVELS[level - 1].next(rand);
@@ -37,13 +39,22 @@ public class AbilitySelection
 			
 			if (!ability.hasAbility(nbt))
 			{
-				player.addChatMessage(new TextComponentString(TextFormatting.WHITE + "Your weapon has a new ability, " + ability.getColor() + ability.toString().toLowerCase() + TextFormatting.WHITE + "!"));
+				player.addChatMessage(new TextComponentString(TextFormatting.GRAY + "Your weapon has a new ability, " + ability.getColor() + ability.toString().toLowerCase() + TextFormatting.GRAY + "!"));
 			}
 			else
 			{
-				player.addChatMessage(new TextComponentString(TextFormatting.WHITE + "Well, looks like you already have this ability..."));
+				ability = abilityHelper.getRandomAbility(abilityLevel, rand);
+				
+				if (!ability.hasAbility(nbt))
+				{
+					player.addChatMessage(new TextComponentString(TextFormatting.GRAY + "Your weapon has a new ability, " + ability.getColor() + ability.toString().toLowerCase() + TextFormatting.GRAY + "!"));
+				}
+				else
+				{
+					player.addChatMessage(new TextComponentString(TextFormatting.GRAY + "Uh oh...looks like you have gotten the same ability twice!"));
+				}
 			}
-			
+
 			LogHelper.info(ability);
 			ability.addAbility(nbt);
 		}
@@ -53,62 +64,70 @@ public class AbilitySelection
 	 * Selects an ability to be added to the stack. Depending on what level it is, the chances of getting better abilities
 	 * increases as the level increases.
 	 */
-	static
+	public static void setAbilityWeights(NBTTagCompound nbt)
 	{
-		for (int level = 2; level <= ConfigHandler.maxLevelCap; level++)
+		Rarity rarity = Rarity.getRarity(nbt);
+		LogHelper.info(rarity);
+		
+		if (rarity != Rarity.UNKNOWN)
 		{
-			RandomCollection<Integer> abilityLevels = new RandomCollection<Integer>();
-			
-			int select1 = ConfigHandler.maxLevelCap / 6;
-			int select2 = ConfigHandler.maxLevelCap / 3;
-			int select3 = ConfigHandler.maxLevelCap / 2;
-			int select4 = (int) (ConfigHandler.maxLevelCap / 1.5);
-			int select5 = (int) (ConfigHandler.maxLevelCap / 1.2);
-			int select6 = ConfigHandler.maxLevelCap;
-			
-			if (level == select1)
+			for (int level = 2; level <= ConfigHandler.maxLevelCap; level++)
 			{
-				abilityLevels.add(0.8D, 1);
-				abilityLevels.add(0.15D, 2);
-				abilityLevels.add(0.05D, 3);
+				RandomCollection<Integer> abilityLevels = new RandomCollection<Integer>();
+				
+				int select1 = ConfigHandler.maxLevelCap / 6;
+				int select2 = ConfigHandler.maxLevelCap / 3;
+				int select3 = ConfigHandler.maxLevelCap / 2;
+				int select4 = (int) (ConfigHandler.maxLevelCap / 1.5);
+				int select5 = (int) (ConfigHandler.maxLevelCap / 1.2);
+				int select6 = ConfigHandler.maxLevelCap;
+				
+				if (level == select1 || level == select2 || level == select3 || level == select4 || level == select5 || level == select6)
+				{
+					if (rarity == Rarity.BASIC) 
+					{
+						abilityLevels.add(0.95D, 1);
+						abilityLevels.add(0.03D, 2);
+						abilityLevels.add(0.02D, 3);
+						LogHelper.info("Basic");
+					}
+					
+					if (rarity == Rarity.UNCOMMON)
+					{
+						abilityLevels.add(0.03D, 1);
+						abilityLevels.add(0.95D, 2);
+						abilityLevels.add(0.02D, 3);
+						LogHelper.info("Uncommon");
+						
+					}
+					
+					if (rarity == Rarity.RARE)
+					{
+						abilityLevels.add(0.03D, 2);
+						abilityLevels.add(0.95D, 3);
+						abilityLevels.add(0.02D, 4);
+						LogHelper.info("Rare");
+					}
+					
+					if (rarity == Rarity.LEGENDARY)
+					{
+						abilityLevels.add(0.03D, 3);
+						abilityLevels.add(0.95D, 4);
+						abilityLevels.add(0.02D, 5);
+						LogHelper.info("Legendary");
+					}
+					
+					if (rarity == Rarity.ANCIENT)
+					{
+						abilityLevels.add(0.02D, 3);
+						abilityLevels.add(0.03D, 4);
+						abilityLevels.add(0.95D, 5);
+						LogHelper.info("Ancient");
+					}
+				}
+				
+				ABILITY_LEVELS[level - 1] = abilityLevels;
 			}
-			
-			if (level == select2)
-			{
-				abilityLevels.add(0.7D, 1);
-				abilityLevels.add(0.2D, 2);
-				abilityLevels.add(0.1D, 3);
-			}
-			
-			if (level == select3)
-			{
-				abilityLevels.add(0.6D, 1);
-				abilityLevels.add(0.25D, 2);
-				abilityLevels.add(0.15D, 3);
-			}
-			
-			if (level == select4)
-			{
-				abilityLevels.add(0.5D, 1);
-				abilityLevels.add(0.3D, 2);
-				abilityLevels.add(0.2D, 3);	
-			}
-			
-			if (level == select5)
-			{
-				abilityLevels.add(0.4D, 1);
-				abilityLevels.add(0.35D, 2);
-				abilityLevels.add(0.25D, 3);
-			}
-			
-			if (level == select6)
-			{
-				abilityLevels.add(0.3D, 1);
-				abilityLevels.add(0.4D, 2);
-				abilityLevels.add(0.3D, 3);
-			}
-			
-			ABILITY_LEVELS[level - 1] = abilityLevels;
 		}
 	}
 }

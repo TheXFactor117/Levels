@@ -35,7 +35,7 @@ public class Experience
 		while (level < ConfigHandler.maxLevelCap && experience >= Experience.getMaxLevelExp(level))
 		{
 			level++;
-			player.addChatMessage(new TextComponentString(TextFormatting.WHITE + "Your weapon has leveled up to level " + level + "!"));
+			player.addChatMessage(new TextComponentString(TextFormatting.GRAY + "Your weapon has leveled up to level " + level + "!"));
 			
 			int select1 = ConfigHandler.maxLevelCap / 6;
 			int select2 = ConfigHandler.maxLevelCap / 3;

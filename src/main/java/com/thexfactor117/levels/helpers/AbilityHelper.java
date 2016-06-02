@@ -27,7 +27,7 @@ public enum AbilityHelper
 	ABILITIES(FIRE, FROST, POISON, STRENGTH, ELEMENTAL, DARKNESS, LIGHT, BLOODLUST, ETHEREAL, STING, VOID);
 	
 	@SuppressWarnings("unchecked")
-	private final RandomCollection<Ability>[] abilityCollections = new RandomCollection[Reference.MAX_ABILITY_LEVEL];
+	private final RandomCollection<Ability>[] abilityCollections = new RandomCollection[3];
 	private final Ability[] abilities;
 	
 	AbilityHelper(Ability... abilities)
@@ -61,6 +61,7 @@ public enum AbilityHelper
 	 */
 	public Ability getRandomAbility(int level, Random rand)
 	{
+		LogHelper.info("Level: " + level);
 		return abilityCollections[level - 1].next(rand);
 	}
 }

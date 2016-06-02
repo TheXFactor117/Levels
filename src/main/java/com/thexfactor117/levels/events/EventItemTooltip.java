@@ -36,7 +36,6 @@ public class EventItemTooltip
 	{
 		ItemStack stack = event.getItemStack();
 		Item item = stack.getItem();
-		NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 
 		if (item != null)
 		{
@@ -45,10 +44,12 @@ public class EventItemTooltip
 			 *****************/
 			if (item instanceof ItemSword)
 			{
+				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+				
 				if (nbt != null)
 				{	
-					Rarity rarity = Rarity.getRarity(nbt);
 					AbilityHelper abilityHelper = AbilityHelper.ABILITIES;
+					Rarity rarity = Rarity.getRarity(nbt);
 					String exp;
 					
 					if (Experience.getLevel(nbt) == ConfigHandler.maxLevelCap) exp = I18n.format("levels.experience.max");
@@ -68,15 +69,6 @@ public class EventItemTooltip
 							event.getToolTip().add(ability.getColor() + I18n.format("levels.ability." + ability.toString().toLowerCase()));
 						}
 					}
-				}
-				else
-				{
-					nbt = new NBTTagCompound();
-					stack.setTagCompound(nbt);
-					
-					Rarity.UNKNOWN.setRarity(nbt);
-					Experience.setExperience(nbt, 0);
-					Experience.setLevel(nbt, 1);
 				}
 			}
 			
@@ -85,6 +77,8 @@ public class EventItemTooltip
 			 *******/
 			if (item instanceof ItemBow)
 			{
+				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+				
 				if (nbt != null)
 				{
 					Rarity rarity = Rarity.getRarity(nbt);
@@ -107,15 +101,6 @@ public class EventItemTooltip
 							event.getToolTip().add(ability.getColor() + I18n.format("levels.ability." + ability.toString().toLowerCase()));
 						}
 					}
-				}
-				else
-				{
-					nbt = new NBTTagCompound();
-					stack.setTagCompound(nbt);
-					
-					Rarity.UNKNOWN.setRarity(nbt);
-					Experience.setExperience(nbt, 0);
-					Experience.setLevel(nbt, 1);
 				}
 			}
 		}

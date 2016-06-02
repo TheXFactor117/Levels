@@ -51,19 +51,8 @@ public class EventLivingDeath
 					
 					if (nbt != null)
 					{
-						Rarity rarity = Rarity.getRarity(nbt);
 						int level = Experience.getLevel(nbt);
 						int experience = Experience.getExperience(nbt);
-
-						/*
-						 * Rarities
-						 */
-						if (rarity == Rarity.UNKNOWN)
-						{
-							rarity = Rarity.getRandomRarity(rand);
-							rarity.setRarity(nbt);
-							if (rarity == Rarity.ANCIENT) player.worldObj.playSound(player, player.getPosition(), SoundEvents.ENTITY_ENDERDRAGON_DEATH, player.getSoundCategory(), 0.8F, 1.0F);
-						}
 
 						/*
 						 * Weapon Bonus Experience
