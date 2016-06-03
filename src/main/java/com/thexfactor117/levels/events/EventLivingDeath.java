@@ -3,7 +3,6 @@ package com.thexfactor117.levels.events;
 import java.util.Random;
 
 import com.thexfactor117.levels.handlers.ConfigHandler;
-import com.thexfactor117.levels.helpers.AbilityHelper;
 import com.thexfactor117.levels.helpers.Experience;
 import com.thexfactor117.levels.helpers.NBTHelper;
 import com.thexfactor117.levels.helpers.Rarity;
@@ -73,7 +72,8 @@ public class EventLivingDeath
 						/*
 						 * Leveling system
 						 */
-						level = Experience.getNextLevel(player, nbt, AbilityHelper.ABILITIES, level, experience, rand);
+						experience = Experience.getExperience(nbt);
+						level = Experience.getNextLevel(player, nbt, level, experience, rand);
 						Experience.setLevel(nbt, level);
 						
 						NBTHelper.saveStackNBT(stack, nbt);
@@ -131,7 +131,7 @@ public class EventLivingDeath
 					/*
 					 * Leveling experience
 					 */
-					level = Experience.getNextLevel(player, nbt, AbilityHelper.ABILITIES, level, experience, rand);
+					level = Experience.getNextLevel(player, nbt, level, experience, rand);
 					Experience.setLevel(nbt, level);
 					
 					NBTHelper.saveStackNBT(stack, nbt);

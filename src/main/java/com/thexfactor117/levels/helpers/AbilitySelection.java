@@ -31,6 +31,8 @@ public class AbilitySelection
 	public static void getRandomizedAbilities(EntityPlayer player, NBTTagCompound nbt, int level, AbilityHelper abilityHelper, Random rand)
 	{
 		setAbilityWeights(nbt);
+		LogHelper.info("AbilitySelection level: " + level);
+		LogHelper.info("Max Level Cap: " + ConfigHandler.maxLevelCap);
 		
 		if (level > 1)
 		{
@@ -75,55 +77,45 @@ public class AbilitySelection
 			{
 				RandomCollection<Integer> abilityLevels = new RandomCollection<Integer>();
 				
-				int select1 = ConfigHandler.maxLevelCap / 6;
-				int select2 = ConfigHandler.maxLevelCap / 3;
-				int select3 = ConfigHandler.maxLevelCap / 2;
-				int select4 = (int) (ConfigHandler.maxLevelCap / 1.5);
-				int select5 = (int) (ConfigHandler.maxLevelCap / 1.2);
-				int select6 = ConfigHandler.maxLevelCap;
-				
-				if (level == select1 || level == select2 || level == select3 || level == select4 || level == select5 || level == select6)
+				if (rarity == Rarity.BASIC) 
 				{
-					if (rarity == Rarity.BASIC) 
-					{
-						abilityLevels.add(0.95D, 1);
-						abilityLevels.add(0.03D, 2);
-						abilityLevels.add(0.02D, 3);
-						LogHelper.info("Basic");
-					}
+					abilityLevels.add(0.95D, 1);
+					abilityLevels.add(0.03D, 2);
+					abilityLevels.add(0.02D, 3);
+					LogHelper.info("Basic");
+				}
+				
+				if (rarity == Rarity.UNCOMMON)
+				{
+					abilityLevels.add(0.03D, 1);
+					abilityLevels.add(0.95D, 2);
+					abilityLevels.add(0.02D, 3);
+					LogHelper.info("Uncommon");
 					
-					if (rarity == Rarity.UNCOMMON)
-					{
-						abilityLevels.add(0.03D, 1);
-						abilityLevels.add(0.95D, 2);
-						abilityLevels.add(0.02D, 3);
-						LogHelper.info("Uncommon");
-						
-					}
-					
-					if (rarity == Rarity.RARE)
-					{
-						abilityLevels.add(0.03D, 2);
-						abilityLevels.add(0.95D, 3);
-						abilityLevels.add(0.02D, 4);
-						LogHelper.info("Rare");
-					}
-					
-					if (rarity == Rarity.LEGENDARY)
-					{
-						abilityLevels.add(0.03D, 3);
-						abilityLevels.add(0.95D, 4);
-						abilityLevels.add(0.02D, 5);
-						LogHelper.info("Legendary");
-					}
-					
-					if (rarity == Rarity.ANCIENT)
-					{
-						abilityLevels.add(0.02D, 3);
-						abilityLevels.add(0.03D, 4);
-						abilityLevels.add(0.95D, 5);
-						LogHelper.info("Ancient");
-					}
+				}
+				
+				if (rarity == Rarity.RARE)
+				{
+					abilityLevels.add(0.03D, 2);
+					abilityLevels.add(0.95D, 3);
+					abilityLevels.add(0.02D, 4);
+					LogHelper.info("Rare");
+				}
+				
+				if (rarity == Rarity.LEGENDARY)
+				{
+					abilityLevels.add(0.03D, 3);
+					abilityLevels.add(0.95D, 4);
+					abilityLevels.add(0.02D, 5);
+					LogHelper.info("Legendary");
+				}
+				
+				if (rarity == Rarity.ANCIENT)
+				{
+					abilityLevels.add(0.02D, 3);
+					abilityLevels.add(0.03D, 4);
+					abilityLevels.add(0.95D, 5);
+					LogHelper.info("Ancient");
 				}
 				
 				ABILITY_LEVELS[level - 1] = abilityLevels;

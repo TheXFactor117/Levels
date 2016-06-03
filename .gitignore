@@ -16,3 +16,7 @@
 /.gitignore
 /build
 /run
+/saves
+/usercache.json
+/usernamecache.json
+/options.txt

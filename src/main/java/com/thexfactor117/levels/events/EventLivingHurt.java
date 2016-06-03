@@ -6,7 +6,6 @@ import java.util.Random;
 
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.Ability;
-import com.thexfactor117.levels.helpers.AbilityHelper;
 import com.thexfactor117.levels.helpers.EnemyLevel;
 import com.thexfactor117.levels.helpers.Experience;
 import com.thexfactor117.levels.helpers.LogHelper;
@@ -282,7 +281,8 @@ public class EventLivingHurt
 						/*
 						 * Leveling system
 						 */
-						level = Experience.getNextLevel(player, nbt, AbilityHelper.ABILITIES, level, experience, rand);
+						experience = Experience.getExperience(nbt);
+						level = Experience.getNextLevel(player, nbt, level, experience, rand);
 						Experience.setLevel(nbt, level);
 						
 						NBTHelper.saveStackNBT(stack, nbt);
@@ -313,7 +313,7 @@ public class EventLivingHurt
 						{
 							NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 							int level = Experience.getLevel(nbt);
-							int experience = Experience.getExperience(nbt);
+							//int experience = Experience.getExperience(nbt);
 
 							/*
 							 * Experience
@@ -335,8 +335,8 @@ public class EventLivingHurt
 							/*
 							 * Leveling system
 							 */
-							level = Experience.getNextLevel(player, nbt, AbilityHelper.ABILITIES, level, experience, rand);
-							Experience.setLevel(nbt, level);
+							//level = Experience.getNextLevel(player, nbt, AbilityHelper.ABILITIES, level, experience, rand);
+							//Experience.setLevel(nbt, level);
 							
 							/*
 							 * Rarity

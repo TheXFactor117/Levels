@@ -47,7 +47,7 @@ public class ConfigHandler
 		enableDurability = config.get("general", "enableDurability", false, "Enables durability. Weapons will eventually run out of durability. Default false").getBoolean();
 		enableMobDrops = config.get("general", "enableMobDrops", true, "Enables mob drops. Mobs will now randomly drop weapons and armor. Default true").getBoolean();
 		enableVersionChecker = config.get("general", "enableVersionChecker", true, "Enables the version checker. It is not recommneded to make this false. Default true").getBoolean();
-		maxLevelCap = config.get("leveling", "maxLevelCap", 20, "Determines what the max level is for weapons to reach. Default 20").getInt();
+		maxLevelCap = config.get("leveling", "maxLevelCap", 6, "Determines what the max level is for weapons to reach. Default 6").getInt();
 		monsterBonusExp = config.get("leveling", "monsterBonusExp", 10, "Determines the extra amount of experience for killing a monster. Default 10").getInt();
 		animalBonusExp = config.get("leveling", "animalBonusExp", 2, "Determines the extra amount of experience for killing an animal. Default 2").getInt();
 		

@@ -14,8 +14,6 @@ import static com.thexfactor117.levels.helpers.Ability.VOID;
 
 import java.util.Random;
 
-import com.thexfactor117.levels.Reference;
-
 /**
  * 
  * @author TheXFactor117
@@ -27,14 +25,14 @@ public enum AbilityHelper
 	ABILITIES(FIRE, FROST, POISON, STRENGTH, ELEMENTAL, DARKNESS, LIGHT, BLOODLUST, ETHEREAL, STING, VOID);
 	
 	@SuppressWarnings("unchecked")
-	private final RandomCollection<Ability>[] abilityCollections = new RandomCollection[3];
+	private final RandomCollection<Ability>[] abilityCollections = new RandomCollection[5];
 	private final Ability[] abilities;
 	
 	AbilityHelper(Ability... abilities)
 	{
 		this.abilities = abilities;
 		
-		for (int i = 0; i < Reference.MAX_ABILITY_LEVEL; i++)
+		for (int i = 0; i < 5; i++)
 		{
 			RandomCollection<Ability> abilityCollection = new RandomCollection<Ability>();
 			
