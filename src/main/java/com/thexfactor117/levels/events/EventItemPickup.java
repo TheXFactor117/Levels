@@ -11,6 +11,7 @@ import com.thexfactor117.levels.network.PacketRarity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -35,7 +36,7 @@ public class EventItemPickup
 		{
 			if (stack != null)
 			{
-				if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemBow)
+				if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemBow || stack.getItem() instanceof ItemArmor)
 				{
 					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 					

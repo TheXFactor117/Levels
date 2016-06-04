@@ -55,7 +55,7 @@ public class Experience
 		return level;
 	}*/
 	
-	public static int getNextLevel(EntityPlayer player, NBTTagCompound nbt, int currentLevel, int experience, Random rand)
+	public static int getNextLevel(EntityPlayer player, NBTTagCompound nbt, AbilityHelper abilityHelper, int currentLevel, int experience, Random rand)
 	{
 		int newLevel = currentLevel;
 		
@@ -63,7 +63,7 @@ public class Experience
 		{
 			newLevel = currentLevel + 1;
 			currentLevel++;
-			AbilitySelection.getRandomizedAbilities(player, nbt, newLevel, AbilityHelper.ABILITIES, rand);
+			AbilitySelection.getRandomizedAbilities(player, nbt, newLevel, abilityHelper, rand);
 			player.addChatMessage(new TextComponentString(TextFormatting.GRAY + "Your weapon has leveled up to level " + newLevel + "!"));
 		}
 		
@@ -115,6 +115,7 @@ public class Experience
 	public static int getMaxLevelExp(int level)
 	{
 		int maxXP = (int) Math.pow(level, 3D) * 20;
+		if (level == 1) maxXP *= 2;
 		return maxXP;
 	}
 }

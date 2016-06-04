@@ -6,6 +6,7 @@ import java.util.Random;
 
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.Ability;
+import com.thexfactor117.levels.helpers.AbilityHelper;
 import com.thexfactor117.levels.helpers.Experience;
 import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.helpers.NBTHelper;
@@ -15,6 +16,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -280,7 +282,7 @@ public class EventLivingHurt
 						 * Leveling system
 						 */
 						experience = Experience.getExperience(nbt);
-						level = Experience.getNextLevel(player, nbt, level, experience, rand);
+						level = Experience.getNextLevel(player, nbt, AbilityHelper.WEAPON, level, experience, rand);
 						Experience.setLevel(nbt, level);
 						
 						NBTHelper.saveStackNBT(stack, nbt);
@@ -496,7 +498,64 @@ public class EventLivingHurt
 							 * Leveling system
 							 */
 							experience = Experience.getExperience(nbt);
-							level = Experience.getNextLevel(player, nbt, level, experience, rand);
+							level = Experience.getNextLevel(player, nbt, AbilityHelper.WEAPON, level, experience, rand);
+							Experience.setLevel(nbt, level);
+							
+							NBTHelper.saveStackNBT(stack, nbt);
+						}
+					}
+				}
+			}
+		}
+		
+		/*
+		 * ARMORS 
+		 */
+		if (event.getEntityLiving() instanceof EntityPlayer)
+		{
+			if (event.getSource().getEntity() instanceof EntityLivingBase)
+			{
+				EntityLivingBase enemy = (EntityLivingBase) event.getSource().getEntity();
+				EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+				Random rand = player.worldObj.rand;
+				
+				for (ItemStack stack : player.inventory.armorInventory)
+				{
+					if (stack != null && stack.getItem() instanceof ItemArmor)
+					{
+						NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+						
+						if (nbt != null)
+						{
+							int level = Experience.getLevel(nbt);
+							int experience = Experience.getExperience(nbt);
+							
+							/*
+							 * Experience
+							 */
+							if (level < ConfigHandler.maxLevelCap)
+							{
+								experience += level > 3 && rand.nextInt(3) == 0 ? 1 + rand.nextInt(3) : 1;
+								Experience.setExperience(nbt, experience + 20);
+							}
+							
+							if (Ability.MOLTEN.hasAbility(nbt) && rand.nextInt(5) == 0) enemy.setFire(4);
+							if (Ability.FROZEN.hasAbility(nbt) && rand.nextInt(5) == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20*4, 10));
+							if (Ability.TOXIC.hasAbility(nbt) && rand.nextInt(5) == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(20), 20*4, 0));
+							if (Ability.ENLIGHTENED.hasAbility(nbt) && rand.nextInt(10) == 0)
+							{
+								float health = player.getHealth() + (event.getAmount() / 2);
+								player.setHealth(health);
+							}
+							
+							if (Ability.HARDENED.hasAbility(nbt) && rand.nextInt(10) == 0) event.setAmount(0F);
+							if (Ability.VOID_ARMOR.hasAbility(nbt) && rand.nextInt(20) == 0) enemy.setHealth(0F);
+							
+							/*
+							 * Leveling system
+							 */
+							experience = Experience.getExperience(nbt);
+							level = Experience.getNextLevel(player, nbt, AbilityHelper.ARMOR, level, experience, rand);
 							Experience.setLevel(nbt, level);
 							
 							NBTHelper.saveStackNBT(stack, nbt);

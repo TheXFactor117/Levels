@@ -41,7 +41,7 @@ public class AbilitySelection
 			
 			if (!ability.hasAbility(nbt))
 			{
-				player.addChatMessage(new TextComponentString(TextFormatting.GRAY + "Your weapon has a new ability, " + ability.getColor() + ability.toString().toLowerCase() + TextFormatting.GRAY + "!"));
+				player.addChatMessage(new TextComponentString(TextFormatting.GRAY + "Your weapon/armor has a new ability, " + ability.getColor() + ability.toString().toLowerCase() + TextFormatting.GRAY + "!"));
 			}
 			else
 			{
@@ -49,7 +49,7 @@ public class AbilitySelection
 				
 				if (!ability.hasAbility(nbt))
 				{
-					player.addChatMessage(new TextComponentString(TextFormatting.GRAY + "Your weapon has a new ability, " + ability.getColor() + ability.toString().toLowerCase() + TextFormatting.GRAY + "!"));
+					player.addChatMessage(new TextComponentString(TextFormatting.GRAY + "Your weapon/armor has a new ability, " + ability.getColor() + ability.toString().toLowerCase() + TextFormatting.GRAY + "!"));
 				}
 				else
 				{

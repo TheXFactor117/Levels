@@ -11,6 +11,12 @@ import static com.thexfactor117.levels.helpers.Ability.POISON;
 import static com.thexfactor117.levels.helpers.Ability.STING;
 import static com.thexfactor117.levels.helpers.Ability.STRENGTH;
 import static com.thexfactor117.levels.helpers.Ability.VOID;
+import static com.thexfactor117.levels.helpers.Ability.MOLTEN;
+import static com.thexfactor117.levels.helpers.Ability.FROZEN;
+import static com.thexfactor117.levels.helpers.Ability.TOXIC;
+import static com.thexfactor117.levels.helpers.Ability.ENLIGHTENED;
+import static com.thexfactor117.levels.helpers.Ability.HARDENED;
+import static com.thexfactor117.levels.helpers.Ability.VOID_ARMOR;
 
 import java.util.Random;
 
@@ -22,7 +28,8 @@ import java.util.Random;
  */
 public enum AbilityHelper 
 {
-	ABILITIES(FIRE, FROST, POISON, STRENGTH, ELEMENTAL, DARKNESS, LIGHT, BLOODLUST, ETHEREAL, STING, VOID);
+	WEAPON(FIRE, FROST, POISON, STRENGTH, ELEMENTAL, DARKNESS, LIGHT, BLOODLUST, ETHEREAL, STING, VOID),
+	ARMOR(MOLTEN, FROZEN, TOXIC, ENLIGHTENED, HARDENED, VOID_ARMOR);
 	
 	@SuppressWarnings("unchecked")
 	private final RandomCollection<Ability>[] abilityCollections = new RandomCollection[5];

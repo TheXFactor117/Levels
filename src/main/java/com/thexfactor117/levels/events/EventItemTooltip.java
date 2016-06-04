@@ -11,6 +11,7 @@ import com.thexfactor117.levels.helpers.Rarity;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -41,13 +42,12 @@ public class EventItemTooltip
 
 		if (item != null)
 		{
-			if (item instanceof ItemSword || item instanceof ItemBow)
+			if (item instanceof ItemSword || item instanceof ItemBow || item instanceof ItemArmor)
 			{
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
 				if (nbt != null)
 				{	
-					AbilityHelper abilityHelper = AbilityHelper.ABILITIES;
 					Rarity rarity = Rarity.getRarity(nbt);
 					String exp;
 					
@@ -66,10 +66,15 @@ public class EventItemTooltip
 					else event.getToolTip().add("Durability: " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
 					
 					event.getToolTip().add("");
-					event.getToolTip().add("Abilities " + TextFormatting.ITALIC + "(Shift)");
-
+					
 					if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
 					{
+						event.getToolTip().add(TextFormatting.ITALIC + "Abilities");
+						AbilityHelper abilityHelper;
+						
+						if (item instanceof ItemSword || item instanceof ItemBow) abilityHelper = AbilityHelper.WEAPON;
+						else abilityHelper = AbilityHelper.ARMOR;
+							
 						for (Ability ability : abilityHelper.getAbilities())
 						{	
 							if (ability.hasAbility(nbt))
@@ -78,6 +83,7 @@ public class EventItemTooltip
 							}
 						}
 					}
+					else event.getToolTip().add(TextFormatting.ITALIC + "Abilities (Shift)");
 				}
 			}
 		}
