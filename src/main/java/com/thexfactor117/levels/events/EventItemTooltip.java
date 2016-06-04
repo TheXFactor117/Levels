@@ -1,5 +1,7 @@
 package com.thexfactor117.levels.events;
 
+import org.lwjgl.input.Keyboard;
+
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.Ability;
 import com.thexfactor117.levels.helpers.AbilityHelper;
@@ -54,16 +56,26 @@ public class EventItemTooltip
 					
 					event.getToolTip().add("");
 					event.getToolTip().add(rarity.getColor() + TextFormatting.ITALIC + I18n.format("levels.rarity." + rarity.ordinal()));
-					event.getToolTip().add("Level: " + Experience.getLevel(nbt));
-					event.getToolTip().add("Experience: " + exp);
-					event.getToolTip().add("Durability: " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
-					event.getToolTip().add("");
+				
+					if (Experience.getLevel(nbt) == 6) event.getToolTip().add("Level: Max");
+					else event.getToolTip().add("Level: " + Experience.getLevel(nbt));
 					
-					for (Ability ability : abilityHelper.getAbilities())
-					{	
-						if (ability.hasAbility(nbt))
-						{
-							event.getToolTip().add(ability.getColor() + I18n.format("levels.ability." + ability.toString().toLowerCase()));
+					event.getToolTip().add("Experience: " + exp);
+					
+					if (!ConfigHandler.enableDurability) event.getToolTip().add("Durability: Unlimited");
+					else event.getToolTip().add("Durability: " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
+					
+					event.getToolTip().add("");
+					event.getToolTip().add("Abilities " + TextFormatting.ITALIC + "(Shift)");
+
+					if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
+					{
+						for (Ability ability : abilityHelper.getAbilities())
+						{	
+							if (ability.hasAbility(nbt))
+							{
+								event.getToolTip().add(ability.getColor() + I18n.format("levels.ability." + ability.toString().toLowerCase()));
+							}
 						}
 					}
 				}
