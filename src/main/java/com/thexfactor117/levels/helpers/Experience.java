@@ -63,12 +63,10 @@ public class Experience
 		{
 			newLevel = currentLevel + 1;
 			currentLevel++;
-			LogHelper.info("New Level: " + newLevel);
 			AbilitySelection.getRandomizedAbilities(player, nbt, newLevel, AbilityHelper.ABILITIES, rand);
 			player.addChatMessage(new TextComponentString(TextFormatting.GRAY + "Your weapon has leveled up to level " + newLevel + "!"));
 		}
 		
-		LogHelper.info("New Level: " + newLevel);
 		return newLevel;
 	}
 	
@@ -116,7 +114,7 @@ public class Experience
 	
 	public static int getMaxLevelExp(int level)
 	{
-		int maxXP = (int) Math.pow(level, 2.2) * 10;
+		int maxXP = (int) Math.pow(level, 3D) * 20;
 		return maxXP;
 	}
 }

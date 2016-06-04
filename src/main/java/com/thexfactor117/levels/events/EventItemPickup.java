@@ -15,20 +15,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 
 /**
  * 
  * @author TheXFactor117
  *
  */
-public class EventItemCrafted 
+public class EventItemPickup 
 {
 	@SubscribeEvent
-	public void onItemCraft(PlayerEvent.ItemCraftedEvent event)
+	public void onItemPickup(ItemPickupEvent event)
 	{
 		EntityPlayer player = event.player;
-		ItemStack stack = event.crafting;
+		ItemStack stack = event.pickedUp.getEntityItem();
 
 		if (!player.worldObj.isRemote)
 		{

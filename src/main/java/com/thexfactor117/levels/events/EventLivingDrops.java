@@ -36,9 +36,9 @@ public class EventLivingDrops
 				float health = event.getEntityLiving().getMaxHealth();
 				int var = 0;
 
-				if (health < 10.0F) var = 50;
-				if (health >= 10.0F && health < 20.0F) var = 25;
-				if (health >= 20.0F) var = 10;
+				if (health < 10.0F) var = 5;
+				if (health >= 10.0F && health < 20.0F) var = 2;
+				if (health >= 20.0F) var = 1;
 				
 				if (var != 0)
 				{
