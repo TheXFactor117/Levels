@@ -35,7 +35,11 @@ public class ModEvents
 			FMLCommonHandler.instance().bus().register(new EventItemPickup());
 		}
 		
-		MinecraftForge.EVENT_BUS.register(new EventLivingDrops());
+		if (ConfigHandler.enableMobDrops)
+		{
+			LogHelper.info("Mob droppings have been enabled...");
+			MinecraftForge.EVENT_BUS.register(new EventLivingDrops());
+		}
 		
 		if (ConfigHandler.enableVersionChecker)
 		{

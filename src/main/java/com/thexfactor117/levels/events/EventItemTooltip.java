@@ -39,10 +39,7 @@ public class EventItemTooltip
 
 		if (item != null)
 		{
-			/*****************
-			 * MELEE WEAPONS *
-			 *****************/
-			if (item instanceof ItemSword)
+			if (item instanceof ItemSword || item instanceof ItemBow)
 			{
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
@@ -56,38 +53,6 @@ public class EventItemTooltip
 					else exp = Experience.getExperience(nbt) + " / " + Experience.getMaxLevelExp(Experience.getLevel(nbt));
 					
 					event.getToolTip().add("");
-					event.getToolTip().add(rarity.getColor() + TextFormatting.ITALIC + I18n.format("levels.rarity." + rarity.ordinal()));
-					event.getToolTip().add("Level: " + Experience.getLevel(nbt));
-					event.getToolTip().add("Experience: " + exp);
-					event.getToolTip().add("Durability: " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
-					event.getToolTip().add("");
-					
-					for (Ability ability : abilityHelper.getAbilities())
-					{	
-						if (ability.hasAbility(nbt))
-						{
-							event.getToolTip().add(ability.getColor() + I18n.format("levels.ability." + ability.toString().toLowerCase()));
-						}
-					}
-				}
-			}
-			
-			/********
-			 * BOWS *
-			 *******/
-			if (item instanceof ItemBow)
-			{
-				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-				
-				if (nbt != null)
-				{
-					Rarity rarity = Rarity.getRarity(nbt);
-					AbilityHelper abilityHelper = AbilityHelper.ABILITIES;
-					String exp;
-					
-					if (Experience.getLevel(nbt) == ConfigHandler.maxLevelCap) exp = I18n.format("levels.experience.max");
-					else exp = Experience.getExperience(nbt) + " / " + Experience.getMaxLevelExp(Experience.getLevel(nbt));
-					
 					event.getToolTip().add(rarity.getColor() + TextFormatting.ITALIC + I18n.format("levels.rarity." + rarity.ordinal()));
 					event.getToolTip().add("Level: " + Experience.getLevel(nbt));
 					event.getToolTip().add("Experience: " + exp);

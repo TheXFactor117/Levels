@@ -5,13 +5,11 @@ import java.util.Random;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.Experience;
 import com.thexfactor117.levels.helpers.NBTHelper;
-import com.thexfactor117.levels.helpers.Rarity;
 
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -98,19 +96,8 @@ public class EventLivingDeath
 				if (stack != null)
 				{
 					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-					Rarity rarity = Rarity.getRarity(nbt);
 					int level = Experience.getLevel(nbt);
 					int experience = Experience.getExperience(nbt);
-					
-					/*
-					 * Rarities
-					 */
-					if (rarity == Rarity.UNKNOWN)
-					{
-						rarity = Rarity.getRandomRarity(rand);
-						rarity.setRarity(nbt);
-						if (rarity == Rarity.ANCIENT) player.worldObj.playSound(player, player.getPosition(), SoundEvents.ENTITY_ENDERDRAGON_DEATH, player.getSoundCategory(), 0.8F, 1.0F);
-					}
 					
 					/*
 					 * Bow bonus experience
@@ -129,8 +116,9 @@ public class EventLivingDeath
 					}
 					
 					/*
-					 * Leveling experience
+					 * Leveling system
 					 */
+					experience = Experience.getExperience(nbt);
 					level = Experience.getNextLevel(player, nbt, level, experience, rand);
 					Experience.setLevel(nbt, level);
 					

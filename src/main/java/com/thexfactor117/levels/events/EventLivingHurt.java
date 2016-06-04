@@ -6,7 +6,6 @@ import java.util.Random;
 
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.Ability;
-import com.thexfactor117.levels.helpers.EnemyLevel;
 import com.thexfactor117.levels.helpers.Experience;
 import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.helpers.NBTHelper;
@@ -14,7 +13,6 @@ import com.thexfactor117.levels.helpers.Rarity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemBow;
@@ -313,7 +311,7 @@ public class EventLivingHurt
 						{
 							NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 							int level = Experience.getLevel(nbt);
-							//int experience = Experience.getExperience(nbt);
+							int experience = Experience.getExperience(nbt);
 
 							/*
 							 * Experience
@@ -332,12 +330,6 @@ public class EventLivingHurt
 								}
 							}
 
-							/*
-							 * Leveling system
-							 */
-							//level = Experience.getNextLevel(player, nbt, AbilityHelper.ABILITIES, level, experience, rand);
-							//Experience.setLevel(nbt, level);
-							
 							/*
 							 * Rarity
 							 */
@@ -500,6 +492,13 @@ public class EventLivingHurt
 								if (Ability.VOID.hasAbility(nbt) && rand.nextInt(20) == 0) enemy.setHealth(0);
 							}
 							
+							/*
+							 * Leveling system
+							 */
+							experience = Experience.getExperience(nbt);
+							level = Experience.getNextLevel(player, nbt, level, experience, rand);
+							Experience.setLevel(nbt, level);
+							
 							NBTHelper.saveStackNBT(stack, nbt);
 						}
 					}
@@ -510,7 +509,7 @@ public class EventLivingHurt
 		/*
 		 * Entity Leveling
 		 */
-		if (event.getEntityLiving() instanceof EntityPlayer && event.getSource().getSourceOfDamage() instanceof EntityMob)
+		/*if (event.getEntityLiving() instanceof EntityPlayer && event.getSource().getSourceOfDamage() instanceof EntityMob)
 		{
 			Random rand = event.getEntityLiving().worldObj.rand;
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
@@ -547,6 +546,6 @@ public class EventLivingHurt
 					}
 				}
 			}
-		}
+		}*/
 	}
 }
