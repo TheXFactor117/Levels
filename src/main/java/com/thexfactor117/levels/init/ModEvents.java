@@ -2,12 +2,11 @@ package com.thexfactor117.levels.init;
 
 import com.thexfactor117.levels.Levels;
 import com.thexfactor117.levels.Reference;
-import com.thexfactor117.levels.events.EventItemCrafted;
-import com.thexfactor117.levels.events.EventItemPickup;
 import com.thexfactor117.levels.events.EventItemTooltip;
 import com.thexfactor117.levels.events.EventLivingDeath;
 import com.thexfactor117.levels.events.EventLivingDrops;
 import com.thexfactor117.levels.events.EventLivingHurt;
+import com.thexfactor117.levels.events.EventLivingUpdate;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.xlib.version.VersionChecker;
 
@@ -32,8 +31,7 @@ public class ModEvents
 			MinecraftForge.EVENT_BUS.register(new EventLivingHurt());
 			MinecraftForge.EVENT_BUS.register(new EventItemTooltip());
 			MinecraftForge.EVENT_BUS.register(new EventLivingDeath());
-			FMLCommonHandler.instance().bus().register(new EventItemCrafted());
-			FMLCommonHandler.instance().bus().register(new EventItemPickup());
+			MinecraftForge.EVENT_BUS.register(new EventLivingUpdate());
 		}
 		
 		if (ConfigHandler.enableVersionChecker)
