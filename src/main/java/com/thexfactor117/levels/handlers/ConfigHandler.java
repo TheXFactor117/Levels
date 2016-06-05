@@ -2,7 +2,7 @@ package com.thexfactor117.levels.handlers;
 
 import java.io.File;
 
-import com.thexfactor117.levels.helpers.LogHelper;
+import com.thexfactor117.levels.Levels;
 
 import net.minecraftforge.common.config.Configuration;
 
@@ -38,7 +38,7 @@ public class ConfigHandler
 		File mainFile = new File(file, "Levels.cfg");
 		
 		Configuration config = new Configuration(mainFile);
-		LogHelper.info("Loading config file...");
+		Levels.LOGGER.info("Loading config file...");
 		config.load();
 		
 		enableDevFeatures = config.get("general", "enableDevFeatures", false, "Enable dev features. Things could go wrong; only use in test worlds. Default false").getBoolean();
@@ -64,9 +64,9 @@ public class ConfigHandler
 		
 		if (config.hasChanged())
 		{
-			LogHelper.info("Config file saving...");
+			Levels.LOGGER.info("Config file saving...");
 			config.save();
-			LogHelper.info("Config file saved.");
+			Levels.LOGGER.info("Config file saved.");
 		}
 	}
 }

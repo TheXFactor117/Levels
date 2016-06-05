@@ -20,6 +20,8 @@ import static com.thexfactor117.levels.helpers.Ability.VOID_ARMOR;
 
 import java.util.Random;
 
+import com.thexfactor117.levels.Levels;
+
 /**
  * 
  * @author TheXFactor117
@@ -66,7 +68,7 @@ public enum AbilityHelper
 	 */
 	public Ability getRandomAbility(int level, Random rand)
 	{
-		LogHelper.info("Level: " + level);
+		Levels.LOGGER.info("Level: " + level);
 		return abilityCollections[level - 1].next(rand);
 	}
 }

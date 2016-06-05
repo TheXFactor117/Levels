@@ -4,11 +4,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import com.thexfactor117.levels.Levels;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.levels.helpers.Ability;
 import com.thexfactor117.levels.helpers.AbilityHelper;
 import com.thexfactor117.levels.helpers.Experience;
-import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.helpers.NBTHelper;
 import com.thexfactor117.levels.helpers.Rarity;
 
@@ -91,7 +91,7 @@ public class EventLivingHurt
 						 * Rarity
 						 */
 						Rarity rarity = Rarity.getRarity(nbt);
-						LogHelper.info(rarity);
+						Levels.LOGGER.info(rarity);
 						float damageMultiplier = 1.0F;
 						//float trueDamage = event.ammount;
 

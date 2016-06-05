@@ -3,7 +3,6 @@ package com.thexfactor117.levels.events;
 import java.util.Random;
 
 import com.thexfactor117.levels.Levels;
-import com.thexfactor117.levels.helpers.LogHelper;
 import com.thexfactor117.levels.helpers.NBTHelper;
 import com.thexfactor117.levels.helpers.Rarity;
 import com.thexfactor117.levels.network.PacketRarity;
@@ -49,7 +48,7 @@ public class EventItemCrafted
 						{
 							rarity = Rarity.getRandomRarity(rand);
 							rarity.setRarity(nbt);
-							LogHelper.info(rarity);
+							Levels.LOGGER.info(rarity);
 							NBTHelper.saveStackNBT(stack, nbt);
 							Levels.network.sendTo(new PacketRarity(NBTHelper.loadStackNBT(stack)), (EntityPlayerMP) player);
 							if (rarity == Rarity.ANCIENT) player.worldObj.playSound(player, player.getPosition(), SoundEvents.ENTITY_ENDERDRAGON_DEATH, player.getSoundCategory(), 0.8F, 1.0F);

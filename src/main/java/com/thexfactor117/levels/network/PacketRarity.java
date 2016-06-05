@@ -1,6 +1,6 @@
 package com.thexfactor117.levels.network;
 
-import com.thexfactor117.levels.helpers.LogHelper;
+import com.thexfactor117.levels.Levels;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -50,7 +50,7 @@ public class PacketRarity implements IMessage
 				@Override
 				public void run()
 				{
-					LogHelper.info("Packet..." + message.nbt);
+					Levels.LOGGER.info("Packet..." + message.nbt);
 				}
 			});
 			
