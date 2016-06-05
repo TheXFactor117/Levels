@@ -29,9 +29,9 @@ import net.minecraftforge.fml.relauncher.Side;
 public class Levels 
 {
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY, serverSide = Reference.COMMON_PROXY)
-	public static CommonProxy proxy;
+	public static CommonProxy PROXY;
 	public static final Logger LOGGER = LogManager.getLogger("Levels");
-	public static SimpleNetworkWrapper network;
+	public static SimpleNetworkWrapper NETWORK;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -41,8 +41,8 @@ public class Levels
 		ConfigHandler.registerConfig(event.getModConfigurationDirectory());
 		ModEvents.registerEvents();
 		
-		network = NetworkRegistry.INSTANCE.newSimpleChannel("rarities");
-		network.registerMessage(Handler.class, PacketRarity.class, 0, Side.CLIENT);
+		NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel("rarities");
+		NETWORK.registerMessage(Handler.class, PacketRarity.class, 0, Side.CLIENT);
 		
 		Levels.LOGGER.info("Configurations and core events have been loaded...");
 	}

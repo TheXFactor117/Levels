@@ -1,26 +1,27 @@
-package com.thexfactor117.levels.helpers;
+package com.thexfactor117.levels.leveling;
 
-import static com.thexfactor117.levels.helpers.Ability.BLOODLUST;
-import static com.thexfactor117.levels.helpers.Ability.DARKNESS;
-import static com.thexfactor117.levels.helpers.Ability.ELEMENTAL;
-import static com.thexfactor117.levels.helpers.Ability.ETHEREAL;
-import static com.thexfactor117.levels.helpers.Ability.FIRE;
-import static com.thexfactor117.levels.helpers.Ability.FROST;
-import static com.thexfactor117.levels.helpers.Ability.LIGHT;
-import static com.thexfactor117.levels.helpers.Ability.POISON;
-import static com.thexfactor117.levels.helpers.Ability.STING;
-import static com.thexfactor117.levels.helpers.Ability.STRENGTH;
-import static com.thexfactor117.levels.helpers.Ability.VOID;
-import static com.thexfactor117.levels.helpers.Ability.MOLTEN;
-import static com.thexfactor117.levels.helpers.Ability.FROZEN;
-import static com.thexfactor117.levels.helpers.Ability.TOXIC;
-import static com.thexfactor117.levels.helpers.Ability.ENLIGHTENED;
-import static com.thexfactor117.levels.helpers.Ability.HARDENED;
-import static com.thexfactor117.levels.helpers.Ability.VOID_ARMOR;
+import static com.thexfactor117.levels.leveling.Ability.BLOODLUST;
+import static com.thexfactor117.levels.leveling.Ability.DARKNESS;
+import static com.thexfactor117.levels.leveling.Ability.ELEMENTAL;
+import static com.thexfactor117.levels.leveling.Ability.ENLIGHTENED;
+import static com.thexfactor117.levels.leveling.Ability.ETHEREAL;
+import static com.thexfactor117.levels.leveling.Ability.FIRE;
+import static com.thexfactor117.levels.leveling.Ability.FROST;
+import static com.thexfactor117.levels.leveling.Ability.FROZEN;
+import static com.thexfactor117.levels.leveling.Ability.HARDENED;
+import static com.thexfactor117.levels.leveling.Ability.LIGHT;
+import static com.thexfactor117.levels.leveling.Ability.MOLTEN;
+import static com.thexfactor117.levels.leveling.Ability.POISON;
+import static com.thexfactor117.levels.leveling.Ability.STING;
+import static com.thexfactor117.levels.leveling.Ability.STRENGTH;
+import static com.thexfactor117.levels.leveling.Ability.TOXIC;
+import static com.thexfactor117.levels.leveling.Ability.VOID;
+import static com.thexfactor117.levels.leveling.Ability.VOID_ARMOR;
 
 import java.util.Random;
 
 import com.thexfactor117.levels.Levels;
+import com.thexfactor117.xlib.misc.RandomCollection;
 
 /**
  * 

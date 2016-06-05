@@ -1,4 +1,4 @@
-package com.thexfactor117.levels.helpers;
+package com.thexfactor117.levels.leveling;
 
 import java.util.Random;
 

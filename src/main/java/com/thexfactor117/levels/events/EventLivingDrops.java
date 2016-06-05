@@ -2,7 +2,7 @@ package com.thexfactor117.levels.events;
 
 import java.util.Random;
 
-import com.thexfactor117.levels.helpers.WeaponType;
+import com.thexfactor117.levels.leveling.WeaponType;
 
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.init.Items;

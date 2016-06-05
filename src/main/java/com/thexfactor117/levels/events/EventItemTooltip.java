@@ -3,11 +3,11 @@ package com.thexfactor117.levels.events;
 import org.lwjgl.input.Keyboard;
 
 import com.thexfactor117.levels.handlers.ConfigHandler;
-import com.thexfactor117.levels.helpers.Ability;
-import com.thexfactor117.levels.helpers.AbilityHelper;
-import com.thexfactor117.levels.helpers.Experience;
-import com.thexfactor117.levels.helpers.NBTHelper;
-import com.thexfactor117.levels.helpers.Rarity;
+import com.thexfactor117.levels.leveling.Ability;
+import com.thexfactor117.levels.leveling.AbilityHelper;
+import com.thexfactor117.levels.leveling.Experience;
+import com.thexfactor117.levels.leveling.Rarity;
+import com.thexfactor117.xlib.misc.NBTHelper;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;

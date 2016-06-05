@@ -3,9 +3,9 @@ package com.thexfactor117.levels.events;
 import java.util.Random;
 
 import com.thexfactor117.levels.handlers.ConfigHandler;
-import com.thexfactor117.levels.helpers.AbilityHelper;
-import com.thexfactor117.levels.helpers.Experience;
-import com.thexfactor117.levels.helpers.NBTHelper;
+import com.thexfactor117.levels.leveling.AbilityHelper;
+import com.thexfactor117.levels.leveling.Experience;
+import com.thexfactor117.xlib.misc.NBTHelper;
 
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
