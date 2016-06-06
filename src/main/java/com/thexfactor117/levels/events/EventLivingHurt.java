@@ -537,7 +537,7 @@ public class EventLivingHurt
 							if (level < ConfigHandler.maxLevelCap)
 							{
 								experience += level > 3 && rand.nextInt(3) == 0 ? 1 + rand.nextInt(3) : 1;
-								Experience.setExperience(nbt, experience + 20);
+								Experience.setExperience(nbt, experience);
 							}
 							
 							/*
