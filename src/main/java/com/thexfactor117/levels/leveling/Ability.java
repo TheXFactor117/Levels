@@ -72,11 +72,6 @@ public enum Ability
 	{
 		nbt.removeTag(toString());
 	}
-	
-	public static boolean isInRange(double x, double min, double max)
-	{
-		return x > min && x < max;
-	}
 
 	public String getColor()
 	{
