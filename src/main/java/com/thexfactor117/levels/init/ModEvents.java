@@ -1,17 +1,14 @@
 package com.thexfactor117.levels.init;
 
 import com.thexfactor117.levels.Levels;
-import com.thexfactor117.levels.Reference;
 import com.thexfactor117.levels.events.EventItemTooltip;
 import com.thexfactor117.levels.events.EventLivingDeath;
 import com.thexfactor117.levels.events.EventLivingDrops;
 import com.thexfactor117.levels.events.EventLivingHurt;
 import com.thexfactor117.levels.events.EventLivingUpdate;
 import com.thexfactor117.levels.handlers.ConfigHandler;
-import com.thexfactor117.xlib.version.VersionChecker;
 
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 
 /**
  * 
@@ -20,7 +17,6 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
  */
 public class ModEvents 
 {
-	@SuppressWarnings("deprecation")
 	public static void registerEvents()
 	{
 		Levels.LOGGER.info("Registering events...");
@@ -32,11 +28,6 @@ public class ModEvents
 			MinecraftForge.EVENT_BUS.register(new EventItemTooltip());
 			MinecraftForge.EVENT_BUS.register(new EventLivingDeath());
 			MinecraftForge.EVENT_BUS.register(new EventLivingUpdate());
-		}
-		
-		if (ConfigHandler.enableVersionChecker)
-		{
-			FMLCommonHandler.instance().bus().register(new VersionChecker(Reference.VERSION, Reference.VERSION_CHECKER_URL, Reference.UPDATE_MESSAGE, Reference.UPDATE_URL));
 		}
 		
 		if (ConfigHandler.enableMobDrops)

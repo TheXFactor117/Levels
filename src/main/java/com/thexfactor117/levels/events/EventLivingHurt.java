@@ -529,6 +529,7 @@ public class EventLivingHurt
 						{
 							int level = Experience.getLevel(nbt);
 							int experience = Experience.getExperience(nbt);
+							Rarity rarity = Rarity.getRarity(nbt);
 							
 							/*
 							 * Experience
@@ -539,16 +540,49 @@ public class EventLivingHurt
 								Experience.setExperience(nbt, experience + 20);
 							}
 							
+							/*
+							 * Rarities
+							 */
+							if (rarity == Rarity.UNCOMMON)
+							{
+								if (rand.nextInt(30) == 0) event.setAmount(0F);
+								if (rand.nextInt(10) == 0) Experience.setExperience(nbt, experience + 7);
+							}
+							if (rarity == Rarity.RARE)
+							{
+								if (rand.nextInt(25) == 0) event.setAmount(0F);
+								if (rand.nextInt(7) == 0) Experience.setExperience(nbt, experience + 7);
+							}
+							if (rarity == Rarity.LEGENDARY)
+							{
+								if (rand.nextInt(20) == 0) event.setAmount(0F);
+								if (rand.nextInt(5) == 0) Experience.setExperience(nbt, experience + 7);
+							}
+							if (rarity == Rarity.ANCIENT)
+							{
+								if (rand.nextInt(15) == 0) event.setAmount(0F);
+								if (rand.nextInt(3) == 0) Experience.setExperience(nbt, experience + 7);
+							}
+							
+							
+							/*
+							 * Abilities
+							 */
 							if (Ability.MOLTEN.hasAbility(nbt) && rand.nextInt(5) == 0) enemy.setFire(4);
 							if (Ability.FROZEN.hasAbility(nbt) && rand.nextInt(5) == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20*4, 10));
 							if (Ability.TOXIC.hasAbility(nbt) && rand.nextInt(5) == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(20), 20*4, 0));
-							if (Ability.ENLIGHTENED.hasAbility(nbt) && rand.nextInt(10) == 0)
+							/*if (Ability.BEASTIAL.hasAbility(nbt))
+							{
+								if (player.getHealth() <= 4F) player.addPotionEffect(new PotionEffect(Potion.getPotionById(5), 20*1, 2));
+							}*/
+							if (Ability.ENLIGHTENED.hasAbility(nbt) && rand.nextInt(7) == 0)
 							{
 								float health = player.getHealth() + (event.getAmount() / 2);
 								player.setHealth(health);
 							}
-							
+							//if (Ability.ABSORB.hasAbility(nbt) && rand.nextInt(7) == 0) player.addPotionEffect(new PotionEffect(Potion.getPotionById(10), 20*10, 1));
 							if (Ability.HARDENED.hasAbility(nbt) && rand.nextInt(10) == 0) event.setAmount(0F);
+							//if (Ability.INVISIBILITY.hasAbility(nbt) && rand.nextInt(10) == 0) player.addPotionEffect(new PotionEffect(Potion.getPotionById(14), 20*5, 0));
 							if (Ability.VOID_ARMOR.hasAbility(nbt) && rand.nextInt(20) == 0) enemy.setHealth(0F);
 							
 							/*

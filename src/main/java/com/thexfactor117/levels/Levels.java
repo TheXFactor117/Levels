@@ -8,7 +8,6 @@ import com.thexfactor117.levels.init.ModEvents;
 import com.thexfactor117.levels.network.PacketRarity;
 import com.thexfactor117.levels.network.PacketRarity.Handler;
 import com.thexfactor117.levels.proxies.CommonProxy;
-import com.thexfactor117.xlib.XLib;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -51,13 +50,5 @@ public class Levels
 	public void init(FMLInitializationEvent event) {}
 	
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event)
-	{
-		Levels.LOGGER.info("Checking if latest version...");
-		
-		XLib.PROXY.postInit();
-		
-		Levels.LOGGER.info("VersionChecker complete...");
-		Levels.LOGGER.info("Levels has finished initializing!");
-	}
+	public void postInit(FMLPostInitializationEvent event) {}
 }

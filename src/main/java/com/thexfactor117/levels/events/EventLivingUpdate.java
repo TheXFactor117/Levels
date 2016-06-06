@@ -10,6 +10,8 @@ import com.thexfactor117.xlib.misc.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -37,7 +39,7 @@ public class EventLivingUpdate
 				{
 					if (main[i] != null)
 					{
-						if (main[i].getItem() instanceof ItemSword)
+						if (main[i].getItem() instanceof ItemSword || main[i].getItem() instanceof ItemBow || main[i].getItem() instanceof ItemArmor)
 						{
 							ItemStack stack = main[i];
 							NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);

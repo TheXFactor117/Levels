@@ -24,15 +24,15 @@ public enum Ability
 	CHAINED(TextFormatting.GRAY, Rarity.LEGENDARY, 0.0125D, 0.015D, 0.025D, 0.035D, 0.065D),
 	VOID(TextFormatting.DARK_GRAY, Rarity.ANCIENT, 0.005D, 0.01D, 0.02D, 0.03D, 0.06D),
 	
-	MOLTEN(TextFormatting.RED, Rarity.BASIC, 0.266667D, 0.2333333D, 0.2D, 0.166667D, 0.116667D),
-	FROZEN(TextFormatting.AQUA, Rarity.BASIC, 0.266667D, 0.2333333D, 0.2D, 0.166667D, 0.116667D),
-	TOXIC(TextFormatting.DARK_PURPLE, Rarity.UNCOMMON, 0.266666D, 0.233334D, 0.2D, 0.166666D, 0.116666D),
-	//BEASTIAL(TextFormatting.GOLD, Rarity.UNCOMMON),
-	ENLIGHTENED(TextFormatting.YELLOW, Rarity.RARE, 0.12D, 0.2D, 0.25D, 0.3D, 0.4D),
-	//ABSORB(TextFormatting.GREEN, Rarity.RARE),
-	HARDENED(TextFormatting.GRAY, Rarity.LEGENDARY, 0.06D, 0.07D, 0.1D, 0.12D, 0.15D),
-	//INVISIBILITY(TextFormatting.WHITE, Rarity.LEGENDARY),
-	VOID_ARMOR(TextFormatting.DARK_GRAY, Rarity.ANCIENT, 0.02D, 0.03D, 0.05D, 0.08D, 0.1D);
+	MOLTEN(TextFormatting.RED, Rarity.BASIC, 0.4D, 0.35D, 0.3D, 0.25D, 0.175D),
+	FROZEN(TextFormatting.AQUA, Rarity.BASIC, 0.4D, 0.35D, 0.3D, 0.25D, 0.175D),
+	TOXIC(TextFormatting.DARK_PURPLE, Rarity.UNCOMMON, 0.06D, 0.08D, 0.1D, 0.125D, 0.14D),
+	BEASTIAL(TextFormatting.GOLD, Rarity.UNCOMMON, 0.06D, 0.08D, 0.1D, 0.125D, 0.14D),
+	ENLIGHTENED(TextFormatting.YELLOW, Rarity.RARE, 0.025D, 0.05D, 0.065D, 0.075D, 0.09D),
+	ABSORB(TextFormatting.GREEN, Rarity.RARE, 0.025D, 0.05D, 0.065D, 0.075D, 0.09D),
+	HARDENED(TextFormatting.GRAY, Rarity.LEGENDARY, 0.0125D, 0.015D, 0.025D, 0.035D, 0.065D),
+	INVISIBILITY(TextFormatting.WHITE, Rarity.LEGENDARY, 0.0125D, 0.015D, 0.025D, 0.035D, 0.065D),
+	VOID_ARMOR(TextFormatting.DARK_GRAY, Rarity.ANCIENT, 0.005D, 0.01D, 0.02D, 0.03D, 0.07D);
 	
 	private final String color;
 	private final Rarity rarity;
