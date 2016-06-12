@@ -1,0 +1,10 @@
+{
+	"homepage": "http://minecraft.curseforge.com/projects/xlib/files",
+	"promos": {
+		"1.9.4-latest": "r1.0.2",
+		"1.9.4-recommended": "r1.0.2"
+	},
+	"1.9.4": {
+		"r1.0.2": "A new version of xLib is available!"
+	}
+}

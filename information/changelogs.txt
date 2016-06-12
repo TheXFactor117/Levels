@@ -1,3 +1,6 @@
+Upcoming changes
+* Updated to Forge 1954
+
 r3.0.x
 + Updated to 1.9.4
 + New additions to tooltips
@@ -8,6 +11,7 @@ r3.0.x
 * Reverted back to the old 6-level system (still configurable, however)
 * Minor updates to configuration file
 * Dependent on xLib now
+* Fixes issue with armor experience gain
 
 r2.3.x
 + Added an enemy leveling system (weakened, normal, hardened, superior, elite and legendary enemies)
