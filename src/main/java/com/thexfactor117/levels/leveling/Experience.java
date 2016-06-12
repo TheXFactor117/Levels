@@ -59,7 +59,7 @@ public class Experience
 	{
 		int newLevel = currentLevel;
 		
-		while (currentLevel < ConfigHandler.maxLevelCap && experience >= Experience.getMaxLevelExp(currentLevel))
+		while (currentLevel < ConfigHandler.MAX_LEVEL_CAP && experience >= Experience.getMaxLevelExp(currentLevel))
 		{
 			newLevel = currentLevel + 1;
 			currentLevel++;

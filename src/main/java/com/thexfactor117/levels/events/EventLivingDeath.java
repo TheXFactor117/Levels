@@ -55,16 +55,16 @@ public class EventLivingDeath
 						/*
 						 * Weapon Bonus Experience
 						 */
-						if (level < ConfigHandler.maxLevelCap)
+						if (level < ConfigHandler.MAX_LEVEL_CAP)
 						{
 							if (event.getEntityLiving() instanceof EntityMob)
 							{
-								Experience.setExperience(nbt, Experience.getExperience(nbt) + ConfigHandler.monsterBonusExp);
+								Experience.setExperience(nbt, Experience.getExperience(nbt) + ConfigHandler.MONSTER_BONUS_XP);
 							}
 
 							if (event.getEntityLiving() instanceof EntityAnimal)
 							{
-								Experience.setExperience(nbt, Experience.getExperience(nbt) + ConfigHandler.animalBonusExp);
+								Experience.setExperience(nbt, Experience.getExperience(nbt) + ConfigHandler.ANIMAL_BONUS_XP);
 							}
 						}
 
@@ -103,16 +103,16 @@ public class EventLivingDeath
 					/*
 					 * Bow bonus experience
 					 */
-					if (level < ConfigHandler.maxLevelCap)
+					if (level < ConfigHandler.MAX_LEVEL_CAP)
 					{
 						if (event.getEntityLiving() instanceof EntityMob)
 						{
-							Experience.setExperience(nbt, Experience.getExperience(nbt) + ConfigHandler.monsterBonusExp);
+							Experience.setExperience(nbt, Experience.getExperience(nbt) + ConfigHandler.MONSTER_BONUS_XP);
 						}
 
 						if (event.getEntityLiving() instanceof EntityAnimal)
 						{
-							Experience.setExperience(nbt, Experience.getExperience(nbt) + ConfigHandler.animalBonusExp);
+							Experience.setExperience(nbt, Experience.getExperience(nbt) + ConfigHandler.ANIMAL_BONUS_XP);
 						}
 					}
 					

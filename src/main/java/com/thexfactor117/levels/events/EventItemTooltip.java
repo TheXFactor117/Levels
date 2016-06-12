@@ -51,7 +51,7 @@ public class EventItemTooltip
 					Rarity rarity = Rarity.getRarity(nbt);
 					String exp;
 					
-					if (Experience.getLevel(nbt) == ConfigHandler.maxLevelCap) exp = I18n.format("levels.experience.max");
+					if (Experience.getLevel(nbt) == ConfigHandler.MAX_LEVEL_CAP) exp = I18n.format("levels.experience.max");
 					else exp = Experience.getExperience(nbt) + " / " + Experience.getMaxLevelExp(Experience.getLevel(nbt));
 					
 					event.getToolTip().add("");
@@ -62,7 +62,7 @@ public class EventItemTooltip
 					
 					event.getToolTip().add("Experience: " + exp);
 					
-					if (!ConfigHandler.enableDurability) event.getToolTip().add("Durability: Unlimited");
+					if (!ConfigHandler.DURABILITY) event.getToolTip().add("Durability: Unlimited");
 					else event.getToolTip().add("Durability: " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
 					
 					event.getToolTip().add("");

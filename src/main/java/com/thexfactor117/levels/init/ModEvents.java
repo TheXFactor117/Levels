@@ -21,7 +21,7 @@ public class ModEvents
 	{
 		Levels.LOGGER.info("Registering events...");
 
-		if (ConfigHandler.enableWeaponLeveling)
+		if (ConfigHandler.LEVELING_SYSTEM)
 		{
 			Levels.LOGGER.info("Weapon Leveling system activating...");
 			MinecraftForge.EVENT_BUS.register(new EventLivingHurt());
@@ -30,7 +30,7 @@ public class ModEvents
 			MinecraftForge.EVENT_BUS.register(new EventLivingUpdate());
 		}
 		
-		if (ConfigHandler.enableMobDrops)
+		if (ConfigHandler.MOB_DROPS)
 		{
 			Levels.LOGGER.info("Mob droppings have been enabled...");
 			MinecraftForge.EVENT_BUS.register(new EventLivingDrops());

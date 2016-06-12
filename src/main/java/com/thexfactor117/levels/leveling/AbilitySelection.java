@@ -20,7 +20,7 @@ import net.minecraft.util.text.TextFormatting;
 public class AbilitySelection 
 {
 	@SuppressWarnings("unchecked")
-	private static final RandomCollection<Integer>[] ABILITY_LEVELS = new RandomCollection[ConfigHandler.maxLevelCap];
+	private static final RandomCollection<Integer>[] ABILITY_LEVELS = new RandomCollection[ConfigHandler.MAX_LEVEL_CAP];
 	
 	/**
 	 * Uses AbilityHelper.getRandomAbility to set a random ability to the stack when it levels up.
@@ -34,7 +34,7 @@ public class AbilitySelection
 	{
 		setAbilityWeights(nbt);
 		Levels.LOGGER.info("AbilitySelection level: " + level);
-		Levels.LOGGER.info("Max Level Cap: " + ConfigHandler.maxLevelCap);
+		Levels.LOGGER.info("Max Level Cap: " + ConfigHandler.MAX_LEVEL_CAP);
 		
 		if (level > 1)
 		{
@@ -75,7 +75,7 @@ public class AbilitySelection
 		
 		if (rarity != Rarity.UNKNOWN)
 		{
-			for (int level = 2; level <= ConfigHandler.maxLevelCap; level++)
+			for (int level = 2; level <= ConfigHandler.MAX_LEVEL_CAP; level++)
 			{
 				RandomCollection<Integer> abilityLevels = new RandomCollection<Integer>();
 				

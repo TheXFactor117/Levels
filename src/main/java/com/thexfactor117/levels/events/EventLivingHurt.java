@@ -73,7 +73,7 @@ public class EventLivingHurt
 						/*
 						 * Experience
 						 */
-						if (level < ConfigHandler.maxLevelCap)
+						if (level < ConfigHandler.MAX_LEVEL_CAP)
 						{
 							boolean isDev = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 							
@@ -125,7 +125,7 @@ public class EventLivingHurt
 						float amount = event.getAmount();
 						event.setAmount(amount *= damageMultiplier);
 
-						if (ConfigHandler.enableDurability)
+						if (ConfigHandler.DURABILITY)
 						{
 							// Durability boosts
 							// rare
@@ -318,7 +318,7 @@ public class EventLivingHurt
 							/*
 							 * Experience
 							 */
-							if (level < ConfigHandler.maxLevelCap)
+							if (level < ConfigHandler.MAX_LEVEL_CAP)
 							{
 								boolean isDev = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 								
@@ -359,7 +359,7 @@ public class EventLivingHurt
 							float amount = event.getAmount();
 							event.setAmount(amount *= damageMultiplier);
 							
-							if (ConfigHandler.enableDurability)
+							if (ConfigHandler.DURABILITY)
 							{
 								// Durability boosts
 								// rare
@@ -534,7 +534,7 @@ public class EventLivingHurt
 							/*
 							 * Experience
 							 */
-							if (level < ConfigHandler.maxLevelCap)
+							if (level < ConfigHandler.MAX_LEVEL_CAP)
 							{
 								experience += level > 3 && rand.nextInt(3) == 0 ? 1 + rand.nextInt(3) : 1;
 								Experience.setExperience(nbt, experience);
