@@ -23,6 +23,13 @@ public class ConfigHandler
 	public static int MONSTER_BONUS_XP;
 	public static int ANIMAL_BONUS_XP;
 	
+	// rarities
+	public static double BASIC_WEIGHT;
+	public static double UNCOMMON_WEIGHT;
+	public static double RARE_WEIGHT;
+	public static double LEGENDARY_WEIGHT;
+	public static double ANCIENT_WEIGHT;
+	
 	// abilities
 	public static int BURN_TIME;
 	public static int STUN_TIME;
@@ -79,6 +86,15 @@ public class ConfigHandler
 		MAX_LEVEL_CAP = CONFIG.getInt("maxLevelCap", category, 6, 1, 100, "Configures the maximum level cap.");
 		MONSTER_BONUS_XP = CONFIG.getInt("monsterBonusXP", category, 10, 0, 100, "Configures the bonus experience awarded when killing a monster.");
 		ANIMAL_BONUS_XP = CONFIG.getInt("animalBonusXP", category, 2, 0, 20, "Configures the bonus experience awarded when killing an animal.");
+		
+		// rarities
+		category = "Rarities";
+		CONFIG.addCustomCategoryComment(category, "Rarity settings. ALL OF THESE VALUES MUST ADD UP TO 1!");
+		BASIC_WEIGHT = CONFIG.getFloat("basicWeight", category, 0.5F, 0F, 1F, "The weight of the Basic rarity. In other words, percentage. (e.g. 0.5F = 50%)");
+		UNCOMMON_WEIGHT = CONFIG.getFloat("uncommonWeight", category, 0.25F, 0F, 1F, "The weight of the Uncommon rarity. In other words, percentage. (e.g. 0.5F = 50%)");
+		RARE_WEIGHT = CONFIG.getFloat("rareWeight", category, 0.15F, 0F, 1F, "The weight of the Rare rarity. In other words, percentage. (e.g. 0.5F = 50%)");
+		LEGENDARY_WEIGHT = CONFIG.getFloat("legendaryWeight", category, 0.07F, 0F, 1F, "The weight of the Legendary rarity. In other words, percentage. (e.g. 0.5F = 50%)");
+		ANCIENT_WEIGHT = CONFIG.getFloat("ancientWeight", category, 0.03F, 0F, 1F, "The weight of the Ancient rarity. In other words, percentage. (e.g. 0.5F = 50%)");
 		
 		// abilities
 		category = "Abilities";

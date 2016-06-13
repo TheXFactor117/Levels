@@ -2,6 +2,7 @@ package com.thexfactor117.levels.leveling;
 
 import java.util.Random;
 
+import com.thexfactor117.levels.handlers.ConfigHandler;
 import com.thexfactor117.xlib.misc.RandomCollection;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,11 +16,11 @@ import net.minecraft.util.text.TextFormatting;
 public enum Rarity 
 {
 	UNKNOWN("", 0.0D),
-	BASIC(TextFormatting.WHITE, 0.5D),
-	UNCOMMON(TextFormatting.DARK_GREEN, 0.25D),
-	RARE(TextFormatting.AQUA, 0.15D),
-	LEGENDARY(TextFormatting.DARK_PURPLE, 0.07D),
-	ANCIENT(TextFormatting.GOLD, 0.03D);
+	BASIC(TextFormatting.WHITE, ConfigHandler.BASIC_WEIGHT),
+	UNCOMMON(TextFormatting.DARK_GREEN, ConfigHandler.UNCOMMON_WEIGHT),
+	RARE(TextFormatting.AQUA, ConfigHandler.RARE_WEIGHT),
+	LEGENDARY(TextFormatting.DARK_PURPLE, ConfigHandler.LEGENDARY_WEIGHT),
+	ANCIENT(TextFormatting.GOLD, ConfigHandler.ANCIENT_WEIGHT);
 	
 	private static final Rarity[] RARITIES = Rarity.values();
 	private static final RandomCollection<Rarity> RANDOM_RARITIES = new RandomCollection<Rarity>();

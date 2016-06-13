@@ -1,11 +1,16 @@
 Upcoming changes
-* Updated to Forge 1954
 
 r3.0.x
 + Updated to 1.9.4
 + New additions to tooltips
 + Re-implemented armor! Includes 9 abilities, alongside leveling/rarity systems similar to weapons/bows
++ Added a Chained ability for bows. Never got fully implemented through updating.
 - Removed enemy leveling system (temporary)
+* Changed poison abilities to use wither effects instead of poison. Still called poison.
+* Lots of improvements and balancing with abilities
+* Fixed issue with armor abilities not working properly
+* Major improvements to configuration file
+* Implemented a new version checker
 * Changed rarity application process. No longer have to kill a monster.
 * Implemented a much more comprehensive ability selection system
 * Reverted back to the old 6-level system (still configurable, however)
