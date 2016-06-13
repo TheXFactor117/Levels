@@ -7,7 +7,7 @@
 		"1.7.10-recommended": "r3.0.1"
 	},
 	"1.9.4": {
-		"r3.0.2": "+ Updated to 1.9.4\n+ New additions to tooltips\n+ Re-implemented armor! Includes 9 abilities, alongside leveling/rarity systems similar to weapons/bows\n- Removed enemy leveling system (temporary)\n* Changed rarity application process. No longer have to kill a monster.\n* Implemented a much more comprehensive ability selection system\n* Reverted back to the old 6-level system (still configurable, however)\n* Minor updates to configuration file\n* Dependent on xLib now\n* Fixes issue with armor experience gain"
+		"r3.0.2": "+ Added a Chained ability for bows. Never got fully implemented through updating.\n* Changed poison abilities to use wither effects instead of poison. Still called poison.\n* Lots of improvements and balancing with abilities\n* Fixed issue with armor abilities not working properly\n* Major improvements to configuration file\n* Implemented a new version checker"
 	},
 	"1.7.10": {
 		"r3.0.1": "* Backported 1.9.4 version of Levels back to 1.7.10"
