@@ -220,48 +220,44 @@ public class EventLivingHurt
 						 */
 						if (enemy != null)
 						{
-							if (Ability.FIRE.hasAbility(nbt)) enemy.setFire(4);
-							if (Ability.FROST.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20*4, 10));
-							if (Ability.POISON.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(19), 20*7, 0));
-							if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(10) == 0) player.addPotionEffect(new PotionEffect(Potion.getPotionById(5), 20*5, 0));
-							if (Ability.ELEMENTAL.hasAbility(nbt))
+							if (Ability.FIRE.hasAbility(nbt)) enemy.setFire(ConfigHandler.BURN_TIME);
+							if (Ability.FROST.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20 * ConfigHandler.STUN_TIME, 10));
+							if (Ability.POISON.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(20), 20 * ConfigHandler.POISON_TIME, 0));
+							if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(ConfigHandler.STRENGTH_PERCENTAGE) == 0) player.addPotionEffect(new PotionEffect(Potion.getPotionById(5), 20 * ConfigHandler.STRENGTH_TIME, 0));
+							if (Ability.ELEMENTAL.hasAbility(nbt) && rand.nextInt(ConfigHandler.ELEMENTAL_PERCENTAGE) == 0)
 							{
-								int var = rand.nextInt(3);
-								if (var == 0) enemy.setFire(4);
-								if (var == 1) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20*4, 10));
-								if (var == 2) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(19), 20*7, 0));
+								int var1 = rand.nextInt(3);
+								if (var1 == 0) enemy.setFire(ConfigHandler.BURN_TIME);
+								if (var1 == 1) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20 * ConfigHandler.STUN_TIME, 10));
+								if (var1 == 2) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(19), 20 * ConfigHandler.POISON_TIME, 0));
 							}
 							
-							if (Ability.DARKNESS.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 20*5, 0));
+							if (Ability.DARKNESS.hasAbility(nbt) && rand.nextInt(ConfigHandler.DARKNESS_PERCENTAGE) == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 20 * ConfigHandler.DARKNESS_TIME, 0));
 							if (Ability.LIGHT.hasAbility(nbt))
 							{
-								enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(18), 20*5, 0));
-								int var = rand.nextInt(10);
-								if (var == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 20*3, 0));
+								enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(18), 20 * ConfigHandler.LIGHT_TIME, 0));
+								int var = rand.nextInt(ConfigHandler.LIGHT_PERCENTAGE_BONUS);
+								if (var == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 20 * ConfigHandler.LIGHT_TIME_BONUS, 0));
 							}
 							
-							if (Ability.BLOODLUST.hasAbility(nbt))
+							if (Ability.BLOODLUST.hasAbility(nbt) && rand.nextInt(ConfigHandler.BLOODLUST_PERCENTAGE) == 0)
 							{
-								int var = rand.nextInt(10);
-								if (var == 0)
-								{
-									int var1 = rand.nextInt(10) + 1;
-									enemy.setHealth(enemy.getHealth() - var1);
-								}
+								int var = rand.nextInt(ConfigHandler.BLOODLUST_BONUS) + 1;
+								enemy.setHealth(enemy.getHealth() - var);
 							}
 							
-							if (Ability.STING.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.setHealth(enemy.getHealth() - 10);
+							if (Ability.STING.hasAbility(nbt) && rand.nextInt(ConfigHandler.STING_PERCENTAGE) == 0) enemy.setHealth(enemy.getHealth() - ConfigHandler.STING_AMOUNT);
 							
-							if (Ability.ETHEREAL.hasAbility(nbt) && rand.nextInt(2) == 0)
+							if (Ability.ETHEREAL.hasAbility(nbt) && rand.nextInt(ConfigHandler.ETHEREAL_PERCENTAGE) == 0)
 							{
 								float health = player.getHealth() + (event.getAmount() / 2);
 								player.setHealth(health);
 							}
 							
-							if (Ability.CHAINED.hasAbility(nbt) && rand.nextInt(10) == 0)
+							if (Ability.CHAINED.hasAbility(nbt) && rand.nextInt(ConfigHandler.CHAINED_PERCENTAGE) == 0)
 							{
 								World world = enemy.getEntityWorld();
-								List entityList = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.posX - 10, player.posY - 10, player.posZ - 10, player.posX + 10, player.posY + 10, player.posZ + 10));
+								List entityList = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.posX - ConfigHandler.CHAINED_RADIUS, player.posY - ConfigHandler.CHAINED_RADIUS, player.posZ - ConfigHandler.CHAINED_RADIUS, player.posX + ConfigHandler.CHAINED_RADIUS, player.posY + ConfigHandler.CHAINED_RADIUS, player.posZ + ConfigHandler.CHAINED_RADIUS));
 								Iterator iterator = entityList.iterator();
 								
 								while (iterator.hasNext())
@@ -270,12 +266,12 @@ public class EventLivingHurt
 									
 									if (entity instanceof EntityLivingBase)
 									{
-										entity.setFire(5);
+										entity.setFire(ConfigHandler.BURN_TIME);
 									}
 								}
 							}
 							
-							if (Ability.VOID.hasAbility(nbt) && rand.nextInt(20) == 0) enemy.setHealth(0);
+							if (Ability.VOID.hasAbility(nbt) && rand.nextInt(ConfigHandler.VOID_PERCENTAGE) == 0) enemy.setHealth(0);
 						}
 						
 						/*
@@ -454,44 +450,58 @@ public class EventLivingHurt
 							 */
 							if (enemy != null)
 							{
-								if (Ability.FIRE.hasAbility(nbt)) enemy.setFire(4);
-								if (Ability.FROST.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20*4, 10));
-								if (Ability.POISON.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(19), 20*7, 0));
-								if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(10) == 0) player.addPotionEffect(new PotionEffect(Potion.getPotionById(1), 20*10, 0));
-								if (Ability.ELEMENTAL.hasAbility(nbt))
+								if (Ability.FIRE.hasAbility(nbt)) enemy.setFire(ConfigHandler.BURN_TIME);
+								if (Ability.FROST.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20 * ConfigHandler.STUN_TIME, 10));
+								if (Ability.POISON.hasAbility(nbt)) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(20), 20 * ConfigHandler.POISON_TIME, 0));
+								if (Ability.STRENGTH.hasAbility(nbt) && rand.nextInt(ConfigHandler.STRENGTH_PERCENTAGE) == 0) player.addPotionEffect(new PotionEffect(Potion.getPotionById(5), 20 * ConfigHandler.STRENGTH_TIME, 0));
+								if (Ability.ELEMENTAL.hasAbility(nbt) && rand.nextInt(ConfigHandler.ELEMENTAL_PERCENTAGE) == 0)
 								{
-									int var = rand.nextInt(3);
-									if (var == 0) enemy.setFire(4);
-									if (var == 1) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20*4, 10));
-									if (var == 2) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(19), 20*7, 0));
+									int var1 = rand.nextInt(3);
+									if (var1 == 0) enemy.setFire(ConfigHandler.BURN_TIME);
+									if (var1 == 1) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20 * ConfigHandler.STUN_TIME, 10));
+									if (var1 == 2) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(19), 20 * ConfigHandler.POISON_TIME, 0));
 								}
 								
-								if (Ability.DARKNESS.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 20*5, 0));
+								if (Ability.DARKNESS.hasAbility(nbt) && rand.nextInt(ConfigHandler.DARKNESS_PERCENTAGE) == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 20 * ConfigHandler.DARKNESS_TIME, 0));
 								if (Ability.LIGHT.hasAbility(nbt))
 								{
-									enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(18), 20*5, 0));
-									int var = rand.nextInt(10);
-									if (var == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 20*3, 0));
+									enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(18), 20 * ConfigHandler.LIGHT_TIME, 0));
+									int var = rand.nextInt(ConfigHandler.LIGHT_PERCENTAGE_BONUS);
+									if (var == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 20 * ConfigHandler.LIGHT_TIME_BONUS, 0));
 								}
 								
-								if (Ability.BLOODLUST.hasAbility(nbt))
+								if (Ability.BLOODLUST.hasAbility(nbt) && rand.nextInt(ConfigHandler.BLOODLUST_PERCENTAGE) == 0)
 								{
-									int var = rand.nextInt(10);
-									if (var == 0)
-									{
-										int var1 = rand.nextInt(10) + 1;
-										enemy.setHealth(enemy.getHealth() - var1);
-									}
+									int var = rand.nextInt(ConfigHandler.BLOODLUST_BONUS) + 1;
+									enemy.setHealth(enemy.getHealth() - var);
 								}
 								
-								if (Ability.ETHEREAL.hasAbility(nbt) && rand.nextInt(2) == 0)
+								if (Ability.STING.hasAbility(nbt) && rand.nextInt(ConfigHandler.STING_PERCENTAGE) == 0) enemy.setHealth(enemy.getHealth() - ConfigHandler.STING_AMOUNT);
+								
+								if (Ability.ETHEREAL.hasAbility(nbt) && rand.nextInt(ConfigHandler.ETHEREAL_PERCENTAGE) == 0)
 								{
 									float health = player.getHealth() + (event.getAmount() / 2);
 									player.setHealth(health);
 								}
 								
-								if (Ability.STING.hasAbility(nbt) && rand.nextInt(10) == 0) enemy.setHealth(enemy.getHealth() - 10);
-								if (Ability.VOID.hasAbility(nbt) && rand.nextInt(20) == 0) enemy.setHealth(0);
+								if (Ability.CHAINED.hasAbility(nbt) && rand.nextInt(ConfigHandler.CHAINED_PERCENTAGE) == 0)
+								{
+									World world = enemy.getEntityWorld();
+									List entityList = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.posX - ConfigHandler.CHAINED_RADIUS, player.posY - ConfigHandler.CHAINED_RADIUS, player.posZ - ConfigHandler.CHAINED_RADIUS, player.posX + ConfigHandler.CHAINED_RADIUS, player.posY + ConfigHandler.CHAINED_RADIUS, player.posZ + ConfigHandler.CHAINED_RADIUS));
+									Iterator iterator = entityList.iterator();
+									
+									while (iterator.hasNext())
+									{
+					                    Entity entity = (Entity) iterator.next();
+										
+										if (entity instanceof EntityLivingBase)
+										{
+											entity.setFire(ConfigHandler.BURN_TIME);
+										}
+									}
+								}
+								
+								if (Ability.VOID.hasAbility(nbt) && rand.nextInt(ConfigHandler.VOID_PERCENTAGE) == 0) enemy.setHealth(0);
 							}
 							
 							/*
@@ -568,22 +578,22 @@ public class EventLivingHurt
 							/*
 							 * Abilities
 							 */
-							if (Ability.MOLTEN.hasAbility(nbt) && rand.nextInt(5) == 0) enemy.setFire(4);
-							if (Ability.FROZEN.hasAbility(nbt) && rand.nextInt(5) == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20*4, 10));
-							if (Ability.TOXIC.hasAbility(nbt) && rand.nextInt(5) == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(20), 20*4, 0));
-							/*if (Ability.BEASTIAL.hasAbility(nbt))
+							if (Ability.MOLTEN.hasAbility(nbt) && rand.nextInt(ConfigHandler.BASIC_ARMOR_PERCENTAGE) == 0) enemy.setFire(ConfigHandler.BURN_TIME);
+							if (Ability.FROZEN.hasAbility(nbt) && rand.nextInt(ConfigHandler.BASIC_ARMOR_PERCENTAGE) == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20 * ConfigHandler.STUN_TIME, 10));
+							if (Ability.TOXIC.hasAbility(nbt) && rand.nextInt(ConfigHandler.BASIC_ARMOR_PERCENTAGE) == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(20), 20 * ConfigHandler.POISON_TIME, 0));
+							if (Ability.BEASTIAL.hasAbility(nbt))
 							{
-								if (player.getHealth() <= 4F) player.addPotionEffect(new PotionEffect(Potion.getPotionById(5), 20*1, 2));
-							}*/
-							if (Ability.ENLIGHTENED.hasAbility(nbt) && rand.nextInt(7) == 0)
+								if (player.getHealth() <= ConfigHandler.BEASTIAL_MIN_HEALTH) player.addPotionEffect(new PotionEffect(Potion.getPotionById(5), 20 * ConfigHandler.BEASTIAL_TIME, 2));
+							}
+							if (Ability.ENLIGHTENED.hasAbility(nbt) && rand.nextInt(ConfigHandler.ENLIGHTENED_PERCENTAGE) == 0)
 							{
 								float health = player.getHealth() + (event.getAmount() / 2);
 								player.setHealth(health);
 							}
-							//if (Ability.ABSORB.hasAbility(nbt) && rand.nextInt(7) == 0) player.addPotionEffect(new PotionEffect(Potion.getPotionById(10), 20*10, 1));
-							if (Ability.HARDENED.hasAbility(nbt) && rand.nextInt(10) == 0) event.setAmount(0F);
-							//if (Ability.INVISIBILITY.hasAbility(nbt) && rand.nextInt(10) == 0) player.addPotionEffect(new PotionEffect(Potion.getPotionById(14), 20*5, 0));
-							if (Ability.VOID_ARMOR.hasAbility(nbt) && rand.nextInt(20) == 0) enemy.setHealth(0F);
+							if (Ability.ABSORB.hasAbility(nbt) && rand.nextInt(ConfigHandler.ABSORB_PERCENTAGE) == 0) player.addPotionEffect(new PotionEffect(Potion.getPotionById(10), 20 * ConfigHandler.ABSORB_TIME, 0));
+							if (Ability.HARDENED.hasAbility(nbt) && rand.nextInt(ConfigHandler.HARDENED_PERCENTAGE) == 0) event.setAmount(0F);
+							if (Ability.INVISIBILITY.hasAbility(nbt) && rand.nextInt(ConfigHandler.INVISIBILITY_PERCENTAGE) == 0) player.addPotionEffect(new PotionEffect(Potion.getPotionById(14), 20 * ConfigHandler.INVISIBILITY_TIME, 0));
+							if (Ability.VOID_ARMOR.hasAbility(nbt) && rand.nextInt(ConfigHandler.VOID_PERCENTAGE) == 0) enemy.setHealth(0F);
 							
 							/*
 							 * Leveling system
