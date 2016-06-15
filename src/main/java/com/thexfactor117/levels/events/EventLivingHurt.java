@@ -54,7 +54,7 @@ public class EventLivingHurt
 			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
 			Random rand = player.worldObj.rand;
 			EntityLivingBase enemy = event.getEntityLiving();
-			ItemStack stack = player.inventory.getCurrentItem();
+			ItemStack stack = player.getHeldItem(player.getActiveHand());
 			
 			if (stack != null)
 			{
