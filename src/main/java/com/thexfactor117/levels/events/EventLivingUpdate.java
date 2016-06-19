@@ -53,7 +53,6 @@ public class EventLivingUpdate
 								{
 									rarity = Rarity.getRandomRarity(rand);
 									rarity.setRarity(nbt);
-									Levels.LOGGER.info(rarity);
 									NBTHelper.saveStackNBT(stack, nbt);
 									Levels.NETWORK.sendTo(new PacketRarity(NBTHelper.loadStackNBT(stack)), (EntityPlayerMP) player);
 									if (rarity == Rarity.ANCIENT) player.worldObj.playSound(player, player.getPosition(), SoundEvents.ENTITY_ENDERDRAGON_DEATH, player.getSoundCategory(), 0.8F, 1.0F);

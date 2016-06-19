@@ -6,6 +6,8 @@ r3.0.x
 + Re-implemented armor! Includes 9 abilities, alongside leveling/rarity systems similar to weapons/bows
 + Added a Chained ability for bows. Never got fully implemented through updating.
 - Removed enemy leveling system (temporary)
+* Removed a lot of debugging information
+* Changed xLib dependency requirements.
 * Changed poison abilities to use wither effects instead of poison. Still called poison.
 * Lots of improvements and balancing with abilities
 * Fixed issue with armor abilities not working properly

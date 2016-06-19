@@ -36,7 +36,6 @@ public class ModEvents
 			MinecraftForge.EVENT_BUS.register(new EventLivingDrops());
 		}
 
-		Levels.LOGGER.info("Configurations are not working right now. Development features being disabled.");
 		Levels.LOGGER.info("Event registration has finished.");
 	}
 }

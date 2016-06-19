@@ -1,12 +1,13 @@
 {
 	"homepage": "http://minecraft.curseforge.com/projects/levels/files",
 	"promos": {
-		"1.9.4-latest": "r3.0.2",
-		"1.9.4-recommended": "r3.0.2",
+		"1.9.4-latest": "r3.0.3",
+		"1.9.4-recommended": "r3.0.3",
 		"1.7.10-latest": "r3.0.1",
 		"1.7.10-recommended": "r3.0.1"
 	},
 	"1.9.4": {
+		"r3.0.3": "* Removed a lot of debugging information\n* Changed xLib dependency requirements.",
 		"r3.0.2": "+ Added a Chained ability for bows. Never got fully implemented through updating.\n* Changed poison abilities to use wither effects instead of poison. Still called poison.\n* Lots of improvements and balancing with abilities\n* Fixed issue with armor abilities not working properly\n* Major improvements to configuration file\n* Implemented a new version checker"
 	},
 	"1.7.10": {
