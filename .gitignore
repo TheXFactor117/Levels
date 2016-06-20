@@ -10,10 +10,16 @@
 /Levels_Client.launch
 /Levels_Server.launch
 /.gitignore
-/build
 /run
 /saves
 /usercache.json
 /usernamecache.json
 /options.txt
 /crash-reports
+/build/classes
+/build/sources
+/build/tmp
+/build/resources
+/build/dependency-cache
+/build/retromapping
+/build/taskLogs
