@@ -18,17 +18,31 @@ plugins {
     id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
 */
-version = "1.9.4-r3.0.3"
+
+loadProperties()
+
 group= "com.thexfactor117.levels" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Levels"
 
-minecraft {
+def loadProperties() {
+    ext.configFile = file "build.properties"
+
+    configFile.withReader {
+        def prop = new Properties()
+        prop.load(it)
+        project.ext.config = new ConfigSlurper().parse prop
+    }
+
+    ext.mod_version = "Test"
+}
+
+/*minecraft {
     version = "1.9.4-12.17.0.1960"
     runDir = "run"
 
     mappings = "snapshot_20160518"
     makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-}
+}*/
 
 dependencies {
     // you may put jars on which you depend on in ./libs
