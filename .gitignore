@@ -3,10 +3,6 @@
 /.gradle
 /.project
 /.settings
-/build.gradle
-/gradle
-/gradlew
-/gradlew.bat
 /config
 /eula.txt
 /logs
