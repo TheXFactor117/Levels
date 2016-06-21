@@ -1,4 +1,7 @@
 # Levels
+
+[![Build Status](https://drone.io/github.com/TheXFactor117/Levels/status.png)](https://drone.io/github.com/TheXFactor117/Levels/latest)
+
 ### About Levels
 Levels is an innovative mod, centered around the concept of leveling systems, combined with adding many new features to the combat system within Minecraft. With Levels, you will be able to level up all of your weapons, swords and axes, along with tools and armor. On top of this, enemies will also become leveled, giving the option of a more challenging experience.
 
