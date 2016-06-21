@@ -572,6 +572,98 @@ public class EventLivingHurt
 								if (rand.nextInt(3) == 0) Experience.setExperience(nbt, experience + 7);
 							}
 							
+							/*
+							 * Durability
+							 */
+							if (ConfigHandler.DURABILITY)
+							{
+								// Durability boosts
+								// rare
+								if (rarity == Rarity.RARE)
+								{
+									// reduction
+									int var = rand.nextInt(5);
+									if (var == 0)
+									{
+										if (stack.getItemDamage() == stack.getMaxDamage())
+										{
+											stack.setItemDamage(stack.getItemDamage());
+										}
+										else
+										{
+											stack.setItemDamage(stack.getItemDamage() - 1);
+										}
+									}
+								}
+								
+								// legendary
+								if (rarity == Rarity.LEGENDARY)
+								{
+									// reduction
+									int var = rand.nextInt(5);
+									if (var == 0)
+									{
+										if (stack.getItemDamage() == stack.getMaxDamage())
+										{
+											stack.setItemDamage(stack.getItemDamage());
+										}
+										else
+										{
+											stack.setItemDamage(stack.getItemDamage() - 1);
+										}
+									}
+									
+									// additional durability
+									int var1 = rand.nextInt(10);
+									if (var1 == 0)
+									{
+										if (stack.getItemDamage() <= stack.getMaxDamage() && stack.getItemDamage() >= (stack.getMaxDamage() - 10))
+										{
+											stack.setItemDamage(stack.getMaxDamage());
+										}
+										else
+										{
+											stack.setItemDamage(stack.getItemDamage() - 10);
+	 									}
+									}
+								}
+								
+								// ancient
+								if (rarity == Rarity.ANCIENT)
+								{
+									// reduction
+									int var = rand.nextInt(10);
+									if (var < 3)
+									{
+										if (stack.getItemDamage() == stack.getMaxDamage())
+										{
+											stack.setItemDamage(stack.getItemDamage());
+										}
+										else
+										{
+											stack.setItemDamage(stack.getItemDamage() - 1);
+										}
+									}
+									
+									// additional durability
+									int var1 = rand.nextInt(5);
+									if (var1 == 0)
+									{
+										if (stack.getItemDamage() <= stack.getMaxDamage() && stack.getItemDamage() >= (stack.getMaxDamage() - 10))
+										{
+											stack.setItemDamage(stack.getMaxDamage());
+										}
+										else
+										{
+											stack.setItemDamage(stack.getItemDamage() - 10);
+										}
+									}
+								}
+							}
+							else
+							{
+								stack.setItemDamage(-stack.getMaxDamage());
+							}
 							
 							/*
 							 * Abilities
