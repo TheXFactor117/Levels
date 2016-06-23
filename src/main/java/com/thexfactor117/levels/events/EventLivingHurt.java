@@ -25,6 +25,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -48,7 +49,7 @@ public class EventLivingHurt
 		 * WEAPONS
 		 *
 		 */
-		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer)
+		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer && !(event.getEntityLiving() instanceof FakePlayer))
 		{
 			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
 			Random rand = player.worldObj.rand;

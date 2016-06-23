@@ -15,7 +15,6 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -29,7 +28,7 @@ public class EventLivingUpdate
 	@SubscribeEvent
 	public void onUpdate(LivingEvent.LivingUpdateEvent event)
 	{
-		if (event.getEntityLiving() instanceof EntityPlayer && !(event.getEntityLiving() instanceof FakePlayer))
+		if (event.getEntityLiving() instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 			ItemStack[] main = player.inventory.mainInventory;

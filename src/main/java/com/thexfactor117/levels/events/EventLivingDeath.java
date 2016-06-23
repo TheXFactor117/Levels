@@ -14,6 +14,7 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -35,7 +36,7 @@ public class EventLivingDeath
 		/*****************
 		 * MELEE WEAPONS *
 		 *****************/
-		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer)
+		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer && !(event.getEntityLiving() instanceof FakePlayer))
 		{
 			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
 			Random rand = player.worldObj.rand;
