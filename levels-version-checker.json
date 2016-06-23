@@ -7,7 +7,8 @@
 		"1.7.10-recommended": "r3.0.1"
 	},
 	"1.9.4": {
-		"r3.0.5": "* Fixes issue with durability. Should be working properly now.\n* Implemented a build system.",
+		"r3.0.6": "* Potentially fixes issue with Woot.",
+		"r3.0.5": "* Fixes issue with durability. Should be working properly now.\n* Implemented a build system."
 	},
 	"1.7.10": {
 		"r3.0.1": "* Backported 1.9.4 version of Levels back to 1.7.10"
