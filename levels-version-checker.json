@@ -1,10 +1,15 @@
 {
 	"homepage": "http://minecraft.curseforge.com/projects/levels/files",
 	"promos": {
+		"1.10-latest": "r4.0.0",
+		"1.10-recommended": "r4.0.0",
 		"1.9.4-latest": "r3.0.5",
 		"1.9.4-recommended": "r3.0.5",
 		"1.7.10-latest": "r3.0.1",
 		"1.7.10-recommended": "r3.0.1"
+	},
+	"1.10": {
+		"r4.0.0": "* Updating to Forge 1.10."
 	},
 	"1.9.4": {
 		"r3.0.6": "* Potentially fixes issue with Woot.",
