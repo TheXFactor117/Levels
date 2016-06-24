@@ -36,7 +36,7 @@ public class EventLivingDeath
 		/*****************
 		 * MELEE WEAPONS *
 		 *****************/
-		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer && !(event.getEntityLiving() instanceof FakePlayer))
+		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer && !(event.getSource().getSourceOfDamage() instanceof FakePlayer))
 		{
 			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
 			Random rand = player.worldObj.rand;
