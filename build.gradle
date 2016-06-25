@@ -33,7 +33,7 @@ minecraft {
     runDir = "run"
 
     mappings = config.mappings
-    makeObfSourceJar = true // an Srg named sources jar is made by default. uncomment this to disable.
+    makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
     
     replace "@VERSION@", config.mod_version + "." + config.build_number
     replace "@MVERSION@", version
