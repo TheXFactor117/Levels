@@ -23,3 +23,6 @@
 /build/dependency-cache
 /build/retromapping
 /build/taskLogs
+/src
+/libs
+/gradle
