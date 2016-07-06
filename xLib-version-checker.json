@@ -1,12 +1,13 @@
 {
 	"homepage": "http://minecraft.curseforge.com/projects/xlib/files",
 	"promos": {
-		"1.10-latest": "r2.0.0",
-		"1.10-recommended": "r2.0.0",
+		"1.10-latest": "r2.0.1",
+		"1.10-recommended": "r2.0.1",
 		"1.9.4-latest": "r1.0.1",
 		"1.9.4-recommended": "r1.0.1"
 	},
 	"1.10": {
+		"r2.0.1": "+ Added base classes and methods used by Lost Eclipse",
 		"r2.0.0": "* Updated to Forge 1.10."
 	},
 	"1.9.4": {
