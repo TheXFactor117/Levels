@@ -1,6 +1,8 @@
 {
 	"homepage": "http://minecraft.curseforge.com/projects/levels/files",
 	"promos": {
+		"1.10.2-latest": "r4.1.0",
+		"1.10.2-recommened": "r4.1.0",
 		"1.10-latest": "r4.0.1",
 		"1.10-recommended": "r4.0.1",
 		"1.9.4-latest": "r3.0.9",
@@ -9,7 +11,7 @@
 		"1.7.10-recommended": "r3.0.1"
 	},
 	"1.10": {
-		"r4.0.1": "* Fixes issue with certain abilities not getting applied."
+		"r4.0.1": "* Fixes issue with certain abilities not getting applied.\n!!! Levels has been updated to 1.10.2, check it out!"
 	},
 	"1.9.4": {
 		"r3.0.9": "* Fixes issue with certain abilities not getting applied."
