@@ -1,5 +1,13 @@
 Upcoming changes
 
+r4.1.x
++ Updated to 1.10.2
++ Added Enemy Leveling systems
++ Added force commands to add rarities and abilities to weapons (disabled by default)
+- Removed xLib as a dependency (1.10.2+ versions DO NOT require xLib)
+* Changed default Void percentage chance to 1/50 instead of 1/20
+* Entities killed by the Void ability are registered as Player kills
+
 r3.0.x
 + Updated to 1.9.4
 + New additions to tooltips
