@@ -1,14 +1,17 @@
 {
 	"homepage": "http://minecraft.curseforge.com/projects/levels/files",
 	"promos": {
-		"1.10.2-latest": "r4.1.0",
-		"1.10.2-recommened": "r4.1.0",
+		"1.10.2-latest": "r4.1.2",
+		"1.10.2-recommened": "r4.1.2",
 		"1.10-latest": "r4.0.1",
 		"1.10-recommended": "r4.0.1",
 		"1.9.4-latest": "r3.0.9",
 		"1.9.4-recommended": "r3.0.9",
 		"1.7.10-latest": "r3.0.1",
 		"1.7.10-recommended": "r3.0.1"
+	},
+	"1.10.2": {
+		"r4.1.2": "* Fixes server crashing on startup\n* Added Waila integration if installed"	
 	},
 	"1.10": {
 		"r4.0.1": "* Fixes issue with certain abilities not getting applied.\n!!! Levels has been updated to 1.10.2, check it out!"
