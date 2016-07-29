@@ -1,28 +1,8 @@
-/bin/
 /.classpath
+/.settings
 /.gradle
 /.project
-/.settings
-/config
-/eula.txt
-/logs
-/server.properties
-/Levels_Client.launch
-/Levels_Server.launch
-/.gitignore
 /run
-/saves
-/usercache.json
-/usernamecache.json
-/options.txt
-/crash-reports
-/build/classes
-/build/sources
-/build/tmp
-/build/resources
-/build/dependency-cache
-/build/retromapping
-/build/taskLogs
-/src
-/libs
-/gradle
+/Levels 2 (1.10.2)_Client.launch
+/Levels 2 (1.10.2)_Server.launch
+/bin/
