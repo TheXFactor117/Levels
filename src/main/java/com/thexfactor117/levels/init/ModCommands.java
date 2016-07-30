@@ -1,6 +1,7 @@
 package com.thexfactor117.levels.init;
 
 import com.thexfactor117.levels.commands.CommandSetAbilities;
+import com.thexfactor117.levels.commands.CommandSetLevel;
 import com.thexfactor117.levels.commands.CommandSetRarity;
 import com.thexfactor117.levels.handlers.ConfigHandler;
 
@@ -19,6 +20,7 @@ public class ModCommands
 		{
 			event.registerServerCommand(new CommandSetAbilities());
 			event.registerServerCommand(new CommandSetRarity());
+			event.registerServerCommand(new CommandSetLevel());
 		}
 	}
 }

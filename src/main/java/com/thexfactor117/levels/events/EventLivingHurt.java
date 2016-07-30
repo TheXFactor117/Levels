@@ -576,7 +576,7 @@ public class EventLivingHurt
 									}
 								}
 								
-								if (Ability.VOID.hasAbility(nbt) && rand.nextInt(50) == 0)
+								if (Ability.VOID.hasAbility(nbt) && rand.nextInt(10) == 0)
 								{
 									enemy.attackEntityFrom(DamageSource.causePlayerDamage(player), 10000);
 								}
@@ -748,22 +748,62 @@ public class EventLivingHurt
 							/*
 							 * Abilities
 							 */
-							if (Ability.MOLTEN.hasAbility(nbt) && rand.nextInt(ConfigHandler.BASIC_ARMOR_PERCENTAGE) == 0) enemy.setFire(ConfigHandler.BURN_TIME);
-							if (Ability.FROZEN.hasAbility(nbt) && rand.nextInt(ConfigHandler.BASIC_ARMOR_PERCENTAGE) == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20 * ConfigHandler.STUN_TIME, 10));
-							if (Ability.TOXIC.hasAbility(nbt) && rand.nextInt(ConfigHandler.BASIC_ARMOR_PERCENTAGE) == 0) enemy.addPotionEffect(new PotionEffect(Potion.getPotionById(20), 20 * ConfigHandler.POISON_TIME, 0));
+							if (Ability.MOLTEN.hasAbility(nbt) && rand.nextInt(5) == 0) 
+							{
+								int multiplier = (int) Ability.MOLTEN.getMultiplier(Ability.MOLTEN.getTier(nbt), nbt);
+								enemy.setFire(4 * multiplier);
+							}
+							
+							if (Ability.FROZEN.hasAbility(nbt) && rand.nextInt(5) == 0) 
+							{
+								int multiplier = (int) Ability.FROZEN.getMultiplier(Ability.FROZEN.getTier(nbt), nbt);
+								enemy.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, (20 * 4) * multiplier, 10));
+							}
+							
+							if (Ability.TOXIC.hasAbility(nbt) && rand.nextInt(5) == 0) 
+							{
+								int multiplier = (int) Ability.TOXIC.getMultiplier(Ability.TOXIC.getTier(nbt), nbt);
+								enemy.addPotionEffect(new PotionEffect(MobEffects.POISON, (20 * 7) * multiplier, 0));
+							}
+							
 							if (Ability.BEASTIAL.hasAbility(nbt))
 							{
-								if (player.getHealth() <= ConfigHandler.BEASTIAL_MIN_HEALTH) player.addPotionEffect(new PotionEffect(Potion.getPotionById(5), 20 * ConfigHandler.BEASTIAL_TIME, 2));
+								int multiplier = (int) Ability.BEASTIAL.getMultiplier(Ability.BEASTIAL.getTier(nbt), nbt);
+								
+								if (player.getHealth() <= 4F * multiplier) 
+								{
+									player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 20 * 1, 2));
+								}
 							}
-							if (Ability.ENLIGHTENED.hasAbility(nbt) && rand.nextInt(ConfigHandler.ENLIGHTENED_PERCENTAGE) == 0)
+							
+							if (Ability.ENLIGHTENED.hasAbility(nbt) && rand.nextInt(7) == 0)
 							{
-								float health = player.getHealth() + (event.getAmount() / 2);
+								int multiplier = (int) Ability.ENLIGHTENED.getMultiplier(Ability.ENLIGHTENED.getTier(nbt), nbt);
+								float health = player.getHealth() + (event.getAmount() / (2 / multiplier));
 								player.setHealth(health);
 							}
-							if (Ability.ABSORB.hasAbility(nbt) && rand.nextInt(ConfigHandler.ABSORB_PERCENTAGE) == 0) player.addPotionEffect(new PotionEffect(Potion.getPotionById(10), 20 * ConfigHandler.ABSORB_TIME, 0));
-							if (Ability.HARDENED.hasAbility(nbt) && rand.nextInt(ConfigHandler.HARDENED_PERCENTAGE) == 0) event.setAmount(0F);
-							if (Ability.INVISIBILITY.hasAbility(nbt) && rand.nextInt(ConfigHandler.INVISIBILITY_PERCENTAGE) == 0) player.addPotionEffect(new PotionEffect(Potion.getPotionById(14), 20 * ConfigHandler.INVISIBILITY_TIME, 0));
-							if (Ability.VOID_ARMOR.hasAbility(nbt) && rand.nextInt(ConfigHandler.VOID_PERCENTAGE) == 0) enemy.setHealth(0F);
+							
+							if (Ability.ABSORB.hasAbility(nbt) && rand.nextInt(7) == 0) 
+							{
+								int multiplier = (int) Ability.ABSORB.getMultiplier(Ability.ABSORB.getTier(nbt), nbt);
+								player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, (20 * 10) * multiplier, 0));
+							}
+							
+							if (Ability.HARDENED.hasAbility(nbt) && rand.nextInt(10) == 0) 
+							{
+								event.setAmount(0F);
+							}
+							
+							if (Ability.INVISIBILITY.hasAbility(nbt) && rand.nextInt(10) == 0) 
+							{
+								int multiplier = (int) Ability.INVISIBILITY.getMultiplier(Ability.INVISIBILITY.getTier(nbt), nbt);
+								player.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, (20 * 5) * multiplier, 0));
+							}
+							
+							if (Ability.VOID_ARMOR.hasAbility(nbt) && rand.nextInt(50) == 0) 
+							{
+								enemy.attackEntityFrom(DamageSource.causePlayerDamage(player), 10000);
+							}
 							
 							/*
 							 * Leveling system

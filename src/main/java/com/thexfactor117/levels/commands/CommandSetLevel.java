@@ -3,7 +3,7 @@ package com.thexfactor117.levels.commands;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.thexfactor117.levels.leveling.Ability;
+import com.thexfactor117.levels.leveling.Experience;
 
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
@@ -23,15 +23,15 @@ import net.minecraft.util.text.TextFormatting;
  *
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class CommandSetAbilities implements ICommand
+public class CommandSetLevel implements ICommand
 {
 	private final List aliases;
 	
-	public CommandSetAbilities()
+	public CommandSetLevel()
 	{
 		aliases = new ArrayList();
-		aliases.add("setAbility");
-		aliases.add("sa");
+		aliases.add("setLevel");
+		aliases.add("sl");
 	}
 	
 	@Override
@@ -43,13 +43,13 @@ public class CommandSetAbilities implements ICommand
 	@Override
 	public String getCommandName() 
 	{
-		return "setAbility";
+		return "setLevel";
 	}
 
 	@Override
 	public String getCommandUsage(ICommandSender sender)
 	{
-		return "setAbility <Ability> <Tier>";
+		return "setLevel <Level>";
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class CommandSetAbilities implements ICommand
 						
 						if (nbt != null)
 						{
-							Ability.setAbility(nbt, args[0], Integer.parseInt(args[1]));
+							Experience.setLevel(nbt, Integer.parseInt(args[0]));
 						}
 					}
 				}
