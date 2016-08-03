@@ -25,6 +25,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * 
  * @author TheXFactor117
+ * 
+ * Untweaked
  *
  */
 public class EventItemTooltip 
@@ -55,7 +57,7 @@ public class EventItemTooltip
 					else exp = Experience.getExperience(nbt) + " / " + Experience.getMaxLevelExp(Experience.getLevel(nbt));
 					
 					event.getToolTip().add("");
-					event.getToolTip().add(TextFormatting.GOLD + "=========================");
+					event.getToolTip().add(TextFormatting.WHITE + "=========================");
 					event.getToolTip().add(rarity.getColor() + TextFormatting.ITALIC + I18n.format("levels.rarity." + rarity.ordinal()));
 				
 					if (Experience.getLevel(nbt) == 6) event.getToolTip().add("Level:" + TextFormatting.ITALIC + "Max");
@@ -102,7 +104,7 @@ public class EventItemTooltip
 					}
 					else event.getToolTip().add(TextFormatting.ITALIC + "Abilities (Shift)");
 					
-					event.getToolTip().add(TextFormatting.GOLD + "=========================");
+					event.getToolTip().add(TextFormatting.WHITE + "=========================");
 					event.getToolTip().add("");
 				}
 			}

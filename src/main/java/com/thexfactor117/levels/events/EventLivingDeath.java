@@ -23,6 +23,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * 
  * @author TheXFactor117
  *
+ * Untweaked
  */
 public class EventLivingDeath 
 {
@@ -37,6 +38,8 @@ public class EventLivingDeath
 		/*
 		 * 
 		 * MELEE WEAPONS
+		 * 
+		 * Untweaked
 		 *
 		 */
 		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer && !(event.getSource().getSourceOfDamage() instanceof FakePlayer))
@@ -58,6 +61,8 @@ public class EventLivingDeath
 
 						/*
 						 * Weapon Bonus Experience
+						 * 
+						 * Tweaked
 						 */
 						if (level < ConfigHandler.MAX_LEVEL_CAP)
 						{
@@ -104,6 +109,8 @@ public class EventLivingDeath
 
 						/*
 						 * Leveling system
+						 * 
+						 * Untweaked
 						 */
 						experience = Experience.getExperience(nbt);
 						level = Experience.getNextLevel(player, stack, nbt, AbilityHelper.WEAPON, level, experience, rand);
@@ -119,6 +126,7 @@ public class EventLivingDeath
 		 * 
 		 * BOWS
 		 * 
+		 * Untweaked
 		 */
 		if (event.getSource().getSourceOfDamage() instanceof EntityArrow)
 		{
@@ -138,6 +146,8 @@ public class EventLivingDeath
 					
 					/*
 					 * Bow bonus experience
+					 * 
+					 * Tweaked
 					 */
 					if (level < ConfigHandler.MAX_LEVEL_CAP)
 					{
@@ -184,6 +194,8 @@ public class EventLivingDeath
 					
 					/*
 					 * Leveling system
+					 * 
+					 * Untweaked
 					 */
 					experience = Experience.getExperience(nbt);
 					level = Experience.getNextLevel(player, stack, nbt, AbilityHelper.WEAPON, level, experience, rand);

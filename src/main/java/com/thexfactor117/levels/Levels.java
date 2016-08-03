@@ -33,6 +33,22 @@ import net.minecraftforge.fml.relauncher.Side;
  * 
  * Levels 2 - a major rewrite of many core features of the original Levels.
  * 
+ * 
+ * 
+ * Levels 2 todo list.
+ * TODO:
+ * + Add tiered abilities 																					(Complete)
+ * + Add dynamically configured loot to dungeon chests based on the chest/structure
+ * + Add axes as melee weapons to receive the leveling systems
+ * - Remove mob drops 																						(Complete)
+ * * Fix current leveling algorithm 																		(Complete)
+ * * Dynamically determine bonus experience based on entity health/level									(Complete - needs checking)
+ * * Adjust leveling cap, plus fix things according to that change 											(Complete - needs checking)
+ * * Change durability to enabled by default
+ * * Change durability bonuses added by rarities (and possibly abilities)
+ * * Rework enemy leveling completely (legendary/ancient enemies need to be extremely challenging)
+ * * Rework configurations, add new ones for certain features, and remove unnecessary fluff
+ * 
  */
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION, updateJSON = Reference.UPDATE_URL)
 public class Levels 

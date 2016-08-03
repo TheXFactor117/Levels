@@ -75,7 +75,8 @@ public class Experience
 	
 	public static int getMaxLevelExp(int level)
 	{
-		int maxXP = (int) Math.pow(level, 2.2D) * 20;
+		if (level == 1) return 50;
+		int maxXP = (int) Math.pow(level, 2.4D) * 20;
 		return maxXP;
 	}
 }

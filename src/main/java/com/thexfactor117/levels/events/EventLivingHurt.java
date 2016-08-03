@@ -38,6 +38,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * 
  * @author TheXFactor117
  *
+ * Untweaked
  */
 public class EventLivingHurt 
 {
@@ -52,7 +53,8 @@ public class EventLivingHurt
 		/*
 		 * 
 		 * WEAPONS
-		 *
+		 * 
+		 * Untweaked
 		 */
 		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer && !(event.getSource().getSourceOfDamage() instanceof FakePlayer))
 		{
@@ -74,6 +76,8 @@ public class EventLivingHurt
 
 						/*
 						 * Experience
+						 * 
+						 * Untweaked
 						 */
 						if (level < ConfigHandler.MAX_LEVEL_CAP)
 						{
@@ -91,6 +95,8 @@ public class EventLivingHurt
 
 						/*
 						 * Rarity
+						 * 
+						 * Untweaked
 						 */
 						Rarity rarity = Rarity.getRarity(nbt);
 						float damageMultiplier = 1.0F;
@@ -124,7 +130,12 @@ public class EventLivingHurt
 
 						float amount = event.getAmount();
 						event.setAmount(amount *= damageMultiplier);
-
+						
+						/*
+						 * Durability
+						 * 
+						 * Untweaked
+						 */
 						if (ConfigHandler.DURABILITY)
 						{
 							// Durability boosts
@@ -217,6 +228,8 @@ public class EventLivingHurt
 						
 						/*
 						 * Abilities
+						 * 
+						 * Untweaked
 						 */
 						if (enemy != null)
 						{
@@ -314,6 +327,8 @@ public class EventLivingHurt
 						
 						/*
 						 * Leveling system
+						 * 
+						 * Untweaked
 						 */
 						experience = Experience.getExperience(nbt);
 						level = Experience.getNextLevel(player, stack, nbt, AbilityHelper.WEAPON, level, experience, rand);
@@ -329,6 +344,7 @@ public class EventLivingHurt
 		 * 
 		 * BOWS
 		 * 
+		 * Untweaked
 		 */
 		if (event.getSource().getSourceOfDamage() instanceof EntityArrow)
 		{
@@ -353,6 +369,8 @@ public class EventLivingHurt
 
 							/*
 							 * Experience
+							 * 
+							 * Untweaked
 							 */
 							if (level < ConfigHandler.MAX_LEVEL_CAP)
 							{
@@ -370,6 +388,8 @@ public class EventLivingHurt
 
 							/*
 							 * Rarity
+							 * 
+							 * Untweaked
 							 */
 							Rarity rarity = Rarity.getRarity(nbt);
 							float damageMultiplier = 1.0F;
@@ -395,6 +415,11 @@ public class EventLivingHurt
 							float amount = event.getAmount();
 							event.setAmount(amount *= damageMultiplier);
 							
+							/*
+							 * Durability
+							 * 
+							 * Untweaked
+							 */
 							if (ConfigHandler.DURABILITY)
 							{
 								// Durability boosts
@@ -487,6 +512,8 @@ public class EventLivingHurt
 							
 							/*
 							 * Abilities
+							 * 
+							 * Untweaked
 							 */
 							if (enemy != null)
 							{
@@ -597,7 +624,9 @@ public class EventLivingHurt
 		}
 		
 		/*
-		 * ARMORS 
+		 * ARMORS
+		 * 
+		 * Untweaked
 		 */
 		if (event.getEntityLiving() instanceof EntityPlayer)
 		{
@@ -621,6 +650,8 @@ public class EventLivingHurt
 							
 							/*
 							 * Experience
+							 * 
+							 * Untweaked
 							 */
 							if (level < ConfigHandler.MAX_LEVEL_CAP)
 							{
@@ -630,6 +661,8 @@ public class EventLivingHurt
 							
 							/*
 							 * Rarities
+							 * 
+							 * Untweaked
 							 */
 							if (rarity == Rarity.UNCOMMON)
 							{
@@ -654,6 +687,8 @@ public class EventLivingHurt
 							
 							/*
 							 * Durability
+							 * 
+							 * Untweaked
 							 */
 							if (ConfigHandler.DURABILITY)
 							{
@@ -747,6 +782,8 @@ public class EventLivingHurt
 							
 							/*
 							 * Abilities
+							 * 
+							 * Untweaked
 							 */
 							if (Ability.MOLTEN.hasAbility(nbt) && rand.nextInt(5) == 0) 
 							{
@@ -807,6 +844,8 @@ public class EventLivingHurt
 							
 							/*
 							 * Leveling system
+							 * 
+							 * Untweaked
 							 */
 							experience = Experience.getExperience(nbt);
 							level = Experience.getNextLevel(player, stack, nbt, AbilityHelper.ARMOR, level, experience, rand);
@@ -820,7 +859,9 @@ public class EventLivingHurt
 		}
 		
 		/*
-		 * Entity Leveling
+		 * ENEMY LEVELING
+		 * 
+		 * Untweaked
 		 */
 		if (ConfigHandler.ENEMY_ABILITIES)
 		{
