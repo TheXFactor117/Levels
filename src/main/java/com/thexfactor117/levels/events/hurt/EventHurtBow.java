@@ -31,7 +31,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * 
  * @author TheXFactor117
  *
- * Untweaked
+ * Tweaked
  */
 public class EventHurtBow 
 {
@@ -43,7 +43,6 @@ public class EventHurtBow
 		 * 
 		 * BOWS
 		 * 
-		 * Untweaked
 		 */
 		if (event.getSource().getSourceOfDamage() instanceof EntityArrow)
 		{
@@ -68,8 +67,6 @@ public class EventHurtBow
 
 							/*
 							 * Experience
-							 * 
-							 * Untweaked
 							 */
 							if (level < ConfigHandler.MAX_LEVEL_CAP)
 							{
@@ -87,29 +84,34 @@ public class EventHurtBow
 
 							/*
 							 * Rarity
-							 * 
-							 * Untweaked
 							 */
 							Rarity rarity = Rarity.getRarity(nbt);
 							float damageMultiplier = 1.0F;
-							//float trueDamage = event.ammount;
 
-							// Damage boosts
+							// Damage boosts and bonus experience
 							switch (rarity)
 							{
 								case UNCOMMON:
-									damageMultiplier = 1.5F;
+									damageMultiplier = 1.2F;
+									int var = rand.nextInt(10);
+									if (var == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + rand.nextInt(5));
 									break;
 								case RARE:
 									damageMultiplier = 1.5F;
+									int var1 = rand.nextInt(7);
+									if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + rand.nextInt(10));
 									break;
 								case LEGENDARY:
 									damageMultiplier = 2.0F;
+									int var2 = rand.nextInt(5); // chance
+									int var3 = rand.nextInt(20) + 5;
+									if (var2 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var3);
 									break;
 								case ANCIENT:
 									damageMultiplier = 3.0F;
-									break;
-								case UNKNOWN:
+									int var4 = rand.nextInt(4); // chance
+									int var5 = rand.nextInt(20) + 10;
+									if (var4 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var5);
 									break;
 								default:
 									break;
@@ -120,92 +122,34 @@ public class EventHurtBow
 							
 							/*
 							 * Durability
-							 * 
-							 * Untweaked
 							 */
 							if (ConfigHandler.DURABILITY)
 							{
-								// Durability boosts
-								// rare
-								if (rarity == Rarity.RARE)
+								// durability boosts
+								switch (rarity)
 								{
-									// reduction
-									int var = rand.nextInt(5);
-									if (var == 0)
-									{
-										if (stack.getItemDamage() == stack.getMaxDamage())
-										{
-											stack.setItemDamage(stack.getItemDamage());
-										}
-										else
-										{
-											stack.setItemDamage(stack.getItemDamage() - 1);
-										}
-									}
-								}
-								
-								// legendary
-								if (rarity == Rarity.LEGENDARY)
-								{
-									// reduction
-									int var = rand.nextInt(5);
-									if (var == 0)
-									{
-										if (stack.getItemDamage() == stack.getMaxDamage())
-										{
-											stack.setItemDamage(stack.getItemDamage());
-										}
-										else
-										{
-											stack.setItemDamage(stack.getItemDamage() - 1);
-										}
-									}
-									
-									// additional durability
-									int var1 = rand.nextInt(10);
-									if (var1 == 0)
-									{
-										if (stack.getItemDamage() <= stack.getMaxDamage() && stack.getItemDamage() >= (stack.getMaxDamage() - 10))
-										{
-											stack.setItemDamage(stack.getMaxDamage());
-										}
-										else
-										{
-											stack.setItemDamage(stack.getItemDamage() - 10);
-	 									}
-									}
-								}
-								
-								// ancient
-								if (rarity == Rarity.ANCIENT)
-								{
-									// reduction
-									int var = rand.nextInt(10);
-									if (var < 3)
-									{
-										if (stack.getItemDamage() == stack.getMaxDamage())
-										{
-											stack.setItemDamage(stack.getItemDamage());
-										}
-										else
-										{
-											stack.setItemDamage(stack.getItemDamage() - 1);
-										}
-									}
-									
-									// additional durability
-									int var1 = rand.nextInt(5);
-									if (var1 == 0)
-									{
-										if (stack.getItemDamage() <= stack.getMaxDamage() && stack.getItemDamage() >= (stack.getMaxDamage() - 10))
-										{
-											stack.setItemDamage(stack.getMaxDamage());
-										}
-										else
-										{
-											stack.setItemDamage(stack.getItemDamage() - 10);
-										}
-									}
+									case UNCOMMON:
+										if (stack.getItemDamage() == stack.getMaxDamage()) break;
+										if (rand.nextInt(7) == 0) stack.setItemDamage(stack.getItemDamage() - 1); // reduction
+										if (rand.nextInt(20) == 0) stack.setItemDamage(stack.getItemDamage() - rand.nextInt(3)); // bonus
+										break;
+									case RARE:
+										if (stack.getItemDamage() == stack.getMaxDamage()) break;
+										if (rand.nextInt(5) == 0) stack.setItemDamage(stack.getItemDamage() - 1); // reduction
+										if (rand.nextInt(10) == 0) stack.setItemDamage(stack.getItemDamage() - rand.nextInt(3)); // bonus
+										break;
+									case LEGENDARY:
+										if (stack.getItemDamage() == stack.getMaxDamage()) break;
+										if (rand.nextInt(4) == 0) stack.setItemDamage(stack.getItemDamage() - 1); // reduction
+										if (rand.nextInt(7) == 0) stack.setItemDamage(stack.getItemDamage() - rand.nextInt(5)); // bonus
+										break;
+									case ANCIENT:
+										if (stack.getItemDamage() == stack.getMaxDamage()) break;
+										if (rand.nextInt(2) == 0) stack.setItemDamage(stack.getItemDamage() - 1); // reduction
+										if (rand.nextInt(5) == 0) stack.setItemDamage(stack.getItemDamage() - rand.nextInt(5)); // bonus
+										break;
+									default:
+										break;
 								}
 							}
 							else
@@ -215,8 +159,6 @@ public class EventHurtBow
 							
 							/*
 							 * Abilities
-							 * 
-							 * Tweaked
 							 */
 							if (enemy != null)
 							{

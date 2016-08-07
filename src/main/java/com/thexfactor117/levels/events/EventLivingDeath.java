@@ -12,6 +12,7 @@ import com.thexfactor117.levels.utils.NBTHelper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,7 +24,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * 
  * @author TheXFactor117
  *
- * Untweaked
+ * Tweaked
  */
 public class EventLivingDeath 
 {
@@ -38,8 +39,6 @@ public class EventLivingDeath
 		/*
 		 * 
 		 * MELEE WEAPONS
-		 * 
-		 * Untweaked
 		 *
 		 */
 		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer && !(event.getSource().getSourceOfDamage() instanceof FakePlayer))
@@ -50,7 +49,7 @@ public class EventLivingDeath
 			
 			if (stack != null)
 			{
-				if (stack.getItem() instanceof ItemSword)
+				if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
 				{
 					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 					
@@ -61,8 +60,6 @@ public class EventLivingDeath
 
 						/*
 						 * Weapon Bonus Experience
-						 * 
-						 * Tweaked
 						 */
 						if (level < ConfigHandler.MAX_LEVEL_CAP)
 						{
@@ -109,8 +106,6 @@ public class EventLivingDeath
 
 						/*
 						 * Leveling system
-						 * 
-						 * Untweaked
 						 */
 						experience = Experience.getExperience(nbt);
 						level = Experience.getNextLevel(player, stack, nbt, AbilityHelper.WEAPON, level, experience, rand);
@@ -126,7 +121,6 @@ public class EventLivingDeath
 		 * 
 		 * BOWS
 		 * 
-		 * Untweaked
 		 */
 		if (event.getSource().getSourceOfDamage() instanceof EntityArrow)
 		{
@@ -146,8 +140,6 @@ public class EventLivingDeath
 					
 					/*
 					 * Bow bonus experience
-					 * 
-					 * Tweaked
 					 */
 					if (level < ConfigHandler.MAX_LEVEL_CAP)
 					{
@@ -194,8 +186,6 @@ public class EventLivingDeath
 					
 					/*
 					 * Leveling system
-					 * 
-					 * Untweaked
 					 */
 					experience = Experience.getExperience(nbt);
 					level = Experience.getNextLevel(player, stack, nbt, AbilityHelper.WEAPON, level, experience, rand);

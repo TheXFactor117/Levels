@@ -12,6 +12,7 @@ import com.thexfactor117.levels.utils.NBTHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -26,8 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * 
  * @author TheXFactor117
  * 
- * Untweaked
- *
+ * Tweaked
  */
 public class EventItemTooltip 
 {
@@ -44,7 +44,7 @@ public class EventItemTooltip
 
 		if (item != null)
 		{
-			if (item instanceof ItemSword || item instanceof ItemBow || item instanceof ItemArmor)
+			if (item instanceof ItemSword || item instanceof ItemBow || item instanceof ItemArmor || item instanceof ItemAxe)
 			{
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
@@ -53,14 +53,15 @@ public class EventItemTooltip
 					Rarity rarity = Rarity.getRarity(nbt);
 					String exp;
 					
-					if (Experience.getLevel(nbt) == ConfigHandler.MAX_LEVEL_CAP) exp = I18n.format("levels.experience.max");
+					if (Experience.getLevel(nbt) == ConfigHandler.MAX_LEVEL_CAP) exp = TextFormatting.ITALIC + I18n.format("levels.experience.max");
 					else exp = Experience.getExperience(nbt) + " / " + Experience.getMaxLevelExp(Experience.getLevel(nbt));
 					
 					event.getToolTip().add("");
-					event.getToolTip().add(TextFormatting.WHITE + "=========================");
+					event.getToolTip().add(rarity.getColor() + "=========================");
+					event.getToolTip().add("");
 					event.getToolTip().add(rarity.getColor() + TextFormatting.ITALIC + I18n.format("levels.rarity." + rarity.ordinal()));
 				
-					if (Experience.getLevel(nbt) == 6) event.getToolTip().add("Level:" + TextFormatting.ITALIC + "Max");
+					if (Experience.getLevel(nbt) == ConfigHandler.MAX_LEVEL_CAP) event.getToolTip().add("Level: " + TextFormatting.ITALIC + "Max");
 					else event.getToolTip().add("Level: " + Experience.getLevel(nbt));
 					
 					event.getToolTip().add("Experience: " + exp);
@@ -104,7 +105,8 @@ public class EventItemTooltip
 					}
 					else event.getToolTip().add(TextFormatting.ITALIC + "Abilities (Shift)");
 					
-					event.getToolTip().add(TextFormatting.WHITE + "=========================");
+					event.getToolTip().add("");
+					event.getToolTip().add(rarity.getColor() + "=========================");
 					event.getToolTip().add("");
 				}
 			}

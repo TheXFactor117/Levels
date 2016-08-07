@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -22,7 +23,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * 
  * @author TheXFactor117
  *
- * Untweaked
+ * Tweaked
  */
 public class EventLivingUpdate 
 {
@@ -40,7 +41,7 @@ public class EventLivingUpdate
 				{
 					if (main[i] != null)
 					{
-						if (main[i].getItem() instanceof ItemSword || main[i].getItem() instanceof ItemBow || main[i].getItem() instanceof ItemArmor)
+						if (main[i].getItem() instanceof ItemSword || main[i].getItem() instanceof ItemBow || main[i].getItem() instanceof ItemArmor || main[i].getItem() instanceof ItemAxe)
 						{
 							ItemStack stack = main[i];
 							NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);

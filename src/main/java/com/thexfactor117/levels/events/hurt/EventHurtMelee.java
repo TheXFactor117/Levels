@@ -13,8 +13,10 @@ import com.thexfactor117.levels.utils.NBTHelper;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.launchwrapper.Launch;
@@ -51,7 +53,7 @@ public class EventHurtMelee
 			
 			if (stack != null)
 			{
-				if (stack.getItem() instanceof ItemSword)
+				if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
 				{
 					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 					
@@ -233,7 +235,7 @@ public class EventHurtMelee
 								int multiplier = (int) Ability.CHAINED.getMultiplier(Ability.CHAINED.getTier(nbt), nbt);
 								int radius = 10 * multiplier;
 								World world = enemy.getEntityWorld();
-								List entityList = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.posX - radius, player.posY - radius, player.posZ - radius, player.posX + radius, player.posY + radius, player.posZ + radius));
+								List entityList = world.getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(player.posX - radius, player.posY - radius, player.posZ - radius, player.posX + radius, player.posY + radius, player.posZ + radius));
 								Iterator iterator = entityList.iterator();
 								
 								while (iterator.hasNext())

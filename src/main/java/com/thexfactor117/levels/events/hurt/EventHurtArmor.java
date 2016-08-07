@@ -24,7 +24,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * 
  * @author TheXFactor117
  *
- * Untweaked
+ * Tweaked
  */
 public class EventHurtArmor 
 {
@@ -33,8 +33,6 @@ public class EventHurtArmor
 	{
 		/*
 		 * ARMORS
-		 * 
-		 * Untweaked
 		 */
 		if (event.getEntityLiving() instanceof EntityPlayer)
 		{
@@ -58,129 +56,69 @@ public class EventHurtArmor
 							
 							/*
 							 * Experience
-							 * 
-							 * Untweaked
 							 */
 							if (level < ConfigHandler.MAX_LEVEL_CAP)
 							{
-								experience += level > 3 && rand.nextInt(3) == 0 ? 1 + rand.nextInt(3) : 1;
-								Experience.setExperience(nbt, experience);
+								Experience.setExperience(nbt, Experience.getExperience(nbt) + 1);
 							}
 							
 							/*
 							 * Rarities
-							 * 
-							 * Untweaked
 							 */
-							if (rarity == Rarity.UNCOMMON)
+							switch (rarity)
 							{
-								if (rand.nextInt(30) == 0) event.setAmount(0F);
-								if (rand.nextInt(10) == 0) Experience.setExperience(nbt, experience + 7);
-							}
-							if (rarity == Rarity.RARE)
-							{
-								if (rand.nextInt(25) == 0) event.setAmount(0F);
-								if (rand.nextInt(7) == 0) Experience.setExperience(nbt, experience + 7);
-							}
-							if (rarity == Rarity.LEGENDARY)
-							{
-								if (rand.nextInt(20) == 0) event.setAmount(0F);
-								if (rand.nextInt(5) == 0) Experience.setExperience(nbt, experience + 7);
-							}
-							if (rarity == Rarity.ANCIENT)
-							{
-								if (rand.nextInt(15) == 0) event.setAmount(0F);
-								if (rand.nextInt(3) == 0) Experience.setExperience(nbt, experience + 7);
+								case UNCOMMON:
+									int var = rand.nextInt(10);
+									if (var == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + rand.nextInt(5));
+									break;
+								case RARE:
+									int var1 = rand.nextInt(7);
+									if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + rand.nextInt(10));
+									break;
+								case LEGENDARY:
+									int var2 = rand.nextInt(5); // chance
+									int var3 = rand.nextInt(20) + 5;
+									if (var2 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var3);
+									break;
+								case ANCIENT:
+									int var4 = rand.nextInt(4); // chance
+									int var5 = rand.nextInt(20) + 10;
+									if (var4 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var5);
+									break;
+								default:
+									break;
 							}
 							
 							/*
 							 * Durability
-							 * 
-							 * Untweaked
 							 */
 							if (ConfigHandler.DURABILITY)
 							{
-								// Durability boosts
-								// rare
-								if (rarity == Rarity.RARE)
+								// durability boosts
+								switch (rarity)
 								{
-									// reduction
-									int var = rand.nextInt(5);
-									if (var == 0)
-									{
-										if (stack.getItemDamage() == stack.getMaxDamage())
-										{
-											stack.setItemDamage(stack.getItemDamage());
-										}
-										else
-										{
-											stack.setItemDamage(stack.getItemDamage() - 1);
-										}
-									}
-								}
-								
-								// legendary
-								if (rarity == Rarity.LEGENDARY)
-								{
-									// reduction
-									int var = rand.nextInt(5);
-									if (var == 0)
-									{
-										if (stack.getItemDamage() == stack.getMaxDamage())
-										{
-											stack.setItemDamage(stack.getItemDamage());
-										}
-										else
-										{
-											stack.setItemDamage(stack.getItemDamage() - 1);
-										}
-									}
-									
-									// additional durability
-									int var1 = rand.nextInt(10);
-									if (var1 == 0)
-									{
-										if (stack.getItemDamage() <= stack.getMaxDamage() && stack.getItemDamage() >= (stack.getMaxDamage() - 10))
-										{
-											stack.setItemDamage(stack.getMaxDamage());
-										}
-										else
-										{
-											stack.setItemDamage(stack.getItemDamage() - 10);
-	 									}
-									}
-								}
-								
-								// ancient
-								if (rarity == Rarity.ANCIENT)
-								{
-									// reduction
-									int var = rand.nextInt(10);
-									if (var < 3)
-									{
-										if (stack.getItemDamage() == stack.getMaxDamage())
-										{
-											stack.setItemDamage(stack.getItemDamage());
-										}
-										else
-										{
-											stack.setItemDamage(stack.getItemDamage() - 1);
-										}
-									}
-									
-									// additional durability
-									int var1 = rand.nextInt(5);
-									if (var1 == 0)
-									{
-										if (stack.getItemDamage() <= stack.getMaxDamage() && stack.getItemDamage() >= (stack.getMaxDamage() - 10))
-										{
-											stack.setItemDamage(stack.getMaxDamage());
-										}
-										else
-										{
-											stack.setItemDamage(stack.getItemDamage() - 10);
-										}
-									}
+									case UNCOMMON:
+										if (stack.getItemDamage() == stack.getMaxDamage()) break;
+										if (rand.nextInt(7) == 0) stack.setItemDamage(stack.getItemDamage() - 1); // reduction
+										if (rand.nextInt(20) == 0) stack.setItemDamage(stack.getItemDamage() - rand.nextInt(3)); // bonus
+										break;
+									case RARE:
+										if (stack.getItemDamage() == stack.getMaxDamage()) break;
+										if (rand.nextInt(5) == 0) stack.setItemDamage(stack.getItemDamage() - 1); // reduction
+										if (rand.nextInt(10) == 0) stack.setItemDamage(stack.getItemDamage() - rand.nextInt(3)); // bonus
+										break;
+									case LEGENDARY:
+										if (stack.getItemDamage() == stack.getMaxDamage()) break;
+										if (rand.nextInt(4) == 0) stack.setItemDamage(stack.getItemDamage() - 1); // reduction
+										if (rand.nextInt(7) == 0) stack.setItemDamage(stack.getItemDamage() - rand.nextInt(5)); // bonus
+										break;
+									case ANCIENT:
+										if (stack.getItemDamage() == stack.getMaxDamage()) break;
+										if (rand.nextInt(2) == 0) stack.setItemDamage(stack.getItemDamage() - 1); // reduction
+										if (rand.nextInt(5) == 0) stack.setItemDamage(stack.getItemDamage() - rand.nextInt(5)); // bonus
+										break;
+									default:
+										break;
 								}
 							}
 							else
@@ -190,8 +128,6 @@ public class EventHurtArmor
 							
 							/*
 							 * Abilities
-							 * 
-							 * Tweaked
 							 */
 							// basic
 							if (Ability.MOLTEN.hasAbility(nbt) && rand.nextInt(4) == 0) 
@@ -257,8 +193,6 @@ public class EventHurtArmor
 							
 							/*
 							 * Leveling system
-							 * 
-							 * Tweaked
 							 */
 							experience = Experience.getExperience(nbt);
 							level = Experience.getNextLevel(player, stack, nbt, AbilityHelper.ARMOR, level, experience, rand);
