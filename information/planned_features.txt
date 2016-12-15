@@ -1,6 +1,0 @@
-### Planned Features
-
-- Enemy Leveling
-- Shields
-- Tools
-- Additional abilities
