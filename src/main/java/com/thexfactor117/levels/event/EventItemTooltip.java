@@ -38,7 +38,7 @@ public class EventItemTooltip
 		ArrayList<String> tooltip = (ArrayList<String>) event.getToolTip();
 		ItemStack stack = event.getItemStack();
 		Item item = stack.getItem();
-		
+
 		if (item != null)
 		{
 			if (item instanceof ItemSword)

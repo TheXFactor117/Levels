@@ -11,22 +11,26 @@ import net.minecraft.util.text.TextFormatting;
 public enum Ability
 {
 	// weapon abilities
-	FIRE(TextFormatting.RED, 1, 1),
-	FROST(TextFormatting.AQUA, 1, 1),
-	POISON(TextFormatting.DARK_GREEN, 1, 1),
-	LIGHT(TextFormatting.YELLOW, 2, 1),
-	BLOODLUST(TextFormatting.DARK_RED, 2, 1),
-	ETHEREAL(TextFormatting.GREEN, 2, 1),
-	CHAINED(TextFormatting.GRAY, 3, 1),
-	VOID(TextFormatting.DARK_GRAY, 3, 1);
+	FIRE(TextFormatting.RED, 0xFF5555, 1, 1),
+	FROST(TextFormatting.AQUA, 0x55FFFF, 1, 1),
+	POISON(TextFormatting.DARK_GREEN, 0x00AA00, 1, 1),
+	LIGHT(TextFormatting.YELLOW, 0xFFFF55, 2, 1),
+	BLOODLUST(TextFormatting.DARK_RED, 0xAA0000, 2, 1),
+	ETHEREAL(TextFormatting.GREEN, 0x55FF55, 2, 1),
+	CHAINED(TextFormatting.GRAY, 0xAAAAAA, 3, 1),
+	VOID(TextFormatting.DARK_GRAY, 0x555555, 3, 1);
 	
+	public static final int WEAPON_ABILITIES = 8;
+
 	private String color;
+	private int hex;
 	private int tier;
 	private double multiplier;
 	
-	Ability(Object color, int tier, double multiplier)
+	Ability(Object color, int hex, int tier, double multiplier)
 	{
 		this.color = color.toString();
+		this.hex = hex;
 		this.tier = tier;
 		this.multiplier = multiplier;
 	}
@@ -68,7 +72,7 @@ public enum Ability
 	 */
 	public void setLevel(NBTTagCompound nbt, int level)
 	{
-		if (tier <= 2)
+		if (level <= 2)
 		{
 			nbt.setInteger(toString() + "_level", level);
 		}
@@ -90,8 +94,26 @@ public enum Ability
 		return multiplier;
 	}
 	
+	public int getTier()
+	{
+		return tier;
+	}
+	
 	public String getColor()
 	{
 		return color;
+	}
+	
+	public int getHex()
+	{
+		return hex;
+	}
+	
+	public String getName()
+	{
+		String str = this.toString().toLowerCase();
+		String first = str.substring(0, 1);
+		
+		return first.toUpperCase() + str.substring(1);
 	}
 }

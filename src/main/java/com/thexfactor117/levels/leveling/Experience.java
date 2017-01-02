@@ -1,6 +1,14 @@
 package com.thexfactor117.levels.leveling;
 
+import java.util.Random;
+
+import com.thexfactor117.levels.util.ConfigHandler;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 
 /**
  * 
@@ -8,21 +16,21 @@ import net.minecraft.nbt.NBTTagCompound;
  *
  */
 public class Experience 
-{
-	/*public static int getNextLevel(EntityPlayer player, ItemStack stack, NBTTagCompound nbt, AbilityHelper abilityHelper, int currentLevel, int experience, Random rand)
+{	
+	public static int getNextLevel(EntityPlayer player, ItemStack stack, NBTTagCompound nbt, int currentLevel, int experience, Random rand)
 	{
 		int newLevel = currentLevel;
 		
-		while (currentLevel < ConfigHandler.MAX_LEVEL_CAP && experience >= Experience.getMaxLevelExp(currentLevel))
+		while (currentLevel < ConfigHandler.MAX_LEVEL && experience >= Experience.getMaxLevelExp(currentLevel))
 		{
 			newLevel = currentLevel + 1;
 			currentLevel++;
-			AbilitySelection.getRandomizedAbilities(player, stack, nbt, newLevel, abilityHelper, rand);
+			Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) + 1);
 			player.addChatMessage(new TextComponentString(TextFormatting.GRAY + "Your weapon has leveled up to level " + TextFormatting.GOLD + "" + newLevel + TextFormatting.GRAY + "!"));
 		}
 		
 		return newLevel;
-	}*/
+	}
 	
 	public static int getLevel(NBTTagCompound nbt)
 	{
@@ -34,13 +42,9 @@ public class Experience
 		if (nbt != null)
 		{
 			if (level > 1)
-			{
 				nbt.setInteger("LEVEL", level);
-			}
 			else
-			{
 				nbt.removeTag("LEVEL");
-			}
 		}
 	}
 	
@@ -54,13 +58,9 @@ public class Experience
 		if (nbt != null)
 		{
 			if (experience > 0)
-			{
 				nbt.setInteger("EXPERIENCE", experience);
-			}
 			else
-			{
 				nbt.removeTag("EXPERIENCE");
-			}
 		}
 	}
 	
@@ -69,5 +69,21 @@ public class Experience
 		if (level == 1) return 50;
 		int maxXP = (int) Math.pow(level, 2.4D) * 20;
 		return maxXP;
+	}
+	
+	public static void setAbilityTokens(NBTTagCompound nbt, int tokens)
+	{
+		if (nbt != null)
+		{
+			if (tokens > 0)
+				nbt.setInteger("TOKENS", tokens);
+			else
+				nbt.removeTag("TOKENS");
+		}
+	}
+	
+	public static int getAbilityTokens(NBTTagCompound nbt)
+	{
+		return nbt != null ? nbt.getInteger("TOKENS") : 0;
 	}
 }

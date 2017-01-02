@@ -7,11 +7,15 @@ import org.apache.logging.log4j.Logger;
 
 import com.thexfactor117.levels.init.ModEvents;
 import com.thexfactor117.levels.network.PacketRarity;
+import com.thexfactor117.levels.proxies.CommonProxy;
 import com.thexfactor117.levels.util.ConfigHandler;
+import com.thexfactor117.levels.util.GuiHandler;
 import com.thexfactor117.levels.util.Reference;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -35,6 +39,10 @@ import net.minecraftforge.fml.relauncher.Side;
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class Levels 
 {
+	@SidedProxy(clientSide = Reference.CLIENT, serverSide = Reference.COMMON)
+	public static CommonProxy proxy;
+	@Instance(Reference.MODID)
+	public static Levels instance;
 	public static final Logger LOGGER = LogManager.getLogger("Levels");
 	public static SimpleNetworkWrapper network;
 	private static File configDir;
@@ -55,7 +63,8 @@ public class Levels
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		
+		proxy.init();
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 	}
 	
 	@EventHandler

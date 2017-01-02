@@ -14,22 +14,24 @@ import net.minecraft.util.text.TextFormatting;
  */
 public enum Rarity 
 {
-	DEFAULT("", 0.0),
-	COMMON(TextFormatting.GRAY, 0.5),
-	UNCOMMON(TextFormatting.DARK_GREEN, 0.25),
-	RARE(TextFormatting.AQUA, 0.13),
-	ULTRA_RARE(TextFormatting.DARK_PURPLE, 0.07),
-	LEGENDARY(TextFormatting.GOLD, 0.035),
-	ARCHAIC(TextFormatting.WHITE, 0.015);
+	DEFAULT("", 0, 0.0),
+	COMMON(TextFormatting.GRAY, 0xAAAAAA, 0.5),
+	UNCOMMON(TextFormatting.DARK_GREEN, 0x00AA00, 0.25),
+	RARE(TextFormatting.AQUA, 0x55FFFF, 0.13),
+	ULTRA_RARE(TextFormatting.DARK_PURPLE, 0xAA00AA, 0.07),
+	LEGENDARY(TextFormatting.GOLD, 0xFFAA00, 0.035),
+	ARCHAIC(TextFormatting.WHITE, 0xFFFFFF, 0.015);
 	
 	private String color;
+	private int hex;
 	private double weight;
 	private static final Rarity[] RARITIES = Rarity.values();
 	private static final RandomCollection<Rarity> RANDOM_RARITIES = new RandomCollection<Rarity>();
 	
-	Rarity(Object color, double weight)
+	Rarity(Object color, int hex, double weight)
 	{
 		this.color = color.toString();
+		this.hex = hex;
 		this.weight = weight;
 	}
 	
@@ -44,7 +46,7 @@ public enum Rarity
 	}
 
 	/**
-	 * Retrieves the rarity applied. Same thing as #getInteger.
+	 * Retrieves the rarity applied.
 	 * @param nbt
 	 * @return
 	 */
@@ -67,9 +69,22 @@ public enum Rarity
 		nbt.setInteger("RARITY", rarity);
 	}
 
+	public String getName()
+	{
+		String str = this.toString().toLowerCase();
+		String first = str.substring(0, 1);
+		
+		return first.toUpperCase() + str.substring(1);
+	}
+	
 	public String getColor()
 	{
 		return color;
+	}
+	
+	public int getHex()
+	{
+		return hex;
 	}
 
 	static
