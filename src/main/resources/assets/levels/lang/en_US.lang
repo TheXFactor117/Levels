@@ -1,0 +1,30 @@
+levels.rarity.0=Default
+levels.rarity.1=Basic
+levels.rarity.2=Uncommon
+levels.rarity.3=Rare
+levels.rarity.4=Ultra Rare
+levels.rarity.5=Legendary
+levels.rarity.6=Archaic
+
+levels.ability.0=Fire
+levels.ability.1=Frost
+levels.ability.2=Poison
+levels.ability.3=Light
+levels.ability.4=Bloodlust
+levels.ability.5=Ethereal
+levels.ability.6=Chained
+levels.ability.7=Void
+
+levels.misc.level=Level
+levels.misc.max=Max
+levels.misc.experience=Experience
+levels.misc.durability=Durability
+levels.misc.abilities=Abilities
+levels.misc.abilities.shift=Abilities (Shift)
+levels.misc.rarity=Rarity
+levels.misc.abilities.tokens=Ability Tokens
+levels.misc.abilities.purchased=Purchased Abilities
+levels.misc.abilities.active=Active
+levels.misc.abilities.passive=Passive
+
+levels.update=Levels has a new versions available!

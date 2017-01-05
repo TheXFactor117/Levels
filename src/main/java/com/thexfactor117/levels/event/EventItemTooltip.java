@@ -8,6 +8,7 @@ import com.thexfactor117.levels.leveling.Ability;
 import com.thexfactor117.levels.leveling.Experience;
 import com.thexfactor117.levels.leveling.Rarity;
 import com.thexfactor117.levels.util.ConfigHandler;
+import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
@@ -43,7 +44,7 @@ public class EventItemTooltip
 		{
 			if (item instanceof ItemSword)
 			{
-				NBTTagCompound nbt = stack.getTagCompound();
+				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
 				if (nbt != null)
 				{
@@ -63,27 +64,27 @@ public class EventItemTooltip
 					
 					// level
 					if (level >= ConfigHandler.MAX_LEVEL)
-						tooltip.add(TextFormatting.GRAY + I18n.format("levels.level.max"));
+						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.max"));
 					else
-						tooltip.add(TextFormatting.GRAY + I18n.format("levels.level") + ": " + level);
+						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.level") + ": " + level);
 					
 					// experience
 					if (level >= ConfigHandler.MAX_LEVEL)
-						tooltip.add(TextFormatting.GRAY + I18n.format("levels.experience.max"));
+						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.max"));
 					else
-						tooltip.add(TextFormatting.GRAY + I18n.format("levels.experience") + ": " + experience + " / " + maxExperience);
+						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.experience") + ": " + experience + " / " + maxExperience);
 					
 					// durability
 					if (ConfigHandler.SHOW_DURABILITY)
 					{
-						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.durability") + ": " + stack.getItemDamage() + " / " + stack.getMaxDamage());
+						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.durability") + ": " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
 					}
 					
 					// abilities
 					tooltip.add("");
 					if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
 					{
-						tooltip.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + "Abilities");
+						tooltip.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + I18n.format("levels.misc.abilities"));
 						tooltip.add("");
 						
 						for (Ability ability : Ability.values())
@@ -95,7 +96,7 @@ public class EventItemTooltip
 						}
 					}
 					else
-						tooltip.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + "Abilities (Shift)");
+						tooltip.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + I18n.format("levels.misc.abilities.shift"));
 					
 					// formatting
 					tooltip.add("");

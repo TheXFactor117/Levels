@@ -11,13 +11,13 @@ import net.minecraft.util.text.TextFormatting;
 public enum Ability
 {
 	// weapon abilities
-	FIRE(TextFormatting.RED, 0xFF5555, 1, 1),
-	FROST(TextFormatting.AQUA, 0x55FFFF, 1, 1),
-	POISON(TextFormatting.DARK_GREEN, 0x00AA00, 1, 1),
-	LIGHT(TextFormatting.YELLOW, 0xFFFF55, 2, 1),
-	BLOODLUST(TextFormatting.DARK_RED, 0xAA0000, 2, 1),
-	ETHEREAL(TextFormatting.GREEN, 0x55FF55, 2, 1),
-	CHAINED(TextFormatting.GRAY, 0xAAAAAA, 3, 1),
+	FIRE(TextFormatting.RED, 0xFF5555, 1, 1.5),
+	FROST(TextFormatting.AQUA, 0x55FFFF, 1, 1.5),
+	POISON(TextFormatting.DARK_GREEN, 0x00AA00, 1, 1.5),
+	LIGHT(TextFormatting.YELLOW, 0xFFFF55, 2, 1.5),
+	BLOODLUST(TextFormatting.DARK_RED, 0xAA0000, 2, 1.5),
+	ETHEREAL(TextFormatting.GREEN, 0x55FF55, 2, 2),
+	CHAINED(TextFormatting.GRAY, 0xAAAAAA, 3, 1.5),
 	VOID(TextFormatting.DARK_GRAY, 0x555555, 3, 1);
 	
 	public static final int WEAPON_ABILITIES = 8;
@@ -89,9 +89,12 @@ public enum Ability
 		else return 0;
 	}
 	
-	public double getMultiplier()
+	public double getMultiplier(int level)
 	{
-		return multiplier;
+		if (level == 1) return 1;
+		else if (level == 2) return multiplier;
+		else if (level == 3) return multiplier + (multiplier / 2);
+		else return 1;
 	}
 	
 	public int getTier()

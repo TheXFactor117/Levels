@@ -16,6 +16,8 @@ public class ConfigHandler
 	// features
 	
 	// abilities
+	public static int MAX_ABILITIES;
+	
 	// rarities
 	
 	// experience
@@ -34,10 +36,15 @@ public class ConfigHandler
 	{
 		String category;
 		
+		// abilities
+		category = "Abilities";
+		config.addCustomCategoryComment(category, "Ability settings");
+		MAX_ABILITIES = config.getInt("maxAbilities", category, 3, 1, 5, "configures the maximum number of abilities an item can have.");
+		
 		// experience
 		category = "Experience";
 		config.addCustomCategoryComment(category, "Experience settings");
-		MAX_LEVEL = config.getInt("maxLevel", category, 6, 1, 100, "configures the maximum level cap.");
+		MAX_LEVEL = config.getInt("maxLevel", category, 7, 1, 100, "configures the maximum level cap.");
 		
 		// miscellaneous
 		category = "Miscellaneous";

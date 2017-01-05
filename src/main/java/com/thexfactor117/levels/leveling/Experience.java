@@ -1,7 +1,5 @@
 package com.thexfactor117.levels.leveling;
 
-import java.util.Random;
-
 import com.thexfactor117.levels.util.ConfigHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +15,7 @@ import net.minecraft.util.text.TextFormatting;
  */
 public class Experience 
 {	
-	public static int getNextLevel(EntityPlayer player, ItemStack stack, NBTTagCompound nbt, int currentLevel, int experience, Random rand)
+	public static int getNextLevel(EntityPlayer player, ItemStack stack, NBTTagCompound nbt, int currentLevel, int experience)
 	{
 		int newLevel = currentLevel;
 		
