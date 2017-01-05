@@ -1,0 +1,16 @@
+[
+{
+  "modid": "levels",
+  "name": "Levels",
+  "description": "A simple, unique leveling system.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/TheXFactor117/Levels",
+  "updateUrl": "http://minecraft.curseforge.com/projects/levels/files",
+  "authorList": ["TheXFactor117"],
+  "credits": "MrIbby and Hlaaftana",
+  "logoFile": "assets/levels/logo/logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
