@@ -2,12 +2,15 @@ package com.thexfactor117.levels.gui;
 
 import java.io.IOException;
 
+import com.thexfactor117.levels.Levels;
 import com.thexfactor117.levels.leveling.Ability;
 import com.thexfactor117.levels.leveling.Experience;
 import com.thexfactor117.levels.leveling.Rarity;
+import com.thexfactor117.levels.network.PacketGuiAbility;
 import com.thexfactor117.levels.util.ConfigHandler;
 import com.thexfactor117.levels.util.NBTHelper;
 
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -15,6 +18,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * 
@@ -25,6 +30,7 @@ public class GuiAbilitySelection extends GuiScreen
 {
 	private GuiButton[] weaponAbilities = new GuiButton[Ability.WEAPON_ABILITIES];;
 	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void initGui() 
 	{	
@@ -58,6 +64,7 @@ public class GuiAbilitySelection extends GuiScreen
 	    }
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) 
 	{
@@ -71,7 +78,7 @@ public class GuiAbilitySelection extends GuiScreen
 	    	
 	    	if (stack != null && stack.getItem() instanceof ItemSword)
 	    	{
-	    		NBTTagCompound nbt = stack.getTagCompound();
+	    		NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 	    		
 	    		if (nbt != null)
 	    		{
@@ -85,14 +92,14 @@ public class GuiAbilitySelection extends GuiScreen
 	    		}
 	    	}
 	    }
-	    
 	    super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException 
 	{
-		EntityPlayer player = mc.thePlayer;
+		EntityPlayerSP player = mc.thePlayer;
 		
 		if (player != null)
 		{
@@ -110,10 +117,7 @@ public class GuiAbilitySelection extends GuiScreen
 						{
 							if (button == weaponAbilities[i])
 							{
-								Ability.values()[i].addAbility(nbt, 1);
-								Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - 1);
-								
-								NBTHelper.saveStackNBT(stack, nbt);
+								Levels.network.sendToServer(new PacketGuiAbility(i));
 							}
 						}
 					}
@@ -195,5 +199,11 @@ public class GuiAbilitySelection extends GuiScreen
 				weaponAbilities[i].enabled = false;
 			}
 		}
+	}
+	
+	@Override
+	public boolean doesGuiPauseGame()
+	{
+		return false;
 	}
 }

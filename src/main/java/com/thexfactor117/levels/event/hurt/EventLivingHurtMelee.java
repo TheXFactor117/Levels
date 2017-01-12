@@ -3,7 +3,6 @@ package com.thexfactor117.levels.event.hurt;
 import java.util.Iterator;
 import java.util.List;
 
-import com.thexfactor117.levels.Levels;
 import com.thexfactor117.levels.leveling.Ability;
 import com.thexfactor117.levels.leveling.Experience;
 import com.thexfactor117.levels.leveling.Rarity;
@@ -196,7 +195,6 @@ public class EventLivingHurtMelee
 			// tier 3
 			if (Ability.CHAINED.hasAbility(nbt) && (int) (Math.random() * 10) == 0)
 			{
-				Levels.LOGGER.info("Hello?");
 				double multiplier = Ability.CHAINED.getMultiplier(Ability.CHAINED.getLevel(nbt));
 				double radius = 10 * multiplier;
 				World world = enemy.getEntityWorld();

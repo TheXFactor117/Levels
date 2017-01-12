@@ -2,14 +2,10 @@ package com.thexfactor117.levels.event;
 
 import java.util.Random;
 
-import com.thexfactor117.levels.Levels;
 import com.thexfactor117.levels.leveling.Rarity;
-import com.thexfactor117.levels.network.PacketRarity;
 import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
@@ -58,8 +54,6 @@ public class EventLivingUpdate
 										rarity = Rarity.getRandomRarity(rand);
 										rarity.setRarity(nbt);
 										NBTHelper.saveStackNBT(stack, nbt);
-										Levels.network.sendTo(new PacketRarity(NBTHelper.loadStackNBT(stack)), (EntityPlayerMP) player);
-										if (rarity == Rarity.ARCHAIC) player.worldObj.playSound(player, player.getPosition(), SoundEvents.ENTITY_ENDERDRAGON_DEATH, player.getSoundCategory(), 0.8F, 1.0F);
 									}
 								}
 							}

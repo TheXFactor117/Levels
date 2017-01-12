@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.thexfactor117.levels.init.ModEvents;
-import com.thexfactor117.levels.network.PacketRarity;
+import com.thexfactor117.levels.network.PacketGuiAbility;
 import com.thexfactor117.levels.proxies.CommonProxy;
 import com.thexfactor117.levels.util.ConfigHandler;
 import com.thexfactor117.levels.util.GuiHandler;
@@ -57,7 +57,7 @@ public class Levels
 		ModEvents.registerEvents();
 		
 		network = NetworkRegistry.INSTANCE.newSimpleChannel("levels");
-		network.registerMessage(PacketRarity.Handler.class, PacketRarity.class, 0, Side.CLIENT);
+		network.registerMessage(PacketGuiAbility.Handler.class, PacketGuiAbility.class, 0, Side.SERVER);
 	}
 	
 	@EventHandler
