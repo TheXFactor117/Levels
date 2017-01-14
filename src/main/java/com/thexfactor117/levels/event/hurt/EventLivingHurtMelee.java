@@ -50,7 +50,7 @@ public class EventLivingHurtMelee
 				if (nbt != null)
 				{
 					updateExperience(nbt);
-					useRarity(event, nbt);
+					useRarity(event, stack, nbt);
 					useAbilities(event, player, enemy, nbt);
 					updateLevel(player, stack, nbt);
 				}
@@ -79,7 +79,7 @@ public class EventLivingHurtMelee
 	 * Called everytime an enemy is hurt. Used to add rarity bonuses, such as dealing more damage or adding more experience.
 	 * @param nbt
 	 */
-	private void useRarity(LivingHurtEvent event, NBTTagCompound nbt)
+	private void useRarity(LivingHurtEvent event, ItemStack stack, NBTTagCompound nbt)
 	{
 		Rarity rarity = Rarity.getRarity(nbt);
 		float damageMultiplier = 1.0F;
@@ -89,6 +89,8 @@ public class EventLivingHurtMelee
 			int var; // damage multiplier chance
 			int var1; // bonus experience chance
 			int var2; // bonus experience amount
+			int var3; // durability mitigation chance
+			int var4; // durability mitigated amount
 			
 			// damage boosts and bonus experience
 			switch (rarity)
@@ -100,6 +102,10 @@ public class EventLivingHurtMelee
 					var2 = (int) (Math.random() * 1);
 					if (var == 0) damageMultiplier = 1.25F;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
+					// durability
+					var3 = (int) (Math.random() * 20);
+					var4 = (int) (Math.random() * 1);
+					if (var3 == 0) stack.setItemDamage(stack.getItemDamage() - var4);
 					break;
 				// 7.7% chance of dealing 1.5x damage and 7.7% chance of gaining additional points of experience
 				case RARE:
@@ -108,6 +114,10 @@ public class EventLivingHurtMelee
 					var2 = (int) (Math.random() * 2);
 					if (var == 0) damageMultiplier = 1.5F;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
+					// durability
+					var3 = (int) (Math.random() * 13);
+					var4 = (int) (Math.random() * 2);
+					if (var3 == 0) stack.setItemDamage(stack.getItemDamage() - var4);
 					break;
 				// 10% chance of dealing 2x damage and 10% chance of gaining additional points of experience
 				case ULTRA_RARE:
@@ -116,6 +126,10 @@ public class EventLivingHurtMelee
 					var2 = (int) (Math.random() * 3);
 					if (var == 0) damageMultiplier = 2F;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
+					// durability
+					var3 = (int) (Math.random() * 10);
+					var4 = (int) (Math.random() * 3);
+					if (var3 == 0) stack.setItemDamage(stack.getItemDamage() - var4);
 					break;
 				// 14% chance of dealing 2.5x damage and 14% chance of gaining additional points of experience
 				case LEGENDARY:
@@ -124,6 +138,10 @@ public class EventLivingHurtMelee
 					var2 = (int) (Math.random() * 5);
 					if (var == 0) damageMultiplier = 2.5F;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
+					// durability
+					var3 = (int) (Math.random() * 7);
+					var4 = (int) (Math.random() * 5);
+					if (var3 == 0) stack.setItemDamage(stack.getItemDamage() - var4);
 					break;
 				// 20% chance of dealing 3x damage and 20% chance of gaining additional points of experience
 				case ARCHAIC:
@@ -132,6 +150,10 @@ public class EventLivingHurtMelee
 					var2 = (int) (Math.random() * 10);
 					if (var == 0) damageMultiplier = 3F;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
+					// durability
+					var3 = (int) (Math.random() * 5);
+					var4 = (int) (Math.random() * 10);
+					if (var3 == 0) stack.setItemDamage(stack.getItemDamage() - var4);
 					break;
 				default:
 					break;

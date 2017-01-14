@@ -36,7 +36,7 @@ import net.minecraftforge.fml.relauncher.Side;
  * ***PRE-ALPHA CODE***
  * 
  */
-@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
+@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION, updateJSON = Reference.UPDATE_URL)
 public class Levels 
 {
 	@SidedProxy(clientSide = Reference.CLIENT, serverSide = Reference.COMMON)
