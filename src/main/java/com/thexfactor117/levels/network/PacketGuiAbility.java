@@ -1,6 +1,5 @@
 package com.thexfactor117.levels.network;
 
-import com.thexfactor117.levels.Levels;
 import com.thexfactor117.levels.leveling.Ability;
 import com.thexfactor117.levels.leveling.Experience;
 import com.thexfactor117.levels.util.NBTHelper;
@@ -66,7 +65,6 @@ public class PacketGuiAbility implements IMessage
 							NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 							Ability.values()[message.index].addAbility(nbt, 1);
 							Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - 1);
-							Levels.LOGGER.info("Packet received!");
 						}
 					}
 				}

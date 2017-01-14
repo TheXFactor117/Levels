@@ -82,11 +82,6 @@ public class GuiAbilitySelection extends GuiScreen
 	    		
 	    		if (nbt != null)
 	    		{
-	    			//Ability.FIRE.addAbility(nbt, 1);
-	    			//Ability.FROST.addAbility(nbt, 1);
-	    			//Experience.setAbilityTokens(nbt, 1);
-	    			//Experience.setLevel(nbt, 6);
-	    			
 	    			drawStrings(stack, nbt);
 	    			displayButtons(nbt);
 	    		}

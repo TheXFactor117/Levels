@@ -17,6 +17,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 /**
  * 
  * @author TheXFactor117
+ * 
+ * Updates weapon information when killing an enemy with a valid weapon. Used to update experience,
+ * level, abilities, and so on.
  *
  */
 public class EventLivingDeath 
@@ -37,7 +40,6 @@ public class EventLivingDeath
 				{
 					addBonusExperience(event, nbt);
 					updateLevel(player, stack, nbt);
-					
 					NBTHelper.saveStackNBT(stack, nbt);
 				}
 			}

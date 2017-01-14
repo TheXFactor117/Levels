@@ -84,4 +84,20 @@ public class Experience
 	{
 		return nbt != null ? nbt.getInteger("TOKENS") : 0;
 	}
+	
+	public static void enable(NBTTagCompound nbt, boolean value)
+	{
+		if (nbt != null)
+		{
+			if (value)
+				nbt.setBoolean("ENABLED", value);
+			else
+				nbt.removeTag("ENABLED");
+		}
+	}
+	
+	public static boolean isEnabled(NBTTagCompound nbt)
+	{
+		return nbt != null ? nbt.getBoolean("ENABLED") : false;
+	}
 }

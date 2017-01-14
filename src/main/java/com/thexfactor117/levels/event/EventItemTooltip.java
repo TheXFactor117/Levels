@@ -12,6 +12,7 @@ import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,6 +25,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * 
  * @author TheXFactor117
+ * 
+ * Displays information about the weapon when hovered over in an inventory.
  *
  */
 public class EventItemTooltip 
@@ -42,11 +45,11 @@ public class EventItemTooltip
 
 		if (item != null)
 		{
-			if (item instanceof ItemSword)
+			if (item instanceof ItemSword || item instanceof ItemAxe)
 			{
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
-				if (nbt != null)
+				if (nbt != null && Experience.isEnabled(nbt))
 				{
 					Rarity rarity = Rarity.getRarity(nbt);
 					int level = Experience.getLevel(nbt);

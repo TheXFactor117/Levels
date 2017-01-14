@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.thexfactor117.levels.util.RandomCollection;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
 
@@ -71,10 +72,7 @@ public enum Rarity
 
 	public String getName()
 	{
-		String str = this.toString().toLowerCase();
-		String first = str.substring(0, 1);
-		
-		return first.toUpperCase() + str.substring(1);
+		return I18n.format("levels.rarity." + this.ordinal());
 	}
 	
 	public String getColor()

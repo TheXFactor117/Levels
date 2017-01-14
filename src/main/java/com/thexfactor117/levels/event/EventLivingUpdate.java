@@ -2,12 +2,13 @@ package com.thexfactor117.levels.event;
 
 import java.util.Random;
 
+import com.thexfactor117.levels.leveling.Experience;
 import com.thexfactor117.levels.leveling.Rarity;
+import com.thexfactor117.levels.util.ConfigHandler;
 import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -39,21 +40,38 @@ public class EventLivingUpdate
 					{
 						if (main.get(i) != null)
 						{
-							if (main.get(i).getItem() instanceof ItemSword || main.get(i).getItem() instanceof ItemBow || main.get(i).getItem() instanceof ItemArmor)
+							if (main.get(i).getItem() instanceof ItemSword || main.get(i).getItem() instanceof ItemAxe)
 							{
 								ItemStack stack = main.get(i);
 								NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 								
 								if (nbt != null)
 								{
-									Rarity rarity = Rarity.getRarity(nbt);
-									Random rand = player.worldObj.rand;
-									
-									if (rarity == Rarity.DEFAULT)
+									if (!Experience.isEnabled(nbt))
 									{
-										rarity = Rarity.getRandomRarity(rand);
-										rarity.setRarity(nbt);
-										NBTHelper.saveStackNBT(stack, nbt);
+										int count = 0;
+										
+										for (int j = 0; j < ConfigHandler.ITEM_BLACKLIST.length; j++)
+										{
+											if (ConfigHandler.ITEM_BLACKLIST[j].equals(stack.getItem().getRegistryName().getResourceDomain() + ":" + stack.getItem().getRegistryName().getResourcePath()))
+											{
+												count++;
+											}
+										}
+										
+										if (count == 0)
+										{
+											Experience.enable(nbt, true);
+											Rarity rarity = Rarity.getRarity(nbt);
+											Random rand = player.worldObj.rand;
+											
+											if (rarity == Rarity.DEFAULT)
+											{
+												rarity = Rarity.getRandomRarity(rand);
+												rarity.setRarity(nbt);
+												NBTHelper.saveStackNBT(stack, nbt);
+											}
+										}
 									}
 								}
 							}

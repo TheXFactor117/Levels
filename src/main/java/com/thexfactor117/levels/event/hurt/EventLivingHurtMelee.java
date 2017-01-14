@@ -41,7 +41,7 @@ public class EventLivingHurtMelee
 		{
 			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
 			EntityLivingBase enemy = event.getEntityLiving();
-			ItemStack stack = player.getHeldItemMainhand();
+			ItemStack stack = player.inventory.getCurrentItem();
 			
 			if (stack != null && (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe))
 			{
@@ -125,12 +125,12 @@ public class EventLivingHurtMelee
 					if (var == 0) damageMultiplier = 2.5F;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					break;
-				// 20% chance of dealing 3x damage and 15% chance of gaining additional points of experience
+				// 20% chance of dealing 3x damage and 20% chance of gaining additional points of experience
 				case ARCHAIC:
 					var = (int) (Math.random() * 5);
 					var1 = (int) (Math.random() * 5);
 					var2 = (int) (Math.random() * 10);
-					if (var == 0) damageMultiplier = 1.5F;
+					if (var == 0) damageMultiplier = 3F;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					break;
 				default:

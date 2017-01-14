@@ -25,6 +25,7 @@ public class ConfigHandler
 	
 	// miscellaneous
 	public static boolean SHOW_DURABILITY;
+	public static String[] ITEM_BLACKLIST;
 	
 	public static void init(File file)
 	{
@@ -50,6 +51,7 @@ public class ConfigHandler
 		category = "Miscellaneous";
 		config.addCustomCategoryComment(category, "Miscellaneous settings");
 		SHOW_DURABILITY = config.getBoolean("showDurability", category, true, "determines whether or not to show durability in tooltips.");
+		ITEM_BLACKLIST = config.getStringList("itemBlacklist", category, new String[] { "examplemodid:exampleitem" }, "items in this list will not have any leveling systems");
 		
 		config.save();
 	}

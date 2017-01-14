@@ -68,10 +68,7 @@ public class Levels
 	}
 	
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event)
-	{
-		
-	}
+	public void postInit(FMLPostInitializationEvent event) {}
 	
 	public static File getConfigDir()
 	{
