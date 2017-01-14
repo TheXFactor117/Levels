@@ -12,6 +12,8 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * 
@@ -22,6 +24,7 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
  */
 public class EventInput 
 {
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onKeyPress(InputEvent.KeyInputEvent event)
 	{
