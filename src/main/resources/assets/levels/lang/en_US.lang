@@ -9,11 +9,12 @@ levels.rarity.6=Archaic
 levels.ability.0=Fire
 levels.ability.1=Frost
 levels.ability.2=Poison
-levels.ability.3=Light
-levels.ability.4=Bloodlust
-levels.ability.5=Ethereal
-levels.ability.6=Chained
-levels.ability.7=Void
+levels.ability.3=Bloodlust
+levels.ability.4=Chained
+levels.ability.5=Void
+levels.ability.6=Light
+levels.ability.7=Ethereal
+levels.ability.8=Soul Bound
 
 levels.misc.level=Level
 levels.misc.max=Max

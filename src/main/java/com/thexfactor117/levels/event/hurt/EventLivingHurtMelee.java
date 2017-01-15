@@ -69,7 +69,7 @@ public class EventLivingHurtMelee
 			boolean isDev = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 			
 			if (isDev)
-				Experience.setExperience(nbt, Experience.getExperience(nbt) + 10);
+				Experience.setExperience(nbt, Experience.getExperience(nbt) + 100);
 			else
 				Experience.setExperience(nbt, Experience.getExperience(nbt) + 1);
 		}

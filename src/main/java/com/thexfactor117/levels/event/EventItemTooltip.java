@@ -94,7 +94,7 @@ public class EventItemTooltip
 						{
 							if (ability.hasAbility(nbt))
 							{
-								tooltip.add(ability.getColor() + I18n.format("levels.ability." + ability.ordinal()));
+								tooltip.add(ability.getColor() + ability.getName(nbt));
 							}
 						}
 					}
