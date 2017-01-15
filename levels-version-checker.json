@@ -1,8 +1,10 @@
 {
 	"homepage": "http://minecraft.curseforge.com/projects/levels/files",
 	"promos": {
-		"1.10.2-latest": "r4.1.3",
-		"1.10.2-recommened": "r4.1.3",
+		"1.11.2-latest": "0.1.0.0",
+		"1.11.2-recommended": "0.1.0.0",
+		"1.10.2-latest": "0.1.0.0",
+		"1.10.2-recommended": "0.1.0.0",
 		"1.10-latest": "r4.0.1",
 		"1.10-recommended": "r4.0.1",
 		"1.9.4-latest": "r3.0.9",
@@ -10,8 +12,11 @@
 		"1.7.10-latest": "r3.0.1",
 		"1.7.10-recommended": "r3.0.1"
 	},
+	"1.11.2": {
+		"0.1.0.0": "* Levels 2 has been released! Completely re-written!"
+	},
 	"1.10.2": {
-		"r4.1.3": "* Fixes crash when using a Test Dummy from MmmMmmMmm."	
+		"0.1.0.0": "* Updated to 1.11.2! Completely re-written!"	
 	},
 	"1.10": {
 		"r4.0.1": "* Fixes issue with certain abilities not getting applied.\n!!! Levels has been updated to 1.10.2, check it out!"

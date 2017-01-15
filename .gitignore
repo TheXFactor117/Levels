@@ -4,6 +4,7 @@
 /.project
 /.settings
 /config
+/.DS_Store
 /eula.txt
 /logs
 /server.properties
@@ -23,6 +24,4 @@
 /build/dependency-cache
 /build/retromapping
 /build/taskLogs
-/src
 /libs
-/gradle
