@@ -18,7 +18,7 @@ loadProperties()
 
 version=config.minecraft_version + "-" + config.mod_version
 group= "com.thexfactor117.levels"
-archivesBaseName = "Levels"
+archivesBaseName = "Levels 2"
 
 def loadProperties() {
     ext.configFile = file "build.properties"
