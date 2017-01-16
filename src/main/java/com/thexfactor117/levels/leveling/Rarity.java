@@ -16,12 +16,12 @@ import net.minecraft.util.text.TextFormatting;
 public enum Rarity 
 {
 	DEFAULT("", 0, 0.0),
-	COMMON(TextFormatting.GRAY, 0xAAAAAA, 0.5),
+	COMMON(TextFormatting.WHITE, 0xFFFFFF, 0.5),
 	UNCOMMON(TextFormatting.DARK_GREEN, 0x00AA00, 0.25),
 	RARE(TextFormatting.AQUA, 0x55FFFF, 0.13),
 	ULTRA_RARE(TextFormatting.DARK_PURPLE, 0xAA00AA, 0.07),
 	LEGENDARY(TextFormatting.GOLD, 0xFFAA00, 0.035),
-	ARCHAIC(TextFormatting.WHITE, 0xFFFFFF, 0.015);
+	ARCHAIC(TextFormatting.LIGHT_PURPLE, 0xFF55FF, 0.015);
 	
 	private String color;
 	private int hex;
