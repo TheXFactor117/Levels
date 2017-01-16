@@ -1,8 +1,8 @@
 {
 	"homepage": "http://minecraft.curseforge.com/projects/levels/files",
 	"promos": {
-		"1.11.2-latest": "0.1.0.1",
-		"1.11.2-recommended": "0.1.0.1",
+		"1.11.2-latest": "b1.1.0",
+		"1.11.2-recommended": "b1.1.0",
 		"1.10.2-latest": "0.1.0.0",
 		"1.10.2-recommended": "0.1.0.0",
 		"1.10-latest": "r4.0.1",
@@ -13,7 +13,7 @@
 		"1.7.10-recommended": "r3.0.1"
 	},
 	"1.11.2": {
-		"0.1.0.1": "* Fixes server crash on load"
+		"b1.1.0": "+ Added many new changes to the ability system, including tiered abilities and passive/active abilities."
 	},
 	"1.10.2": {
 		"0.1.0.0": "* Updated to 1.11.2! Completely re-written!"	
