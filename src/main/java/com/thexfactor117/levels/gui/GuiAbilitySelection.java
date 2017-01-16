@@ -132,13 +132,22 @@ public class GuiAbilitySelection extends GuiScreen
 		
 		drawCenteredString(fontRendererObj, stack.getDisplayName(), width / 2, 20, rarity.getHex());
 		drawString(fontRendererObj, I18n.format("levels.misc.rarity") + ": " + rarity.getName(), width / 2 - 50, 40, rarity.getHex());
-		drawString(fontRendererObj, I18n.format("levels.misc.level") + ": " + Experience.getLevel(nbt), width / 2 - 50, 50, 0xFFFFFF);
-		drawString(fontRendererObj, I18n.format("levels.misc.experience") + ": " + Experience.getExperience(nbt) + " / " + Experience.getMaxLevelExp(Experience.getLevel(nbt)), width / 2 - 50, 60, 0xFFFFFF);
 		drawCenteredString(fontRendererObj, I18n.format("levels.misc.abilities"), width / 2, 80, 0xFFFFFF);
 		drawCenteredString(fontRendererObj, I18n.format("levels.misc.abilities.tokens") + ": " + Experience.getAbilityTokens(nbt), width / 2 - 112, 85, 0xFFFFFF);
 		drawCenteredString(fontRendererObj, I18n.format("levels.misc.abilities.purchased"), width / 2 + 112, 100, 0xFFFFFF);
 		drawCenteredString(fontRendererObj, I18n.format("levels.misc.abilities.active"), width / 2 + 75, 120, 0xFFFFFF);
 		drawCenteredString(fontRendererObj, I18n.format("levels.misc.abilities.passive"), width / 2 + 150, 120, 0xFFFFFF);
+		
+		if (Experience.getLevel(nbt) == 7)
+		{
+			drawString(fontRendererObj, I18n.format("levels.misc.level") + ": " + I18n.format("levels.misc.max"), width / 2 - 50, 50, 0xFFFFFF);
+			drawString(fontRendererObj, I18n.format("levels.misc.experience") + ": " + I18n.format("levels.misc.max"), width / 2 - 50, 60, 0xFFFFFF);
+		}
+		else
+		{
+			drawString(fontRendererObj, I18n.format("levels.misc.level") + ": " + Experience.getLevel(nbt), width / 2 - 50, 50, 0xFFFFFF);
+			drawString(fontRendererObj, I18n.format("levels.misc.experience") + ": " + Experience.getExperience(nbt) + " / " + Experience.getMaxLevelExp(Experience.getLevel(nbt)), width / 2 - 50, 60, 0xFFFFFF);
+		}
 		
 		int j = -1;
 		int k = -1;

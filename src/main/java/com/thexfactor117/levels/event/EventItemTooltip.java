@@ -67,13 +67,13 @@ public class EventItemTooltip
 					
 					// level
 					if (level >= ConfigHandler.MAX_LEVEL)
-						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.max"));
+						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.level") + ": " + I18n.format("levels.misc.max"));
 					else
 						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.level") + ": " + level);
 					
 					// experience
 					if (level >= ConfigHandler.MAX_LEVEL)
-						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.max"));
+						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.experience") + ": " + I18n.format("levels.misc.max"));
 					else
 						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.experience") + ": " + experience + " / " + maxExperience);
 					
