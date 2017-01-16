@@ -11,25 +11,30 @@ import net.minecraft.util.text.TextFormatting;
  */
 public enum Ability
 {
-	// weapon abilities
-	FIRE(TextFormatting.RED, 0xFF5555, 1, 1.5),
-	FROST(TextFormatting.AQUA, 0x55FFFF, 1, 1.5),
-	POISON(TextFormatting.DARK_GREEN, 0x00AA00, 1, 1.5),
-	LIGHT(TextFormatting.YELLOW, 0xFFFF55, 2, 1.5),
-	BLOODLUST(TextFormatting.DARK_RED, 0xAA0000, 2, 1.5),
-	ETHEREAL(TextFormatting.GREEN, 0x55FF55, 2, 2),
-	CHAINED(TextFormatting.GRAY, 0xAAAAAA, 3, 1.5),
-	VOID(TextFormatting.DARK_GRAY, 0x555555, 3, 1);
+	// weapon abilities (type, color, color code, tier, multiplier)
+	// active
+	FIRE(0, TextFormatting.RED, 0xFF5555, 1, 1.5),
+	FROST(0, TextFormatting.AQUA, 0x55FFFF, 1, 1.5),
+	POISON(0, TextFormatting.DARK_GREEN, 0x00AA00, 1, 1.5),
+	BLOODLUST(0, TextFormatting.DARK_RED, 0xAA0000, 2, 1.5),
+	CHAINED(0, TextFormatting.GRAY, 0xAAAAAA, 3, 1.5),
+	VOID(0, TextFormatting.DARK_GRAY, 0x555555, 3, 1),
+	// passive
+	LIGHT(1, TextFormatting.YELLOW, 0xFFFF55, 2, 1),
+	ETHEREAL(1, TextFormatting.GREEN, 0x55FF55, 2, 2),
+	SOUL_BOUND(1, TextFormatting.DARK_PURPLE, 0xAA00AA, 3, 1);
 	
-	public static final int WEAPON_ABILITIES = 8;
+	public static final int WEAPON_ABILITIES = 9;
 
+	private int type;
 	private String color;
 	private int hex;
 	private int tier;
 	private double multiplier;
 	
-	Ability(Object color, int hex, int tier, double multiplier)
+	Ability(int type, Object color, int hex, int tier, double multiplier)
 	{
+		this.type = type;
 		this.color = color.toString();
 		this.hex = hex;
 		this.tier = tier;
@@ -73,7 +78,7 @@ public enum Ability
 	 */
 	public void setLevel(NBTTagCompound nbt, int level)
 	{
-		if (level <= 2)
+		if (level <= 3)
 		{
 			nbt.setInteger(toString() + "_level", level);
 		}
@@ -88,6 +93,19 @@ public enum Ability
 	{
 		if (nbt != null) return nbt.getInteger(toString() + "_level");
 		else return 0;
+	}
+	
+	public boolean canUpgradeLevel(NBTTagCompound nbt)
+	{
+		if (getType() == 0)
+		{
+			if (getLevel(nbt) < 3)
+				return true;
+			else
+				return false;
+		}
+		else
+			return false;
 	}
 	
 	public double getMultiplier(int level)
@@ -116,5 +134,22 @@ public enum Ability
 	public String getName()
 	{
 		return I18n.format("levels.ability." + this.ordinal());
+	}
+	
+	public String getName(NBTTagCompound nbt)
+	{
+		if (getLevel(nbt) == 1)
+			return I18n.format("levels.ability." + this.ordinal());
+		else if (getLevel(nbt) == 2)
+			return I18n.format("levels.ability." + this.ordinal()) + " II";
+		else if (getLevel(nbt) == 3)
+			return I18n.format("levels.ability." + this.ordinal()) + " III";
+		
+		return I18n.format("levels.ability." + this.ordinal());
+	}
+	
+	public int getType()
+	{
+		return type;
 	}
 }

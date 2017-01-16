@@ -63,8 +63,17 @@ public class PacketGuiAbility implements IMessage
 						if (stack != null && stack.getItem() instanceof ItemSword)
 						{
 							NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-							Ability.values()[message.index].addAbility(nbt, 1);
-							Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - 1);
+							
+							if (Ability.values()[message.index].hasAbility(nbt))
+							{
+								Ability.values()[message.index].setLevel(nbt, Ability.values()[message.index].getLevel(nbt) + 1);
+								Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - 1);
+							}
+							else
+							{
+								Ability.values()[message.index].addAbility(nbt, 1);
+								Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.values()[message.index].getTier());
+							}
 						}
 					}
 				}

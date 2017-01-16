@@ -69,7 +69,7 @@ public class EventLivingHurtMelee
 			boolean isDev = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 			
 			if (isDev)
-				Experience.setExperience(nbt, Experience.getExperience(nbt) + 10);
+				Experience.setExperience(nbt, Experience.getExperience(nbt) + 100);
 			else
 				Experience.setExperience(nbt, Experience.getExperience(nbt) + 1);
 		}
@@ -174,7 +174,7 @@ public class EventLivingHurtMelee
 	{
 		if (enemy != null)
 		{
-			// tier 1
+			// active
 			if (Ability.FIRE.hasAbility(nbt) && (int) (Math.random() * 4) == 0)
 			{
 				double multiplier = Ability.FIRE.getMultiplier(Ability.FIRE.getLevel(nbt));
@@ -193,28 +193,12 @@ public class EventLivingHurtMelee
 				enemy.addPotionEffect(new PotionEffect(MobEffects.POISON, (int) (20 * (7 * multiplier)), Ability.POISON.getLevel(nbt)));
 			}
 			
-			// tier 2
-			if (Ability.LIGHT.hasAbility(nbt) && (int) (Math.random() * 7) == 0)
-			{
-				double multiplier = Ability.LIGHT.getMultiplier(Ability.LIGHT.getLevel(nbt));
-				enemy.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, (int) (20 * (4 * multiplier)), Ability.LIGHT.getLevel(nbt)));
-				enemy.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, (int) (20 * (4 * multiplier)), Ability.LIGHT.getLevel(nbt)));
-			}
-			
 			if (Ability.BLOODLUST.hasAbility(nbt) && (int) (Math.random() * 7) == 0)
 			{
 				double multiplier = Ability.BLOODLUST.getMultiplier(Ability.BLOODLUST.getLevel(nbt));
 				enemy.addPotionEffect(new PotionEffect(MobEffects.WITHER, (int) (20 * (4 * multiplier)), Ability.BLOODLUST.getLevel(nbt)));
 			}
-			
-			if (Ability.ETHEREAL.hasAbility(nbt) && (int) (Math.random() * 7) == 0)
-			{
-				double multiplier = Ability.ETHEREAL.getMultiplier(Ability.ETHEREAL.getLevel(nbt));
-				float health = (float) (player.getHealth() + (event.getAmount() / (4 / multiplier)));
-				player.setHealth(health);
-			}
-			
-			// tier 3
+
 			if (Ability.CHAINED.hasAbility(nbt) && (int) (Math.random() * 10) == 0)
 			{
 				double multiplier = Ability.CHAINED.getMultiplier(Ability.CHAINED.getLevel(nbt));
@@ -244,6 +228,19 @@ public class EventLivingHurtMelee
 
 				float damage = enemy.getMaxHealth() * multiplier;
 				event.setAmount(damage);
+			}
+			
+			// passive
+			if (Ability.LIGHT.hasAbility(nbt) && (int) (Math.random() * 7) == 0)
+			{
+				enemy.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, (int) (20 * 6), Ability.LIGHT.getLevel(nbt)));
+				enemy.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, (int) (20 * 6), Ability.LIGHT.getLevel(nbt)));
+			}
+			
+			if (Ability.ETHEREAL.hasAbility(nbt) && (int) (Math.random() * 7) == 0)
+			{
+				float health = (float) (player.getHealth() + (event.getAmount() / 2));
+				player.setHealth(health);
 			}
 		}
 	}
