@@ -12,6 +12,7 @@ import com.thexfactor117.levels.util.NBTHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemAxe;
@@ -211,7 +212,7 @@ public class EventLivingHurtMelee
 				{
                     Entity entity = (Entity) iterator.next();
 					
-					if (entity instanceof EntityLivingBase && !(entity instanceof EntityPlayer))
+					if (entity instanceof EntityLivingBase && !(entity instanceof EntityPlayer) && !(entity instanceof EntityAnimal))
 					{
 						entity.attackEntityFrom(DamageSource.causePlayerDamage(player), event.getAmount());
 					}

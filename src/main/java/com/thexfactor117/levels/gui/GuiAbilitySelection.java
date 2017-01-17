@@ -189,6 +189,8 @@ public class GuiAbilitySelection extends GuiScreen
 					
 					if (Ability.values()[i].hasAbility(nbt) && Ability.values()[i].canUpgradeLevel(nbt))
 						weaponAbilities[i].enabled = true;
+					else if (Ability.values()[i].hasAbility(nbt))
+						weaponAbilities[i].enabled = false;
 				}
 				
 				if (Experience.getAbilityTokens(nbt) == 2)
@@ -203,6 +205,8 @@ public class GuiAbilitySelection extends GuiScreen
 					
 					if (Ability.values()[i].hasAbility(nbt) && Ability.values()[i].canUpgradeLevel(nbt))
 						weaponAbilities[i].enabled = true;
+					else if (Ability.values()[i].hasAbility(nbt))
+						weaponAbilities[i].enabled = false;
 				}
 				
 				if (Experience.getAbilityTokens(nbt) >= 3)
@@ -216,6 +220,8 @@ public class GuiAbilitySelection extends GuiScreen
 					
 					if (Ability.values()[i].hasAbility(nbt) && Ability.values()[i].canUpgradeLevel(nbt))
 						weaponAbilities[i].enabled = true;
+					else if (Ability.values()[i].hasAbility(nbt))
+						weaponAbilities[i].enabled = false;
 				}
 			}
 		}
