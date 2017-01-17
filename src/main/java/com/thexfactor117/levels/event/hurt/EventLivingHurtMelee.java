@@ -211,7 +211,7 @@ public class EventLivingHurtMelee
 				{
                     Entity entity = (Entity) iterator.next();
 					
-					if (entity instanceof EntityLivingBase)
+					if (entity instanceof EntityLivingBase && !(entity instanceof EntityPlayer))
 					{
 						entity.attackEntityFrom(DamageSource.causePlayerDamage(player), event.getAmount());
 					}
