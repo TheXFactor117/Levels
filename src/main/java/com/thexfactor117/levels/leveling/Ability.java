@@ -22,10 +22,18 @@ public enum Ability
 	// passive
 	LIGHT(1, TextFormatting.YELLOW, 0xFFFF55, 2, 1),
 	ETHEREAL(1, TextFormatting.GREEN, 0x55FF55, 2, 2),
-	SOUL_BOUND(1, TextFormatting.DARK_PURPLE, 0xAA00AA, 3, 1);
+	SOUL_BOUND(1, TextFormatting.DARK_PURPLE, 0xAA00AA, 3, 1),
+	
+	// armor abilities
+	// active
+	MOLTEN(0, TextFormatting.RED, 0xFF5555, 1, 1.5),
+	FROZEN(0, TextFormatting.AQUA, 0x55FFFF, 1, 1.5),
+	TOXIC(0, TextFormatting.DARK_GREEN, 0x00AA00, 1, 1.5);
+	// passive
 	
 	public static final int WEAPON_ABILITIES = 9;
-
+	public static final int ARMOR_ABILITIES = 8;
+	
 	private int type;
 	private String color;
 	private int hex;
