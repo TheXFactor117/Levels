@@ -8,6 +8,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -66,7 +67,7 @@ public class PacketGuiAbility implements IMessage
 						{
 							NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 							
-							if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
+							if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemBow)
 							{	
 								if (Ability.WEAPONS[message.index].hasAbility(nbt))
 								{

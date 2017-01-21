@@ -14,9 +14,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.launchwrapper.Launch;
@@ -74,6 +76,30 @@ public class EventLivingHurt
 						updateExperience(nbt);
 						useRarity(event, stack, nbt);
 						useArmorAbilities(event, player, enemy, nbt);
+						updateLevel(player, stack, nbt);
+					}
+				}
+			}
+		}
+		else if (event.getSource().getSourceOfDamage() instanceof EntityArrow)
+		{
+			EntityArrow arrow = (EntityArrow) event.getSource().getSourceOfDamage();
+			
+			if (arrow.shootingEntity instanceof EntityPlayer)
+			{
+				EntityPlayer player = (EntityPlayer) arrow.shootingEntity;
+				EntityLivingBase enemy = event.getEntityLiving();
+				ItemStack stack = player.inventory.getCurrentItem();
+				
+				if (stack != null && stack.getItem() instanceof ItemBow)
+				{
+					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+					
+					if (nbt != null)
+					{
+						updateExperience(nbt);
+						useRarity(event, stack, nbt);
+						useWeaponAbilities(event, player, enemy, nbt);
 						updateLevel(player, stack, nbt);
 					}
 				}
