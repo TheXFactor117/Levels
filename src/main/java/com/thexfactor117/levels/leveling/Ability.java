@@ -13,35 +13,45 @@ public enum Ability
 {
 	// weapon abilities (type, color, color code, tier, multiplier)
 	// active
-	FIRE(0, TextFormatting.RED, 0xFF5555, 1, 1.5),
-	FROST(0, TextFormatting.AQUA, 0x55FFFF, 1, 1.5),
-	POISON(0, TextFormatting.DARK_GREEN, 0x00AA00, 1, 1.5),
-	BLOODLUST(0, TextFormatting.DARK_RED, 0xAA0000, 2, 1.5),
-	CHAINED(0, TextFormatting.GRAY, 0xAAAAAA, 3, 1.5),
-	VOID(0, TextFormatting.DARK_GRAY, 0x555555, 3, 1),
+	FIRE("weapon", "active", TextFormatting.RED, 0xFF5555, 1, 1.5),
+	FROST("weapon", "active", TextFormatting.AQUA, 0x55FFFF, 1, 1.5),
+	POISON("weapon", "active", TextFormatting.DARK_GREEN, 0x00AA00, 1, 1.5),
+	BLOODLUST("weapon", "active", TextFormatting.DARK_RED, 0xAA0000, 2, 1.5),
+	CHAINED("weapon", "active", TextFormatting.GRAY, 0xAAAAAA, 3, 1.5),
+	VOID("weapon", "active", TextFormatting.DARK_GRAY, 0x555555, 3, 1),
 	// passive
-	LIGHT(1, TextFormatting.YELLOW, 0xFFFF55, 2, 1),
-	ETHEREAL(1, TextFormatting.GREEN, 0x55FF55, 2, 2),
-	SOUL_BOUND(1, TextFormatting.DARK_PURPLE, 0xAA00AA, 3, 1),
+	LIGHT("weapon", "passive", TextFormatting.YELLOW, 0xFFFF55, 2, 1),
+	ETHEREAL("weapon", "passive", TextFormatting.GREEN, 0x55FF55, 2, 2),
+	SOUL_BOUND("weapon", "passive", TextFormatting.DARK_PURPLE, 0xAA00AA, 3, 1),
 	
 	// armor abilities
 	// active
-	MOLTEN(0, TextFormatting.RED, 0xFF5555, 1, 1.5),
-	FROZEN(0, TextFormatting.AQUA, 0x55FFFF, 1, 1.5),
-	TOXIC(0, TextFormatting.DARK_GREEN, 0x00AA00, 1, 1.5);
+	MOLTEN("armor", "active", TextFormatting.RED, 0xFF5555, 1, 1.5),
+	FROZEN("armor", "active", TextFormatting.AQUA, 0x55FFFF, 1, 1.5),
+	TOXIC("armor", "active", TextFormatting.DARK_GREEN, 0x00AA00, 1, 1.5),
+	ABSORB("armor", "active", TextFormatting.GREEN, 0x55FF55, 2, 1.5),
+	VOID_ARMOR("armor", "active", TextFormatting.DARK_GRAY, 0x555555, 3, 1),
 	// passive
+	BEASTIAL("armor", "passive", TextFormatting.DARK_RED, 0xAA0000, 1, 1.5),
+	ENLIGHTENED("armor", "passive", TextFormatting.YELLOW, 0xFFFF55, 2, 2),
+	HARDENED("armor", "passive", TextFormatting.GRAY, 0xAAAAAA, 2, 1),
+	SOUL_BOUND_ARMOR("armor", "passive", TextFormatting.DARK_PURPLE, 0xAA00AA, 3, 1);
 	
 	public static final int WEAPON_ABILITIES = 9;
-	public static final int ARMOR_ABILITIES = 8;
+	public static final int ARMOR_ABILITIES = 9;
+	public static final Ability[] WEAPONS = new Ability[WEAPON_ABILITIES];
+	public static final Ability[] ARMOR = new Ability[ARMOR_ABILITIES];
 	
-	private int type;
+	private String category;
+	private String type;
 	private String color;
 	private int hex;
 	private int tier;
 	private double multiplier;
 	
-	Ability(int type, Object color, int hex, int tier, double multiplier)
+	Ability(String category, String type, Object color, int hex, int tier, double multiplier)
 	{
+		this.category = category;
 		this.type = type;
 		this.color = color.toString();
 		this.hex = hex;
@@ -105,7 +115,7 @@ public enum Ability
 	
 	public boolean canUpgradeLevel(NBTTagCompound nbt)
 	{
-		if (getType() == 0)
+		if (getType().equals("active"))
 		{
 			if (getLevel(nbt) < 3)
 				return true;
@@ -156,8 +166,31 @@ public enum Ability
 		return I18n.format("levels.ability." + this.ordinal());
 	}
 	
-	public int getType()
+	public String getType()
 	{
 		return type;
+	}
+	
+	public String getCategory()
+	{
+		return category;
+	}
+	
+	static
+	{
+		int j = 0;
+		
+		for (int i = 0; i < Ability.values().length; i++)
+		{
+			if (Ability.values()[i].getCategory().equals("weapon"))
+			{
+				Ability.WEAPONS[i] = Ability.values()[i];
+			}
+			else if (Ability.values()[i].getCategory().equals("armor"))
+			{
+				Ability.ARMOR[j] = Ability.values()[i];
+				j++;
+			}
+		}
 	}
 }

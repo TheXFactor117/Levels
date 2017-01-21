@@ -1,4 +1,4 @@
-package com.thexfactor117.levels.event.hurt;
+package com.thexfactor117.levels.event;
 
 import java.util.Iterator;
 import java.util.List;
@@ -15,6 +15,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -33,7 +34,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * @author TheXFactor117
  *
  */
-public class EventLivingHurtMelee 
+public class EventLivingHurt 
 {
 	@SubscribeEvent
 	public void onHurt(LivingHurtEvent event)
@@ -52,8 +53,29 @@ public class EventLivingHurtMelee
 				{
 					updateExperience(nbt);
 					useRarity(event, stack, nbt);
-					useAbilities(event, player, enemy, nbt);
+					useWeaponAbilities(event, player, enemy, nbt);
 					updateLevel(player, stack, nbt);
+				}
+			}
+		}
+		else if (event.getSource().getSourceOfDamage() instanceof EntityLivingBase && event.getEntityLiving() instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+			EntityLivingBase enemy = (EntityLivingBase) event.getSource().getSourceOfDamage();
+			
+			for (ItemStack stack : player.inventory.armorInventory)
+			{
+				if (stack.getItem() instanceof ItemArmor)	
+				{
+					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+					
+					if (nbt != null)
+					{
+						updateExperience(nbt);
+						useRarity(event, stack, nbt);
+						useArmorAbilities(event, player, enemy, nbt);
+						updateLevel(player, stack, nbt);
+					}
 				}
 			}
 		}
@@ -70,7 +92,7 @@ public class EventLivingHurtMelee
 			boolean isDev = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 			
 			if (isDev)
-				Experience.setExperience(nbt, Experience.getExperience(nbt) + 100);
+				Experience.setExperience(nbt, Experience.getExperience(nbt) + 1000);
 			else
 				Experience.setExperience(nbt, Experience.getExperience(nbt) + 1);
 		}
@@ -83,7 +105,7 @@ public class EventLivingHurtMelee
 	private void useRarity(LivingHurtEvent event, ItemStack stack, NBTTagCompound nbt)
 	{
 		Rarity rarity = Rarity.getRarity(nbt);
-		float damageMultiplier = 1.0F;
+		float damageMultiplier = 0F;
 		
 		if (rarity != Rarity.DEFAULT)
 		{
@@ -101,7 +123,7 @@ public class EventLivingHurtMelee
 					var = (int) (Math.random() * 20);
 					var1 = (int) (Math.random() * 20);
 					var2 = (int) (Math.random() * 1);
-					if (var == 0) damageMultiplier = 1.25F;
+					if (var == 0) damageMultiplier = 1F;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					// durability
 					var3 = (int) (Math.random() * 20);
@@ -113,7 +135,7 @@ public class EventLivingHurtMelee
 					var = (int) (Math.random() * 13);
 					var1 = (int) (Math.random() * 13);
 					var2 = (int) (Math.random() * 2);
-					if (var == 0) damageMultiplier = 1.5F;
+					if (var == 0) damageMultiplier = 2F;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					// durability
 					var3 = (int) (Math.random() * 13);
@@ -125,7 +147,7 @@ public class EventLivingHurtMelee
 					var = (int) (Math.random() * 10);
 					var1 = (int) (Math.random() * 10);
 					var2 = (int) (Math.random() * 3);
-					if (var == 0) damageMultiplier = 2F;
+					if (var == 0) damageMultiplier = 3F;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					// durability
 					var3 = (int) (Math.random() * 10);
@@ -137,7 +159,7 @@ public class EventLivingHurtMelee
 					var = (int) (Math.random() * 7);
 					var1 = (int) (Math.random() * 7);
 					var2 = (int) (Math.random() * 5);
-					if (var == 0) damageMultiplier = 2.5F;
+					if (var == 0) damageMultiplier = 4F;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					// durability
 					var3 = (int) (Math.random() * 7);
@@ -149,7 +171,7 @@ public class EventLivingHurtMelee
 					var = (int) (Math.random() * 5);
 					var1 = (int) (Math.random() * 5);
 					var2 = (int) (Math.random() * 10);
-					if (var == 0) damageMultiplier = 3F;
+					if (var == 0) damageMultiplier = 6F;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					// durability
 					var3 = (int) (Math.random() * 5);
@@ -160,7 +182,10 @@ public class EventLivingHurtMelee
 					break;
 			}
 			
-			event.setAmount(event.getAmount() * damageMultiplier);
+			if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
+				event.setAmount(event.getAmount() + damageMultiplier);
+			else if (stack.getItem() instanceof ItemArmor)
+				event.setAmount(event.getAmount() - damageMultiplier);
 		}
 	}
 	
@@ -171,7 +196,7 @@ public class EventLivingHurtMelee
 	 * @param enemy
 	 * @param nbt
 	 */
-	private void useAbilities(LivingHurtEvent event, EntityPlayer player, EntityLivingBase enemy, NBTTagCompound nbt)
+	private void useWeaponAbilities(LivingHurtEvent event, EntityPlayer player, EntityLivingBase enemy, NBTTagCompound nbt)
 	{
 		if (enemy != null)
 		{
@@ -242,6 +267,67 @@ public class EventLivingHurtMelee
 			{
 				float health = (float) (player.getHealth() + (event.getAmount() / 2));
 				player.setHealth(health);
+			}
+		}
+	}
+	
+	private void useArmorAbilities(LivingHurtEvent event, EntityPlayer player, EntityLivingBase enemy, NBTTagCompound nbt)
+	{
+		if (enemy != null)
+		{
+			// active
+			if (Ability.MOLTEN.hasAbility(nbt) && (int) (Math.random() * 4) == 0)
+			{
+				double multiplier = Ability.MOLTEN.getMultiplier(Ability.MOLTEN.getLevel(nbt));
+				enemy.setFire((int) (4 * multiplier));
+			}
+			
+			if (Ability.FROZEN.hasAbility(nbt) && (int) (Math.random() * 4) == 0)
+			{
+				double multiplier = Ability.FROZEN.getMultiplier(Ability.FROZEN.getLevel(nbt));
+				enemy.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, (int) (20 * (2 * multiplier)), 10));
+			}
+			
+			if (Ability.TOXIC.hasAbility(nbt) && (int) (Math.random() * 4) == 0)
+			{
+				double multiplier = Ability.TOXIC.getMultiplier(Ability.TOXIC.getLevel(nbt));
+				enemy.addPotionEffect(new PotionEffect(MobEffects.POISON, (int) (20 * (7 * multiplier)), Ability.TOXIC.getLevel(nbt)));
+			}
+			
+			if (Ability.ABSORB.hasAbility(nbt) && (int) (Math.random() * 7) == 0)
+			{
+				double multiplier = Ability.ABSORB.getMultiplier(Ability.ABSORB.getLevel(nbt));
+				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, (int) (20 * (5 * multiplier)), Ability.ABSORB.getLevel(nbt)));
+			}
+			
+			if (Ability.VOID.hasAbility(nbt) && (int) (Math.random() * 20) == 0)
+			{
+				float multiplier = 0F;
+				
+				if (Ability.VOID.getLevel(nbt) == 1) multiplier = 0.4F;
+				else if (Ability.VOID.getLevel(nbt) == 2) multiplier = 0.6F;
+				else if (Ability.VOID.getLevel(nbt) == 3) multiplier = 0.8F;
+
+				float damage = enemy.getMaxHealth() * multiplier;
+				event.setAmount(damage);
+			}
+			
+			// passive
+			if (Ability.BEASTIAL.hasAbility(nbt))
+			{
+				if (player.getHealth() <= (player.getMaxHealth() * 0.2F))
+					player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 20 * 10, 0));
+			}
+			
+			if (Ability.ENLIGHTENED.hasAbility(nbt) && (int) (Math.random() * 7) == 0)
+			{
+				float health = (float) (player.getHealth() + (event.getAmount() / 2));
+				player.setHealth(health);
+			}
+			
+			if (Ability.HARDENED.hasAbility(nbt) && (int) (Math.random() * 10) == 0)
+			{
+				event.setAmount(0F);
 			}
 		}
 	}
