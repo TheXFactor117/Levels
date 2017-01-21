@@ -8,6 +8,14 @@
 ### Levels 2 - Beta 1
 #####
 
+### b2.0.0
+#
+# + Added Armor leveling and abilities.
+# * Changed rarity damage multipliers from multiplying to adding.
+# * Fixed some issues where Axes might not work properly with the leveling systems.
+#
+###
+
 ### b1.1.1
 #
 # * Fixes issue where abilities can be leveled up more than 3 times.
