@@ -1,0 +1,18 @@
+###############################################
+###############################################
+##### Levels 2 Frequently Asked Questions #####
+###############################################
+###############################################
+
+Q: Where can I learn how the mod works?
+A: Read the Wiki! It can be found on the Level's GitHub repository. There are also links on the forum thread.
+
+Q: Will you ever create a tools/pickaxe leveling system?
+A: Chances are, probably not. But who knows! Anything could happen.
+
+Q: When will armor, bow, and enemy leveling systems be added back in?
+A: As soon as I can develop them. Re-writing the mod means re-writing each of these systems, so it might take a bit of time to finish them up. However,
+   they should come out much faster as time goes on.
+   
+Q: I want to help out with the mod. What could I do?
+A: I actually don't need much help with this mod right now. The best thing you could do is just play it, share it, and provide feedback about it!
