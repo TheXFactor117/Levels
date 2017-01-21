@@ -16,6 +16,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -44,7 +45,7 @@ public class GuiAbilitySelection extends GuiScreen
 	    	
 	    	if (stack != null)
 	    	{
-	    		if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
+	    		if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemBow)
 		    	{
 		    		weaponAbilities = new GuiButton[Ability.WEAPON_ABILITIES];
 		    		NBTTagCompound nbt = stack.getTagCompound();
@@ -100,13 +101,13 @@ public class GuiAbilitySelection extends GuiScreen
 	    	
 	    	if (stack != null)
 	    	{
-	    		if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemArmor)
+	    		if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemArmor || stack.getItem() instanceof ItemBow)
 	    		{
 	    			NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 		    		
 		    		if (nbt != null)
 		    		{	
-		    			if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
+		    			if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemBow)
 		    			{
 		    				drawStrings(stack, Ability.WEAPONS, nbt);
 		    				displayButtons(weaponAbilities, Ability.WEAPONS, nbt);
@@ -142,7 +143,7 @@ public class GuiAbilitySelection extends GuiScreen
 				{
 					if (Experience.getAbilityTokens(nbt) > 0)
 					{
-						if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
+						if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemBow)
 						{
 							for (int i = 0; i < weaponAbilities.length; i++)
 							{

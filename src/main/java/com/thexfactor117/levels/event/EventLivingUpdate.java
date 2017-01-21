@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -44,7 +45,7 @@ public class EventLivingUpdate
 						{
 							Item item = main.get(i).getItem();
 							
-							if (item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemArmor)
+							if (item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemArmor || item instanceof ItemBow)
 							{
 								ItemStack stack = main.get(i);
 								NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);

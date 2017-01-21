@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
@@ -34,7 +35,7 @@ public class EventInput
 		EntityPlayer player = mc.thePlayer;
 		Item current = player.inventory.getCurrentItem().getItem();
 		
-		if (current instanceof ItemSword || current instanceof ItemAxe || current instanceof ItemArmor)
+		if (current instanceof ItemSword || current instanceof ItemAxe || current instanceof ItemArmor || current instanceof ItemBow)
 		{
 			if (key.isPressed())
 			{

@@ -8,6 +8,12 @@
 ### Levels 2 - Beta 1
 #####
 
+### b2.1.0
+#
+# + Added Bow leveling and abilities.
+#
+###
+
 ### b2.0.0
 #
 # + Added Armor leveling and abilities.

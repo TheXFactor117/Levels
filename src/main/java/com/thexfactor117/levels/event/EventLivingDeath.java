@@ -6,6 +6,7 @@ import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -41,6 +42,27 @@ public class EventLivingDeath
 					addBonusExperience(event, nbt);
 					updateLevel(player, stack, nbt);
 					NBTHelper.saveStackNBT(stack, nbt);
+				}
+			}
+		}
+		else if (event.getSource().getSourceOfDamage() instanceof EntityArrow)
+		{
+			EntityArrow arrow = (EntityArrow) event.getSource().getSourceOfDamage();
+			
+			if (arrow.shootingEntity instanceof EntityPlayer)
+			{
+				EntityPlayer player = (EntityPlayer) arrow.shootingEntity;
+				ItemStack stack = player.inventory.getCurrentItem();
+				
+				if (stack != null)
+				{
+					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+					
+					if (nbt != null)
+					{
+						addBonusExperience(event, nbt);
+						updateLevel(player, stack, nbt);
+					}
 				}
 			}
 		}
