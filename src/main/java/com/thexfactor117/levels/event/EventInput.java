@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -33,7 +34,7 @@ public class EventInput
 		EntityPlayer player = mc.thePlayer;
 		Item current = player.inventory.getCurrentItem().getItem();
 		
-		if (current instanceof ItemSword || current instanceof ItemAxe)
+		if (current instanceof ItemSword || current instanceof ItemAxe || current instanceof ItemArmor)
 		{
 			if (key.isPressed())
 			{

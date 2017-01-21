@@ -14,6 +14,8 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -27,7 +29,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public class GuiAbilitySelection extends GuiScreen
 {
-	private GuiButton[] weaponAbilities = new GuiButton[Ability.WEAPON_ABILITIES];;
+	private GuiButton[] weaponAbilities;
+	private GuiButton[] armorAbilities;
 	
 	@SideOnly(Side.CLIENT)
 	@Override
@@ -39,26 +42,46 @@ public class GuiAbilitySelection extends GuiScreen
 	    {
 	    	ItemStack stack = player.inventory.getCurrentItem();
 	    	
-	    	if (stack != null && stack.getItem() instanceof ItemSword)
+	    	if (stack != null)
 	    	{
-	    		NBTTagCompound nbt = stack.getTagCompound();
-	    		
-	    		if (nbt != null)
-	    		{
-	    			for (int i = 0; i < weaponAbilities.length - 3; i++)
-	    			{
-	    				weaponAbilities[i] = new GuiButton(i, width / 2 - 200, 100 + (i * 20), 75, 20, Ability.values()[i].getName() + " (" + Ability.values()[i].getTier() + ")");
-	    				this.buttonList.add(weaponAbilities[i]);
-	    				weaponAbilities[i].enabled = false;
-	    			}
-	    			
-	    			for (int i = weaponAbilities.length - 3; i < weaponAbilities.length; i++)
-	    			{
-	    				weaponAbilities[i] = new GuiButton(i, width / 2 - 100, -20 + (i * 20), 75, 20, Ability.values()[i].getName() + " (" + Ability.values()[i].getTier() + ")");
-	    				this.buttonList.add(weaponAbilities[i]);
-	    				weaponAbilities[i].enabled = false;
-	    			}
-	    		}
+	    		if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
+		    	{
+		    		weaponAbilities = new GuiButton[Ability.WEAPON_ABILITIES];
+		    		NBTTagCompound nbt = stack.getTagCompound();
+		    		
+		    		if (nbt != null)
+		    		{
+		    			for (int i = 0; i < weaponAbilities.length; i++)
+		    			{
+		    				if (Ability.WEAPONS[i].getType().equals("active"))
+			    				weaponAbilities[i] = new GuiButton(i, width / 2 - 200, 100 + (i * 20), 75, 20, Ability.WEAPONS[i].getName() + " (" + Ability.WEAPONS[i].getTier() + ")");
+		    				else
+			    				weaponAbilities[i] = new GuiButton(i, width / 2 - 100, -20 + (i * 20), 75, 20, Ability.WEAPONS[i].getName() + " (" + Ability.WEAPONS[i].getTier() + ")");
+		    				
+		    				this.buttonList.add(weaponAbilities[i]);
+		    				weaponAbilities[i].enabled = false;
+		    			}
+		    		}
+		    	}
+		    	else if (stack.getItem() instanceof ItemArmor)
+		    	{
+		    		armorAbilities = new GuiButton[Ability.ARMOR_ABILITIES];
+		    		NBTTagCompound nbt = stack.getTagCompound();
+		    		
+		    		if (nbt != null)
+		    		{
+		    			for (int i = 0; i < armorAbilities.length; i++)
+		    			{
+		    				if (Ability.ARMOR[i].getType().equals("active"))
+			    				armorAbilities[i] = new GuiButton(i, width / 2 - 200, 100 + (i * 20), 75, 20, Ability.ARMOR[i].getName() + " (" + Ability.ARMOR[i].getTier() + ")");
+		    				else
+		    					armorAbilities[i] = new GuiButton(i, width / 2 - 100, (i * 20), 75, 20, Ability.ARMOR[i].getName() + " (" + Ability.ARMOR[i].getTier() + ")");
+		    				
+		    				this.buttonList.add(armorAbilities[i]);
+		    				armorAbilities[i].enabled = false;
+		    			}
+		    		}
+		    	}
 	    	}
 	    }
 	}
@@ -75,14 +98,25 @@ public class GuiAbilitySelection extends GuiScreen
 	    {
 	    	ItemStack stack = player.inventory.getCurrentItem();
 	    	
-	    	if (stack != null && stack.getItem() instanceof ItemSword)
+	    	if (stack != null)
 	    	{
-	    		NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-	    		
-	    		if (nbt != null)
+	    		if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemArmor)
 	    		{
-	    			drawStrings(stack, nbt);
-	    			displayButtons(nbt);
+	    			NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+		    		
+		    		if (nbt != null)
+		    		{	
+		    			if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
+		    			{
+		    				drawStrings(stack, Ability.WEAPONS, nbt);
+		    				displayButtons(weaponAbilities, Ability.WEAPONS, nbt);
+		    			}
+		    			else if (stack.getItem() instanceof ItemArmor)
+		    			{
+		    				drawStrings(stack, Ability.ARMOR, nbt);
+		    				displayButtons(armorAbilities, Ability.ARMOR, nbt);
+		    			}
+		    		}
 	    		}
 	    	}
 	    }
@@ -108,11 +142,24 @@ public class GuiAbilitySelection extends GuiScreen
 				{
 					if (Experience.getAbilityTokens(nbt) > 0)
 					{
-						for (int i = 0; i < weaponAbilities.length; i++)
+						if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
 						{
-							if (button == weaponAbilities[i])
+							for (int i = 0; i < weaponAbilities.length; i++)
 							{
-								Levels.network.sendToServer(new PacketGuiAbility(i));
+								if (button == weaponAbilities[i])
+								{
+									Levels.network.sendToServer(new PacketGuiAbility(i));
+								}
+							}
+						}
+						else if (stack.getItem() instanceof ItemArmor)
+						{
+							for (int i = 0; i < armorAbilities.length; i++)
+							{
+								if (button == armorAbilities[i])
+								{
+									Levels.network.sendToServer(new PacketGuiAbility(i));
+								}
 							}
 						}
 					}
@@ -124,9 +171,10 @@ public class GuiAbilitySelection extends GuiScreen
 	/**
 	 * Draws the strings for the ability selection screen.
 	 * @param stack
+	 * @param abilities
 	 * @param nbt
 	 */
-	private void drawStrings(ItemStack stack, NBTTagCompound nbt)
+	private void drawStrings(ItemStack stack, Ability[] abilities, NBTTagCompound nbt)
 	{
 		Rarity rarity = Rarity.getRarity(nbt);
 		
@@ -152,21 +200,20 @@ public class GuiAbilitySelection extends GuiScreen
 		int j = -1;
 		int k = -1;
 		
-		for (int i = 0; i < Ability.values().length - 3; i++)
-		{	
-			if (Ability.values()[i].hasAbility(nbt))
-			{
-				j++;
-				drawCenteredString(fontRendererObj, Ability.values()[i].getName(nbt), width / 2 + 75, 135 + (j * 10), Ability.values()[i].getHex());
-			}
-		}
-		
-		for (int i = Ability.values().length - 3; i < Ability.values().length; i++)
+		for (int i = 0; i < abilities.length; i++)
 		{
-			if (Ability.values()[i].hasAbility(nbt))
+			if (abilities[i].hasAbility(nbt))
 			{
-				k++;
-				drawCenteredString(fontRendererObj, Ability.values()[i].getName(nbt), width / 2 + 150, 135 + (k * 10), Ability.values()[i].getHex());
+				if (abilities[i].getType().equals("active"))
+				{
+					j++;
+					drawCenteredString(fontRendererObj, abilities[i].getName(nbt), width / 2 + 75, 135 + (j * 10), abilities[i].getHex());
+				}
+				else
+				{
+					k++;
+					drawCenteredString(fontRendererObj, abilities[i].getName(nbt), width / 2 + 150, 135 + (k * 10), abilities[i].getHex());
+				}
 			}
 		}
 	}
@@ -174,62 +221,69 @@ public class GuiAbilitySelection extends GuiScreen
 	/**
 	 * Determines which buttons need to be enabled based on available ability tokens and if the
 	 * weapon is of a high enough level to enable.
+	 * @param buttons
+	 * @param abilities
 	 * @param nbt
 	 */
-	private void displayButtons(NBTTagCompound nbt)
+	private void displayButtons(GuiButton[] buttons, Ability[] abilities, NBTTagCompound nbt)
 	{
 		if (Experience.getAbilityTokens(nbt) > 0)
 		{
-			for (int i = 0; i < weaponAbilities.length; i++)
+			for (int i = 0; i < buttons.length; i++)
 			{	
 				if (Experience.getAbilityTokens(nbt) == 1)
 				{
-					if (Ability.values()[i].getTier() == 1)
-						weaponAbilities[i].enabled = true;
+					if (abilities[i].getTier() == 1)
+						buttons[i].enabled = true;
 					
-					if (Ability.values()[i].hasAbility(nbt) && Ability.values()[i].canUpgradeLevel(nbt))
-						weaponAbilities[i].enabled = true;
-					else if (Ability.values()[i].hasAbility(nbt))
-						weaponAbilities[i].enabled = false;
+					if (abilities[i].hasAbility(nbt) && abilities[i].canUpgradeLevel(nbt))
+						buttons[i].enabled = true;
+					else if (abilities[i].hasAbility(nbt))
+						buttons[i].enabled = false;
 				}
 				
 				if (Experience.getAbilityTokens(nbt) == 2)
 				{
-					if (Ability.values()[i].getTier() <= 2)
-						weaponAbilities[i].enabled = true;
+					if (abilities[i].getTier() <= 2)
+						buttons[i].enabled = true;
 				}
 				else
 				{
-					if (Ability.values()[i].getTier() == 2)
-						weaponAbilities[i].enabled = false;
+					if (abilities[i].getTier() == 2)
+						buttons[i].enabled = false;
 					
-					if (Ability.values()[i].hasAbility(nbt) && Ability.values()[i].canUpgradeLevel(nbt))
-						weaponAbilities[i].enabled = true;
-					else if (Ability.values()[i].hasAbility(nbt))
-						weaponAbilities[i].enabled = false;
+					if (abilities[i].hasAbility(nbt) && abilities[i].canUpgradeLevel(nbt))
+						buttons[i].enabled = true;
+					else if (abilities[i].hasAbility(nbt))
+						buttons[i].enabled = false;
 				}
 				
 				if (Experience.getAbilityTokens(nbt) >= 3)
 				{
-					weaponAbilities[i].enabled = true;
+					buttons[i].enabled = true;
 				}
 				else
 				{
-					if (Ability.values()[i].getTier() == 3)
-						weaponAbilities[i].enabled = false;
+					if (abilities[i].getTier() == 3)
+						buttons[i].enabled = false;
 					
-					if (Ability.values()[i].hasAbility(nbt) && Ability.values()[i].canUpgradeLevel(nbt))
-						weaponAbilities[i].enabled = true;
-					else if (Ability.values()[i].hasAbility(nbt))
-						weaponAbilities[i].enabled = false;
+					if (abilities[i].hasAbility(nbt) && abilities[i].canUpgradeLevel(nbt))
+						buttons[i].enabled = true;
+					else if (abilities[i].hasAbility(nbt))
+						buttons[i].enabled = false;
+				}
+				
+				if (abilities[i].hasAbility(nbt) && abilities[i].getType().equals("passive"))
+				{
+					buttons[i].enabled = false;
 				}
 			}
 		}
 		else
 		{
-			for (int i = 0; i < weaponAbilities.length; i++)
+			for (int i = 0; i < buttons.length; i++)
 			{
-				weaponAbilities[i].enabled = false;
+				buttons[i].enabled = false;
 			}
 		}
 	}
