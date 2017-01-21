@@ -7,6 +7,8 @@ import com.thexfactor117.levels.event.EventLivingHurt;
 import com.thexfactor117.levels.event.EventLivingUpdate;
 import com.thexfactor117.levels.event.EventPlayerClone;
 import com.thexfactor117.levels.event.EventPlayerDrops;
+import com.thexfactor117.levels.event.EventPlayerTracking;
+import com.thexfactor117.levels.event.EventRenderOverlay;
 
 import net.minecraftforge.common.MinecraftForge;
 
@@ -26,5 +28,7 @@ public class ModEvents
 		MinecraftForge.EVENT_BUS.register(new EventPlayerDrops());
 		MinecraftForge.EVENT_BUS.register(new EventPlayerClone());
 		MinecraftForge.EVENT_BUS.register(new EventInput());
+		MinecraftForge.EVENT_BUS.register(new EventPlayerTracking());
+		MinecraftForge.EVENT_BUS.register(new EventRenderOverlay());
 	}
 }

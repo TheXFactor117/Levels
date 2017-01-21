@@ -26,6 +26,7 @@ public class ConfigHandler
 	// miscellaneous
 	public static boolean SHOW_DURABILITY;
 	public static String[] ITEM_BLACKLIST;
+	public static String STRING_POSITION;
 	
 	public static void init(File file)
 	{
@@ -52,6 +53,7 @@ public class ConfigHandler
 		config.addCustomCategoryComment(category, "Miscellaneous settings");
 		SHOW_DURABILITY = config.getBoolean("showDurability", category, true, "determines whether or not to show durability in tooltips.");
 		ITEM_BLACKLIST = config.getStringList("itemBlacklist", category, new String[] { "examplemodid:exampleitem" }, "items in this list will not have any leveling systems");
+		STRING_POSITION = config.getString("stringPosition", category, "default", "Sets the enemy rarity positioning on the screen. Use default, topright, topleft, bottomleft, bottomright, or cursor.");
 		
 		config.save();
 	}
