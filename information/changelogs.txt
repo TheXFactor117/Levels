@@ -1,0 +1,43 @@
+###############################
+###############################
+##### Levels 2 Changelogs #####
+###############################
+###############################
+
+#####
+### Levels 2 - Beta 1
+#####
+
+### b1.1.1
+#
+# * Fixes issue where abilities can be leveled up more than 3 times.
+# * Tweaked Chained ability to only affect hostile enemies.
+#
+###
+
+### b1.1.0
+#
+# + Added a tiered ability system.
+# + Added new ability: Soul Bound.
+# * Fixed a couple Gui bugs.
+# * Changed basic rarity color to white; changed archaic rarity color to pink.
+# * Fixed Chained ability bug in which it damaged the player whenever triggered.
+#
+###
+
+### b1.0.1
+#
+# * Fixes crash on server load.
+#
+###
+
+### b1.0.0
+#
+# + Added an item blacklist to manually remove items from receiving the leveling systems.
+# - Removed randomized abilities. Abilities can now be picked by the player.
+# - Removed some abilities. Also removed some leveling systems temporarily.
+# * Re-built leveling system from the ground up.
+# * Re-worked rarity bonuses and all abilities.
+# * Fixed many, many bugs.
+#
+###
