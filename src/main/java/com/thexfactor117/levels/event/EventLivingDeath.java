@@ -1,5 +1,7 @@
 package com.thexfactor117.levels.event;
 
+import com.thexfactor117.levels.capabilities.CapabilityEnemyLevel;
+import com.thexfactor117.levels.capabilities.IEnemyLevel;
 import com.thexfactor117.levels.leveling.Experience;
 import com.thexfactor117.levels.util.ConfigHandler;
 import com.thexfactor117.levels.util.NBTHelper;
@@ -80,6 +82,7 @@ public class EventLivingDeath
 			if (event.getEntityLiving() instanceof EntityLivingBase)
 			{
 				EntityLivingBase enemy = event.getEntityLiving();
+				IEnemyLevel enemyLevel = enemy.getCapability(CapabilityEnemyLevel.ENEMY_LEVEL_CAP, null);
 				int bonusExperience = 0;
 				
 				if (enemy.getMaxHealth() <= 10) bonusExperience = 0;
@@ -87,6 +90,18 @@ public class EventLivingDeath
 				else if (enemy.getMaxHealth() > 25 && enemy.getMaxHealth() <= 40) bonusExperience = 2;
 				else if (enemy.getMaxHealth() > 40 && enemy.getMaxHealth() <= 75) bonusExperience = 3;
 				else if (enemy.getMaxHealth() > 75) bonusExperience = 4;
+				
+				if (enemyLevel != null && enemyLevel.getEnemyLevel() > 0)
+				{
+					int level = enemyLevel.getEnemyLevel();
+					
+					if (level == 1) bonusExperience *= 0;
+					else if (level == 2) bonusExperience *= 1;
+					else if (level == 3) bonusExperience *= 1.5D;
+					else if (level == 4) bonusExperience *= 2;
+					else if (level == 5) bonusExperience *= 2.5D;
+					else if (level == 6) bonusExperience *= 3;
+				}
 				
 				Experience.setExperience(nbt, Experience.getExperience(nbt) + bonusExperience);
 			}

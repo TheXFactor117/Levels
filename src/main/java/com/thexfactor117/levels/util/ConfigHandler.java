@@ -14,6 +14,7 @@ public class ConfigHandler
 	private static Configuration config;
 	
 	// features
+	public static boolean ENEMY_LEVELING;
 	
 	// abilities
 	public static int MAX_ABILITIES;
@@ -37,6 +38,11 @@ public class ConfigHandler
 	private static void syncConfig()
 	{
 		String category;
+		
+		// features
+		category = "Features";
+		config.addCustomCategoryComment(category, "Control overall features of the mod");
+		ENEMY_LEVELING = config.getBoolean("enemyLeveling", category, true, "enable/disable enemies from getting leveling systems.");
 		
 		// abilities
 		category = "Abilities";

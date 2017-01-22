@@ -1,13 +1,13 @@
 {
 	"homepage": "http://minecraft.curseforge.com/projects/levels/files",
 	"promos": {
-		"1.11.2-latest": "b2.1.0",
-		"1.11.2-recommended": "b2.1.0",
+		"1.11.2-latest": "b2.2.0",
+		"1.11.2-recommended": "b2.2.0",
 		"1.10.2-latest": "b1.1.1",
 		"1.10.2-recommended": "b1.1.1"
 	},
 	"1.11.2": {
-		"b2.1.0": "+ Added bow leveling and abilities!"
+		"b2.2.0": "+ Added enemy leveling!"
 	},
 	"1.10.2": {
 		"b1.1.1": "* Levels 2 has been backported to 1.10.2. Recommened to update to test the new version of the mod."	
