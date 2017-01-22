@@ -5,7 +5,9 @@ import java.io.File;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.thexfactor117.levels.capabilities.CapabilityEnemyLevel;
 import com.thexfactor117.levels.init.ModEvents;
+import com.thexfactor117.levels.network.PacketEnemyLevel;
 import com.thexfactor117.levels.network.PacketGuiAbility;
 import com.thexfactor117.levels.proxies.CommonProxy;
 import com.thexfactor117.levels.util.ConfigHandler;
@@ -56,8 +58,12 @@ public class Levels
 		
 		ModEvents.registerEvents();
 		
+		if (ConfigHandler.ENEMY_LEVELING)
+			CapabilityEnemyLevel.register();
+		
 		network = NetworkRegistry.INSTANCE.newSimpleChannel("levels");
 		network.registerMessage(PacketGuiAbility.Handler.class, PacketGuiAbility.class, 0, Side.SERVER);
+		network.registerMessage(PacketEnemyLevel.Handler.class, PacketEnemyLevel.class, 1, Side.CLIENT);
 	}
 	
 	@EventHandler
