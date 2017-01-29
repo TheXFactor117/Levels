@@ -57,6 +57,7 @@ public class Levels
 		ConfigHandler.init(new File(configDir.getPath(), Reference.MODID + ".cfg"));
 		
 		ModEvents.registerEvents();
+		proxy.preInit();
 		
 		if (ConfigHandler.ENEMY_LEVELING)
 			CapabilityEnemyLevel.register();

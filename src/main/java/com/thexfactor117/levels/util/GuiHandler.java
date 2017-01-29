@@ -1,6 +1,6 @@
 package com.thexfactor117.levels.util;
 
-import com.thexfactor117.levels.gui.GuiAbilitySelection;
+import com.thexfactor117.levels.client.gui.GuiAbilitySelection;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

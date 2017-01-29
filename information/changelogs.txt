@@ -5,8 +5,22 @@
 ###############################
 
 #####
-### Levels 2 - Beta 1
+### Levels 2 - Release 1
 #####
+
+### r1.0.0
+#
+# * Levels 2 has been officially released!
+# * Fixes crash on server startup.
+# * Fixes some graphical issues.
+#
+###
+
+
+#####
+### Levels 2 - Beta 2
+#####
+
 
 ### b2.2.0
 #
@@ -27,6 +41,13 @@
 # * Fixed some issues where Axes might not work properly with the leveling systems.
 #
 ###
+
+
+
+#####
+### Levels 2 - Beta 1
+#####
+
 
 ### b1.1.1
 #
