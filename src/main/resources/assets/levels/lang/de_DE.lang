@@ -1,0 +1,40 @@
+levels.rarity.0=Standard
+levels.rarity.1=Einfach
+levels.rarity.2=Ungewöhnlich
+levels.rarity.3=Selten
+levels.rarity.4=Hochselten
+levels.rarity.5=Legendär
+levels.rarity.6=Altmodisch
+
+levels.ability.0=Feuer
+levels.ability.1=Frost
+levels.ability.2=Gift
+levels.ability.3=Blutrausch
+levels.ability.4=Verkettet
+levels.ability.5=Leere
+levels.ability.6=Licht
+levels.ability.7=Himmlisch
+levels.ability.8=Seelengebunden
+levels.ability.9=Geschmolzen
+levels.ability.10=Gefroren
+levels.ability.11=Giftig
+levels.ability.12=Absorbierend
+levels.ability.13=Leere
+levels.ability.14=Beastialisch
+levels.ability.15=Erleuchtet
+levels.ability.16=Gehärtet
+levels.ability.17=Seelengebunden
+
+levels.misc.level=Level
+levels.misc.max=Max
+levels.misc.experience=Erfahrung
+levels.misc.durability=Haltbarkeit
+levels.misc.abilities=Fähigkeiten
+levels.misc.abilities.shift=Fähigkeiten (Shift)
+levels.misc.rarity=Seltenheit
+levels.misc.abilities.tokens=Fähigkeiten-Wertmarken
+levels.misc.abilities.purchased=Gekaufte Fähigkeiten
+levels.misc.abilities.active=Aktiv
+levels.misc.abilities.passive=Passiv
+
+levels.update=Es ist eine neue Version von Levels verfügbar!
