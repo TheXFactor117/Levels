@@ -6,6 +6,9 @@ import com.thexfactor117.levels.util.NBTHelper;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -60,19 +63,35 @@ public class PacketGuiAbility implements IMessage
 					{
 						ItemStack stack = player.inventory.getCurrentItem();
 						
-						if (stack != null && stack.getItem() instanceof ItemSword)
+						if (stack != null)
 						{
 							NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 							
-							if (Ability.values()[message.index].hasAbility(nbt))
-							{
-								Ability.values()[message.index].setLevel(nbt, Ability.values()[message.index].getLevel(nbt) + 1);
-								Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - 1);
+							if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemBow)
+							{	
+								if (Ability.WEAPONS[message.index].hasAbility(nbt))
+								{
+									Ability.WEAPONS[message.index].setLevel(nbt, Ability.WEAPONS[message.index].getLevel(nbt) + 1);
+									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - 1);
+								}
+								else
+								{
+									Ability.WEAPONS[message.index].addAbility(nbt, 1);
+									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.WEAPONS[message.index].getTier());
+								}
 							}
-							else
+							else if (stack.getItem() instanceof ItemArmor)
 							{
-								Ability.values()[message.index].addAbility(nbt, 1);
-								Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.values()[message.index].getTier());
+								if (Ability.ARMOR[message.index].hasAbility(nbt))
+								{
+									Ability.ARMOR[message.index].setLevel(nbt, Ability.ARMOR[message.index].getLevel(nbt) + 1);
+									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - 1);
+								}
+								else
+								{
+									Ability.ARMOR[message.index].addAbility(nbt, 1);
+									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.ARMOR[message.index].getTier());
+								}
 							}
 						}
 					}

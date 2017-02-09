@@ -12,7 +12,9 @@ import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -45,7 +47,7 @@ public class EventItemTooltip
 
 		if (item != null)
 		{
-			if (item instanceof ItemSword || item instanceof ItemAxe)
+			if (item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemArmor || item instanceof ItemBow)
 			{
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
@@ -90,11 +92,24 @@ public class EventItemTooltip
 						tooltip.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + I18n.format("levels.misc.abilities"));
 						tooltip.add("");
 						
-						for (Ability ability : Ability.values())
+						if (item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemBow)
 						{
-							if (ability.hasAbility(nbt))
+							for (Ability ability : Ability.WEAPONS)
 							{
-								tooltip.add(ability.getColor() + ability.getName(nbt));
+								if (ability.hasAbility(nbt))
+								{
+									tooltip.add(ability.getColor() + ability.getName(nbt));
+								}
+							}
+						}
+						else if (item instanceof ItemArmor)
+						{
+							for (Ability ability : Ability.ARMOR)
+							{
+								if (ability.hasAbility(nbt))
+								{
+									tooltip.add(ability.getColor() + ability.getName(nbt));
+								}
 							}
 						}
 					}
