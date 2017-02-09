@@ -8,7 +8,10 @@ import com.thexfactor117.levels.util.ConfigHandler;
 import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -39,7 +42,9 @@ public class EventLivingUpdate
 					{
 						if (main[i] != null)
 						{
-							if (main[i].getItem() instanceof ItemSword || main[i].getItem() instanceof ItemAxe)
+							Item item = main[i].getItem();
+							
+							if (item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemArmor || item instanceof ItemBow)
 							{
 								ItemStack stack = main[i];
 								NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);

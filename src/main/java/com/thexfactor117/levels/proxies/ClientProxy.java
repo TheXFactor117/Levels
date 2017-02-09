@@ -2,7 +2,11 @@ package com.thexfactor117.levels.proxies;
 
 import org.lwjgl.input.Keyboard;
 
+import com.thexfactor117.levels.event.EventRenderOverlay;
+import com.thexfactor117.levels.util.ConfigHandler;
+
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 /**
@@ -13,6 +17,15 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 public class ClientProxy extends CommonProxy
 {
 	public static KeyBinding keyBinding;
+	
+	@Override
+	public void preInit()
+	{
+		if (ConfigHandler.ENEMY_LEVELING)
+		{
+			MinecraftForge.EVENT_BUS.register(new EventRenderOverlay());
+		}
+	}
 	
 	@Override
 	public void init()
