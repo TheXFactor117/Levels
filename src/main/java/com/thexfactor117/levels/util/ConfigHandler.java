@@ -74,12 +74,12 @@ public class ConfigHandler
 		LEGENDARY_CHANCE = config.getFloat("legendaryChance", category, 0.035F, 0F, 1F, "change the percentage chance of obtaining the specified rarity.");
 		ARCHAIC_CHANCE = config.getFloat("archaicChance", category, 0.015F, 0F, 1F, "change the percentage chance of obtaining the specified rarity.");
 		
-		COMMON_DAMAGE = config.getFloat("commonDamage", category, 0F, 0F, 100F, "amount of bonus damage the rarity deals.");
-		UNCOMMON_DAMAGE = config.getFloat("uncommonDamage", category, 1F, 0F, 100F, "amount of bonus damage the rarity deals.");
+		COMMON_DAMAGE = config.getFloat("commonDamage", category, 1F, 0F, 100F, "amount of bonus damage the rarity deals.");
+		UNCOMMON_DAMAGE = config.getFloat("uncommonDamage", category, 1.5F, 0F, 100F, "amount of bonus damage the rarity deals.");
 		RARE_DAMAGE = config.getFloat("rareDamage", category, 2F, 0F, 100F, "amount of bonus damage the rarity deals.");
-		ULTRA_RARE_DAMAGE = config.getFloat("ultraRareDamage", category, 3F, 0F, 100F, "amount of bonus damage the rarity deals.");
-		LEGENDARY_DAMAGE = config.getFloat("legendaryDamage", category, 4F, 0F, 100F, "amount of bonus damage the rarity deals.");
-		ARCHAIC_DAMAGE = config.getFloat("archaicDamage", category, 6F, 0F, 100F, "amount of bonus damage the rarity deals.");
+		ULTRA_RARE_DAMAGE = config.getFloat("ultraRareDamage", category, 2.5F, 0F, 100F, "amount of bonus damage the rarity deals.");
+		LEGENDARY_DAMAGE = config.getFloat("legendaryDamage", category, 3F, 0F, 100F, "amount of bonus damage the rarity deals.");
+		ARCHAIC_DAMAGE = config.getFloat("archaicDamage", category, 4F, 0F, 100F, "amount of bonus damage the rarity deals.");
 		
 		// experience
 		category = "Experience";

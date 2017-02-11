@@ -230,9 +230,9 @@ public class EventLivingHurt
 			}
 			
 			if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
-				event.setAmount(event.getAmount() + damageMultiplier);
+				event.setAmount(event.getAmount() * damageMultiplier);
 			else if (stack.getItem() instanceof ItemArmor)
-				event.setAmount(event.getAmount() - damageMultiplier);
+				event.setAmount(event.getAmount() / damageMultiplier);
 		}
 	}
 	
