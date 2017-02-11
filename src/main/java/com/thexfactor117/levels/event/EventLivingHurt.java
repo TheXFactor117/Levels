@@ -3,6 +3,7 @@ package com.thexfactor117.levels.event;
 import java.util.Iterator;
 import java.util.List;
 
+import com.thexfactor117.levels.Levels;
 import com.thexfactor117.levels.leveling.Ability;
 import com.thexfactor117.levels.leveling.Experience;
 import com.thexfactor117.levels.leveling.Rarity;
@@ -152,7 +153,7 @@ public class EventLivingHurt
 	private void useRarity(LivingHurtEvent event, ItemStack stack, NBTTagCompound nbt)
 	{
 		Rarity rarity = Rarity.getRarity(nbt);
-		float damageMultiplier = 0F;
+		float damageMultiplier = 1F;
 		
 		if (rarity != Rarity.DEFAULT)
 		{
@@ -228,11 +229,14 @@ public class EventLivingHurt
 				default:
 					break;
 			}
+			Levels.LOGGER.info("Amount: " + event.getAmount());
 			
 			if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
 				event.setAmount(event.getAmount() * damageMultiplier);
 			else if (stack.getItem() instanceof ItemArmor)
 				event.setAmount(event.getAmount() / damageMultiplier);
+			
+			Levels.LOGGER.info("Amount After: " + event.getAmount());
 		}
 	}
 	

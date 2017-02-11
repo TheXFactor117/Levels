@@ -8,6 +8,12 @@
 ### Levels 2 - Release 1
 #####
 
+### r1.1.1
+#
+# * Fixed issue where some enemies were unkillable.
+#
+###
+
 ### r1.1.0
 #
 # + Added config option for changing rarity chance.
