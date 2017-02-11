@@ -104,6 +104,27 @@ public class EventLivingHurt
 					}
 				}
 			}
+			else if (arrow.shootingEntity instanceof EntityLivingBase && event.getEntityLiving() instanceof EntityPlayer)
+			{
+				EntityLivingBase enemy = (EntityLivingBase) arrow.shootingEntity;
+				EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+				
+				for (ItemStack stack : player.inventory.armorInventory)
+				{
+					if (stack.getItem() instanceof ItemArmor)	
+					{
+						NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+						
+						if (nbt != null)
+						{
+							updateExperience(nbt);
+							useRarity(event, stack, nbt);
+							useArmorAbilities(event, player, enemy, nbt);
+							updateLevel(player, stack, nbt);
+						}
+					}
+				}
+			}
 		}
 	}
 	
@@ -149,7 +170,7 @@ public class EventLivingHurt
 					var = (int) (Math.random() * 20);
 					var1 = (int) (Math.random() * 20);
 					var2 = (int) (Math.random() * 1);
-					if (var == 0) damageMultiplier = 1F;
+					if (var == 0) damageMultiplier = ConfigHandler.UNCOMMON_DAMAGE;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					// durability
 					var3 = (int) (Math.random() * 20);
@@ -161,7 +182,7 @@ public class EventLivingHurt
 					var = (int) (Math.random() * 13);
 					var1 = (int) (Math.random() * 13);
 					var2 = (int) (Math.random() * 2);
-					if (var == 0) damageMultiplier = 2F;
+					if (var == 0) damageMultiplier = ConfigHandler.RARE_DAMAGE;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					// durability
 					var3 = (int) (Math.random() * 13);
@@ -173,7 +194,7 @@ public class EventLivingHurt
 					var = (int) (Math.random() * 10);
 					var1 = (int) (Math.random() * 10);
 					var2 = (int) (Math.random() * 3);
-					if (var == 0) damageMultiplier = 3F;
+					if (var == 0) damageMultiplier = ConfigHandler.ULTRA_RARE_DAMAGE;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					// durability
 					var3 = (int) (Math.random() * 10);
@@ -185,7 +206,7 @@ public class EventLivingHurt
 					var = (int) (Math.random() * 7);
 					var1 = (int) (Math.random() * 7);
 					var2 = (int) (Math.random() * 5);
-					if (var == 0) damageMultiplier = 4F;
+					if (var == 0) damageMultiplier = ConfigHandler.LEGENDARY_DAMAGE;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					// durability
 					var3 = (int) (Math.random() * 7);
@@ -197,7 +218,7 @@ public class EventLivingHurt
 					var = (int) (Math.random() * 5);
 					var1 = (int) (Math.random() * 5);
 					var2 = (int) (Math.random() * 10);
-					if (var == 0) damageMultiplier = 6F;
+					if (var == 0) damageMultiplier = ConfigHandler.ARCHAIC_DAMAGE;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					// durability
 					var3 = (int) (Math.random() * 5);

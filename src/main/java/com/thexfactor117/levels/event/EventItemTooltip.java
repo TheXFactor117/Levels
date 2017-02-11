@@ -20,6 +20,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -38,7 +39,7 @@ public class EventItemTooltip
 	 * @param event
 	 */
 	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void addInformation(ItemTooltipEvent event)
 	{
 		ArrayList<String> tooltip = (ArrayList<String>) event.getToolTip();
@@ -58,9 +59,10 @@ public class EventItemTooltip
 					int experience = Experience.getExperience(nbt);
 					int maxExperience = Experience.getMaxLevelExp(level);
 					
+					removeTooltips(tooltip);
+					
 					// add tooltips
 					// formatting
-					tooltip.add("");
 					tooltip.add(rarity.getColor() + "===============");
 					tooltip.add("");
 					
@@ -122,6 +124,19 @@ public class EventItemTooltip
 					tooltip.add("");
 				}
 			}
+		}
+	}
+	
+	private void removeTooltips(ArrayList<String> tooltip)
+	{
+		if (tooltip.get(1).equals(""))
+			tooltip.remove(1);
+		
+		if (tooltip.indexOf("When in main hand:") != -1)
+		{
+			tooltip.remove(tooltip.indexOf("When in main hand:") + 2);
+			tooltip.remove(tooltip.indexOf("When in main hand:") + 1);
+			tooltip.remove(tooltip.indexOf("When in main hand:"));
 		}
 	}
 }

@@ -64,8 +64,8 @@ public class Experience
 	
 	public static int getMaxLevelExp(int level)
 	{
-		if (level == 1) return 50;
-		int maxXP = (int) Math.pow(level, 2.4D) * 20;
+		if (level == 1) return ConfigHandler.LEVEL_1_EXP;
+		int maxXP = (int) Math.pow(level, ConfigHandler.EXP_EXPONENT) * ConfigHandler.EXP_MULTIPLIER;
 		return maxXP;
 	}
 	

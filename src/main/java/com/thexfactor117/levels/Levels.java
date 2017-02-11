@@ -34,9 +34,6 @@ import net.minecraftforge.fml.relauncher.Side;
  * on top of armor, bow, and enemy leveling in the near future. On top of
  * that, other interesting leveling systems are planned to enhance the
  * overall feel of Minecraft, while sticking to a primarily vanilla feel.
- * 
- * ***PRE-ALPHA CODE***
- * 
  */
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION, updateJSON = Reference.UPDATE_URL)
 public class Levels 

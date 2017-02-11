@@ -38,3 +38,5 @@ levels.misc.abilities.active=Active
 levels.misc.abilities.passive=Passive
 
 levels.update=Levels has a new versions available!
+levels.login1=Press 'L' with a weapon/armor in hand to get started!
+levels.login2=(You can disable this message in the config)

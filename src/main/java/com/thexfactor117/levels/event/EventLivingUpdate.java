@@ -49,7 +49,7 @@ public class EventLivingUpdate
 							{
 								ItemStack stack = main.get(i);
 								NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-								
+
 								if (nbt != null)
 								{
 									if (!Experience.isEnabled(nbt))
