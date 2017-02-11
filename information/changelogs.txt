@@ -8,6 +8,18 @@
 ### Levels 2 - Release 1
 #####
 
+### r1.1.0
+#
+# + Added config option for changing rarity chance.
+# + Added config option for changing rarity bonus damage multiplier.
+# + Added config option for changing the leveling algorithm.
+# + Added a login message (toggable) to get new users started in the mod.
+# + Added a tooltip to show how much damage the weapon could deal given the specific rarity.
+# * Fixed bug where armor wouldn't gain experience when hit by arrows.
+# * Changed rarity bonus damage to be multipliers.
+#
+###
+
 ### r1.0.0
 #
 # * Levels 2 has been officially released!
