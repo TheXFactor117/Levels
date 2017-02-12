@@ -1,15 +1,15 @@
 {
 	"homepage": "http://minecraft.curseforge.com/projects/levels/files",
 	"promos": {
-		"1.11.2-latest": "r1.1.1",
-		"1.11.2-recommended": "r1.1.1",
+		"1.11.2-latest": "r1.1.2",
+		"1.11.2-recommended": "r1.1.2",
 		"1.10.2-latest": "b1.1.1",
 		"1.10.2-recommended": "b1.1.1"
 	},
 	"1.11.2": {
-		"r1.1.0": "* Fixed bug where some enemies were unkillable."
+		"r1.1.2": "* Fixed critical bug where servers would crash on player join."
 	},
 	"1.10.2": {
-		"b1.1.1": "* Levels 2 has been backported to 1.10.2. Recommened to update to test the new version of the mod."	
+		"r1.0.0": "* Levels 2-r1.0.0 has been backported to 1.10.2 again."	
 	}
 }

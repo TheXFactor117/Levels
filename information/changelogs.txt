@@ -8,6 +8,12 @@
 ### Levels 2 - Release 1
 #####
 
+### r1.1.2
+#
+# * Fixed critical bug where servers would crash on player join.
+#
+###
+
 ### r1.1.1
 #
 # * Fixed issue where some enemies were unkillable.
