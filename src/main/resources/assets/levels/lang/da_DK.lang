@@ -1,0 +1,42 @@
+levels.rarity.0=Standard
+levels.rarity.1=Basal
+levels.rarity.2=Ualmindelig
+levels.rarity.3=Sjælden
+levels.rarity.4=Ultra Sjælden
+levels.rarity.5=Legendarisk
+levels.rarity.6=Arkaisk
+
+levels.ability.0=Ild
+levels.ability.1=Frost
+levels.ability.2=Gift
+levels.ability.3=Blodtørst
+levels.ability.4=Kædet
+levels.ability.5=Tomrum
+levels.ability.6=Lys
+levels.ability.7=Æterisk
+levels.ability.8=Sjældebunden
+levels.ability.9=Smeltet
+levels.ability.10=Frossen
+levels.ability.11=Giftig
+levels.ability.12=Absorberende
+levels.ability.13=Tomrum
+levels.ability.14=Bestialsk
+levels.ability.15=Oplyst
+levels.ability.16=Hærdet
+levels.ability.17=Sjældebunden
+
+levels.misc.level=Level
+levels.misc.max=Max
+levels.misc.experience=Erfaring
+levels.misc.durability=Slidstyrke
+levels.misc.abilities=Evner
+levels.misc.abilities.shift=Evner (Shift)
+levels.misc.rarity=Sjældenhed
+levels.misc.abilities.tokens=Evnepoletter
+levels.misc.abilities.purchased=Købte Evner
+levels.misc.abilities.active=Aktiv
+levels.misc.abilities.passive=Passiv
+
+levels.update=Levels har nye tilgængelige versioner!
+levels.login1=Tryk 'L' med noget udstyr for at komme i gang!
+levels.login2=(Du kan slå denne besked fra i config-filen)
