@@ -13,27 +13,27 @@ public enum Ability
 {
 	// weapon abilities (type, color, color code, tier, multiplier)
 	// active
-	FIRE("weapon", "active", TextFormatting.RED, 0xFF5555, 1, 1.5),
-	FROST("weapon", "active", TextFormatting.AQUA, 0x55FFFF, 1, 1.5),
-	POISON("weapon", "active", TextFormatting.DARK_GREEN, 0x00AA00, 1, 1.5),
-	BLOODLUST("weapon", "active", TextFormatting.DARK_RED, 0xAA0000, 2, 1.5),
-	CHAINED("weapon", "active", TextFormatting.GRAY, 0xAAAAAA, 3, 1.5),
-	VOID("weapon", "active", TextFormatting.DARK_GRAY, 0x555555, 3, 1),
+	FIRE("weapon", "active", true, TextFormatting.RED, 0xFF5555, 1, 1.5),
+	FROST("weapon", "active", true, TextFormatting.AQUA, 0x55FFFF, 1, 1.5),
+	POISON("weapon", "active", true, TextFormatting.DARK_GREEN, 0x00AA00, 1, 1.5),
+	BLOODLUST("weapon", "active", true, TextFormatting.DARK_RED, 0xAA0000, 2, 1.5),
+	CHAINED("weapon", "active", true, TextFormatting.GRAY, 0xAAAAAA, 3, 1.5),
+	VOID("weapon", "active", true, TextFormatting.DARK_GRAY, 0x555555, 3, 1),
 	// passive
-	LIGHT("weapon", "passive", TextFormatting.YELLOW, 0xFFFF55, 2, 1),
-	ETHEREAL("weapon", "passive", TextFormatting.GREEN, 0x55FF55, 2, 2),
-	SOUL_BOUND("weapon", "passive", TextFormatting.DARK_PURPLE, 0xAA00AA, 3, 1),
+	LIGHT("weapon", "passive", true, TextFormatting.YELLOW, 0xFFFF55, 2, 1),
+	ETHEREAL("weapon", "passive", true, TextFormatting.GREEN, 0x55FF55, 2, 2),
+	SOUL_BOUND("weapon", "passive", true, TextFormatting.DARK_PURPLE, 0xAA00AA, 3, 1),
 	
 	// armor abilities
 	// active
-	MOLTEN("armor", "active", TextFormatting.RED, 0xFF5555, 1, 1.5),
-	FROZEN("armor", "active", TextFormatting.AQUA, 0x55FFFF, 1, 1.5),
-	TOXIC("armor", "active", TextFormatting.DARK_GREEN, 0x00AA00, 1, 1.5),
-	ABSORB("armor", "active", TextFormatting.GREEN, 0x55FF55, 2, 1.5),
-	VOID_ARMOR("armor", "active", TextFormatting.DARK_GRAY, 0x555555, 3, 1),
+	MOLTEN("armor", "active", true, TextFormatting.RED, 0xFF5555, 1, 1.5),
+	FROZEN("armor", "active", true, TextFormatting.AQUA, 0x55FFFF, 1, 1.5),
+	TOXIC("armor", "active", true, TextFormatting.DARK_GREEN, 0x00AA00, 1, 1.5),
+	ABSORB("armor", "active", true, TextFormatting.GREEN, 0x55FF55, 2, 1.5),
+	VOID_ARMOR("armor", "active", true, TextFormatting.DARK_GRAY, 0x555555, 3, 1),
 	// passive
-	BEASTIAL("armor", "passive", TextFormatting.DARK_RED, 0xAA0000, 1, 1.5),
-	ENLIGHTENED("armor", "passive", TextFormatting.YELLOW, 0xFFFF55, 2, 2),
+	BEASTIAL("armor", "passive", true, TextFormatting.DARK_RED, 0xAA0000, 1, 1.5),
+	ENLIGHTENED("armor", "passive", true, TextFormatting.YELLOW, 0xFFFF55, 2, 2),
 	HARDENED("armor", "passive", TextFormatting.GRAY, 0xAAAAAA, 2, 1),
 	SOUL_BOUND_ARMOR("armor", "passive", TextFormatting.DARK_PURPLE, 0xAA00AA, 3, 1);
 	
@@ -44,12 +44,13 @@ public enum Ability
 	
 	private String category;
 	private String type;
+	private boolean enabled;
 	private String color;
 	private int hex;
 	private int tier;
 	private double multiplier;
 	
-	Ability(String category, String type, Object color, int hex, int tier, double multiplier)
+	Ability(String category, String type, boolean enabled, Object color, int hex, int tier, double multiplier)
 	{
 		this.category = category;
 		this.type = type;

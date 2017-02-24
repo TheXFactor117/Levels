@@ -2,7 +2,7 @@ package com.thexfactor117.levels.event;
 
 import com.thexfactor117.levels.capabilities.CapabilityEnemyLevel;
 import com.thexfactor117.levels.capabilities.IEnemyLevel;
-import com.thexfactor117.levels.util.ConfigHandler;
+import com.thexfactor117.levels.config.Config;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -52,12 +52,12 @@ public class EventRenderOverlay
 	                int screenheight = resolution.getScaledHeight();
 	                FontRenderer fontR = FMLClientHandler.instance().getClient().fontRendererObj;
 	                
-	                if (ConfigHandler.STRING_POSITION.equals("default")) fontR.drawString(buffer, screenwidth / 2 - fontR.getStringWidth(buffer) / 2, 10, 0xffffff);
-	                if (ConfigHandler.STRING_POSITION.equals("topright")) fontR.drawString(buffer, screenwidth - 10 - fontR.getStringWidth(buffer), 10, 0xffffff);
-	                if (ConfigHandler.STRING_POSITION.equals("topleft")) fontR.drawString(buffer, 10, 10, 0xffffff);
-	                if (ConfigHandler.STRING_POSITION.equals("bottomright")) fontR.drawString(buffer, screenwidth - 10 - fontR.getStringWidth(buffer), screenheight - 20, 0xffffff);
-	                if (ConfigHandler.STRING_POSITION.equals("bottomleft")) fontR.drawString(buffer, 10, screenheight - 20, 0xffffff);
-	                if (ConfigHandler.STRING_POSITION.equals("cursor")) fontR.drawString(buffer, screenwidth / 2 - fontR.getStringWidth(buffer) / 2, screenheight / 2 - 15, 0xffffff);
+	                if (Config.stringPosition.equals("default")) fontR.drawString(buffer, screenwidth / 2 - fontR.getStringWidth(buffer) / 2, 10, 0xffffff);
+	                if (Config.stringPosition.equals("topright")) fontR.drawString(buffer, screenwidth - 10 - fontR.getStringWidth(buffer), 10, 0xffffff);
+	                if (Config.stringPosition.equals("topleft")) fontR.drawString(buffer, 10, 10, 0xffffff);
+	                if (Config.stringPosition.equals("bottomright")) fontR.drawString(buffer, screenwidth - 10 - fontR.getStringWidth(buffer), screenheight - 20, 0xffffff);
+	                if (Config.stringPosition.equals("bottomleft")) fontR.drawString(buffer, 10, screenheight - 20, 0xffffff);
+	                if (Config.stringPosition.equals("cursor")) fontR.drawString(buffer, screenwidth / 2 - fontR.getStringWidth(buffer) / 2, screenheight / 2 - 15, 0xffffff);
 				}
 			}
 		}

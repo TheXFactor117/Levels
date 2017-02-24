@@ -1,6 +1,6 @@
 package com.thexfactor117.levels.leveling;
 
-import com.thexfactor117.levels.util.ConfigHandler;
+import com.thexfactor117.levels.config.Config;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,7 +19,7 @@ public class Experience
 	{
 		int newLevel = currentLevel;
 		
-		while (currentLevel < ConfigHandler.MAX_LEVEL && experience >= Experience.getMaxLevelExp(currentLevel))
+		while (currentLevel < Config.maxLevel && experience >= Experience.getMaxLevelExp(currentLevel))
 		{
 			newLevel = currentLevel + 1;
 			currentLevel++;
@@ -64,8 +64,8 @@ public class Experience
 	
 	public static int getMaxLevelExp(int level)
 	{
-		if (level == 1) return ConfigHandler.LEVEL_1_EXP;
-		int maxXP = (int) Math.pow(level, ConfigHandler.EXP_EXPONENT) * ConfigHandler.EXP_MULTIPLIER;
+		if (level == 1) return Config.level1Exp;
+		int maxXP = (int) Math.pow(level, Config.expExponent) * Config.expMultiplier;
 		return maxXP;
 	}
 	

@@ -3,11 +3,11 @@ package com.thexfactor117.levels.client.gui;
 import java.io.IOException;
 
 import com.thexfactor117.levels.Levels;
+import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.leveling.Ability;
 import com.thexfactor117.levels.leveling.Experience;
 import com.thexfactor117.levels.leveling.Rarity;
 import com.thexfactor117.levels.network.PacketGuiAbility;
-import com.thexfactor117.levels.util.ConfigHandler;
 import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -188,7 +188,7 @@ public class GuiAbilitySelection extends GuiScreen
 		drawCenteredString(fontRendererObj, I18n.format("levels.misc.abilities.active"), width / 2 + 75, 120, 0xFFFFFF);
 		drawCenteredString(fontRendererObj, I18n.format("levels.misc.abilities.passive"), width / 2 + 150, 120, 0xFFFFFF);
 		
-		if (Experience.getLevel(nbt) == ConfigHandler.MAX_LEVEL)
+		if (Experience.getLevel(nbt) == Config.maxLevel)
 		{
 			drawString(fontRendererObj, I18n.format("levels.misc.level") + ": " + I18n.format("levels.misc.max"), width / 2 - 50, 50, 0xFFFFFF);
 			drawString(fontRendererObj, I18n.format("levels.misc.experience") + ": " + I18n.format("levels.misc.max"), width / 2 - 50, 60, 0xFFFFFF);

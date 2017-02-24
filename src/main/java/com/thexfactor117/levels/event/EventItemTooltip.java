@@ -6,10 +6,10 @@ import java.util.Collection;
 import org.lwjgl.input.Keyboard;
 
 import com.google.common.collect.Multimap;
+import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.leveling.Ability;
 import com.thexfactor117.levels.leveling.Experience;
 import com.thexfactor117.levels.leveling.Rarity;
-import com.thexfactor117.levels.util.ConfigHandler;
 import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.client.resources.I18n;
@@ -76,19 +76,19 @@ public class EventItemTooltip
 					tooltip.add(rarity.getColor() + TextFormatting.ITALIC + I18n.format("levels.rarity." + rarity.ordinal()));
 					
 					// level
-					if (level >= ConfigHandler.MAX_LEVEL)
+					if (level >= Config.maxLevel)
 						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.level") + ": " + I18n.format("levels.misc.max"));
 					else
 						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.level") + ": " + level);
 					
 					// experience
-					if (level >= ConfigHandler.MAX_LEVEL)
+					if (level >= Config.maxLevel)
 						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.experience") + ": " + I18n.format("levels.misc.max"));
 					else
 						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.experience") + ": " + experience + " / " + maxExperience);
 					
 					// durability
-					if (ConfigHandler.SHOW_DURABILITY)
+					if (Config.showDurability)
 					{
 						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.durability") + ": " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
 					}
@@ -146,22 +146,22 @@ public class EventItemTooltip
 			switch (rarity)
 			{
 				case COMMON:
-					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (ConfigHandler.COMMON_DAMAGE * (damage + 1F)) + ")");
+					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (Config.commonDamage * (damage + 1F)) + ")");
 					break;
 				case UNCOMMON:
-					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (ConfigHandler.UNCOMMON_DAMAGE * (damage + 1F)) + ")");
+					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (Config.uncommonDamage * (damage + 1F)) + ")");
 					break;
 				case RARE:
-					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (ConfigHandler.RARE_DAMAGE * (damage + 1F)) + ")");
+					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (Config.rareDamage * (damage + 1F)) + ")");
 					break;
 				case ULTRA_RARE:
-					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (ConfigHandler.ULTRA_RARE_DAMAGE * (damage + 1F)) + ")");
+					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (Config.ultraRareDamage * (damage + 1F)) + ")");
 					break;
 				case LEGENDARY:
-					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (ConfigHandler.LEGENDARY_DAMAGE * (damage + 1F)) + ")");
+					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (Config.legendaryDamage * (damage + 1F)) + ")");
 					break;
 				case ARCHAIC:
-					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (ConfigHandler.ARCHAIC_DAMAGE * (damage + 1F)) + ")");
+					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (Config.archaicDamage * (damage + 1F)) + ")");
 					break;
 				default:
 					break;

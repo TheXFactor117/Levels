@@ -2,7 +2,7 @@ package com.thexfactor117.levels.leveling;
 
 import java.util.Random;
 
-import com.thexfactor117.levels.util.ConfigHandler;
+import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.util.RandomCollection;
 
 import net.minecraft.client.resources.I18n;
@@ -17,12 +17,12 @@ import net.minecraft.util.text.TextFormatting;
 public enum Rarity 
 {
 	DEFAULT("", 0, 0.0),
-	COMMON(TextFormatting.WHITE, 0xFFFFFF, ConfigHandler.COMMON_CHANCE),
-	UNCOMMON(TextFormatting.DARK_GREEN, 0x00AA00, ConfigHandler.UNCOMMON_CHANCE),
-	RARE(TextFormatting.AQUA, 0x55FFFF, ConfigHandler.RARE_CHANCE),
-	ULTRA_RARE(TextFormatting.DARK_PURPLE, 0xAA00AA, ConfigHandler.ULTRA_RARE_CHANCE),
-	LEGENDARY(TextFormatting.GOLD, 0xFFAA00, ConfigHandler.LEGENDARY_CHANCE),
-	ARCHAIC(TextFormatting.LIGHT_PURPLE, 0xFF55FF, ConfigHandler.ARCHAIC_CHANCE);
+	COMMON(TextFormatting.WHITE, 0xFFFFFF, Config.commonChance),
+	UNCOMMON(TextFormatting.DARK_GREEN, 0x00AA00, Config.uncommonChance),
+	RARE(TextFormatting.AQUA, 0x55FFFF, Config.rareChance),
+	ULTRA_RARE(TextFormatting.DARK_PURPLE, 0xAA00AA, Config.ultraRareChance),
+	LEGENDARY(TextFormatting.GOLD, 0xFFAA00, Config.legendaryChance),
+	ARCHAIC(TextFormatting.LIGHT_PURPLE, 0xFF55FF, Config.archaicChance);
 	
 	private String color;
 	private int hex;
