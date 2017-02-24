@@ -54,12 +54,17 @@ public class GuiAbilitySelection extends GuiScreen
 		    		
 		    		if (nbt != null)
 		    		{
+		    			int j = 0;
+		    			
 		    			for (int i = 0; i < weaponAbilities.length; i++)
 		    			{
 		    				if (Ability.WEAPONS.get(i).getType().equals("active"))
-			    				weaponAbilities[i] = new GuiButton(i, width / 2 - 200, 100 + (i * 20), 75, 20, Ability.WEAPONS.get(i).getName() + " (" + Ability.WEAPONS.get(i).getTier() + ")");
+			    			{
+		    					weaponAbilities[i] = new GuiButton(i, width / 2 - 200, 100 + (i * 20), 75, 20, Ability.WEAPONS.get(i).getName() + " (" + Ability.WEAPONS.get(i).getTier() + ")");
+		    					j++;
+			    			}
 		    				else
-			    				weaponAbilities[i] = new GuiButton(i, width / 2 - 100, -20 + (i * 20), 75, 20, Ability.WEAPONS.get(i).getName() + " (" + Ability.WEAPONS.get(i).getTier() + ")");
+			    				weaponAbilities[i] = new GuiButton(i, width / 2 - 100, 100 + ((i - j) * 20), 75, 20, Ability.WEAPONS.get(i).getName() + " (" + Ability.WEAPONS.get(i).getTier() + ")");
 		    				
 		    				this.buttonList.add(weaponAbilities[i]);
 		    				weaponAbilities[i].enabled = false;
@@ -73,12 +78,17 @@ public class GuiAbilitySelection extends GuiScreen
 		    		
 		    		if (nbt != null)
 		    		{
+		    			int j = 0;
+		    			
 		    			for (int i = 0; i < armorAbilities.length; i++)
 		    			{
 		    				if (Ability.ARMOR.get(i).getType().equals("active"))
-			    				armorAbilities[i] = new GuiButton(i, width / 2 - 200, 100 + (i * 20), 75, 20, Ability.ARMOR.get(i).getName() + " (" + Ability.ARMOR.get(i).getTier() + ")");
+			    			{
+		    					armorAbilities[i] = new GuiButton(i, width / 2 - 200, 100 + (i * 20), 75, 20, Ability.ARMOR.get(i).getName() + " (" + Ability.ARMOR.get(i).getTier() + ")");
+		    					j++;
+			    			}
 		    				else
-		    					armorAbilities[i] = new GuiButton(i, width / 2 - 100, (i * 20), 75, 20, Ability.ARMOR.get(i).getName() + " (" + Ability.ARMOR.get(i).getTier() + ")");
+		    					armorAbilities[i] = new GuiButton(i, width / 2 - 100, ((i - j) * 20), 75, 20, Ability.ARMOR.get(i).getName() + " (" + Ability.ARMOR.get(i).getTier() + ")");
 		    				
 		    				this.buttonList.add(armorAbilities[i]);
 		    				armorAbilities[i].enabled = false;
