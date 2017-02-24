@@ -8,6 +8,14 @@
 ### Levels 2 - Release 1
 #####
 
+### r1.2.0
+#
+# + Added configuration options to remove certain abilities.
+# + Added Danish language file (courtesy of Zerotiger).
+# * Re-worked configuration file.
+#
+###
+
 ### r1.1.2
 #
 # * Fixed critical bug where servers would crash on player join.

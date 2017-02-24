@@ -1,13 +1,13 @@
 {
 	"homepage": "http://minecraft.curseforge.com/projects/levels/files",
 	"promos": {
-		"1.11.2-latest": "r1.1.2",
-		"1.11.2-recommended": "r1.1.2",
+		"1.11.2-latest": "r1.2.0",
+		"1.11.2-recommended": "r1.2.0",
 		"1.10.2-latest": "b1.1.1",
 		"1.10.2-recommended": "b1.1.1"
 	},
 	"1.11.2": {
-		"r1.1.2": "* Fixed critical bug where servers would crash on player join."
+		"r1.2.0": "* View the full changelog on GitHub."
 	},
 	"1.10.2": {
 		"r1.0.0": "* Levels 2-r1.0.0 has been backported to 1.10.2 again."	
