@@ -1,5 +1,9 @@
 package com.thexfactor117.levels.leveling;
 
+import java.util.ArrayList;
+
+import com.thexfactor117.levels.config.Config;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
@@ -13,34 +17,34 @@ public enum Ability
 {
 	// weapon abilities (type, color, color code, tier, multiplier)
 	// active
-	FIRE("weapon", "active", true, TextFormatting.RED, 0xFF5555, 1, 1.5),
-	FROST("weapon", "active", true, TextFormatting.AQUA, 0x55FFFF, 1, 1.5),
-	POISON("weapon", "active", true, TextFormatting.DARK_GREEN, 0x00AA00, 1, 1.5),
-	BLOODLUST("weapon", "active", true, TextFormatting.DARK_RED, 0xAA0000, 2, 1.5),
-	CHAINED("weapon", "active", true, TextFormatting.GRAY, 0xAAAAAA, 3, 1.5),
-	VOID("weapon", "active", true, TextFormatting.DARK_GRAY, 0x555555, 3, 1),
+	FIRE("weapon", "active", Config.fire, TextFormatting.RED, 0xFF5555, 1, 1.5),
+	FROST("weapon", "active", Config.frost, TextFormatting.AQUA, 0x55FFFF, 1, 1.5),
+	POISON("weapon", "active", Config.poison, TextFormatting.DARK_GREEN, 0x00AA00, 1, 1.5),
+	BLOODLUST("weapon", "active", Config.bloodlust, TextFormatting.DARK_RED, 0xAA0000, 2, 1.5),
+	CHAINED("weapon", "active", Config.chained, TextFormatting.GRAY, 0xAAAAAA, 3, 1.5),
+	VOID("weapon", "active", Config.voida, TextFormatting.DARK_GRAY, 0x555555, 3, 1),
 	// passive
-	LIGHT("weapon", "passive", true, TextFormatting.YELLOW, 0xFFFF55, 2, 1),
-	ETHEREAL("weapon", "passive", true, TextFormatting.GREEN, 0x55FF55, 2, 2),
-	SOUL_BOUND("weapon", "passive", true, TextFormatting.DARK_PURPLE, 0xAA00AA, 3, 1),
+	LIGHT("weapon", "passive", Config.light, TextFormatting.YELLOW, 0xFFFF55, 2, 1),
+	ETHEREAL("weapon", "passive", Config.ethereal, TextFormatting.GREEN, 0x55FF55, 2, 2),
+	SOUL_BOUND("weapon", "passive", Config.soulBound, TextFormatting.DARK_PURPLE, 0xAA00AA, 3, 1),
 	
 	// armor abilities
 	// active
-	MOLTEN("armor", "active", true, TextFormatting.RED, 0xFF5555, 1, 1.5),
-	FROZEN("armor", "active", true, TextFormatting.AQUA, 0x55FFFF, 1, 1.5),
-	TOXIC("armor", "active", true, TextFormatting.DARK_GREEN, 0x00AA00, 1, 1.5),
-	ABSORB("armor", "active", true, TextFormatting.GREEN, 0x55FF55, 2, 1.5),
-	VOID_ARMOR("armor", "active", true, TextFormatting.DARK_GRAY, 0x555555, 3, 1),
+	MOLTEN("armor", "active", Config.molten, TextFormatting.RED, 0xFF5555, 1, 1.5),
+	FROZEN("armor", "active", Config.frozen, TextFormatting.AQUA, 0x55FFFF, 1, 1.5),
+	TOXIC("armor", "active", Config.toxic, TextFormatting.DARK_GREEN, 0x00AA00, 1, 1.5),
+	ABSORB("armor", "active", Config.absorb, TextFormatting.GREEN, 0x55FF55, 2, 1.5),
+	VOID_ARMOR("armor", "active", Config.voidArmor, TextFormatting.DARK_GRAY, 0x555555, 3, 1),
 	// passive
-	BEASTIAL("armor", "passive", true, TextFormatting.DARK_RED, 0xAA0000, 1, 1.5),
-	ENLIGHTENED("armor", "passive", true, TextFormatting.YELLOW, 0xFFFF55, 2, 2),
-	HARDENED("armor", "passive", TextFormatting.GRAY, 0xAAAAAA, 2, 1),
-	SOUL_BOUND_ARMOR("armor", "passive", TextFormatting.DARK_PURPLE, 0xAA00AA, 3, 1);
+	BEASTIAL("armor", "passive", Config.beastial, TextFormatting.DARK_RED, 0xAA0000, 1, 1.5),
+	ENLIGHTENED("armor", "passive", Config.enlightened, TextFormatting.YELLOW, 0xFFFF55, 2, 2),
+	HARDENED("armor", "passive", Config.hardened, TextFormatting.GRAY, 0xAAAAAA, 2, 1),
+	SOUL_BOUND_ARMOR("armor", "passive", Config.soulBoundArmor, TextFormatting.DARK_PURPLE, 0xAA00AA, 3, 1);
 	
-	public static final int WEAPON_ABILITIES = 9;
-	public static final int ARMOR_ABILITIES = 9;
-	public static final Ability[] WEAPONS = new Ability[WEAPON_ABILITIES];
-	public static final Ability[] ARMOR = new Ability[ARMOR_ABILITIES];
+	public static int WEAPON_ABILITIES;
+	public static int ARMOR_ABILITIES;
+	public static final ArrayList<Ability> WEAPONS = new ArrayList<Ability>();
+	public static final ArrayList<Ability> ARMOR = new ArrayList<Ability>();
 	
 	private String category;
 	private String type;
@@ -54,6 +58,7 @@ public enum Ability
 	{
 		this.category = category;
 		this.type = type;
+		this.enabled = enabled;
 		this.color = color.toString();
 		this.hex = hex;
 		this.tier = tier;
@@ -180,16 +185,18 @@ public enum Ability
 	static
 	{
 		int j = 0;
-		
+
 		for (int i = 0; i < Ability.values().length; i++)
-		{
-			if (Ability.values()[i].getCategory().equals("weapon"))
+		{		
+			if (Ability.values()[i].getCategory().equals("weapon") && Ability.values()[i].enabled)
 			{
-				Ability.WEAPONS[i] = Ability.values()[i];
+				Ability.WEAPONS.add(Ability.values()[i]);
+				Ability.WEAPON_ABILITIES++;
 			}
-			else if (Ability.values()[i].getCategory().equals("armor"))
+			else if (Ability.values()[i].getCategory().equals("armor") && Ability.values()[i].enabled)
 			{
-				Ability.ARMOR[j] = Ability.values()[i];
+				Ability.ARMOR.add(Ability.values()[j]);
+				Ability.ARMOR_ABILITIES++;
 				j++;
 			}
 		}

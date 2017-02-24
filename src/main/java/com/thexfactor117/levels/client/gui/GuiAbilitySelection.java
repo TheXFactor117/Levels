@@ -1,6 +1,7 @@
 package com.thexfactor117.levels.client.gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.thexfactor117.levels.Levels;
 import com.thexfactor117.levels.config.Config;
@@ -55,10 +56,10 @@ public class GuiAbilitySelection extends GuiScreen
 		    		{
 		    			for (int i = 0; i < weaponAbilities.length; i++)
 		    			{
-		    				if (Ability.WEAPONS[i].getType().equals("active"))
-			    				weaponAbilities[i] = new GuiButton(i, width / 2 - 200, 100 + (i * 20), 75, 20, Ability.WEAPONS[i].getName() + " (" + Ability.WEAPONS[i].getTier() + ")");
+		    				if (Ability.WEAPONS.get(i).getType().equals("active"))
+			    				weaponAbilities[i] = new GuiButton(i, width / 2 - 200, 100 + (i * 20), 75, 20, Ability.WEAPONS.get(i).getName() + " (" + Ability.WEAPONS.get(i).getTier() + ")");
 		    				else
-			    				weaponAbilities[i] = new GuiButton(i, width / 2 - 100, -20 + (i * 20), 75, 20, Ability.WEAPONS[i].getName() + " (" + Ability.WEAPONS[i].getTier() + ")");
+			    				weaponAbilities[i] = new GuiButton(i, width / 2 - 100, -20 + (i * 20), 75, 20, Ability.WEAPONS.get(i).getName() + " (" + Ability.WEAPONS.get(i).getTier() + ")");
 		    				
 		    				this.buttonList.add(weaponAbilities[i]);
 		    				weaponAbilities[i].enabled = false;
@@ -74,10 +75,10 @@ public class GuiAbilitySelection extends GuiScreen
 		    		{
 		    			for (int i = 0; i < armorAbilities.length; i++)
 		    			{
-		    				if (Ability.ARMOR[i].getType().equals("active"))
-			    				armorAbilities[i] = new GuiButton(i, width / 2 - 200, 100 + (i * 20), 75, 20, Ability.ARMOR[i].getName() + " (" + Ability.ARMOR[i].getTier() + ")");
+		    				if (Ability.ARMOR.get(i).getType().equals("active"))
+			    				armorAbilities[i] = new GuiButton(i, width / 2 - 200, 100 + (i * 20), 75, 20, Ability.ARMOR.get(i).getName() + " (" + Ability.ARMOR.get(i).getTier() + ")");
 		    				else
-		    					armorAbilities[i] = new GuiButton(i, width / 2 - 100, (i * 20), 75, 20, Ability.ARMOR[i].getName() + " (" + Ability.ARMOR[i].getTier() + ")");
+		    					armorAbilities[i] = new GuiButton(i, width / 2 - 100, (i * 20), 75, 20, Ability.ARMOR.get(i).getName() + " (" + Ability.ARMOR.get(i).getTier() + ")");
 		    				
 		    				this.buttonList.add(armorAbilities[i]);
 		    				armorAbilities[i].enabled = false;
@@ -176,7 +177,7 @@ public class GuiAbilitySelection extends GuiScreen
 	 * @param abilities
 	 * @param nbt
 	 */
-	private void drawStrings(ItemStack stack, Ability[] abilities, NBTTagCompound nbt)
+	private void drawStrings(ItemStack stack, ArrayList<Ability> abilities, NBTTagCompound nbt)
 	{
 		Rarity rarity = Rarity.getRarity(nbt);
 		
@@ -202,19 +203,19 @@ public class GuiAbilitySelection extends GuiScreen
 		int j = -1;
 		int k = -1;
 		
-		for (int i = 0; i < abilities.length; i++)
+		for (int i = 0; i < abilities.size(); i++)
 		{
-			if (abilities[i].hasAbility(nbt))
+			if (abilities.get(i).hasAbility(nbt))
 			{
-				if (abilities[i].getType().equals("active"))
+				if (abilities.get(i).getType().equals("active"))
 				{
 					j++;
-					drawCenteredString(fontRendererObj, abilities[i].getName(nbt), width / 2 + 75, 135 + (j * 10), abilities[i].getHex());
+					drawCenteredString(fontRendererObj, abilities.get(i).getName(nbt), width / 2 + 75, 135 + (j * 10), abilities.get(i).getHex());
 				}
 				else
 				{
 					k++;
-					drawCenteredString(fontRendererObj, abilities[i].getName(nbt), width / 2 + 150, 135 + (k * 10), abilities[i].getHex());
+					drawCenteredString(fontRendererObj, abilities.get(i).getName(nbt), width / 2 + 150, 135 + (k * 10), abilities.get(i).getHex());
 				}
 			}
 		}
@@ -227,7 +228,7 @@ public class GuiAbilitySelection extends GuiScreen
 	 * @param abilities
 	 * @param nbt
 	 */
-	private void displayButtons(GuiButton[] buttons, Ability[] abilities, NBTTagCompound nbt)
+	private void displayButtons(GuiButton[] buttons, ArrayList<Ability> abilities, NBTTagCompound nbt)
 	{
 		if (Experience.getAbilityTokens(nbt) > 0)
 		{
@@ -235,47 +236,52 @@ public class GuiAbilitySelection extends GuiScreen
 			{	
 				if (Experience.getAbilityTokens(nbt) == 1)
 				{
-					if (abilities[i].getTier() == 1)
+					if (abilities.get(i).getTier() == 1)
 						buttons[i].enabled = true;
 					
-					if (abilities[i].hasAbility(nbt) && abilities[i].canUpgradeLevel(nbt))
+					if (abilities.get(i).hasAbility(nbt) && abilities.get(i).canUpgradeLevel(nbt))
 						buttons[i].enabled = true;
-					else if (abilities[i].hasAbility(nbt))
+					else if (abilities.get(i).hasAbility(nbt))
 						buttons[i].enabled = false;
 				}
 				
 				if (Experience.getAbilityTokens(nbt) == 2)
 				{
-					if (abilities[i].getTier() <= 2)
+					if (abilities.get(i).getTier() <= 2)
 						buttons[i].enabled = true;
 				}
 				else
 				{
-					if (abilities[i].getTier() == 2)
+					if (abilities.get(i).getTier() == 2)
 						buttons[i].enabled = false;
 					
-					if (abilities[i].hasAbility(nbt) && abilities[i].canUpgradeLevel(nbt))
+					if (abilities.get(i).hasAbility(nbt) && abilities.get(i).canUpgradeLevel(nbt))
 						buttons[i].enabled = true;
-					else if (abilities[i].hasAbility(nbt))
+					else if (abilities.get(i).hasAbility(nbt))
 						buttons[i].enabled = false;
 				}
 				
 				if (Experience.getAbilityTokens(nbt) >= 3)
 				{
 					buttons[i].enabled = true;
+					
+					if (abilities.get(i).hasAbility(nbt) && abilities.get(i).canUpgradeLevel(nbt))
+						buttons[i].enabled = true;
+					else if (abilities.get(i).hasAbility(nbt))
+						buttons[i].enabled = false;
 				}
 				else
 				{
-					if (abilities[i].getTier() == 3)
+					if (abilities.get(i).getTier() == 3)
 						buttons[i].enabled = false;
 					
-					if (abilities[i].hasAbility(nbt) && abilities[i].canUpgradeLevel(nbt))
+					if (abilities.get(i).hasAbility(nbt) && abilities.get(i).canUpgradeLevel(nbt))
 						buttons[i].enabled = true;
-					else if (abilities[i].hasAbility(nbt))
+					else if (abilities.get(i).hasAbility(nbt))
 						buttons[i].enabled = false;
 				}
 				
-				if (abilities[i].hasAbility(nbt) && abilities[i].getType().equals("passive"))
+				if (abilities.get(i).hasAbility(nbt) && abilities.get(i).getType().equals("passive"))
 				{
 					buttons[i].enabled = false;
 				}
