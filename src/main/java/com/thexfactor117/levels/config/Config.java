@@ -45,6 +45,27 @@ public class Config
 
 	public static int maxAbilities = 3;
 	
+	// abilities
+	public static boolean fire = true;
+	public static boolean frost = true;
+	public static boolean poison = true;
+	public static boolean bloodlust = true;
+	public static boolean chained = true;
+	public static boolean voida = true;
+	public static boolean light = true;
+	public static boolean ethereal = true;
+	public static boolean soulBound = true;
+	
+	public static boolean molten = true;
+	public static boolean frozen = true;
+	public static boolean toxic = true;
+	public static boolean absorb = true;
+	public static boolean voidArmor = true;
+	public static boolean beastial = true;
+	public static boolean enlightened = true;
+	public static boolean hardened = true;
+	public static boolean soulBoundArmor = true;
+	
 	/*
 	 * RARITIES
 	 */
@@ -152,6 +173,101 @@ public class Config
 		prop = abilities.get(category, "maxAbilitiesPerItem", maxAbilities);
 		prop.setComment("Sets the maximum amount of weapons that can be applied on a given item. Default: 3");
 		maxAbilities = prop.getInt();
+		propOrder.add(prop.getName());
+		
+		/*
+		 * Abilities
+		 */
+		// weapons
+		prop = abilities.get(category, "fireAbility", fire);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		fire = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "frostAbility", frost);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		frost = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "poisonAbility", poison);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		poison = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "bloodlustAbility", bloodlust);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		bloodlust = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "chainedAbility", chained);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		chained = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "voidAbility", voida);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		voida = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "lightAbility", light);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		light = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "etherealAbility", ethereal);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		ethereal = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "soulBoundAbility", soulBound);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		soulBound = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		// armor
+		prop = abilities.get(category, "moltenAbility", molten);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		molten = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "frozenAbility", frozen);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		frozen = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "toxicAbility", toxic);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		toxic = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "absorbAbility", absorb);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		absorb = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "voidArmorAbility", voidArmor);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		voidArmor = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "beastialAbility", beastial);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		beastial = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "enlightenedAbility", enlightened);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		enlightened = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "hardenedAbility", hardened);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		hardened = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "soulBoundArmorAbility", soulBoundArmor);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		soulBoundArmor = prop.getBoolean();
 		propOrder.add(prop.getName());
 		
 		abilities.setCategoryPropertyOrder(category, propOrder);
