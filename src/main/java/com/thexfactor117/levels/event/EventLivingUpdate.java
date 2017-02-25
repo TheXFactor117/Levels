@@ -15,6 +15,7 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -34,19 +35,19 @@ public class EventLivingUpdate
 			
 			if (player != null)
 			{
-				ItemStack[] main = player.inventory.mainInventory;
+				NonNullList<ItemStack> main = player.inventory.mainInventory;
 				
 				if (!player.worldObj.isRemote)
 				{
-					for (int i = 0; i < main.length; i++)
+					for (int i = 0; i < main.size(); i++)
 					{
-						if (main[i] != null)
+						if (main.get(i) != null)
 						{
-							Item item = main[i].getItem();
+							Item item = main.get(i).getItem();
 							
 							if (item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemArmor || item instanceof ItemBow)
 							{
-								ItemStack stack = main[i];
+								ItemStack stack = main.get(i);
 								NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 								
 								if (nbt != null)
