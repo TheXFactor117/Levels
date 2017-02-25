@@ -88,7 +88,7 @@ public class GuiAbilitySelection extends GuiScreen
 		    					j++;
 			    			}
 		    				else
-		    					armorAbilities[i] = new GuiButton(i, width / 2 - 100, ((i - j) * 20), 75, 20, Ability.ARMOR.get(i).getName() + " (" + Ability.ARMOR.get(i).getTier() + ")");
+		    					armorAbilities[i] = new GuiButton(i, width / 2 - 100, 100 + ((i - j) * 20), 75, 20, Ability.ARMOR.get(i).getName() + " (" + Ability.ARMOR.get(i).getTier() + ")");
 		    				
 		    				this.buttonList.add(armorAbilities[i]);
 		    				armorAbilities[i].enabled = false;
