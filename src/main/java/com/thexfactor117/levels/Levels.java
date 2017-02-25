@@ -6,11 +6,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.thexfactor117.levels.capabilities.CapabilityEnemyLevel;
+import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.init.ModEvents;
 import com.thexfactor117.levels.network.PacketEnemyLevel;
 import com.thexfactor117.levels.network.PacketGuiAbility;
 import com.thexfactor117.levels.proxies.CommonProxy;
-import com.thexfactor117.levels.util.ConfigHandler;
 import com.thexfactor117.levels.util.GuiHandler;
 import com.thexfactor117.levels.util.Reference;
 
@@ -34,9 +34,6 @@ import net.minecraftforge.fml.relauncher.Side;
  * on top of armor, bow, and enemy leveling in the near future. On top of
  * that, other interesting leveling systems are planned to enhance the
  * overall feel of Minecraft, while sticking to a primarily vanilla feel.
- * 
- * ***PRE-ALPHA CODE***
- * 
  */
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION, updateJSON = Reference.UPDATE_URL)
 public class Levels 
@@ -54,12 +51,12 @@ public class Levels
 	{
 		configDir = new File(event.getModConfigurationDirectory() + "/" + Reference.MODID);
 		configDir.mkdirs();
-		ConfigHandler.init(new File(configDir.getPath(), Reference.MODID + ".cfg"));
+		Config.init(configDir);
 		
 		ModEvents.registerEvents();
 		proxy.preInit();
 		
-		if (ConfigHandler.ENEMY_LEVELING)
+		if (Config.enemyLeveling)
 			CapabilityEnemyLevel.register();
 		
 		network = NetworkRegistry.INSTANCE.newSimpleChannel("levels");

@@ -69,28 +69,28 @@ public class PacketGuiAbility implements IMessage
 							
 							if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemBow)
 							{	
-								if (Ability.WEAPONS[message.index].hasAbility(nbt))
+								if (Ability.WEAPONS.get(message.index).hasAbility(nbt))
 								{
-									Ability.WEAPONS[message.index].setLevel(nbt, Ability.WEAPONS[message.index].getLevel(nbt) + 1);
+									Ability.WEAPONS.get(message.index).setLevel(nbt, Ability.WEAPONS.get(message.index).getLevel(nbt) + 1);
 									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - 1);
 								}
 								else
 								{
-									Ability.WEAPONS[message.index].addAbility(nbt, 1);
-									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.WEAPONS[message.index].getTier());
+									Ability.WEAPONS.get(message.index).addAbility(nbt, 1);
+									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.WEAPONS.get(message.index).getTier());
 								}
 							}
 							else if (stack.getItem() instanceof ItemArmor)
 							{
-								if (Ability.ARMOR[message.index].hasAbility(nbt))
+								if (Ability.ARMOR.get(message.index).hasAbility(nbt))
 								{
-									Ability.ARMOR[message.index].setLevel(nbt, Ability.ARMOR[message.index].getLevel(nbt) + 1);
+									Ability.ARMOR.get(message.index).setLevel(nbt, Ability.ARMOR.get(message.index).getLevel(nbt) + 1);
 									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - 1);
 								}
 								else
 								{
-									Ability.ARMOR[message.index].addAbility(nbt, 1);
-									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.ARMOR[message.index].getTier());
+									Ability.ARMOR.get(message.index).addAbility(nbt, 1);
+									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.ARMOR.get(message.index).getTier());
 								}
 							}
 						}

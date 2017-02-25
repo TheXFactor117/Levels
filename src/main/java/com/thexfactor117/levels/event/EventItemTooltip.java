@@ -1,16 +1,21 @@
 package com.thexfactor117.levels.event;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.lwjgl.input.Keyboard;
 
+import com.google.common.collect.Multimap;
+import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.leveling.Ability;
 import com.thexfactor117.levels.leveling.Experience;
 import com.thexfactor117.levels.leveling.Rarity;
-import com.thexfactor117.levels.util.ConfigHandler;
 import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
@@ -20,6 +25,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -38,7 +44,7 @@ public class EventItemTooltip
 	 * @param event
 	 */
 	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void addInformation(ItemTooltipEvent event)
 	{
 		ArrayList<String> tooltip = (ArrayList<String>) event.getToolTip();
@@ -58,6 +64,8 @@ public class EventItemTooltip
 					int experience = Experience.getExperience(nbt);
 					int maxExperience = Experience.getMaxLevelExp(level);
 					
+					changeTooltips(tooltip, stack, rarity);
+					
 					// add tooltips
 					// formatting
 					tooltip.add("");
@@ -68,19 +76,19 @@ public class EventItemTooltip
 					tooltip.add(rarity.getColor() + TextFormatting.ITALIC + I18n.format("levels.rarity." + rarity.ordinal()));
 					
 					// level
-					if (level >= ConfigHandler.MAX_LEVEL)
+					if (level >= Config.maxLevel)
 						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.level") + ": " + I18n.format("levels.misc.max"));
 					else
 						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.level") + ": " + level);
 					
 					// experience
-					if (level >= ConfigHandler.MAX_LEVEL)
+					if (level >= Config.maxLevel)
 						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.experience") + ": " + I18n.format("levels.misc.max"));
 					else
 						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.experience") + ": " + experience + " / " + maxExperience);
 					
 					// durability
-					if (ConfigHandler.SHOW_DURABILITY)
+					if (Config.showDurability)
 					{
 						tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.durability") + ": " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
 					}
@@ -121,6 +129,42 @@ public class EventItemTooltip
 					tooltip.add(rarity.getColor() + "===============");
 					tooltip.add("");
 				}
+			}
+		}
+	}
+	
+	private void changeTooltips(ArrayList<String> tooltip, ItemStack stack, Rarity rarity)
+	{	
+		if (tooltip.indexOf("When in main hand:") != -1)
+		{
+			Multimap<String, AttributeModifier> map = stack.getItem().getAttributeModifiers(EntityEquipmentSlot.MAINHAND, stack);
+			Collection<AttributeModifier> damageCollection = map.get(SharedMonsterAttributes.ATTACK_DAMAGE.getAttributeUnlocalizedName());
+			AttributeModifier damageModifier = (AttributeModifier) damageCollection.toArray()[0];
+			
+			double damage = damageModifier.getAmount();
+			
+			switch (rarity)
+			{
+				case COMMON:
+					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (Config.commonDamage * (damage + 1F)) + ")");
+					break;
+				case UNCOMMON:
+					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (Config.uncommonDamage * (damage + 1F)) + ")");
+					break;
+				case RARE:
+					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (Config.rareDamage * (damage + 1F)) + ")");
+					break;
+				case ULTRA_RARE:
+					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (Config.ultraRareDamage * (damage + 1F)) + ")");
+					break;
+				case LEGENDARY:
+					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (Config.legendaryDamage * (damage + 1F)) + ")");
+					break;
+				case ARCHAIC:
+					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (" + (Config.archaicDamage * (damage + 1F)) + ")");
+					break;
+				default:
+					break;
 			}
 		}
 	}

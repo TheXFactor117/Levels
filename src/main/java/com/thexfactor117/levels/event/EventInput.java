@@ -8,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemBow;
@@ -34,22 +33,13 @@ public class EventInput
 		KeyBinding key = ClientProxy.keyBinding;
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityPlayer player = mc.thePlayer;
+		Item current = player.inventory.getCurrentItem().getItem();
 		
-		if (player != null)
+		if (current instanceof ItemSword || current instanceof ItemAxe || current instanceof ItemArmor || current instanceof ItemBow)
 		{
-			ItemStack current = player.inventory.getCurrentItem();
-			
-			if (current != null)
+			if (key.isPressed())
 			{
-				Item item = current.getItem();
-				
-				if (item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemArmor || item instanceof ItemBow)
-				{
-					if (key.isPressed())
-					{
-						player.openGui(Levels.instance, GuiHandler.ABILITY_SELECTION, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
-					}
-				}
+				player.openGui(Levels.instance, GuiHandler.ABILITY_SELECTION, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
 			}
 		}
 	}

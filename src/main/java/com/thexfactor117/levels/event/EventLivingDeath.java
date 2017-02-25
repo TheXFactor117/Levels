@@ -2,8 +2,8 @@ package com.thexfactor117.levels.event;
 
 import com.thexfactor117.levels.capabilities.CapabilityEnemyLevel;
 import com.thexfactor117.levels.capabilities.IEnemyLevel;
+import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.leveling.Experience;
-import com.thexfactor117.levels.util.ConfigHandler;
 import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -77,7 +77,7 @@ public class EventLivingDeath
 	 */
 	private void addBonusExperience(LivingDeathEvent event, NBTTagCompound nbt)
 	{
-		if (Experience.getLevel(nbt) < ConfigHandler.MAX_LEVEL)
+		if (Experience.getLevel(nbt) < Config.maxLevel)
 		{
 			if (event.getEntityLiving() instanceof EntityLivingBase)
 			{

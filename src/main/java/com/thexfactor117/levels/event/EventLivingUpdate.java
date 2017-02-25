@@ -2,9 +2,9 @@ package com.thexfactor117.levels.event;
 
 import java.util.Random;
 
+import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.leveling.Experience;
 import com.thexfactor117.levels.leveling.Rarity;
-import com.thexfactor117.levels.util.ConfigHandler;
 import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -49,16 +49,16 @@ public class EventLivingUpdate
 							{
 								ItemStack stack = main.get(i);
 								NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-								
+
 								if (nbt != null)
 								{
 									if (!Experience.isEnabled(nbt))
 									{
 										int count = 0;
 										
-										for (int j = 0; j < ConfigHandler.ITEM_BLACKLIST.length; j++)
+										for (int j = 0; j < Config.itemBlacklist.length; j++)
 										{
-											if (ConfigHandler.ITEM_BLACKLIST[j].equals(stack.getItem().getRegistryName().getResourceDomain() + ":" + stack.getItem().getRegistryName().getResourcePath()))
+											if (Config.itemBlacklist[j].equals(stack.getItem().getRegistryName().getResourceDomain() + ":" + stack.getItem().getRegistryName().getResourcePath()))
 											{
 												count++;
 											}

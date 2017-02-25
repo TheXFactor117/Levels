@@ -1,5 +1,6 @@
 package com.thexfactor117.levels.init;
 
+import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.event.EventInput;
 import com.thexfactor117.levels.event.EventItemTooltip;
 import com.thexfactor117.levels.event.EventLivingDeath;
@@ -8,7 +9,6 @@ import com.thexfactor117.levels.event.EventLivingUpdate;
 import com.thexfactor117.levels.event.EventPlayerClone;
 import com.thexfactor117.levels.event.EventPlayerDrops;
 import com.thexfactor117.levels.event.EventPlayerTracking;
-import com.thexfactor117.levels.util.ConfigHandler;
 
 import net.minecraftforge.common.MinecraftForge;
 
@@ -29,7 +29,7 @@ public class ModEvents
 		MinecraftForge.EVENT_BUS.register(new EventPlayerDrops());
 		MinecraftForge.EVENT_BUS.register(new EventPlayerClone());
 		
-		if (ConfigHandler.ENEMY_LEVELING)
+		if (Config.enemyLeveling)
 		{
 			MinecraftForge.EVENT_BUS.register(new EventPlayerTracking());
 		}
