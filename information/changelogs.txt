@@ -8,6 +8,12 @@
 ### Levels 2 - Release 1
 #####
 
+### r1.2.2
+#
+# * Fixes crash when holding/not holding certain items.
+#
+###
+
 ### r1.2.1
 #
 # * Fixes armor ability selection GUI button placement.

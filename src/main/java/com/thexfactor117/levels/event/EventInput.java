@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
@@ -33,13 +34,25 @@ public class EventInput
 		KeyBinding key = ClientProxy.keyBinding;
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityPlayer player = mc.thePlayer;
-		Item current = player.inventory.getCurrentItem().getItem();
 		
-		if (current instanceof ItemSword || current instanceof ItemAxe || current instanceof ItemArmor || current instanceof ItemBow)
+		if (player != null)
 		{
-			if (key.isPressed())
+			ItemStack stack = player.inventory.getCurrentItem();
+			
+			if (stack != null)
 			{
-				player.openGui(Levels.instance, GuiHandler.ABILITY_SELECTION, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
+				Item current = stack.getItem();
+				
+				if (current != null)
+				{
+					if (current instanceof ItemSword || current instanceof ItemAxe || current instanceof ItemArmor || current instanceof ItemBow)
+					{
+						if (key.isPressed())
+						{
+							player.openGui(Levels.instance, GuiHandler.ABILITY_SELECTION, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
+						}
+					}
+				}
 			}
 		}
 	}
