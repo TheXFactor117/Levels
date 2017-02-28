@@ -8,6 +8,12 @@
 ### Levels 2 - Release 1
 #####
 
+### r1.2.4
+#
+# * Fixes crash with arrows.
+#
+###
+
 ### r1.2.3
 #
 # * Fixes crash when not wearing armor.

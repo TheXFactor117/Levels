@@ -115,16 +115,19 @@ public class EventLivingHurt
 				
 				for (ItemStack stack : player.inventory.armorInventory)
 				{
-					if (stack.getItem() instanceof ItemArmor)	
+					if (stack != null)
 					{
-						NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-						
-						if (nbt != null)
+						if (stack.getItem() instanceof ItemArmor)	
 						{
-							updateExperience(nbt);
-							useRarity(event, stack, nbt);
-							useArmorAbilities(event, player, enemy, nbt);
-							updateLevel(player, stack, nbt);
+							NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+							
+							if (nbt != null)
+							{
+								updateExperience(nbt);
+								useRarity(event, stack, nbt);
+								useArmorAbilities(event, player, enemy, nbt);
+								updateLevel(player, stack, nbt);
+							}
 						}
 					}
 				}
