@@ -37,7 +37,6 @@ public class Config
 	public static boolean showDurability = true;
 	public static String[] itemBlacklist = new String[] { "modid:item" };
 	public static String stringPosition = "default";
-	public static boolean loginMessage = true;
 	
 	/*
 	 * ABILITIES
@@ -153,11 +152,6 @@ public class Config
 		prop = main.get(category, "enemyLevelStringPosition", stringPosition);
 		prop.setComment("Determines the location of the enemy level display. Can either be 'default', 'topleft', 'topright', 'bottomleft', 'bottomright', or 'cursor'. Default: 'default'");
 		stringPosition = prop.getString();
-		propOrder.add(prop.getName());
-		
-		prop = main.get(category, "displayLoginMessage", loginMessage);
-		prop.setComment("Determines whether or not Levels will display a login information on login. Default: true");
-		loginMessage = prop.getBoolean();
 		propOrder.add(prop.getName());
 		
 		main.setCategoryPropertyOrder(category, propOrder);
