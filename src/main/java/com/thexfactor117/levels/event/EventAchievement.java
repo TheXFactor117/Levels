@@ -27,6 +27,7 @@ public class EventAchievement
 			player.addChatMessage(new TextComponentString(TextFormatting.GOLD + "- " + TextFormatting.GRAY + I18n.format("levels.login1")));
 			player.addChatMessage(new TextComponentString(""));
 			player.addChatMessage(new TextComponentString(TextFormatting.GOLD + "=============================="));
+			player.addChatMessage(new TextComponentString(""));
 		}
 	}
 }
