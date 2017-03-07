@@ -8,6 +8,13 @@
 ### Levels 2 - Release 1
 #####
 
+### r1.2.5
+#
+# + Added a message explaining Levels after crafting a sword. Must have achievements on for it to work.
+# - Removed login message.
+#
+###
+
 ### r1.2.4
 #
 # * Fixes crash with arrows.
