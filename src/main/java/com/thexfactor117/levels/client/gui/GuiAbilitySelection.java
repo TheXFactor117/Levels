@@ -2,6 +2,7 @@ package com.thexfactor117.levels.client.gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.thexfactor117.levels.Levels;
 import com.thexfactor117.levels.config.Config;
@@ -22,6 +23,7 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.client.config.HoverChecker;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -104,7 +106,8 @@ public class GuiAbilitySelection extends GuiScreen
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) 
 	{
 		this.drawDefaultBackground();
-
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		
 		EntityPlayer player = this.mc.thePlayer;
 	    
 	    if (player != null)
@@ -123,18 +126,18 @@ public class GuiAbilitySelection extends GuiScreen
 		    			{
 		    				drawStrings(stack, Ability.WEAPONS, nbt);
 		    				displayButtons(weaponAbilities, Ability.WEAPONS, nbt);
+		    				drawTooltips(weaponAbilities, Ability.WEAPONS, mouseX, mouseY);
 		    			}
 		    			else if (stack.getItem() instanceof ItemArmor)
 		    			{
 		    				drawStrings(stack, Ability.ARMOR, nbt);
 		    				displayButtons(armorAbilities, Ability.ARMOR, nbt);
+		    				drawTooltips(armorAbilities, Ability.ARMOR, mouseX, mouseY);
 		    			}
 		    		}
 	    		}
 	    	}
 	    }
-	    
-	    super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -302,6 +305,23 @@ public class GuiAbilitySelection extends GuiScreen
 			for (int i = 0; i < buttons.length; i++)
 			{
 				buttons[i].enabled = false;
+			}
+		}
+	}
+	
+	private void drawTooltips(GuiButton[] buttons, ArrayList<Ability> abilities, int mouseX, int mouseY)
+	{
+		for (int i = 0; i < buttons.length; i++)
+		{
+			HoverChecker checker = new HoverChecker(buttons[i], 0);
+
+			if (checker.checkHover(mouseX, mouseY))
+			{
+				List<String> list = new ArrayList<String>();
+				list.add(abilities.get(i).getColor() + abilities.get(i).getName());
+				list.add("");
+				list.add(I18n.format("levels.abilities.info." + abilities.get(i).ordinal()));
+				drawHoveringText(list, mouseX + 3, mouseY + 3);
 			}
 		}
 	}

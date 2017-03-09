@@ -1,6 +1,5 @@
 package com.thexfactor117.levels.event;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.util.text.TextComponentString;
@@ -24,7 +23,9 @@ public class EventAchievement
 			
 			player.addChatMessage(new TextComponentString(TextFormatting.GOLD + "=========={ Levels 2 }=========="));
 			player.addChatMessage(new TextComponentString(""));
-			player.addChatMessage(new TextComponentString(TextFormatting.GOLD + "- " + TextFormatting.GRAY + I18n.format("levels.login1")));
+			player.addChatMessage(new TextComponentString(TextFormatting.GOLD + "- " + TextFormatting.GRAY + "Press 'L' with a weapon/armor in hand to get started!"));
+			player.addChatMessage(new TextComponentString(""));
+			player.addChatMessage(new TextComponentString(TextFormatting.GOLD + "- " + TextFormatting.GRAY + "For more information, visit our wiki on our GitHub repository!"));
 			player.addChatMessage(new TextComponentString(""));
 			player.addChatMessage(new TextComponentString(TextFormatting.GOLD + "=============================="));
 			player.addChatMessage(new TextComponentString(""));
