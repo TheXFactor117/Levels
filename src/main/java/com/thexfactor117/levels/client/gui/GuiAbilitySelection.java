@@ -77,7 +77,7 @@ public class GuiAbilitySelection extends GuiScreen
 		    	{
 		    		armorAbilities = new GuiButton[Ability.ARMOR_ABILITIES];
 		    		NBTTagCompound nbt = stack.getTagCompound();
-		    		
+
 		    		if (nbt != null)
 		    		{
 		    			int j = 0;
@@ -86,7 +86,7 @@ public class GuiAbilitySelection extends GuiScreen
 		    			{
 		    				if (Ability.ARMOR.get(i).getType().equals("active"))
 			    			{
-		    					armorAbilities[i] = new GuiButton(i, width / 2 - 200, 100 + (i * 20), 75, 20, Ability.ARMOR.get(i).getName() + " (" + Ability.ARMOR.get(i).getTier() + ")");
+		    					armorAbilities[i] = new GuiButton(i, width / 2 - 200, 40 + (i * 20), 75, 20, Ability.ARMOR.get(i).getName() + " (" + Ability.ARMOR.get(i).getTier() + ")");
 		    					j++;
 			    			}
 		    				else

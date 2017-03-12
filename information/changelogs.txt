@@ -8,6 +8,12 @@
 ### Levels 2 - Release 1
 #####
 
+### r1.2.7
+#
+# * Fixes issue where armor abilities were displayed as weapon abilities.
+#
+###
+
 ### r1.2.6
 #
 # + Added tooltips underneath abilities explaining what they do.

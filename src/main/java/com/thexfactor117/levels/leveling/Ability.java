@@ -185,7 +185,8 @@ public enum Ability
 	static
 	{
 		int j = 0;
-
+		int k = 0;
+		
 		for (int i = 0; i < Ability.values().length; i++)
 		{		
 			if (Ability.values()[i].getCategory().equals("weapon") && Ability.values()[i].enabled)
@@ -195,9 +196,10 @@ public enum Ability
 			}
 			else if (Ability.values()[i].getCategory().equals("armor") && Ability.values()[i].enabled)
 			{
-				Ability.ARMOR.add(Ability.values()[j]);
+				j = Ability.WEAPON_ABILITIES + 1;
+				Ability.ARMOR.add(Ability.values()[k + j]);
 				Ability.ARMOR_ABILITIES++;
-				j++;
+				k++;
 			}
 		}
 	}
