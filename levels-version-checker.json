@@ -1,15 +1,15 @@
 {
 	"homepage": "http://minecraft.curseforge.com/projects/levels/files",
 	"promos": {
-		"1.11.2-latest": "r1.2.7",
-		"1.11.2-recommended": "r1.2.7",
-		"1.10.2-latest": "r1.2.7",
-		"1.10.2-recommended": "r1.2.7"
+		"1.11.2-latest": "r1.2.8",
+		"1.11.2-recommended": "r1.2.8",
+		"1.10.2-latest": "r1.2.8",
+		"1.10.2-recommended": "r1.2.8"
 	},
 	"1.11.2": {
-		"r1.2.7": "* View the full changelog on GitHub."
+		"r1.2.8": "* View the full changelog on GitHub."
 	},
 	"1.10.2": {
-		"r1.2.7": "* View the full changelog on GitHub."	
+		"r1.2.8": "* View the full changelog on GitHub."	
 	}
 }

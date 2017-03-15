@@ -10,6 +10,12 @@
 
 ### r1.2.7
 #
+# * Fixes issues with r1.2.7
+#
+###
+
+### r1.2.7
+#
 # * Fixes issue where armor abilities were displayed as weapon abilities.
 #
 ###
