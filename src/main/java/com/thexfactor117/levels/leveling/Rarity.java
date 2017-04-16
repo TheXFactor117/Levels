@@ -2,78 +2,83 @@ package com.thexfactor117.levels.leveling;
 
 import java.util.Random;
 
-import com.thexfactor117.levels.config.Config;
+import com.thexfactor117.levels.util.Config;
 import com.thexfactor117.levels.util.RandomCollection;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * 
  * @author TheXFactor117
  *
+ * Basic rarity implementation for weapons and armor.
+ * 
  */
 public enum Rarity 
 {
-	DEFAULT("", 0, 0.0),
-	COMMON(TextFormatting.WHITE, 0xFFFFFF, Config.commonChance),
-	UNCOMMON(TextFormatting.DARK_GREEN, 0x00AA00, Config.uncommonChance),
-	RARE(TextFormatting.AQUA, 0x55FFFF, Config.rareChance),
-	ULTRA_RARE(TextFormatting.DARK_PURPLE, 0xAA00AA, Config.ultraRareChance),
-	LEGENDARY(TextFormatting.GOLD, 0xFFAA00, Config.legendaryChance),
-	ARCHAIC(TextFormatting.LIGHT_PURPLE, 0xFF55FF, Config.archaicChance);
+	DEFAULT(TextFormatting.GRAY, 0, 0xF0100010, 0x505000FF),
+	COMMON(TextFormatting.WHITE, Config.commonChance, 0xF0100010, 0x50FFFFFF),
+	UNCOMMON(TextFormatting.DARK_GREEN, Config.uncommonChance, 0xF0100010, 0x5000AA00),
+	RARE(TextFormatting.AQUA, Config.rareChance, 0xF000DDDD, 0x5055FFFF),
+	LEGENDARY(TextFormatting.DARK_PURPLE, Config.legendaryChance, 0xF0100010, 0x50AA00AA),
+	MYTHIC(TextFormatting.GOLD, Config.mythicChance, 0xF0100010, 0x50FFAA00);
 	
 	private String color;
-	private int hex;
 	private double weight;
-	private static final Rarity[] RARITIES = Rarity.values();
+	private int backgroundColor; // used in tooltips
+	private int borderColor; // used in tooltips
+	
 	private static final RandomCollection<Rarity> RANDOM_RARITIES = new RandomCollection<Rarity>();
 	
-	Rarity(Object color, int hex, double weight)
+	Rarity(Object color, double weight, int backgroundColor, int borderColor)
 	{
 		this.color = color.toString();
-		this.hex = hex;
 		this.weight = weight;
+		this.backgroundColor = backgroundColor;
+		this.borderColor = borderColor;
 	}
 	
 	/**
-	 * Returns one of the enums above, according to their weight.
-	 * @param random
+	 * Returns a random rarity from the Rarity RandomCollection.
+	 * @param rand
 	 * @return
 	 */
-	public static Rarity getRandomRarity(Random random)
+	public static Rarity getRandomRarity(Random rand)
 	{
-		return RANDOM_RARITIES.next(random);
+		return RANDOM_RARITIES.next(rand);
 	}
-
+	
 	/**
-	 * Retrieves the rarity applied.
+	 * Return the current rarity in the given NBTTagCompound. Returns Common if it can't find it.
 	 * @param nbt
 	 * @return
 	 */
 	public static Rarity getRarity(NBTTagCompound nbt)
 	{
-		return nbt != null && nbt.hasKey("RARITY") ? RARITIES[nbt.getInteger("RARITY")] : DEFAULT;
+		return nbt != null && nbt.hasKey("RARITY") ? Rarity.values()[nbt.getInteger("RARITY")] : DEFAULT;
 	}
 	
-	public void setRarity(NBTTagCompound nbt)
+	/**
+	 * Sets the rarity specified to the given NBTTagCompound.
+	 * @param nbt
+	 * @param rarity
+	 */
+	public static void setRarity(NBTTagCompound nbt, Rarity rarity)
 	{
 		if (nbt != null)
 		{
-			nbt.setInteger("RARITY", ordinal());
+			nbt.setInteger("RARITY", rarity.ordinal());
 		}
 	}
 	
-	public static void setRarity(NBTTagCompound nbt, String rarityName)
-	{
-		int rarity = Integer.parseInt(rarityName);
-		nbt.setInteger("RARITY", rarity);
-	}
-
+	@SideOnly(Side.CLIENT)
 	public String getName()
 	{
-		return I18n.format("levels.rarity." + this.ordinal());
+		return I18n.format("aw.rarities." + ordinal());
 	}
 	
 	public String getColor()
@@ -81,16 +86,29 @@ public enum Rarity
 		return color;
 	}
 	
-	public int getHex()
+	public double getWeight()
 	{
-		return hex;
+		return weight;
 	}
-
+	
+	public int getBackgroundColor()
+	{
+		return backgroundColor;
+	}
+	
+	public int getBorderColor()
+	{
+		return borderColor;
+	}
+	
+	/**
+	 * Stores enums into the RandomCollection.
+	 */
 	static
 	{
-		for (Rarity rarity : RARITIES)
+		for (Rarity rarity : Rarity.values())
 		{
-			if (rarity.weight > 0.0D)
+			if (rarity.getWeight() > 0.0D)
 			{
 				RANDOM_RARITIES.add(rarity.weight, rarity);
 			}

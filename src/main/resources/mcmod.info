@@ -1,7 +1,7 @@
 [
 {
   "modid": "levels",
-  "name": "Levels",
+  "name": "Levels 3",
   "description": "A simple, unique leveling system.",
   "version": "${version}",
   "mcversion": "${mcversion}",

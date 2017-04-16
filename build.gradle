@@ -11,6 +11,7 @@ buildscript {
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -18,7 +19,7 @@ loadProperties()
 
 version=config.minecraft_version + "-" + config.mod_version
 group= "com.thexfactor117.levels"
-archivesBaseName = "Levels 2"
+archivesBaseName = "Levels 3"
 
 def loadProperties() {
     ext.configFile = file "build.properties"

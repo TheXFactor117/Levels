@@ -1,56 +1,83 @@
 package com.thexfactor117.levels.leveling;
 
-import com.thexfactor117.levels.config.Config;
+import com.thexfactor117.levels.util.Config;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 
 /**
  * 
  * @author TheXFactor117
  *
+ * Class for handling the experience of weapons and such.
+ * 
  */
 public class Experience 
-{	
-	public static int getNextLevel(EntityPlayer player, ItemStack stack, NBTTagCompound nbt, int currentLevel, int experience)
+{
+	/**
+	 * Levels up the current weapon/armor to the next level, assuming it is not at max level.
+	 * @param player
+	 * @param stack
+	 */
+	public static void levelUp(EntityPlayer player, ItemStack stack)
 	{
-		int newLevel = currentLevel;
+		NBTTagCompound nbt = stack.getTagCompound();
 		
-		while (currentLevel < Config.maxLevel && experience >= Experience.getMaxLevelExp(currentLevel))
+		if (nbt != null)
 		{
-			newLevel = currentLevel + 1;
-			currentLevel++;
-			Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) + 1);
-			player.addChatMessage(new TextComponentString(stack.getDisplayName() + TextFormatting.GRAY + " has leveled up to level " + TextFormatting.GOLD + "" + newLevel + TextFormatting.GRAY + "!"));
+			while (Experience.getLevel(nbt) < Config.maxLevel && Experience.getExperience(nbt) >= Experience.getNextLevelExperience(Experience.getLevel(nbt)))
+			{
+				Experience.setLevel(nbt, Experience.getLevel(nbt) + 1);
+				
+				// update multipliers
+				
+				// send audio to client if Mythic
+			}
 		}
-		
-		return newLevel;
 	}
 	
+	/**
+	 * Returns the level of the current weapon/armor.
+	 * @param nbt
+	 * @return
+	 */
 	public static int getLevel(NBTTagCompound nbt)
 	{
-		return nbt != null ? Math.max(nbt.getInteger("LEVEL"), 1) : 1;
+		return nbt != null ? nbt.getInteger("LEVEL") : 1;
 	}
 	
+	/**
+	 * Sets the level of the current weapon/armor.
+	 * @param nbt
+	 * @param level
+	 */
 	public static void setLevel(NBTTagCompound nbt, int level)
 	{
 		if (nbt != null)
 		{
-			if (level > 1)
+			if (level > 0)
 				nbt.setInteger("LEVEL", level);
 			else
 				nbt.removeTag("LEVEL");
 		}
 	}
 	
+	/**
+	 * Returns the experience of the current weapon/armor.
+	 * @param nbt
+	 * @return
+	 */
 	public static int getExperience(NBTTagCompound nbt)
 	{
-		return nbt != null ? nbt.getInteger("EXPERIENCE") : 0;
+		return nbt != null ? nbt.getInteger("EXPERIENCE") : 1;
 	}
 	
+	/**
+	 * Sets the experience of the current weapon/armor.
+	 * @param nbt
+	 * @param level
+	 */
 	public static void setExperience(NBTTagCompound nbt, int experience)
 	{
 		if (nbt != null)
@@ -62,42 +89,13 @@ public class Experience
 		}
 	}
 	
-	public static int getMaxLevelExp(int level)
+	/**
+	 * Returns the amount of experience to level up.
+	 * @param currentLevel
+	 * @return
+	 */
+	public static int getNextLevelExperience(int currentLevel)
 	{
-		if (level == 1) return Config.level1Exp;
-		int maxXP = (int) Math.pow(level, Config.expExponent) * Config.expMultiplier;
-		return maxXP;
-	}
-	
-	public static void setAbilityTokens(NBTTagCompound nbt, int tokens)
-	{
-		if (nbt != null)
-		{
-			if (tokens > 0)
-				nbt.setInteger("TOKENS", tokens);
-			else
-				nbt.removeTag("TOKENS");
-		}
-	}
-	
-	public static int getAbilityTokens(NBTTagCompound nbt)
-	{
-		return nbt != null ? nbt.getInteger("TOKENS") : 0;
-	}
-	
-	public static void enable(NBTTagCompound nbt, boolean value)
-	{
-		if (nbt != null)
-		{
-			if (value)
-				nbt.setBoolean("ENABLED", value);
-			else
-				nbt.removeTag("ENABLED");
-		}
-	}
-	
-	public static boolean isEnabled(NBTTagCompound nbt)
-	{
-		return nbt != null ? nbt.getBoolean("ENABLED") : false;
+		return (int) Math.pow(currentLevel, Config.expExponent) * Config.expMultiplier;
 	}
 }
