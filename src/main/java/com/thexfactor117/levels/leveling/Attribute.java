@@ -77,6 +77,16 @@ public enum Attribute
 	}
 	
 	/**
+	 * Returns true if the NBT tag compound has the specified Attribute active.
+	 * @param nbt
+	 * @return
+	 */
+	public boolean isActive(NBTTagCompound nbt)
+	{
+		return nbt != null && nbt.getBoolean("Active");
+	}
+	
+	/**
 	 * Adds the specified Attribute to the NBT tag compound.
 	 * @param nbt
 	 */
@@ -85,6 +95,18 @@ public enum Attribute
 		if (nbt != null)
 		{
 			nbt.setBoolean(toString(), true);
+		}
+	}
+	
+	/**
+	 * Activates the current Attribute. Check to make sure the tag compound has the Attribute first!
+	 * @param nbt
+	 */
+	public void activate(NBTTagCompound nbt)
+	{
+		if (nbt != null)
+		{
+			nbt.setBoolean("Active", true);
 		}
 	}
 	

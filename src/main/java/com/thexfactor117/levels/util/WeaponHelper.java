@@ -5,7 +5,6 @@ import java.util.Random;
 import java.util.UUID;
 
 import com.google.common.collect.Multimap;
-import com.thexfactor117.levels.Levels;
 import com.thexfactor117.levels.leveling.Rarity;
 
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -13,6 +12,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
@@ -37,11 +37,17 @@ public class WeaponHelper
 			Rarity rarity = Rarity.getRarity(nbt);
 			
 			if (rarity == Rarity.DEFAULT)
-			{
+			{				
+				ItemSword sword = (ItemSword) stack.getItem();
+				
 				Rarity.setRarity(nbt, Rarity.getRandomRarity(new Random())); // sets random rarity
 				
+				/*
+				 * SETTING DAMAGE AND ATTACK SPEED
+				 */
+				
 				// retrieves the default attributes, like damage and attack speed.
-				Multimap<String, AttributeModifier> map = stack.getAttributeModifiers(EntityEquipmentSlot.MAINHAND);
+				Multimap<String, AttributeModifier> map = sword.getItemAttributeModifiers(EntityEquipmentSlot.MAINHAND);
 				Collection<AttributeModifier> damageCollection = map.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
 				Collection<AttributeModifier> speedCollection = map.get(SharedMonsterAttributes.ATTACK_SPEED.getName());
 				AttributeModifier damageModifier = (AttributeModifier) damageCollection.toArray()[0];
@@ -51,14 +57,10 @@ public class WeaponHelper
 				double baseSpeed = speedModifier.getAmount();
 				double damage = getWeightedDamage(Rarity.getRarity(nbt), baseDamage);
 				double speed = getWeightedAttackSpeed(Rarity.getRarity(nbt), baseSpeed);
-				
-				Levels.LOGGER.info("Base Speed: " + baseSpeed);
-				Levels.LOGGER.info("Speed: " + speed);
-				Levels.LOGGER.info("Rarity: " + Rarity.getRarity(nbt));
-				
+
 				// Creates new AttributeModifier's and applies them to the stack's NBT tag compound.
 				AttributeModifier attackDamage = new AttributeModifier(ATTACK_DAMAGE, "attackDamage", damage, 0);
-				AttributeModifier attackSpeed = new AttributeModifier(ATTACK_SPEED, "attackSpeed", baseSpeed, 0);
+				AttributeModifier attackSpeed = new AttributeModifier(ATTACK_SPEED, "attackSpeed", speed, 0);
 				NBTTagCompound damageNbt = writeAttributeModifierToNBT(SharedMonsterAttributes.ATTACK_DAMAGE, attackDamage, EntityEquipmentSlot.MAINHAND);
 				NBTTagCompound speedNbt = writeAttributeModifierToNBT(SharedMonsterAttributes.ATTACK_SPEED, attackSpeed, EntityEquipmentSlot.MAINHAND);
 				NBTTagList list = new NBTTagList();
@@ -66,6 +68,8 @@ public class WeaponHelper
 				list.appendTag(speedNbt);
 				nbt.setTag("AttributeModifiers", list);
 				NBTHelper.saveStackNBT(stack, nbt);
+				
+				stack.setStackDisplayName(generateName(stack, Rarity.getRarity(nbt)));
 			}
 		}
 	}
@@ -148,6 +152,14 @@ public class WeaponHelper
 		}
 		
 		return attackSpeed;
+	}
+	
+	private static String generateName(ItemStack stack, Rarity rarity)
+	{
+		//String prefix = "";
+		//String suffix = "";
+		
+		return rarity.getColor() + stack.getDisplayName() + " of Awesome";
 	}
 	
 	private static NBTTagCompound writeAttributeModifierToNBT(IAttribute attribute, AttributeModifier modifier, EntityEquipmentSlot slot) 

@@ -23,7 +23,7 @@ public enum Rarity
 	DEFAULT(TextFormatting.GRAY, 0, 0xF0100010, 0x505000FF),
 	COMMON(TextFormatting.WHITE, Config.commonChance, 0xF0100010, 0x50FFFFFF),
 	UNCOMMON(TextFormatting.DARK_GREEN, Config.uncommonChance, 0xF0100010, 0x5000AA00),
-	RARE(TextFormatting.AQUA, Config.rareChance, 0xF000DDDD, 0x5055FFFF),
+	RARE(TextFormatting.AQUA, Config.rareChance, 0xF0100010, 0x5055FFFF),
 	LEGENDARY(TextFormatting.DARK_PURPLE, Config.legendaryChance, 0xF0100010, 0x50AA00AA),
 	MYTHIC(TextFormatting.GOLD, Config.mythicChance, 0xF0100010, 0x50FFAA00);
 	
