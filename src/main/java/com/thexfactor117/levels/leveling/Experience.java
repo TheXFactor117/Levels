@@ -1,6 +1,7 @@
 package com.thexfactor117.levels.leveling;
 
 import com.thexfactor117.levels.util.Config;
+import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -33,6 +34,8 @@ public class Experience
 				// update multipliers
 				
 				// send audio to client if Mythic
+				
+				NBTHelper.saveStackNBT(stack, nbt);
 			}
 		}
 	}

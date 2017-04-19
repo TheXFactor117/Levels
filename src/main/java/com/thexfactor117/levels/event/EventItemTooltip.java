@@ -19,6 +19,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
@@ -30,7 +31,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  */
 public class EventItemTooltip 
 {
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onTooltip(ItemTooltipEvent event)
 	{
 		ArrayList<String> tooltip = (ArrayList<String>) event.getToolTip();
@@ -49,7 +50,7 @@ public class EventItemTooltip
 					
 					if (rarity != Rarity.DEFAULT)
 					{
-						changeTooltip(tooltip, stack, nbt);
+						//changeTooltip(tooltip, stack, nbt);
 						addTooltips(tooltip, stack, nbt);
 					}
 				}
@@ -61,28 +62,39 @@ public class EventItemTooltip
 	{
 		Rarity rarity = Rarity.getRarity(nbt);
 		
-		tooltip.add("");
-		tooltip.add(rarity.getColor() + "====================");
-		
+		NBTTagList taglist = nbt.getTagList("AttributeModifiers", 10);
+		NBTTagCompound damageNbt = taglist.getCompoundTagAt(0);
+		NBTTagCompound speedNbt = taglist.getCompoundTagAt(1);
+		DecimalFormat format = new DecimalFormat("#.##");
+
 		// rarity
 		tooltip.add(rarity.getColor() + TextFormatting.ITALIC + rarity.getName()); // rarity
 		
 		tooltip.add("");
 		
+		// damage and attack speed
+		tooltip.add(TextFormatting.BLUE + "+" + format.format(damageNbt.getDouble("Amount")) + " Damage");
+		tooltip.add(TextFormatting.BLUE + "+" + format.format(speedNbt.getDouble("Amount") + 4) + " Attack Speed");
+		
+		tooltip.add("");
+		
 		// level
-		if (Experience.getExperience(nbt) >= Config.maxLevel)
+		if (Experience.getLevel(nbt) >= Config.maxLevel)
 			tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.level") + ": " + I18n.format("levels.misc.max")); // max level
 		else
-			tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.level") + ": " + Experience.getExperience(nbt)); // level
+			tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.level") + ": " + Experience.getLevel(nbt)); // level
 		
 		// experience
-		if (Experience.getExperience(nbt) >= Config.maxLevel)
+		if (Experience.getLevel(nbt) >= Config.maxLevel)
 			tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.experience") + ": " + I18n.format("levels.misc.max"));
 		else
 			tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.experience") + ": " + Experience.getExperience(nbt) + " / " + Experience.getNextLevelExperience(Experience.getLevel(nbt)));
 
 		// durability
-		tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.durability") + ": " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
+		if (nbt.getInteger("Unbreakable") == 1)
+			tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.durability") + ": " + I18n.format("levels.misc.durability.unlimited"));
+		else
+			tooltip.add(TextFormatting.GRAY + I18n.format("levels.misc.durability") + ": " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
 
 		tooltip.add("");
 		
@@ -111,11 +123,9 @@ public class EventItemTooltip
 		}
 		
 		tooltip.add("");
-		tooltip.add(rarity.getColor() + "====================");
-		tooltip.add("");
 	}
 	
-	private void changeTooltip(ArrayList<String> tooltip, ItemStack stack, NBTTagCompound nbt)
+	/*private void changeTooltip(ArrayList<String> tooltip, ItemStack stack, NBTTagCompound nbt)
 	{
 		String index = "When in main hand:";
 		
@@ -129,5 +139,5 @@ public class EventItemTooltip
 			
 			tooltip.set(i + 1, TextFormatting.BLUE + " +" + format.format(speedNbt.getDouble("Amount") + 4) + " Attack Speed");
 		}
-	}
+	}*/
 }

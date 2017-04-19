@@ -43,6 +43,7 @@ public class Config
 	
 	// miscellaneous
 	public static String[] itemBlacklist = new String[] { "modid:item" };
+	public static boolean unlimitedDurability = false;
 	
 	public static void init(File dir)
 	{
@@ -152,6 +153,11 @@ public class Config
 		prop = main.get(category, "itemBlacklist", itemBlacklist);
 		prop.setComment("Items in this blacklist will not gain the leveling systems. Useful for very powerful items or potential conflicts. Style should be 'modid:item'");
 		itemBlacklist = prop.getStringList();
+		propOrder.add(prop.getName());
+		
+		prop = main.get(category, "unlimitedDurability", unlimitedDurability);
+		prop.setComment("Determines whether or not weapons and armor will lose durability.");
+		unlimitedDurability = prop.getBoolean();
 		propOrder.add(prop.getName());
 		
 		main.setCategoryPropertyOrder(category, propOrder);

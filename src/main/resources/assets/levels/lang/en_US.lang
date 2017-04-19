@@ -9,6 +9,7 @@ levels.misc.level=Level
 levels.misc.max=Max
 levels.misc.experience=Experience
 levels.misc.durability=Durability
+levels.misc.durability.unlimited=Unlimited
 levels.misc.rarity=Rarity
 levels.misc.attributes=Attributes
 levels.misc.attributes.shift=Attributes (Shift)

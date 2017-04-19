@@ -42,6 +42,13 @@ public class WeaponHelper
 				
 				Rarity.setRarity(nbt, Rarity.getRandomRarity(new Random())); // sets random rarity
 				
+				if (Config.unlimitedDurability)
+				{
+					nbt.setInteger("Unbreakable", 1); // adds Unbreakable tag to item
+				}
+				
+				nbt.setInteger("HideFlags", 6); // hides Attribute Modifier and Unbreakable tags
+				
 				/*
 				 * SETTING DAMAGE AND ATTACK SPEED
 				 */
