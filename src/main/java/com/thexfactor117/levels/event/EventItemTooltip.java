@@ -1,4 +1,4 @@
-package com.thexfactor117.levels.events;
+package com.thexfactor117.levels.event;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

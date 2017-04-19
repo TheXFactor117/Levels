@@ -1,4 +1,4 @@
-package com.thexfactor117.levels.events;
+package com.thexfactor117.levels.event;
 
 import com.thexfactor117.levels.util.WeaponHelper;
 import com.thexfactor117.levels.util.Config;
@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
  * 
  * @author TheXFactor117
  *
- * 
+ * Creates weapons whenever an item is picked up off the ground or crafted.
  *
  */
 public class EventCreateWeapon 

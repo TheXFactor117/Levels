@@ -1,6 +1,6 @@
 package com.thexfactor117.levels.proxies;
 
-import com.thexfactor117.levels.events.EventRenderTooltip;
+import com.thexfactor117.levels.event.EventRenderTooltip;
 
 import net.minecraftforge.common.MinecraftForge;
 

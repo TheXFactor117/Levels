@@ -1,7 +1,8 @@
 package com.thexfactor117.levels.init;
 
-import com.thexfactor117.levels.events.EventCreateWeapon;
-import com.thexfactor117.levels.events.EventItemTooltip;
+import com.thexfactor117.levels.event.EventCreateWeapon;
+import com.thexfactor117.levels.event.EventItemTooltip;
+import com.thexfactor117.levels.event.EventUseWeapon;
 
 import net.minecraftforge.common.MinecraftForge;
 
@@ -16,5 +17,6 @@ public class ModEvents
 	{
 		MinecraftForge.EVENT_BUS.register(new EventCreateWeapon());
 		MinecraftForge.EVENT_BUS.register(new EventItemTooltip());
+		MinecraftForge.EVENT_BUS.register(new EventUseWeapon());
 	}
 }
