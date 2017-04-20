@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import com.google.common.collect.Multimap;
+import com.thexfactor117.levels.Levels;
 import com.thexfactor117.levels.leveling.Rarity;
 
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -39,7 +40,6 @@ public class WeaponHelper
 			if (rarity == Rarity.DEFAULT)
 			{				
 				ItemSword sword = (ItemSword) stack.getItem();
-				
 				Rarity.setRarity(nbt, Rarity.getRandomRarity(new Random())); // sets random rarity
 				
 				if (Config.unlimitedDurability)
@@ -47,38 +47,43 @@ public class WeaponHelper
 					nbt.setInteger("Unbreakable", 1); // adds Unbreakable tag to item
 				}
 				
+				nbt.setDouble("Multiplier", getWeightedMultiplier(Rarity.getRarity(nbt)));
 				nbt.setInteger("HideFlags", 6); // hides Attribute Modifier and Unbreakable tags
-				
-				/*
-				 * SETTING DAMAGE AND ATTACK SPEED
-				 */
-				
-				// retrieves the default attributes, like damage and attack speed.
-				Multimap<String, AttributeModifier> map = sword.getItemAttributeModifiers(EntityEquipmentSlot.MAINHAND);
-				Collection<AttributeModifier> damageCollection = map.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
-				Collection<AttributeModifier> speedCollection = map.get(SharedMonsterAttributes.ATTACK_SPEED.getName());
-				AttributeModifier damageModifier = (AttributeModifier) damageCollection.toArray()[0];
-				AttributeModifier speedModifier = (AttributeModifier) speedCollection.toArray()[0];
-				
-				double baseDamage = damageModifier.getAmount() + 1; // add one to base damage for player strength
-				double baseSpeed = speedModifier.getAmount();
-				double damage = getWeightedDamage(Rarity.getRarity(nbt), baseDamage);
-				double speed = getWeightedAttackSpeed(Rarity.getRarity(nbt), baseSpeed);
-
-				// Creates new AttributeModifier's and applies them to the stack's NBT tag compound.
-				AttributeModifier attackDamage = new AttributeModifier(ATTACK_DAMAGE, "attackDamage", damage, 0);
-				AttributeModifier attackSpeed = new AttributeModifier(ATTACK_SPEED, "attackSpeed", speed, 0);
-				NBTTagCompound damageNbt = writeAttributeModifierToNBT(SharedMonsterAttributes.ATTACK_DAMAGE, attackDamage, EntityEquipmentSlot.MAINHAND);
-				NBTTagCompound speedNbt = writeAttributeModifierToNBT(SharedMonsterAttributes.ATTACK_SPEED, attackSpeed, EntityEquipmentSlot.MAINHAND);
-				NBTTagList list = new NBTTagList();
-				list.appendTag(damageNbt);
-				list.appendTag(speedNbt);
-				nbt.setTag("AttributeModifiers", list);
+				setAttributeModifiers(nbt, sword); // sets up Attribute Modifiers
 				NBTHelper.saveStackNBT(stack, nbt);
-				
 				stack.setStackDisplayName(generateName(stack, Rarity.getRarity(nbt)));
 			}
 		}
+	}
+	
+	/**
+	 * Creates a new Attribute Modifier tag list and adds it to the NBTTagCompound. Overrides default vanilla implementation.
+	 * @param nbt
+	 * @param sword
+	 */
+	private static void setAttributeModifiers(NBTTagCompound nbt, ItemSword sword)
+	{
+		// retrieves the default attributes, like damage and attack speed.
+		Multimap<String, AttributeModifier> map = sword.getItemAttributeModifiers(EntityEquipmentSlot.MAINHAND);
+		Collection<AttributeModifier> damageCollection = map.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
+		Collection<AttributeModifier> speedCollection = map.get(SharedMonsterAttributes.ATTACK_SPEED.getName());
+		AttributeModifier damageModifier = (AttributeModifier) damageCollection.toArray()[0];
+		AttributeModifier speedModifier = (AttributeModifier) speedCollection.toArray()[0];
+		
+		double baseDamage = damageModifier.getAmount() + 1; // add one to base damage for player strength
+		double baseSpeed = speedModifier.getAmount();
+		double damage = getWeightedDamage(Rarity.getRarity(nbt), baseDamage);
+		double speed = getWeightedAttackSpeed(Rarity.getRarity(nbt), baseSpeed);
+
+		// Creates new AttributeModifier's and applies them to the stack's NBT tag compound.
+		AttributeModifier attackDamage = new AttributeModifier(ATTACK_DAMAGE, "attackDamage", damage, 0);
+		AttributeModifier attackSpeed = new AttributeModifier(ATTACK_SPEED, "attackSpeed", speed, 0);
+		NBTTagCompound damageNbt = writeAttributeModifierToNBT(SharedMonsterAttributes.ATTACK_DAMAGE, attackDamage, EntityEquipmentSlot.MAINHAND);
+		NBTTagCompound speedNbt = writeAttributeModifierToNBT(SharedMonsterAttributes.ATTACK_SPEED, attackSpeed, EntityEquipmentSlot.MAINHAND);
+		NBTTagList list = new NBTTagList();
+		list.appendTag(damageNbt);
+		list.appendTag(speedNbt);
+		nbt.setTag("AttributeModifiers", list);
 	}
 	
 	/**
@@ -159,6 +164,43 @@ public class WeaponHelper
 		}
 		
 		return attackSpeed;
+	}
+	
+	/**
+	 * Returns a randomized, weighted multiplier.
+	 * @param rarity
+	 * @return
+	 */
+	private static double getWeightedMultiplier(Rarity rarity)
+	{
+		double range = 0D;
+		Levels.LOGGER.info(rarity);
+		
+		switch (rarity)
+		{
+			case COMMON:
+				range = 0.05;
+				break;
+			case UNCOMMON:
+				range = 0.08;
+				break;
+			case RARE:
+				range = 0.13;
+				break;
+			case LEGENDARY:
+				range = 0.2;
+				break;
+			case MYTHIC:
+				range = 0.3;
+				break;
+			default:
+				break;
+		}
+		Levels.LOGGER.info(range);
+		double multiplier = Math.random() * range;
+		Levels.LOGGER.info(multiplier);
+				
+		return multiplier;
 	}
 	
 	private static String generateName(ItemStack stack, Rarity rarity)

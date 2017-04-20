@@ -1,17 +1,19 @@
 package com.thexfactor117.levels.leveling;
 
+import com.thexfactor117.levels.Levels;
 import com.thexfactor117.levels.util.Config;
 import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 
 /**
  * 
  * @author TheXFactor117
  *
- * Class for handling the experience of weapons and such.
+ * Handles the experience of weapons and armor.
  * 
  */
 public class Experience 
@@ -29,9 +31,21 @@ public class Experience
 		{
 			while (Experience.getLevel(nbt) < Config.maxLevel && Experience.getExperience(nbt) >= Experience.getNextLevelExperience(Experience.getLevel(nbt)))
 			{
-				Experience.setLevel(nbt, Experience.getLevel(nbt) + 1);
+				Experience.setLevel(nbt, Experience.getLevel(nbt) + 1); // increase level by one
 				
-				// update multipliers
+				// update damage and attack speed values
+				NBTTagList taglist = nbt.getTagList("AttributeModifiers", 10); // retrieves our custom Attribute Modifier implementation
+				NBTTagCompound damageNbt = taglist.getCompoundTagAt(0);
+				NBTTagCompound speedNbt = taglist.getCompoundTagAt(1);
+				double newDamage = damageNbt.getDouble("Amount") + ((damageNbt.getDouble("Amount") * nbt.getDouble("Multiplier")) / 2);
+				double newSpeed = speedNbt.getDouble("Amount") - ((speedNbt.getDouble("Amount") * nbt.getDouble("Multiplier")) / 2);		
+				damageNbt.setDouble("Amount", newDamage);
+				speedNbt.setDouble("Amount", newSpeed);
+				
+				Levels.LOGGER.info(nbt.getDouble("Multiplier"));
+				Levels.LOGGER.info(newDamage);
+				Levels.LOGGER.info(damageNbt.getDouble("Amount"));
+				Levels.LOGGER.info("");
 				
 				// send audio to client if Mythic
 				

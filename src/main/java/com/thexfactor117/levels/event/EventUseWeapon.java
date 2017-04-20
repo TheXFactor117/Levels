@@ -105,7 +105,7 @@ public class EventUseWeapon
 			
 			if (isDev)
 			{
-				Experience.setExperience(nbt, Experience.getExperience(nbt) + 20);
+				Experience.setExperience(nbt, Experience.getExperience(nbt) + 50);
 			}
 			else
 			{
