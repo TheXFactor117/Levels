@@ -13,6 +13,8 @@ import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -40,7 +42,7 @@ public class EventItemTooltip
 		
 		if (stack != null)
 		{
-			if (item instanceof ItemSword)
+			if (item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemArmor)
 			{
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
@@ -72,9 +74,18 @@ public class EventItemTooltip
 		
 		tooltip.add("");
 		
-		// damage and attack speed
-		tooltip.add(TextFormatting.BLUE + "+" + format.format(damageNbt.getDouble("Amount")) + " Damage");
-		tooltip.add(TextFormatting.BLUE + "+" + format.format(speedNbt.getDouble("Amount") + 4) + " Attack Speed");
+		if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
+		{
+			// damage and attack speed
+			tooltip.add(TextFormatting.BLUE + "+" + format.format(damageNbt.getDouble("Amount")) + " Damage");
+			tooltip.add(TextFormatting.BLUE + "+" + format.format(speedNbt.getDouble("Amount") + 4) + " Attack Speed");
+		}
+		else if (stack.getItem() instanceof ItemArmor)
+		{
+			// armor and armor toughness
+			tooltip.add(TextFormatting.BLUE + "+" + format.format(damageNbt.getDouble("Amount")) + " Armor");
+			tooltip.add(TextFormatting.BLUE + "+" + format.format(speedNbt.getDouble("Amount")) + " Armor Toughness");
+		}
 		
 		tooltip.add("");
 		
@@ -102,18 +113,15 @@ public class EventItemTooltip
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
 		{
 			tooltip.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + I18n.format("levels.misc.attributes"));
-			tooltip.add("");
 			
 			for (Attribute attribute : Attribute.values())
 			{
 				if (attribute.hasAttribute(nbt))
-				{
-					tooltip.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + attribute.getName());
-					
+				{					
 					if (attribute.isActive(nbt))
 						tooltip.add(attribute.getColor() + attribute.getName());
 					else
-						tooltip.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + attribute.getName());
+						tooltip.add(TextFormatting.DARK_GRAY + "" + TextFormatting.STRIKETHROUGH + attribute.getName());
 				}
 			}
 		}

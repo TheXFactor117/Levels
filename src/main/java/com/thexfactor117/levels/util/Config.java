@@ -26,16 +26,7 @@ public class Config
 	public static double rareChance = 0.1;
 	public static double legendaryChance = 0.07;
 	public static double mythicChance = 0.03;
-	
-	// attribute chances
-	public static double fireChance = 0.333;
-	public static double frostChance = 0.333;
-	public static double durableChance = 0.334;
-	public static double absorbChance = 0.5;
-	public static double soulBoundChance = 0.5;
-	public static double voidChance = 0.5;
-	public static double unbreakableChance = 0.5;
-	
+
 	// experience
 	public static double maxLevel = 10;
 	public static double expExponent = 2.4F;
@@ -89,44 +80,6 @@ public class Config
 		prop = main.get(category, "mythicChance", mythicChance);
 		prop.setComment("Determines the chance a weapon/armor will have this rarity.");
 		mythicChance = prop.getDouble();
-		propOrder.add(prop.getName());
-		
-		/*
-		 * Attribute Chances
-		 */
-		prop = main.get(category, "fireChance", fireChance);
-		prop.setComment("Determines the chance a weapon/armor will have this attribute.");
-		fireChance = prop.getDouble();
-		propOrder.add(prop.getName());
-		
-		prop = main.get(category, "frostChance", frostChance);
-		prop.setComment("Determines the chance a weapon/armor will have this attribute.");
-		frostChance = prop.getDouble();
-		propOrder.add(prop.getName());
-		
-		prop = main.get(category, "durableChance", durableChance);
-		prop.setComment("Determines the chance a weapon/armor will have this attribute.");
-		durableChance = prop.getDouble();
-		propOrder.add(prop.getName());
-		
-		prop = main.get(category, "absorbChance", absorbChance);
-		prop.setComment("Determines the chance a weapon/armor will have this attribute.");
-		absorbChance = prop.getDouble();
-		propOrder.add(prop.getName());
-		
-		prop = main.get(category, "soulBoundChance", soulBoundChance);
-		prop.setComment("Determines the chance a weapon/armor will have this attribute.");
-		soulBoundChance = prop.getDouble();
-		propOrder.add(prop.getName());
-		
-		prop = main.get(category, "voidChance", voidChance);
-		prop.setComment("Determines the chance a weapon/armor will have this attribute.");
-		voidChance = prop.getDouble();
-		propOrder.add(prop.getName());
-		
-		prop = main.get(category, "unbreakableChance", unbreakableChance);
-		prop.setComment("Determines the chance a weapon/armor will have this attribute.");
-		unbreakableChance = prop.getDouble();
 		propOrder.add(prop.getName());
 		
 		/*

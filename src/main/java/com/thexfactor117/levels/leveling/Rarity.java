@@ -78,7 +78,7 @@ public enum Rarity
 	@SideOnly(Side.CLIENT)
 	public String getName()
 	{
-		return I18n.format("aw.rarities." + ordinal());
+		return I18n.format("levels.rarities." + ordinal());
 	}
 	
 	public String getColor()

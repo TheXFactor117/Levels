@@ -1,9 +1,10 @@
 package com.thexfactor117.levels.event;
 
-import com.thexfactor117.levels.util.WeaponHelper;
 import com.thexfactor117.levels.util.Config;
 import com.thexfactor117.levels.util.NBTHelper;
+import com.thexfactor117.levels.util.WeaponHelper;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
@@ -29,7 +30,7 @@ public class EventCreateWeapon
 
 		if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemArmor)
 		{
-			createWeapon(stack);
+			create(stack, event.getEntityPlayer());
 		}
 	}
 	
@@ -40,7 +41,7 @@ public class EventCreateWeapon
 		
 		if (stack.getItem() instanceof ItemSword && stack.getItem() instanceof ItemAxe && stack.getItem() instanceof ItemArmor)
 		{
-			createWeapon(event.crafting);
+			create(event.crafting, event.player);
 		}
 	}
 	
@@ -48,7 +49,7 @@ public class EventCreateWeapon
 	 * Sets up a weapon with customized values.
 	 * @param stack
 	 */
-	private void createWeapon(ItemStack stack)
+	private void create(ItemStack stack, EntityPlayer player)
 	{
 		NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 		
@@ -62,7 +63,7 @@ public class EventCreateWeapon
 				}
 			}
 			
-			WeaponHelper.createWeapon(stack);
+			WeaponHelper.create(stack, player);
 		}
 	}
 }

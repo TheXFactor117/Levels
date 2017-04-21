@@ -13,3 +13,11 @@ levels.misc.durability.unlimited=Unlimited
 levels.misc.rarity=Rarity
 levels.misc.attributes=Attributes
 levels.misc.attributes.shift=Attributes (Shift)
+
+levels.attributes.0=Fire
+levels.attributes.1=Frost
+levels.attributes.2=Durable
+levels.attributes.3=Absorb
+levels.attributes.4=Soul Bound
+levels.attributes.5=Void
+levels.attributes.6=Unbreakable

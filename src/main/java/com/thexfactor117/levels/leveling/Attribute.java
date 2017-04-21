@@ -2,6 +2,7 @@ package com.thexfactor117.levels.leveling;
 
 import java.util.Random;
 
+import com.thexfactor117.levels.Levels;
 import com.thexfactor117.levels.util.Config;
 import com.thexfactor117.levels.util.RandomCollection;
 
@@ -18,27 +19,27 @@ import net.minecraft.util.text.TextFormatting;
  */
 public enum Attribute 
 {
-	FIRE(TextFormatting.RED, Rarity.UNCOMMON, Config.fireChance),
-	FROST(TextFormatting.AQUA, Rarity.UNCOMMON, Config.frostChance),
-	DURABLE(TextFormatting.GRAY, Rarity.UNCOMMON, Config.durableChance),
-	ABSORB(TextFormatting.GREEN, Rarity.RARE, Config.absorbChance),
-	SOUL_BOUND(TextFormatting.DARK_PURPLE, Rarity.RARE, Config.soulBoundChance),
-	VOID(TextFormatting.DARK_GRAY, Rarity.LEGENDARY, Config.voidChance),
-	UNBREAKABLE(TextFormatting.GRAY, Rarity.LEGENDARY, Config.unbreakableChance);
+	FIRE(TextFormatting.RED, Rarity.UNCOMMON, 0.25, 0.17, 0.12),
+	FROST(TextFormatting.AQUA, Rarity.UNCOMMON, 0.25, 0.17, 0.12),
+	DURABLE(TextFormatting.GRAY, Rarity.UNCOMMON, 0.25, 0.17, 0.12),
+	ABSORB(TextFormatting.GREEN, Rarity.RARE, 0.1, 0.18, 0.18),
+	SOUL_BOUND(TextFormatting.DARK_PURPLE, Rarity.RARE, 0.1, 0.18, 0.18),
+	VOID(TextFormatting.DARK_GRAY, Rarity.LEGENDARY, 0.025, 0.065, 0.14),
+	UNBREAKABLE(TextFormatting.GRAY, Rarity.LEGENDARY, 0.025, 0.065, 0.14);
 	
 	private String color;
 	private Rarity rarity;
-	private double weight;
+	private double[] weights;
 	
 	private static final RandomCollection<Attribute> UNCOMMON_ATTRIBUTES = new RandomCollection<Attribute>();
 	private static final RandomCollection<Attribute> RARE_ATTRIBUTES = new RandomCollection<Attribute>();
 	private static final RandomCollection<Attribute> LEGENDARY_ATTRIBUTES = new RandomCollection<Attribute>();
 	
-	Attribute(Object color, Rarity rarity, double weight)
+	Attribute(Object color, Rarity rarity, double... weights)
 	{
 		this.color = color.toString();
 		this.rarity = rarity;
-		this.weight = weight;
+		this.weights = weights;
 	}
 	
 	/**
@@ -51,6 +52,8 @@ public enum Attribute
 	{
 		switch (rarity)
 		{
+			case COMMON:
+				return UNCOMMON_ATTRIBUTES.next(rand);
 			case UNCOMMON:
 				return UNCOMMON_ATTRIBUTES.next(rand);
 			case RARE:
@@ -83,7 +86,17 @@ public enum Attribute
 	 */
 	public boolean isActive(NBTTagCompound nbt)
 	{
-		return nbt != null && nbt.getBoolean("Active");
+		return nbt != null && nbt.getBoolean(this.getName() + "Active");
+	}
+	
+	/**
+	 * Gets the level in which the attribute becomes active.
+	 * @param nbt
+	 * @return
+	 */
+	public int getActiveAt(NBTTagCompound nbt)
+	{
+		return nbt.getInteger(this.getName() + "ActiveAt");
 	}
 	
 	/**
@@ -95,6 +108,9 @@ public enum Attribute
 		if (nbt != null)
 		{
 			nbt.setBoolean(toString(), true);
+			nbt.setBoolean(this.getName() + "Active", false);
+			nbt.setInteger(this.getName() + "ActiveAt", (int) (Math.random() * Config.maxLevel + 1));
+			Levels.LOGGER.info(getActiveAt(nbt));
 		}
 	}
 	
@@ -106,7 +122,7 @@ public enum Attribute
 	{
 		if (nbt != null)
 		{
-			nbt.setBoolean("Active", true);
+			nbt.setBoolean(this.getName() + "Active", true);
 		}
 	}
 	
@@ -119,12 +135,14 @@ public enum Attribute
 		if (nbt != null)
 		{
 			nbt.removeTag(toString());
+			nbt.removeTag(this.getName() + "Active");
+			nbt.removeTag(this.getName() + "ActiveAt");
 		}
 	}
 	
 	public String getName()
 	{
-		return I18n.format("aw.attributes." + ordinal());
+		return I18n.format("levels.attributes." + ordinal());
 	}
 	
 	public String getColor()
@@ -137,32 +155,18 @@ public enum Attribute
 		return rarity;
 	}
 	
-	public double getWeight()
+	public double[] getWeights()
 	{
-		return weight;
+		return weights;
 	}
 	
 	static
 	{
 		for (Attribute attribute : Attribute.values())
 		{
-			if (attribute.getWeight() > 0.0D)
-			{
-				switch (attribute.getRarity())
-				{
-					case UNCOMMON:
-						UNCOMMON_ATTRIBUTES.add(attribute.getWeight(), attribute);
-						break;
-					case RARE:
-						RARE_ATTRIBUTES.add(attribute.getWeight(), attribute);
-						break;
-					case LEGENDARY:
-						LEGENDARY_ATTRIBUTES.add(attribute.getWeight(), attribute);
-						break;
-					default:
-						break;
-				}
-			}
+			UNCOMMON_ATTRIBUTES.add(attribute.weights[0], attribute);
+			RARE_ATTRIBUTES.add(attribute.weights[1], attribute);
+			LEGENDARY_ATTRIBUTES.add(attribute.weights[2], attribute);
 		}
 	}
 }

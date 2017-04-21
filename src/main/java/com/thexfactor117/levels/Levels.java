@@ -17,6 +17,8 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 /**
  * 
@@ -33,7 +35,7 @@ public class Levels
 	@Instance(Reference.MODID)
 	public static Levels instance;
 	public static final Logger LOGGER = LogManager.getLogger("Levels");
-	//public static SimpleNetworkWrapper network;
+	public static SimpleNetworkWrapper network;
 	private static File configDir;
 	
 	@EventHandler
@@ -45,6 +47,9 @@ public class Levels
 		
 		ModEvents.registerEvents();
 		proxy.preInit();
+		
+		network = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MODID);
+		
 	}
 	
 	@EventHandler

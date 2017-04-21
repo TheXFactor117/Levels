@@ -8,6 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 
 /**
  * 
@@ -33,6 +35,8 @@ public class Experience
 			{
 				Experience.setLevel(nbt, Experience.getLevel(nbt) + 1); // increase level by one
 				
+				player.sendMessage(new TextComponentString(stack.getDisplayName() + TextFormatting.GRAY + " has leveled up to level " + TextFormatting.GOLD + Experience.getLevel(nbt) + TextFormatting.GRAY + "!"));
+				
 				// update damage and attack speed values
 				NBTTagList taglist = nbt.getTagList("AttributeModifiers", 10); // retrieves our custom Attribute Modifier implementation
 				NBTTagCompound damageNbt = taglist.getCompoundTagAt(0);
@@ -42,13 +46,21 @@ public class Experience
 				damageNbt.setDouble("Amount", newDamage);
 				speedNbt.setDouble("Amount", newSpeed);
 				
-				Levels.LOGGER.info(nbt.getDouble("Multiplier"));
-				Levels.LOGGER.info(newDamage);
-				Levels.LOGGER.info(damageNbt.getDouble("Amount"));
-				Levels.LOGGER.info("");
-				
-				// send audio to client if Mythic
-				
+				// update attributes
+				for (Attribute attribute : Attribute.values())
+				{
+					if (attribute.hasAttribute(nbt))
+					{
+						Levels.LOGGER.info(attribute.getActiveAt(nbt));
+						
+						if (!attribute.isActive(nbt) && Experience.getLevel(nbt) >= attribute.getActiveAt(nbt))
+						{
+							attribute.activate(nbt);
+							player.sendMessage(new TextComponentString(TextFormatting.GRAY + " The " + attribute.getColor() + attribute.getName() + TextFormatting.GRAY + " attribute has been unlocked!"));
+						}
+					}
+				}
+
 				NBTHelper.saveStackNBT(stack, nbt);
 			}
 		}

@@ -28,7 +28,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * Handles adding experience, leveling up, and using attributes.
  *
  */
-public class EventUseWeapon 
+public class EventAttack 
 {
 	/**
 	 * Called every time a living entity attacks.
@@ -50,10 +50,10 @@ public class EventUseWeapon
 				
 				if (nbt != null)
 				{
-					addExperience(nbt, stack, enemy);
+					//addExperience(nbt, stack, enemy);
 					useRarity(nbt, stack);
 					useAttributes(nbt, event, stack, player, enemy);
-					attemptLevel(stack, player);
+					attemptLevel(nbt, stack, player);
 				}
 			}
 		}
@@ -74,7 +74,7 @@ public class EventUseWeapon
 						addExperience(nbt, stack, enemy);
 						useRarity(nbt, stack);
 						useAttributes(nbt, event, stack, player, enemy);
-						attemptLevel(stack, player);
+						attemptLevel(nbt, stack, player);
 					}
 				}
 			}
@@ -88,7 +88,24 @@ public class EventUseWeapon
 	@SubscribeEvent
 	public void onLivingDeath(LivingDeathEvent event)
 	{
-		
+		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer && !(event.getSource().getSourceOfDamage() instanceof FakePlayer))
+		{
+			// WEAPONS
+			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
+			EntityLivingBase enemy = event.getEntityLiving();
+			ItemStack stack = player.inventory.getCurrentItem();
+			
+			if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
+			{
+				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+				
+				if (nbt != null)
+				{
+					addExperience(nbt, stack, enemy);
+					attemptLevel(nbt, stack, player);
+				}
+			}
+		}
 	}
 
 	/**
@@ -211,11 +228,11 @@ public class EventUseWeapon
 	{
 		if (enemy != null)
 		{
-			if (Attribute.FIRE.hasAttribute(nbt) && (int) (Math.random() * 4) == 0) enemy.setFire(5); // 25% chance
-			if (Attribute.FROST.hasAttribute(nbt) && (int) (Math.random() * 4) == 0) enemy.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20, 10)); // 25% chance; 1 second stun
-			if (Attribute.DURABLE.hasAttribute(nbt) && (int) (Math.random() * 4) == 0) stack.setItemDamage(stack.getItemDamage() - 1); // 25% chance; doesn't use durability
-			if (Attribute.ABSORB.hasAttribute(nbt) && (int) (Math.random() * 7) == 0) player.setHealth(player.getHealth() + (event.getAmount() / 2)); // 14% chance; returns half the damage dealt back as health
-			if (Attribute.VOID.hasAttribute(nbt) && (int) (Math.random() * 20) == 0) enemy.setHealth(0.01F); // 5% chance; sets enemies health to something small, so damage kills enemy in one hit
+			if (Attribute.FIRE.hasAttribute(nbt) && Attribute.FIRE.isActive(nbt) && (int) (Math.random() * 4) == 0) enemy.setFire(5); // 25% chance
+			if (Attribute.FROST.hasAttribute(nbt) && Attribute.FROST.isActive(nbt) && (int) (Math.random() * 4) == 0) enemy.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20, 10)); // 25% chance; 1 second stun
+			if (Attribute.DURABLE.hasAttribute(nbt) && Attribute.DURABLE.isActive(nbt) && (int) (Math.random() * 4) == 0) stack.setItemDamage(stack.getItemDamage() - 1); // 25% chance; doesn't use durability
+			if (Attribute.ABSORB.hasAttribute(nbt) && Attribute.ABSORB.isActive(nbt) && (int) (Math.random() * 7) == 0) player.setHealth(player.getHealth() + (event.getAmount() / 2)); // 14% chance; returns half the damage dealt back as health
+			if (Attribute.VOID.hasAttribute(nbt) && Attribute.VOID.isActive(nbt) && (int) (Math.random() * 20) == 0) enemy.setHealth(0.01F); // 5% chance; sets enemies health to something small, so damage kills enemy in one hit
 		}
 	}
 	
@@ -224,8 +241,9 @@ public class EventUseWeapon
 	 * @param stack
 	 * @param player
 	 */
-	private void attemptLevel(ItemStack stack, EntityPlayer player)
+	private void attemptLevel(NBTTagCompound nbt, ItemStack stack, EntityPlayer player)
 	{
 		Experience.levelUp(player, stack);
+		NBTHelper.saveStackNBT(stack, nbt);
 	}
 }
