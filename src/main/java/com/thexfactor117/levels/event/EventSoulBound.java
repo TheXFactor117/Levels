@@ -49,7 +49,7 @@ public class EventSoulBound
 				ItemStack stack = event.getDrops().get(i).getEntityItem();
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
-				if (nbt != null && Attribute.SOUL_BOUND.hasAttribute(nbt))
+				if (nbt != null && Attribute.SOUL_BOUND.hasAttribute(nbt) && Attribute.SOUL_BOUND.isActive(nbt))
 				{
 					event.getDrops().remove(i);
 					player.inventory.addItemStackToInventory(stack);

@@ -1,4 +1,4 @@
-package com.thexfactor117.levels.util;
+package com.thexfactor117.levels.config;
 
 import java.io.File;
 import java.util.List;
@@ -39,7 +39,6 @@ public class Config
 	public static void init(File dir)
 	{
 		main = new Configuration(new File(dir.getPath(), "augmented_weaponry.cfg"));
-		
 		sync();
 	}
 	

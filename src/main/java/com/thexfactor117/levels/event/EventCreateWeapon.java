@@ -1,6 +1,6 @@
 package com.thexfactor117.levels.event;
 
-import com.thexfactor117.levels.util.Config;
+import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.util.NBTHelper;
 import com.thexfactor117.levels.util.WeaponHelper;
 

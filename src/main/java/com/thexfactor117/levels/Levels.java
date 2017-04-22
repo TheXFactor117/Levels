@@ -5,9 +5,9 @@ import java.io.File;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.init.ModEvents;
 import com.thexfactor117.levels.proxies.CommonProxy;
-import com.thexfactor117.levels.util.Config;
 import com.thexfactor117.levels.util.Reference;
 
 import net.minecraftforge.fml.common.Mod;

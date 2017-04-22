@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import com.google.common.collect.Multimap;
+import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.leveling.Attribute;
 import com.thexfactor117.levels.leveling.Experience;
 import com.thexfactor117.levels.leveling.Rarity;

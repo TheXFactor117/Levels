@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 import org.lwjgl.input.Keyboard;
 
+import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.leveling.Attribute;
 import com.thexfactor117.levels.leveling.Experience;
 import com.thexfactor117.levels.leveling.Rarity;
-import com.thexfactor117.levels.util.Config;
 import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.client.resources.I18n;

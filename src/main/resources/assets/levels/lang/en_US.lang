@@ -1,9 +1,9 @@
-levels.rarity.0=Default
-levels.rarity.1=Common
-levels.rarity.2=Uncommon
-levels.rarity.3=Rare
-levels.rarity.4=Legendary
-levels.rarity.5=Mythic
+levels.rarities.0=Default
+levels.rarities.1=Common
+levels.rarities.2=Uncommon
+levels.rarities.3=Rare
+levels.rarities.4=Legendary
+levels.rarities.5=Mythic
 
 levels.misc.level=Level
 levels.misc.max=Max

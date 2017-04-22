@@ -3,7 +3,7 @@ package com.thexfactor117.levels.leveling;
 import java.util.Random;
 
 import com.thexfactor117.levels.Levels;
-import com.thexfactor117.levels.util.Config;
+import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.util.RandomCollection;
 
 import net.minecraft.client.resources.I18n;

@@ -11,6 +11,8 @@ import com.thexfactor117.levels.util.NBTHelper;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,7 +32,7 @@ public class EventRenderTooltip
 	@SubscribeEvent
 	public void renderTooltip(RenderTooltipEvent.Pre event)
 	{
-		if (event.getStack().getItem() instanceof ItemSword)
+		if (event.getStack().getItem() instanceof ItemSword || event.getStack().getItem() instanceof ItemAxe || event.getStack().getItem() instanceof ItemArmor)
 		{
 			NBTTagCompound nbt = NBTHelper.loadStackNBT(event.getStack());
 			
