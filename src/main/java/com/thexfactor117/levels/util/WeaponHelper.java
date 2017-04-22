@@ -66,7 +66,7 @@ public class WeaponHelper
 				nbt.setInteger("HideFlags", 6); // hides Attribute Modifier and Unbreakable tags
 				setAttributeModifiers(nbt, stack.getItem()); // sets up Attribute Modifiers
 				NBTHelper.saveStackNBT(stack, nbt);
-				//stack.setStackDisplayName(generateName(stack, Rarity.getRarity(nbt))); // creates a randomized name for the weapon
+				stack.setStackDisplayName(generateName(stack, Rarity.getRarity(nbt))); // creates a randomized name for the weapon
 			}
 		}
 	}
@@ -136,7 +136,28 @@ public class WeaponHelper
 	 */
 	private static void getRandomizedAttributes(NBTTagCompound nbt, Rarity rarity, Random rand)
 	{
-		int amount = (int) (Math.random() * 3);
+		int amount = 0;
+		
+		switch (rarity)
+		{
+			case COMMON:
+				amount = (int) (Math.random() * 2);
+				break;
+			case UNCOMMON:
+				amount = (int) (Math.random() * 2);
+				break;
+			case RARE:
+				amount = (int) (Math.random() * 3);
+				break;
+			case LEGENDARY:
+				amount = (int) (Math.random() * 3 + 1);
+				break;
+			case MYTHIC:
+				amount = (int) (Math.random() * 4 + 1);
+				break;
+				default:
+					break;
+		}
 		
 		for (int i = 0; i < amount; i++)
 		{
@@ -356,7 +377,7 @@ public class WeaponHelper
 		//String prefix = "";
 		//String suffix = "";
 		
-		return rarity.getColor() + stack.getDisplayName() + " of Awesome";
+		return rarity.getColor() + stack.getDisplayName();
 	}
 	
 	private static NBTTagCompound writeAttributeModifierToNBT(IAttribute attribute, AttributeModifier modifier, EntityEquipmentSlot slot) 

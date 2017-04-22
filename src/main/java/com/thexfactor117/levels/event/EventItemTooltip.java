@@ -52,7 +52,6 @@ public class EventItemTooltip
 					
 					if (rarity != Rarity.DEFAULT)
 					{
-						//changeTooltip(tooltip, stack, nbt);
 						addTooltips(tooltip, stack, nbt);
 					}
 				}
@@ -68,9 +67,6 @@ public class EventItemTooltip
 		NBTTagCompound damageNbt = taglist.getCompoundTagAt(0);
 		NBTTagCompound speedNbt = taglist.getCompoundTagAt(1);
 		DecimalFormat format = new DecimalFormat("#.##");
-
-		// rarity
-		tooltip.add(rarity.getColor() + TextFormatting.ITALIC + rarity.getName()); // rarity
 		
 		tooltip.add("");
 		
@@ -88,6 +84,9 @@ public class EventItemTooltip
 		}
 		
 		tooltip.add("");
+		
+		// rarity
+		tooltip.add(rarity.getColor() + TextFormatting.ITALIC + rarity.getName()); // rarity
 		
 		// level
 		if (Experience.getLevel(nbt) >= Config.maxLevel)
@@ -119,9 +118,9 @@ public class EventItemTooltip
 				if (attribute.hasAttribute(nbt))
 				{					
 					if (attribute.isActive(nbt))
-						tooltip.add(attribute.getColor() + attribute.getName());
+						tooltip.add(" " + attribute.getColor() + attribute.getName());
 					else
-						tooltip.add(TextFormatting.DARK_GRAY + "" + TextFormatting.STRIKETHROUGH + attribute.getName());
+						tooltip.add(" " + TextFormatting.DARK_GRAY + "" + TextFormatting.STRIKETHROUGH + attribute.getName());
 				}
 			}
 		}
@@ -132,20 +131,4 @@ public class EventItemTooltip
 		
 		tooltip.add("");
 	}
-	
-	/*private void changeTooltip(ArrayList<String> tooltip, ItemStack stack, NBTTagCompound nbt)
-	{
-		String index = "When in main hand:";
-		
-		if (tooltip.indexOf(index) != -1)
-		{	
-			NBTTagList taglist = nbt.getTagList("AttributeModifiers", 10);
-			NBTTagCompound speedNbt = taglist.getCompoundTagAt(1);
-			DecimalFormat format = new DecimalFormat("#.##");
-			
-			int i = tooltip.indexOf(index); // the index of "When in main hand:"
-			
-			tooltip.set(i + 1, TextFormatting.BLUE + " +" + format.format(speedNbt.getDouble("Amount") + 4) + " Attack Speed");
-		}
-	}*/
 }

@@ -10,9 +10,9 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 /**
  * 
@@ -22,26 +22,22 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
  *
  */
 public class EventCreateWeapon 
-{	
+{		
 	@SubscribeEvent
-	public void onPickup(EntityItemPickupEvent event)
+	public void onPlayerTick(PlayerTickEvent event)
 	{
-		ItemStack stack = event.getItem().getEntityItem();
-
-		if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemArmor)
+		if (!event.player.getEntityWorld().isRemote)
 		{
-			create(stack, event.getEntityPlayer());
-		}
-	}
-	
-	@SubscribeEvent
-	public void onCraft(PlayerEvent.ItemCraftedEvent event)
-	{
-		ItemStack stack = event.crafting;
-		
-		if (stack.getItem() instanceof ItemSword && stack.getItem() instanceof ItemAxe && stack.getItem() instanceof ItemArmor)
-		{
-			create(event.crafting, event.player);
+			if (event.phase == Phase.START)
+			{
+				for (ItemStack stack : event.player.inventory.mainInventory)
+				{
+					if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemArmor)
+					{
+						create(stack, event.player);
+					}
+				}
+			}
 		}
 	}
 	

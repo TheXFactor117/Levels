@@ -5,6 +5,48 @@
 ###############################
 
 #####
+### Levels 3
+#####
+
+### 3.0.0-beta
++ Added Attributes (which replace Abilities).
++ Added Damage, Attack Speed, Armor, and Armor Toughness modifiers to all weapons and armor.
++ Added multipliers in which multiply the four aspects above each time you level up.
++ Added config option for Unlimited durability.
+- Removed Enemy Leveling for the time being.
+- Removed bow support for the time being.
+- Removed Ultra Rare rarity.
+- Removed Abilities.
+- Removed GUI's. Attributes are gained randomly now.
+* Increased difference between different rarities. Legendary and Mythic weapons are now much more powerful.
+* Weapon experience is only gained when a mob is killed.
+* All experience is now based on the enemies health and damage.
+* Changed Archaic rarity to Mythic.
+* Increased max level to 10. Configurable in the config.
+* Unlimited durability now uses the Unbreakable tag.
+* Fixed many bugs and issues with Levels 2.
+* Optimized lots of code from Levels 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#####
 ### Levels 2 - Release 1
 #####
 

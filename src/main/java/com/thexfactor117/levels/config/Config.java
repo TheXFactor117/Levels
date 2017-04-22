@@ -29,7 +29,7 @@ public class Config
 
 	// experience
 	public static double maxLevel = 10;
-	public static double expExponent = 2.4F;
+	public static double expExponent = 2.1F;
 	public static int expMultiplier = 20;
 	
 	// miscellaneous

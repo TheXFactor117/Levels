@@ -245,8 +245,8 @@ public class EventAttack
 			if (Attribute.FIRE.hasAttribute(nbt) && Attribute.FIRE.isActive(nbt) && (int) (Math.random() * 4) == 0) enemy.setFire(5); // 25% chance
 			if (Attribute.FROST.hasAttribute(nbt) && Attribute.FROST.isActive(nbt) && (int) (Math.random() * 4) == 0) enemy.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20, 10)); // 25% chance; 1 second stun
 			if (Attribute.DURABLE.hasAttribute(nbt) && Attribute.DURABLE.isActive(nbt) && (int) (Math.random() * 4) == 0) stack.setItemDamage(stack.getItemDamage() - 1); // 25% chance; doesn't use durability
-			if (Attribute.ABSORB.hasAttribute(nbt) && Attribute.ABSORB.isActive(nbt) && (int) (Math.random() * 7) == 0) player.setHealth(player.getHealth() + (event.getAmount() / 2)); // 14% chance; returns half the damage dealt back as health
-			if (Attribute.VOID.hasAttribute(nbt) && Attribute.VOID.isActive(nbt) && (int) (Math.random() * 20) == 0) enemy.setHealth(0.01F); // 5% chance; sets enemies health to something small, so damage kills enemy in one hit
+			if (Attribute.ABSORB.hasAttribute(nbt) && Attribute.ABSORB.isActive(nbt) && (int) (Math.random() * 5) == 0) player.setHealth(player.getHealth() + (event.getAmount() / 2)); // 14% chance; returns half the damage dealt back as health
+			if (Attribute.VOID.hasAttribute(nbt) && Attribute.VOID.isActive(nbt) && (int) (Math.random() * 15) == 0) enemy.setHealth(0.01F); // 5% chance; sets enemies health to something small, so damage kills enemy in one hit
 		}
 	}
 	
