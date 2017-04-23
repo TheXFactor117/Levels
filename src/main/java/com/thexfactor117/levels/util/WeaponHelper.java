@@ -371,7 +371,6 @@ public class WeaponHelper
 		return multiplier;
 	}
 	
-	@SuppressWarnings("unused")
 	private static String generateName(ItemStack stack, Rarity rarity)
 	{
 		//String prefix = "";

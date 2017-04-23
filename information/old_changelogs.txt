@@ -1,0 +1,165 @@
+###############
+##### Old Changelogs
+###############
+
+
+#####
+### Levels 2 - Release 1
+#####
+
+### r1.2.7
+#
+# * Fixes issues with r1.2.7
+#
+###
+
+### r1.2.7
+#
+# * Fixes issue where armor abilities were displayed as weapon abilities.
+#
+###
+
+### r1.2.6
+#
+# + Added tooltips underneath abilities explaining what they do.
+# * Fixed duplication bug on servers.
+#
+###
+
+### r1.2.5
+#
+# + Added a message explaining Levels after crafting a sword. Must have achievements on for it to work.
+# - Removed login message.
+#
+###
+
+### r1.2.4
+#
+# * Fixes crash with arrows.
+#
+###
+
+### r1.2.3
+#
+# * Fixes crash when not wearing armor.
+#
+###
+
+### r1.2.2
+#
+# * Fixes crash when holding/not holding certain items.
+#
+###
+
+### r1.2.1
+#
+# * Fixes armor ability selection GUI button placement.
+#
+###
+
+### r1.2.0
+#
+# + Added configuration options to remove certain abilities.
+# + Added Danish language file (courtesy of Zerotiger).
+# * Re-worked configuration file.
+#
+###
+
+### r1.1.2
+#
+# * Fixed critical bug where servers would crash on player join.
+#
+###
+
+### r1.1.1
+#
+# * Fixed issue where some enemies were unkillable.
+#
+###
+
+### r1.1.0
+#
+# + Added config option for changing rarity chance.
+# + Added config option for changing rarity bonus damage multiplier.
+# + Added config option for changing the leveling algorithm.
+# + Added a login message (toggable) to get new users started in the mod.
+# + Added a tooltip to show how much damage the weapon could deal given the specific rarity.
+# * Fixed bug where armor wouldn't gain experience when hit by arrows.
+# * Changed rarity bonus damage to be multipliers.
+#
+###
+
+### r1.0.0
+#
+# * Levels 2 has been officially released!
+# * Fixes crash on server startup.
+# * Fixes some graphical issues.
+#
+###
+
+
+#####
+### Levels 2 - Beta 2
+#####
+
+
+### b2.2.0
+#
+# + Added Enemy leveling.
+#
+###
+
+### b2.1.0
+#
+# + Added Bow leveling and abilities.
+#
+###
+
+### b2.0.0
+#
+# + Added Armor leveling and abilities.
+# * Changed rarity damage multipliers from multiplying to adding.
+# * Fixed some issues where Axes might not work properly with the leveling systems.
+#
+###
+
+
+
+#####
+### Levels 2 - Beta 1
+#####
+
+
+### b1.1.1
+#
+# * Fixes issue where abilities can be leveled up more than 3 times.
+# * Tweaked Chained ability to only affect hostile enemies.
+#
+###
+
+### b1.1.0
+#
+# + Added a tiered ability system.
+# + Added new ability: Soul Bound.
+# * Fixed a couple Gui bugs.
+# * Changed basic rarity color to white; changed archaic rarity color to pink.
+# * Fixed Chained ability bug in which it damaged the player whenever triggered.
+#
+###
+
+### b1.0.1
+#
+# * Fixes crash on server load.
+#
+###
+
+### b1.0.0
+#
+# + Added an item blacklist to manually remove items from receiving the leveling systems.
+# - Removed randomized abilities. Abilities can now be picked by the player.
+# - Removed some abilities. Also removed some leveling systems temporarily.
+# * Re-built leveling system from the ground up.
+# * Re-worked rarity bonuses and all abilities.
+# * Fixed many, many bugs.
+#
+###
