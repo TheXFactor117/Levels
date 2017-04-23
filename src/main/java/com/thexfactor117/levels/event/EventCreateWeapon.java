@@ -32,7 +32,7 @@ public class EventCreateWeapon
 			{
 				for (ItemStack stack : event.player.inventory.mainInventory)
 				{
-					if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemArmor)
+					if (stack != null && (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemArmor))
 					{
 						create(stack, event.player);
 					}

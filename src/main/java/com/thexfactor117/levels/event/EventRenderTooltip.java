@@ -32,7 +32,7 @@ public class EventRenderTooltip
 	@SubscribeEvent
 	public void renderTooltip(RenderTooltipEvent.Pre event)
 	{
-		if (event.getStack().getItem() instanceof ItemSword || event.getStack().getItem() instanceof ItemAxe || event.getStack().getItem() instanceof ItemArmor)
+		if (event.getStack() != null && (event.getStack().getItem() instanceof ItemSword || event.getStack().getItem() instanceof ItemAxe || event.getStack().getItem() instanceof ItemArmor))
 		{
 			NBTTagCompound nbt = NBTHelper.loadStackNBT(event.getStack());
 			
