@@ -6,7 +6,6 @@ import com.thexfactor117.levels.Levels;
 import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.util.RandomCollection;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
 
@@ -19,14 +18,15 @@ import net.minecraft.util.text.TextFormatting;
  */
 public enum Attribute 
 {
-	FIRE(TextFormatting.RED, Rarity.UNCOMMON, 0.25, 0.17, 0.12),
-	FROST(TextFormatting.AQUA, Rarity.UNCOMMON, 0.25, 0.17, 0.12),
-	DURABLE(TextFormatting.GRAY, Rarity.UNCOMMON, 0.25, 0.17, 0.12),
-	ABSORB(TextFormatting.GREEN, Rarity.RARE, 0.1, 0.18, 0.18),
-	SOUL_BOUND(TextFormatting.DARK_PURPLE, Rarity.RARE, 0.1, 0.18, 0.18),
-	VOID(TextFormatting.DARK_GRAY, Rarity.LEGENDARY, 0.025, 0.065, 0.14),
-	UNBREAKABLE(TextFormatting.GRAY, Rarity.LEGENDARY, 0.025, 0.065, 0.14);
+	FIRE("Fire", TextFormatting.RED, Rarity.UNCOMMON, 0.25, 0.17, 0.12),
+	FROST("Frost", TextFormatting.AQUA, Rarity.UNCOMMON, 0.25, 0.17, 0.12),
+	DURABLE("Durable", TextFormatting.GRAY, Rarity.UNCOMMON, 0.25, 0.17, 0.12),
+	ABSORB("Absorb", TextFormatting.GREEN, Rarity.RARE, 0.1, 0.18, 0.18),
+	SOUL_BOUND("Soul Bound", TextFormatting.DARK_PURPLE, Rarity.RARE, 0.1, 0.18, 0.18),
+	VOID("Void", TextFormatting.DARK_GRAY, Rarity.LEGENDARY, 0.025, 0.065, 0.14),
+	UNBREAKABLE("Unbreakable", TextFormatting.GRAY, Rarity.LEGENDARY, 0.025, 0.065, 0.14);
 	
+	private String name;
 	private String color;
 	private Rarity rarity;
 	private double[] weights;
@@ -35,8 +35,9 @@ public enum Attribute
 	private static final RandomCollection<Attribute> RARE_ATTRIBUTES = new RandomCollection<Attribute>();
 	private static final RandomCollection<Attribute> LEGENDARY_ATTRIBUTES = new RandomCollection<Attribute>();
 	
-	Attribute(Object color, Rarity rarity, double... weights)
+	Attribute(String name, Object color, Rarity rarity, double... weights)
 	{
+		this.name = name;
 		this.color = color.toString();
 		this.rarity = rarity;
 		this.weights = weights;
@@ -142,7 +143,7 @@ public enum Attribute
 	
 	public String getName()
 	{
-		return I18n.format("levels.attributes." + ordinal());
+		return name;
 	}
 	
 	public String getColor()

@@ -17,7 +17,7 @@ targetCompatibility = 1.8
 
 loadProperties()
 
-version=config.minecraft_version + "-" + config.mod_version
+version=config.minecraft_version + "-" + config.mod_version + "-" + config.major_version
 group= "com.thexfactor117.levels"
 archivesBaseName = "Levels 3"
 

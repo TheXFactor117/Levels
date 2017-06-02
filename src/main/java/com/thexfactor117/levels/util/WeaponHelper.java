@@ -66,7 +66,6 @@ public class WeaponHelper
 				nbt.setInteger("HideFlags", 6); // hides Attribute Modifier and Unbreakable tags
 				setAttributeModifiers(nbt, stack.getItem()); // sets up Attribute Modifiers
 				NBTHelper.saveStackNBT(stack, nbt);
-				stack.setStackDisplayName(generateName(stack, Rarity.getRarity(nbt))); // creates a randomized name for the weapon
 			}
 		}
 	}
@@ -168,7 +167,14 @@ public class WeaponHelper
 				attribute.addAttribute(nbt);
 				
 				if (attribute.getActiveAt(nbt) == 1)
+				{
 					attribute.activate(nbt);
+					
+					if (attribute == Attribute.UNBREAKABLE)
+					{
+						nbt.setInteger("Unbreakable", 1); // adds Unbreakable tag to item
+					}
+				}
 			}
 		}
 	}
@@ -369,14 +375,6 @@ public class WeaponHelper
 		double multiplier = Math.random() * range;
 				
 		return multiplier;
-	}
-	
-	private static String generateName(ItemStack stack, Rarity rarity)
-	{
-		//String prefix = "";
-		//String suffix = "";
-		
-		return rarity.getColor() + stack.getDisplayName();
 	}
 	
 	private static NBTTagCompound writeAttributeModifierToNBT(IAttribute attribute, AttributeModifier modifier, EntityEquipmentSlot slot) 

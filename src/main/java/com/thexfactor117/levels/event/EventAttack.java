@@ -45,28 +45,9 @@ public class EventAttack
 			EntityLivingBase enemy = event.getEntityLiving();
 			ItemStack stack = player.inventory.getCurrentItem();
 			
-			if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
+			if (enemy != null)
 			{
-				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-				
-				if (nbt != null)
-				{
-					//addExperience(nbt, stack, enemy);
-					useRarity(nbt, stack, false);
-					useAttributes(nbt, event, stack, player, enemy);
-					attemptLevel(nbt, stack, player);
-				}
-			}
-		}
-		else if (event.getSource().getSourceOfDamage() instanceof EntityLivingBase && event.getEntityLiving() instanceof EntityPlayer)
-		{
-			// ARMOR
-			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-			EntityLivingBase enemy = (EntityLivingBase) event.getSource().getSourceOfDamage();
-			
-			for (ItemStack stack : player.inventory.armorInventory)
-			{
-				if (stack != null && stack.getItem() instanceof ItemArmor)
+				if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
 				{
 					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 					
@@ -76,6 +57,31 @@ public class EventAttack
 						useRarity(nbt, stack, false);
 						useAttributes(nbt, event, stack, player, enemy);
 						attemptLevel(nbt, stack, player);
+					}
+				}
+			}
+		}
+		else if (event.getSource().getSourceOfDamage() instanceof EntityLivingBase && event.getEntityLiving() instanceof EntityPlayer)
+		{
+			// ARMOR
+			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+			EntityLivingBase enemy = (EntityLivingBase) event.getSource().getSourceOfDamage();
+			
+			if (enemy != null)
+			{
+				for (ItemStack stack : player.inventory.armorInventory)
+				{
+					if (stack != null && stack.getItem() instanceof ItemArmor)
+					{
+						NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+						
+						if (nbt != null)
+						{
+							addExperience(nbt, stack, enemy);
+							useRarity(nbt, stack, false);
+							useAttributes(nbt, event, stack, player, enemy);
+							attemptLevel(nbt, stack, player);
+						}
 					}
 				}
 			}
@@ -96,15 +102,18 @@ public class EventAttack
 			EntityLivingBase enemy = event.getEntityLiving();
 			ItemStack stack = player.inventory.getCurrentItem();
 			
-			if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
+			if (enemy != null)
 			{
-				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-				
-				if (nbt != null)
+				if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
 				{
-					addExperience(nbt, stack, enemy);
-					useRarity(nbt, stack, true);
-					attemptLevel(nbt, stack, player);
+					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+					
+					if (nbt != null)
+					{
+						addExperience(nbt, stack, enemy);
+						useRarity(nbt, stack, true);
+						attemptLevel(nbt, stack, player);
+					}
 				}
 			}
 		}
