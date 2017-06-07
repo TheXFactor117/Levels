@@ -2,6 +2,13 @@
 ### Levels 3 Changelogs
 #####
 
+### 3.0.1-beta
+* Fixes player ticking crash.
+* Fixes display name issues when renaming weapons/armor.
+* Fixes Unbreakable attribute not correctly applying sometimes.
+* Fixes client code reference crashes.
+
+
 ### 3.0.0-beta
 + Added Attributes (which replace Abilities).
 + Added Damage, Attack Speed, Armor, and Armor Toughness modifiers to all weapons and armor.

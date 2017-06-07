@@ -45,7 +45,7 @@ public class EventAttack
 			EntityLivingBase enemy = event.getEntityLiving();
 			ItemStack stack = player.inventory.getCurrentItem();
 			
-			if (enemy != null)
+			if (enemy != null && player != null)
 			{
 				if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
 				{
@@ -67,7 +67,7 @@ public class EventAttack
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 			EntityLivingBase enemy = (EntityLivingBase) event.getSource().getSourceOfDamage();
 			
-			if (enemy != null)
+			if (enemy != null && player != null)
 			{
 				for (ItemStack stack : player.inventory.armorInventory)
 				{
@@ -102,7 +102,7 @@ public class EventAttack
 			EntityLivingBase enemy = event.getEntityLiving();
 			ItemStack stack = player.inventory.getCurrentItem();
 			
-			if (enemy != null)
+			if (enemy != null && player != null)
 			{
 				if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe)
 				{
@@ -135,18 +135,26 @@ public class EventAttack
 			{
 				Experience.setExperience(nbt, Experience.getExperience(nbt) + 200);
 			}
-			else
+			
+			if (stack.getItem() instanceof ItemArmor)
 			{
-				if (stack.getItem() instanceof ItemArmor)
+				int xp = 0;
+				
+				if (enemy.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE) != null)
 				{
-					int xp = (int) (enemy.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue() * 0.5);
-					Experience.setExperience(nbt, Experience.getExperience(nbt) + xp);
+					xp = (int) (enemy.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue() * 0.5);
 				}
 				else
 				{
-					int xp = (int) (enemy.getMaxHealth() * 0.2);
-					Experience.setExperience(nbt, Experience.getExperience(nbt) + xp);
+					xp = (int) (enemy.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).getAttributeValue() * 0.5);
 				}
+				
+				Experience.setExperience(nbt, Experience.getExperience(nbt) + xp);
+			}
+			else
+			{
+				int xp = (int) (enemy.getMaxHealth() * 0.2);
+				Experience.setExperience(nbt, Experience.getExperience(nbt) + xp);
 			}
 		}
 	}
