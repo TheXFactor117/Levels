@@ -64,7 +64,7 @@ public class WeaponHelper
 				getRandomizedAttributes(nbt, Rarity.getRarity(nbt), rand);
 				nbt.setDouble("Multiplier", getWeightedMultiplier(Rarity.getRarity(nbt))); // adds a randomized multiplier to the item, weighted by rarity
 				nbt.setInteger("HideFlags", 6); // hides Attribute Modifier and Unbreakable tags
-				setAttributeModifiers(nbt, stack.getItem()); // sets up Attribute Modifiers
+				setAttributeModifiers(nbt, stack); // sets up Attribute Modifiers
 				NBTHelper.saveStackNBT(stack, nbt);
 			}
 		}
@@ -75,8 +75,10 @@ public class WeaponHelper
 	 * @param nbt
 	 * @param sword
 	 */
-	private static void setAttributeModifiers(NBTTagCompound nbt, Item item)
+	private static void setAttributeModifiers(NBTTagCompound nbt, ItemStack stack)
 	{
+		Item item = stack.getItem();
+		
 		if (item instanceof ItemSword || item instanceof ItemAxe)
 		{
 			// retrieves the default attributes, like damage and attack speed.
@@ -104,7 +106,7 @@ public class WeaponHelper
 		}
 		else if (item instanceof ItemArmor)
 		{
-			Multimap<String, AttributeModifier> map = ((ItemArmor) item).getItemAttributeModifiers(((ItemArmor) item).getEquipmentSlot());
+			Multimap<String, AttributeModifier> map = ((ItemArmor) item).getAttributeModifiers(((ItemArmor) item).armorType, stack);
 			Collection<AttributeModifier> armorCollection = map.get(SharedMonsterAttributes.ARMOR.getName());
 			Collection<AttributeModifier> toughnessCollection = map.get(SharedMonsterAttributes.ARMOR_TOUGHNESS.getName());
 			AttributeModifier armorModifier = (AttributeModifier) armorCollection.toArray()[0];
@@ -118,8 +120,8 @@ public class WeaponHelper
 			// Creates new AttributeModifier's and applies them to the stack's NBT tag compound.
 			AttributeModifier armor = new AttributeModifier(ARMOR, "armor", newArmor, 0);
 			AttributeModifier toughness = new AttributeModifier(ARMOR_TOUGHNESS, "armorToughness", newToughness, 0);
-			NBTTagCompound armorNbt = writeAttributeModifierToNBT(SharedMonsterAttributes.ARMOR, armor, ((ItemArmor) item).getEquipmentSlot());
-			NBTTagCompound toughnessNbt = writeAttributeModifierToNBT(SharedMonsterAttributes.ARMOR_TOUGHNESS, toughness, ((ItemArmor) item).getEquipmentSlot());
+			NBTTagCompound armorNbt = writeAttributeModifierToNBT(SharedMonsterAttributes.ARMOR, armor, ((ItemArmor) item).armorType);
+			NBTTagCompound toughnessNbt = writeAttributeModifierToNBT(SharedMonsterAttributes.ARMOR_TOUGHNESS, toughness, ((ItemArmor) item).armorType);
 			NBTTagList list = new NBTTagList();
 			list.appendTag(armorNbt);
 			list.appendTag(toughnessNbt);
