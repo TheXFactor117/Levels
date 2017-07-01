@@ -1,4 +1,4 @@
-package com.thexfactor117.levels.event;
+package com.thexfactor117.levels.events;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -6,17 +6,22 @@ import java.util.ArrayList;
 import org.lwjgl.input.Keyboard;
 
 import com.thexfactor117.levels.config.Config;
-import com.thexfactor117.levels.leveling.Attribute;
 import com.thexfactor117.levels.leveling.Experience;
 import com.thexfactor117.levels.leveling.Rarity;
+import com.thexfactor117.levels.leveling.attributes.ArmorAttribute;
+import com.thexfactor117.levels.leveling.attributes.BowAttribute;
+import com.thexfactor117.levels.leveling.attributes.ShieldAttribute;
+import com.thexfactor117.levels.leveling.attributes.WeaponAttribute;
 import com.thexfactor117.levels.util.NBTHelper;
 
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.text.TextFormatting;
@@ -28,32 +33,25 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * 
  * @author TheXFactor117
  *
- * Uses the ItemTooltipEvent to change the contents of an item's tooltip.
- *
  */
-public class EventItemTooltip 
+public class EventTooltip 
 {
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onTooltip(ItemTooltipEvent event)
 	{
 		ArrayList<String> tooltip = (ArrayList<String>) event.getToolTip();
 		ItemStack stack = event.getItemStack();
-		Item item = event.getItemStack().getItem();
+		NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 		
-		if (stack != null)
+		if (stack != null && nbt != null)
 		{
-			if (item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemArmor)
+			if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemArmor || stack.getItem() instanceof ItemBow || stack.getItem() instanceof ItemShield || stack.getItem() instanceof ItemTool)
 			{
-				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+				Rarity rarity = Rarity.getRarity(nbt);
 				
-				if (nbt != null)
+				if (rarity != Rarity.DEFAULT)
 				{
-					Rarity rarity = Rarity.getRarity(nbt);
-					
-					if (rarity != Rarity.DEFAULT)
-					{
-						addTooltips(tooltip, stack, nbt);
-					}
+					addTooltips(tooltip, stack, nbt);
 				}
 			}
 		}
@@ -83,7 +81,10 @@ public class EventItemTooltip
 			tooltip.add(TextFormatting.BLUE + "+" + format.format(speedNbt.getDouble("Amount")) + " Armor Toughness");
 		}
 		
-		tooltip.add("");
+		if (!(stack.getItem() instanceof ItemShield || stack.getItem() instanceof ItemBow))
+		{
+			tooltip.add("");
+		}
 		
 		// rarity
 		tooltip.add(rarity.getColor() + TextFormatting.ITALIC + rarity.getName()); // rarity
@@ -113,14 +114,36 @@ public class EventItemTooltip
 		{
 			tooltip.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + I18n.format("levels.misc.attributes"));
 			
-			for (Attribute attribute : Attribute.values())
+			if (stack.getItem() instanceof ItemSword)
 			{
-				if (attribute.hasAttribute(nbt))
-				{					
-					if (attribute.isActive(nbt))
-						tooltip.add(" " + attribute.getColor() + attribute.getName());
-					else
-						tooltip.add(" " + TextFormatting.DARK_GRAY + "" + TextFormatting.STRIKETHROUGH + attribute.getName());
+				for (WeaponAttribute attribute : WeaponAttribute.WEAPON_ATTRIBUTES)
+				{
+					if (attribute.hasAttribute(nbt))
+						tooltip.add(" " + attribute.getColor() + attribute.getName(nbt));
+				}
+			}
+			else if (stack.getItem() instanceof ItemArmor)
+			{
+				for (ArmorAttribute attribute : ArmorAttribute.ARMOR_ATTRIBUTES)
+				{
+					if (attribute.hasAttribute(nbt))
+						tooltip.add(" " + attribute.getColor() + attribute.getName(nbt));
+				}
+			}
+			else if (stack.getItem() instanceof ItemBow)
+			{
+				for (BowAttribute attribute : BowAttribute.BOW_ATTRIBUTES)
+				{
+					if (attribute.hasAttribute(nbt))
+						tooltip.add(" " + attribute.getColor() + attribute.getName(nbt));
+				}
+			}
+			else if (stack.getItem() instanceof ItemShield)
+			{
+				for (ShieldAttribute attribute : ShieldAttribute.SHIELD_ATTRIBUTES)
+				{
+					if (attribute.hasAttribute(nbt))
+						tooltip.add(" " + attribute.getColor() + attribute.getName(nbt));
 				}
 			}
 		}

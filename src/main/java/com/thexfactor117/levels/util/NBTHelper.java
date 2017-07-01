@@ -3,6 +3,11 @@ package com.thexfactor117.levels.util;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+/**
+ * 
+ * @author TheXFactor117
+ *
+ */
 public class NBTHelper 
 {
 	public static NBTTagCompound loadStackNBT(ItemStack stack)

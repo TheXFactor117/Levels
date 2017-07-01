@@ -1,6 +1,5 @@
 package com.thexfactor117.levels.leveling;
 
-import com.thexfactor117.levels.Levels;
 import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.util.NBTHelper;
 
@@ -18,8 +17,6 @@ import net.minecraft.util.text.TextFormatting;
  * 
  * @author TheXFactor117
  *
- * Handles the experience of weapons and armor.
- * 
  */
 public class Experience 
 {
@@ -37,6 +34,7 @@ public class Experience
 			while (Experience.getLevel(nbt) < Config.maxLevel && Experience.getExperience(nbt) >= Experience.getNextLevelExperience(Experience.getLevel(nbt)))
 			{
 				Experience.setLevel(nbt, Experience.getLevel(nbt) + 1); // increase level by one
+				Experience.setAttributeTokens(nbt, Experience.getAttributeTokens(nbt) + 1);
 				
 				player.sendMessage(new TextComponentString(stack.getDisplayName() + TextFormatting.GRAY + " has leveled up to level " + TextFormatting.GOLD + Experience.getLevel(nbt) + TextFormatting.GRAY + "!"));
 				
@@ -61,24 +59,6 @@ public class Experience
 					double newToughness = toughnessNbt.getDouble("Amount") - ((toughnessNbt.getDouble("Amount") * nbt.getDouble("Multiplier")) / 2);		
 					armorNbt.setDouble("Amount", newArmor);
 					toughnessNbt.setDouble("Amount", newToughness);
-				}
-				
-				// update attributes
-				for (Attribute attribute : Attribute.values())
-				{
-					if (attribute.hasAttribute(nbt))
-					{
-						Levels.LOGGER.info(attribute.getActiveAt(nbt));
-						
-						if (!attribute.isActive(nbt) && Experience.getLevel(nbt) >= attribute.getActiveAt(nbt))
-						{
-							attribute.activate(nbt);
-							player.sendMessage(new TextComponentString(TextFormatting.GRAY + " The " + attribute.getColor() + attribute.getName() + TextFormatting.GRAY + " attribute has been unlocked!"));
-						
-							if (attribute == Attribute.UNBREAKABLE)
-								nbt.setInteger("Unbreakable", 1);
-						}
-					}
 				}
 
 				NBTHelper.saveStackNBT(stack, nbt);
@@ -136,6 +116,32 @@ public class Experience
 			else
 				nbt.removeTag("EXPERIENCE");
 		}
+	}
+	
+	/**
+	 * Sets the amount of Attribute Tokens the specific NBT tag has.
+	 * @param nbt
+	 * @param tokens
+	 */
+	public static void setAttributeTokens(NBTTagCompound nbt, int tokens)
+	{
+		if (nbt != null)
+		{
+			if (tokens > 0)
+				nbt.setInteger("TOKENS", tokens);
+			else
+				nbt.removeTag("TOKENS");
+		}
+	}
+	
+	/**
+	 * Returns how many Attribute Tokens the specific NBT tag has.
+	 * @param nbt
+	 * @return
+	 */
+	public static int getAttributeTokens(NBTTagCompound nbt)
+	{
+		return nbt != null ? nbt.getInteger("TOKENS") : 0;
 	}
 	
 	/**

@@ -2,7 +2,6 @@ package com.thexfactor117.levels.leveling;
 
 import java.util.Random;
 
-import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.util.RandomCollection;
 
 import net.minecraft.client.resources.I18n;
@@ -15,41 +14,79 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * 
  * @author TheXFactor117
  *
- * Basic rarity implementation for weapons and armor.
- * 
  */
 public enum Rarity 
 {
-	DEFAULT(TextFormatting.GRAY, 0, 0xF0100010, 0x505000FF),
-	COMMON(TextFormatting.WHITE, Config.commonChance, 0xF0100010, 0x50FFFFFF),
-	UNCOMMON(TextFormatting.DARK_GREEN, Config.uncommonChance, 0xF0100010, 0x5000AA00),
-	RARE(TextFormatting.AQUA, Config.rareChance, 0xF0100010, 0x5055FFFF),
-	LEGENDARY(TextFormatting.DARK_PURPLE, Config.legendaryChance, 0xF0100010, 0x50AA00AA),
-	MYTHIC(TextFormatting.GOLD, Config.mythicChance, 0xF0100010, 0x50FFAA00);
+	DEFAULT(TextFormatting.GRAY, 0, 0, 0, 0, 0),
+	COMMON(TextFormatting.WHITE, 0xFFFFFF, 0.65, -0.1, 0xF0100010, 0x50FFFFFF),
+	UNCOMMON(TextFormatting.DARK_GREEN, 0x00AA00, 0.2, 0.04, 0xF0100010, 0x5000AA00),
+	RARE(TextFormatting.AQUA, 0x55FFFF, 0.1, 0.03, 0xF0100010, 0x5055FFFF),
+	LEGENDARY(TextFormatting.DARK_PURPLE, 0xAA00AA, 0.045, 0.02, 0xF0100010, 0x50AA00AA),
+	MYTHIC(TextFormatting.GOLD, 0xFFAA00, 0.005, 0.01, 0xF0100010, 0x50FFAA00);
 	
 	private String color;
-	private double weight;
-	private int backgroundColor; // used in tooltips
-	private int borderColor; // used in tooltips
+	private int hex;
+	private double defaultChance;
+	private double chanceHelper;
+	private int backColor;
+	private int borderColor;
 	
-	private static final RandomCollection<Rarity> RANDOM_RARITIES = new RandomCollection<Rarity>();
-	
-	Rarity(Object color, double weight, int backgroundColor, int borderColor)
+	Rarity(Object color, int hex, double chance, double chanceHelper, int backColor, int borderColor)
 	{
 		this.color = color.toString();
-		this.weight = weight;
-		this.backgroundColor = backgroundColor;
+		this.hex = hex;
+		this.defaultChance = chance;
+		this.chanceHelper = chanceHelper;
+		this.backColor = backColor;
 		this.borderColor = borderColor;
 	}
 	
 	/**
-	 * Returns a random rarity from the Rarity RandomCollection.
+	 * Returns a randomized rarity based on the Blacksmithing rank of the player.
+	 * @param nbt
+	 * @param blacksmithingRank
 	 * @param rand
 	 * @return
 	 */
-	public static Rarity getRandomRarity(Random rand)
+	public static Rarity getRandomRarity(NBTTagCompound nbt, int blacksmithingRank, Random rand)
 	{
-		return RANDOM_RARITIES.next(rand);
+		RandomCollection<Rarity> random = new RandomCollection<Rarity>();
+		
+		switch (blacksmithingRank)
+		{
+			case 0:
+				for (Rarity rarity : Rarity.values())
+				{
+					random.add(rarity.getDefaultChance(), rarity);
+				}
+				break;
+			case 1:
+				for (Rarity rarity : Rarity.values())
+				{
+					random.add(rarity.getDefaultChance() + rarity.getChanceHelper(), rarity);
+				}
+				break;
+			case 2:
+				for (Rarity rarity : Rarity.values())
+				{
+					random.add(rarity.getDefaultChance() + (rarity.getChanceHelper() * 2), rarity);
+				}
+				break;
+			case 3:
+				for (Rarity rarity : Rarity.values())
+				{
+					random.add(rarity.getDefaultChance() + (rarity.getChanceHelper() * 3), rarity);
+				}
+				break;
+			case 4:
+				for (Rarity rarity : Rarity.values())
+				{
+					random.add(rarity.getDefaultChance() + (rarity.getChanceHelper() * 4), rarity);
+				}
+				break;
+		}
+		
+		return random.next(rand);
 	}
 	
 	/**
@@ -75,6 +112,12 @@ public enum Rarity
 		}
 	}
 	
+	/*
+	 * 
+	 * GETTERS AND SETTERS
+	 * 
+	 */
+	
 	@SideOnly(Side.CLIENT)
 	public String getName()
 	{
@@ -86,32 +129,28 @@ public enum Rarity
 		return color;
 	}
 	
-	public double getWeight()
+	public int getHex()
 	{
-		return weight;
+		return hex;
+	}
+	
+	public double getDefaultChance()
+	{
+		return defaultChance;
+	}
+	
+	public double getChanceHelper()
+	{
+		return chanceHelper;
 	}
 	
 	public int getBackgroundColor()
 	{
-		return backgroundColor;
+		return backColor;
 	}
 	
 	public int getBorderColor()
 	{
 		return borderColor;
-	}
-	
-	/**
-	 * Stores enums into the RandomCollection.
-	 */
-	static
-	{
-		for (Rarity rarity : Rarity.values())
-		{
-			if (rarity.getWeight() > 0.0D)
-			{
-				RANDOM_RARITIES.add(rarity.weight, rarity);
-			}
-		}
 	}
 }

@@ -5,15 +5,19 @@ import java.util.Random;
 import java.util.UUID;
 
 import com.google.common.collect.Multimap;
+import com.thexfactor117.levels.Levels;
+import com.thexfactor117.levels.capabilities.CapabilityBlacksmithing;
+import com.thexfactor117.levels.capabilities.IBlacksmithing;
 import com.thexfactor117.levels.config.Config;
-import com.thexfactor117.levels.leveling.Attribute;
 import com.thexfactor117.levels.leveling.Experience;
 import com.thexfactor117.levels.leveling.Rarity;
+import com.thexfactor117.levels.network.PacketMythicSound;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
@@ -22,15 +26,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.play.server.SPacketTitle;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 
 /**
  * 
  * @author TheXFactor117
- * 
- * Helper class for creating attributes for weapons and armor.
- * 
+ *
  */
-public class WeaponHelper 
+public class WeaponHelper
 {
 	private static final UUID ATTACK_DAMAGE = UUID.fromString("38d403d3-3e25-4638-957f-71cd25273933");
 	private static final UUID ATTACK_SPEED = UUID.fromString("106410b5-3fa8-4fcf-8252-ca4292dc0391");
@@ -44,15 +49,19 @@ public class WeaponHelper
 		if (nbt != null)
 		{
 			Rarity rarity = Rarity.getRarity(nbt);
-			Random rand = new Random();
+			Random rand = player.getEntityWorld().rand;
+			IBlacksmithing blacksmithing = player.getCapability(CapabilityBlacksmithing.BLACKSMITHING_CAP, null);
 			
-			if (rarity == Rarity.DEFAULT)
+			if (rarity == Rarity.DEFAULT && blacksmithing != null)
 			{				
-				Rarity.setRarity(nbt, Rarity.getRandomRarity(rand)); // sets random rarity
+				Rarity.setRarity(nbt, Rarity.getRandomRarity(nbt, blacksmithing.getBlacksmithingRank(), rand)); // sets random rarity
 				
 				if (Rarity.getRarity(nbt) == Rarity.MYTHIC)
 				{
-					//play sound
+					SPacketTitle packet = new SPacketTitle(SPacketTitle.Type.TITLE, new TextComponentString(TextFormatting.GOLD + "MYTHIC"), -1, 20, -1);
+					EntityPlayerMP playermp = (EntityPlayerMP) player;
+					playermp.connection.sendPacket(packet);
+					Levels.network.sendTo(new PacketMythicSound(), (EntityPlayerMP) player);
 				}
 				
 				if (Config.unlimitedDurability)
@@ -61,7 +70,6 @@ public class WeaponHelper
 				}
 				
 				Experience.setLevel(nbt, 1);
-				getRandomizedAttributes(nbt, Rarity.getRarity(nbt), rand);
 				nbt.setDouble("Multiplier", getWeightedMultiplier(Rarity.getRarity(nbt))); // adds a randomized multiplier to the item, weighted by rarity
 				nbt.setInteger("HideFlags", 6); // hides Attribute Modifier and Unbreakable tags
 				setAttributeModifiers(nbt, stack); // sets up Attribute Modifiers
@@ -126,58 +134,6 @@ public class WeaponHelper
 			list.appendTag(armorNbt);
 			list.appendTag(toughnessNbt);
 			nbt.setTag("AttributeModifiers", list);
-		}
-	}
-	
-	/**
-	 * Sets a randomized amount of attributes (0-2) to the stack.
-	 * @param nbt
-	 * @param rarity
-	 * @param rand
-	 */
-	private static void getRandomizedAttributes(NBTTagCompound nbt, Rarity rarity, Random rand)
-	{
-		int amount = 0;
-		
-		switch (rarity)
-		{
-			case COMMON:
-				amount = (int) (Math.random() * 2);
-				break;
-			case UNCOMMON:
-				amount = (int) (Math.random() * 2);
-				break;
-			case RARE:
-				amount = (int) (Math.random() * 3);
-				break;
-			case LEGENDARY:
-				amount = (int) (Math.random() * 3 + 1);
-				break;
-			case MYTHIC:
-				amount = (int) (Math.random() * 4 + 1);
-				break;
-				default:
-					break;
-		}
-		
-		for (int i = 0; i < amount; i++)
-		{
-			Attribute attribute = Attribute.getRandomAttribute(rand, rarity);
-			
-			if (!attribute.hasAttribute(nbt))
-			{
-				attribute.addAttribute(nbt);
-				
-				if (attribute.getActiveAt(nbt) == 1)
-				{
-					attribute.activate(nbt);
-					
-					if (attribute == Attribute.UNBREAKABLE)
-					{
-						nbt.setInteger("Unbreakable", 1); // adds Unbreakable tag to item
-					}
-				}
-			}
 		}
 	}
 	

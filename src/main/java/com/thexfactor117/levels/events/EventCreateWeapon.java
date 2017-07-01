@@ -1,4 +1,4 @@
-package com.thexfactor117.levels.event;
+package com.thexfactor117.levels.events;
 
 import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.util.NBTHelper;
@@ -6,7 +6,8 @@ import com.thexfactor117.levels.util.WeaponHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,13 +19,11 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
  * 
  * @author TheXFactor117
  *
- * Creates weapons whenever an item is picked up off the ground or crafted.
- *
  */
 public class EventCreateWeapon 
-{		
+{
 	@SubscribeEvent
-	public void onPlayerTick(PlayerTickEvent event)
+	public void onCreateWeapon(PlayerTickEvent event)
 	{
 		if (!event.player.getEntityWorld().isRemote)
 		{
@@ -32,7 +31,7 @@ public class EventCreateWeapon
 			{
 				for (ItemStack stack : event.player.inventory.mainInventory)
 				{
-					if (stack != null && (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemArmor))
+					if (stack != null && (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemBow || stack.getItem() instanceof ItemArmor || stack.getItem() instanceof ItemShield))
 					{
 						create(stack, event.player);
 					}

@@ -1,8 +1,9 @@
 package com.thexfactor117.levels.proxies;
 
-import com.thexfactor117.levels.event.EventRenderTooltip;
+import org.lwjgl.input.Keyboard;
 
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 /**
  * 
@@ -11,15 +12,22 @@ import net.minecraftforge.common.MinecraftForge;
  */
 public class ClientProxy extends CommonProxy
 {
+	public static KeyBinding keyBindingL;
+	public static KeyBinding keyBindingB;
+	
 	@Override
 	public void preInit()
 	{
-		MinecraftForge.EVENT_BUS.register(new EventRenderTooltip());
+
 	}
 	
 	@Override
 	public void init()
 	{
-
+		keyBindingL = new KeyBinding("key.gui.weapon_interface", Keyboard.KEY_L, "key.levels");
+		keyBindingB = new KeyBinding("key.blacksmithing", Keyboard.KEY_B, "key.levels");
+		
+		ClientRegistry.registerKeyBinding(keyBindingL);
+		ClientRegistry.registerKeyBinding(keyBindingB);
 	}
 }

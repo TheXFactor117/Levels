@@ -13,11 +13,165 @@ levels.misc.durability.unlimited=Unlimited
 levels.misc.rarity=Rarity
 levels.misc.attributes=Attributes
 levels.misc.attributes.shift=Attributes (Shift)
+levels.misc.attributes.tokens=Attribute Tokens
+levels.misc.attributes.current=Current Attributes
 
-levels.attributes.0=Fire
-levels.attributes.1=Frost
-levels.attributes.2=Durable
-levels.attributes.3=Absorb
-levels.attributes.4=Soul Bound
-levels.attributes.5=Void
-levels.attributes.6=Unbreakable
+###
+## WEAPONS
+###
+
+levels.attributes.weapons.info.0=Sets enemies on fire for a short time.
+levels.attributes.weapons.info.1=Stuns enemies for a short time.
+levels.attributes.weapons.info.2=Poisons enemies for a short time.
+levels.attributes.weapons.info.3=Your weapon becomes slightly more durable than usual.
+levels.attributes.weapons.info.4=Absorb a portion of the damage dealt as health.
+levels.attributes.weapons.info.5=Your weapon stays in your inventory on death.
+levels.attributes.weapons.info.6=Percentage chance at performing a critical strike.
+levels.attributes.weapons.info.7=Percentage chance for enemies within a certain radius to take half the damage as well.
+levels.attributes.weapons.info.8=Your weapon will never break or degrade.
+levels.attributes.weapons.info.9=There is a slight chance at instantly killing the enemy.
+
+levels.attributes.weapons.info.0.tier1=4 seconds
+levels.attributes.weapons.info.0.tier2=5 seconds
+levels.attributes.weapons.info.0.tier3=6 seconds
+levels.attributes.weapons.info.1.tier1=1 second
+levels.attributes.weapons.info.1.tier2=1.5 seconds
+levels.attributes.weapons.info.1.tier3=2 seconds
+levels.attributes.weapons.info.2.tier1=7 seconds
+levels.attributes.weapons.info.2.tier2=10.5 seconds
+levels.attributes.weapons.info.2.tier3=15 seconds
+levels.attributes.weapons.info.3.tier1=1 durability point
+levels.attributes.weapons.info.3.tier2=2 durability points
+levels.attributes.weapons.info.3.tier3=4 durability points
+levels.attributes.weapons.info.4.tier1=25%%
+levels.attributes.weapons.info.4.tier2=37.5%%
+levels.attributes.weapons.info.4.tier3=56%%
+levels.attributes.weapons.info.5.tier1=Item remains in inventory on death.
+levels.attributes.weapons.info.5.tier2=NOTHING
+levels.attributes.weapons.info.5.tier3=NOTHING
+levels.attributes.weapons.info.6.tier1=20%%
+levels.attributes.weapons.info.6.tier2=30%%
+levels.attributes.weapons.info.6.tier3=45%%
+levels.attributes.weapons.info.7.tier1=8 blocks
+levels.attributes.weapons.info.7.tier2=12 blocks
+levels.attributes.weapons.info.7.tier3=18 blocks
+levels.attributes.weapons.info.8.tier1=Item will never degrade or break.
+levels.attributes.weapons.info.8.tier2=NOTHING
+levels.attributes.weapons.info.8.tier3=NOTHING
+levels.attributes.weapons.info.9.tier1=5%% chance
+levels.attributes.weapons.info.9.tier2=8%% chance
+levels.attributes.weapons.info.9.tier3=10%% chance
+
+###
+## ARMOR
+###
+
+levels.attributes.armors.info.0=Sets enemies on fire for a short time.
+levels.attributes.armors.info.1=Stuns enemies for a short time.
+levels.attributes.armors.info.2=Poisons enemies for a short time.
+levels.attributes.armors.info.3=Your armor becomes slightly more durable than usual.
+levels.attributes.armors.info.4=Increases your resistance to magical attacks (potions, etc...).
+levels.attributes.armors.info.5=Your armor stays in your inventory on death.
+levels.attributes.armors.info.6=Your armor will never break or degrade.
+
+levels.attributes.armors.info.0.tier1=4 seconds
+levels.attributes.armors.info.0.tier2=5 seconds
+levels.attributes.armors.info.0.tier3=6 seconds
+levels.attributes.armors.info.1.tier1=1 second
+levels.attributes.armors.info.1.tier2=1.5 seconds
+levels.attributes.armors.info.1.tier3=2 seconds
+levels.attributes.armors.info.2.tier1=7 seconds
+levels.attributes.armors.info.2.tier2=10.5 seconds
+levels.attributes.armors.info.2.tier3=15 seconds
+levels.attributes.armors.info.3.tier1=1 point
+levels.attributes.armors.info.3.tier2=2 points
+levels.attributes.armors.info.3.tier3=4 points
+levels.attributes.armors.info.4.tier1=20%%
+levels.attributes.armors.info.4.tier2=30%%
+levels.attributes.armors.info.4.tier3=45%%
+levels.attributes.armors.info.5.tier1=Item remains in inventory on death.
+levels.attributes.armors.info.5.tier2=NOTHING
+levels.attributes.armors.info.5.tier3=NOTHING
+levels.attributes.armors.info.6.tier1=Item will never degrade or break.
+levels.attributes.armors.info.6.tier2=NOTHING
+levels.attributes.armors.info.6.tier3=NOTHING
+
+###
+## BOW
+###
+
+levels.attributes.bows.info.0=Sets enemies on fire for a short time.
+levels.attributes.bows.info.1=Stuns enemies for a short time.
+levels.attributes.bows.info.2=Poisons enemies for a short time.
+levels.attributes.bows.info.3=Your bow becomes slightly more durable than usual.
+levels.attributes.bows.info.4=Absorb a portion of the damage dealt in health.
+levels.attributes.bows.info.5=Your bow stays in your inventory on death.
+levels.attributes.bows.info.6=Percentage chance at performing a critical strike.
+levels.attributes.bows.info.7=Percentage chance for enemies to drop arrows.
+levels.attributes.bows.info.8=Your bow fires multiple arrows at the enemy. Only consumes one arrow.
+levels.attributes.bows.info.9=Your bow will never break or degrade.
+levels.attributes.bows.info.10=There is a slight chance at instantly killing the enemy.
+
+levels.attributes.bows.info.0.tier1=4 seconds
+levels.attributes.bows.info.0.tier2=5 seconds
+levels.attributes.bows.info.0.tier3=6 seconds
+levels.attributes.bows.info.1.tier1=1 seconds
+levels.attributes.bows.info.1.tier2=1.5 seconds
+levels.attributes.bows.info.1.tier3=2 seconds
+levels.attributes.bows.info.2.tier1=7 seconds
+levels.attributes.bows.info.2.tier2=10.5 seconds
+levels.attributes.bows.info.2.tier3=15 seconds
+levels.attributes.bows.info.3.tier1=1 point
+levels.attributes.bows.info.3.tier2=2 points
+levels.attributes.bows.info.3.tier3=4 points
+levels.attributes.bows.info.4.tier1=25%%
+levels.attributes.bows.info.4.tier2=37.5%%
+levels.attributes.bows.info.4.tier3=56%%
+levels.attributes.bows.info.5.tier1=Item remains in inventory on death.
+levels.attributes.bows.info.5.tier2=NOTHING
+levels.attributes.bows.info.5.tier3=NOTHING
+levels.attributes.bows.info.6.tier1=20%%
+levels.attributes.bows.info.6.tier2=30%%
+levels.attributes.bows.info.6.tier3=45%%
+levels.attributes.bows.info.7.tier1=0-2 arrows
+levels.attributes.bows.info.7.tier2=0-4 arrows
+levels.attributes.bows.info.7.tier3=0-8 arrows
+levels.attributes.bows.info.8.tier1=3 arrows
+levels.attributes.bows.info.8.tier2=4 arrows
+levels.attributes.bows.info.8.tier3=6 arrows
+levels.attributes.bows.info.9.tier1=Item will never degrade or break.
+levels.attributes.bows.info.9.tier2=NOTHING
+levels.attributes.bows.info.9.tier3=NOTHING
+levels.attributes.bows.info.10.tier1=5%% chance
+levels.attributes.bows.info.10.tier2=8%% chance
+levels.attributes.bows.info.10.tier3=10%% chance
+
+###
+## SHIELD
+###
+
+levels.attributes.shields.info.0=Sets enemies on fire for a short time.
+levels.attributes.shields.info.1=Stuns enemies for a short time.
+levels.attributes.shields.info.2=Poisons enemies for a short time.
+levels.attributes.shields.info.3=Your armor becomes slightly more durable than usual.
+levels.attributes.shields.info.4=Your armor stays in your inventory on death.
+levels.attributes.shields.info.5=Your armor will never break or degrade.
+
+levels.attributes.shields.info.0.tier1=4 seconds
+levels.attributes.shields.info.0.tier2=5 seconds
+levels.attributes.shields.info.0.tier3=6 seconds
+levels.attributes.shields.info.1.tier1=1 second
+levels.attributes.shields.info.1.tier2=1.5 seconds
+levels.attributes.shields.info.1.tier3=2 seconds
+levels.attributes.shields.info.2.tier1=7 seconds
+levels.attributes.shields.info.2.tier2=10.5 seconds
+levels.attributes.shields.info.2.tier3=15 seconds
+levels.attributes.shields.info.3.tier1=1 point
+levels.attributes.shields.info.3.tier2=2 points
+levels.attributes.shields.info.3.tier3=4 points
+levels.attributes.shields.info.4.tier1=Item remains in inventory on death.
+levels.attributes.shields.info.4.tier2=NOTHING
+levels.attributes.shields.info.4.tier3=NOTHING
+levels.attributes.shields.info.5.tier1=Item will never degrade or break.
+levels.attributes.shields.info.5.tier2=NOTHING
+levels.attributes.shields.info.5.tier3=NOTHING

@@ -2,6 +2,10 @@
 ### Levels 3 Changelogs
 #####
 
+### 3.0.2-beta
+* Fixes crash when connecting to servers.
+
+
 ### 3.0.1-beta
 * Fixes player ticking crash.
 * Fixes display name issues when renaming weapons/armor.
