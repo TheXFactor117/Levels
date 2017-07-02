@@ -6,7 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.thexfactor117.levels.config.Config;
-import com.thexfactor117.levels.init.ModCapabilities;
 import com.thexfactor117.levels.init.ModEvents;
 import com.thexfactor117.levels.network.PacketAttributeSelection;
 import com.thexfactor117.levels.network.PacketMythicSound;
@@ -51,7 +50,6 @@ public class Levels
 		Config.init(configDir);
 		
 		ModEvents.register();
-		ModCapabilities.register();
 		proxy.preInit();
 		
 		network = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MODID);

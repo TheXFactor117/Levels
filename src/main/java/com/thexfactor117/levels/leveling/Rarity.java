@@ -17,26 +17,24 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public enum Rarity 
 {
-	DEFAULT(TextFormatting.GRAY, 0, 0, 0, 0, 0),
-	COMMON(TextFormatting.WHITE, 0xFFFFFF, 0.65, -0.1, 0xF0100010, 0x50FFFFFF),
-	UNCOMMON(TextFormatting.DARK_GREEN, 0x00AA00, 0.2, 0.04, 0xF0100010, 0x5000AA00),
-	RARE(TextFormatting.AQUA, 0x55FFFF, 0.1, 0.03, 0xF0100010, 0x5055FFFF),
-	LEGENDARY(TextFormatting.DARK_PURPLE, 0xAA00AA, 0.045, 0.02, 0xF0100010, 0x50AA00AA),
-	MYTHIC(TextFormatting.GOLD, 0xFFAA00, 0.005, 0.01, 0xF0100010, 0x50FFAA00);
+	DEFAULT(TextFormatting.GRAY, 0, 0, 0, 0),
+	COMMON(TextFormatting.WHITE, 0xFFFFFF, 0.65, 0xF0100010, 0x50FFFFFF),
+	UNCOMMON(TextFormatting.DARK_GREEN, 0x00AA00, 0.2, 0xF0100010, 0x5000AA00),
+	RARE(TextFormatting.AQUA, 0x55FFFF, 0.1, 0xF0100010, 0x5055FFFF),
+	LEGENDARY(TextFormatting.DARK_PURPLE, 0xAA00AA, 0.045, 0xF0100010, 0x50AA00AA),
+	MYTHIC(TextFormatting.GOLD, 0xFFAA00, 0.005, 0xF0100010, 0x50FFAA00);
 	
 	private String color;
 	private int hex;
 	private double defaultChance;
-	private double chanceHelper;
 	private int backColor;
 	private int borderColor;
 	
-	Rarity(Object color, int hex, double chance, double chanceHelper, int backColor, int borderColor)
+	Rarity(Object color, int hex, double chance, int backColor, int borderColor)
 	{
 		this.color = color.toString();
 		this.hex = hex;
 		this.defaultChance = chance;
-		this.chanceHelper = chanceHelper;
 		this.backColor = backColor;
 		this.borderColor = borderColor;
 	}
@@ -48,43 +46,9 @@ public enum Rarity
 	 * @param rand
 	 * @return
 	 */
-	public static Rarity getRandomRarity(NBTTagCompound nbt, int blacksmithingRank, Random rand)
+	public static Rarity getRandomRarity(NBTTagCompound nbt, Random rand)
 	{
 		RandomCollection<Rarity> random = new RandomCollection<Rarity>();
-		
-		switch (blacksmithingRank)
-		{
-			case 0:
-				for (Rarity rarity : Rarity.values())
-				{
-					random.add(rarity.getDefaultChance(), rarity);
-				}
-				break;
-			case 1:
-				for (Rarity rarity : Rarity.values())
-				{
-					random.add(rarity.getDefaultChance() + rarity.getChanceHelper(), rarity);
-				}
-				break;
-			case 2:
-				for (Rarity rarity : Rarity.values())
-				{
-					random.add(rarity.getDefaultChance() + (rarity.getChanceHelper() * 2), rarity);
-				}
-				break;
-			case 3:
-				for (Rarity rarity : Rarity.values())
-				{
-					random.add(rarity.getDefaultChance() + (rarity.getChanceHelper() * 3), rarity);
-				}
-				break;
-			case 4:
-				for (Rarity rarity : Rarity.values())
-				{
-					random.add(rarity.getDefaultChance() + (rarity.getChanceHelper() * 4), rarity);
-				}
-				break;
-		}
 		
 		return random.next(rand);
 	}
@@ -137,11 +101,6 @@ public enum Rarity
 	public double getDefaultChance()
 	{
 		return defaultChance;
-	}
-	
-	public double getChanceHelper()
-	{
-		return chanceHelper;
 	}
 	
 	public int getBackgroundColor()

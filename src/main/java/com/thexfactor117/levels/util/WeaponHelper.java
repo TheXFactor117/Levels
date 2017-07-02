@@ -6,8 +6,6 @@ import java.util.UUID;
 
 import com.google.common.collect.Multimap;
 import com.thexfactor117.levels.Levels;
-import com.thexfactor117.levels.capabilities.CapabilityBlacksmithing;
-import com.thexfactor117.levels.capabilities.IBlacksmithing;
 import com.thexfactor117.levels.config.Config;
 import com.thexfactor117.levels.leveling.Experience;
 import com.thexfactor117.levels.leveling.Rarity;
@@ -50,12 +48,11 @@ public class WeaponHelper
 		{
 			Rarity rarity = Rarity.getRarity(nbt);
 			Random rand = player.getEntityWorld().rand;
-			IBlacksmithing blacksmithing = player.getCapability(CapabilityBlacksmithing.BLACKSMITHING_CAP, null);
 			
-			if (rarity == Rarity.DEFAULT && blacksmithing != null)
+			if (rarity == Rarity.DEFAULT)
 			{				
-				Rarity.setRarity(nbt, Rarity.getRandomRarity(nbt, blacksmithing.getBlacksmithingRank(), rand)); // sets random rarity
-				
+				Rarity.setRarity(nbt, Rarity.getRandomRarity(nbt, rand)); // sets random rarity
+
 				if (Rarity.getRarity(nbt) == Rarity.MYTHIC)
 				{
 					SPacketTitle packet = new SPacketTitle(SPacketTitle.Type.TITLE, new TextComponentString(TextFormatting.GOLD + "MYTHIC"), -1, 20, -1);
