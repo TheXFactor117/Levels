@@ -1,3 +1,5 @@
+NOTE: You may not take the source code of this mod and release it without written permission!
+
 # Levels
 A small, Minecraft mod focused around the aspect of weapon and armor leveling.
 
