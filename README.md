@@ -1,4 +1,6 @@
-NOTE: You may not take the source code of this mod and release it without written permission!
+Since people have given me a lotta shit about the license and other stuff - lemme spell out what is going on.
+
+The port of Levels 2 which was floating around ported the mod illegally (by GPL's standards). I removed it because it was a shitty version of Levels 2 and apparently had several bugs and issues. I've been on and off trying to update Levels 3, but I'm also trying to cut back how much time I'm spending modding (with work and school), and with LSC taking up a lot of time, I don't have much time to work on Levels 3 - if anyone wants to take over the mod, send me a message please. I'd be interested in handing the project off to someone else.
 
 # Levels
 A small, Minecraft mod focused around the aspect of weapon and armor leveling.
